@@ -1,4 +1,4 @@
-package sdk
+package utils
 
 import (
 	"context"
@@ -12,7 +12,7 @@ const (
 	queryParamTagKey = "queryParam"
 )
 
-func populateQueryParams(ctx context.Context, req *http.Request, queryParams interface{}) {
+func PopulateQueryParams(ctx context.Context, req *http.Request, queryParams interface{}) {
 	queryParamsStructType := reflect.TypeOf(queryParams)
 	queryParamsValType := reflect.ValueOf(queryParams)
 

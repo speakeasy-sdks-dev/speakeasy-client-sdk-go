@@ -1,4 +1,4 @@
-package sdk
+package utils
 
 import (
 	"net/http"
@@ -22,8 +22,6 @@ type SecurityClient struct {
 	headers map[string]string
 }
 
-var _ HTTPClient = &SecurityClient{}
-
 func newSecurityClient() *SecurityClient {
 	return &SecurityClient{
 		client:  http.DefaultClient,
@@ -39,7 +37,7 @@ func (c *SecurityClient) Do(req *http.Request) (*http.Response, error) {
 	return c.client.Do(req)
 }
 
-func createSecurityClient(security interface{}) *SecurityClient {
+func CreateSecurityClient(security interface{}) *SecurityClient {
 	client := parseSecurityStruct(security)
 	if client != nil {
 		return client

@@ -1,4 +1,4 @@
-package sdk
+package utils
 
 import (
 	"encoding/json"
@@ -7,6 +7,18 @@ import (
 	"reflect"
 	"strings"
 )
+
+func UnmarshalJsonFromResponseBody(body io.Reader, out interface{}) error {
+	data, err := io.ReadAll(body)
+	if err != nil {
+		return fmt.Errorf("error reading response body: %w", err)
+	}
+	if err := json.Unmarshal(data, &out); err != nil {
+		return fmt.Errorf("error unmarshalling json response body: %w", err)
+	}
+
+	return nil
+}
 
 func parseStructTag(tagKey string, field reflect.StructField) map[string]string {
 	tag := field.Tag.Get(tagKey)
@@ -36,16 +48,4 @@ func parseStructTag(tagKey string, field reflect.StructField) map[string]string 
 	}
 
 	return values
-}
-
-func unmarshalJsonFromResponseBody(body io.Reader, out interface{}) error {
-	data, err := io.ReadAll(body)
-	if err != nil {
-		return fmt.Errorf("error reading response body: %w", err)
-	}
-	if err := json.Unmarshal(data, &out); err != nil {
-		return fmt.Errorf("error unmarshalling json response body: %w", err)
-	}
-
-	return nil
 }

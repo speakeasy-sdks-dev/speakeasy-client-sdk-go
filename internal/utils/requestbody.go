@@ -1,4 +1,4 @@
-package sdk
+package utils
 
 import (
 	"bytes"
@@ -16,7 +16,7 @@ const (
 	multipartFormTagKey = "multipartForm"
 )
 
-func serializeRequestBody(ctx context.Context, request interface{}) (*bytes.Buffer, string, error) {
+func SerializeRequestBody(ctx context.Context, request interface{}) (*bytes.Buffer, string, error) {
 	requestStructType := reflect.TypeOf(request)
 	requestValType := reflect.ValueOf(request)
 

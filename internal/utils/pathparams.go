@@ -1,4 +1,4 @@
-package sdk
+package utils
 
 import (
 	"context"
@@ -14,7 +14,7 @@ const (
 
 var pathParamRegex = regexp.MustCompile(`({.*?})`)
 
-func generateURL(ctx context.Context, serverURL, path string, pathParams interface{}) string {
+func GenerateURL(ctx context.Context, serverURL, path string, pathParams interface{}) string {
 	url := strings.TrimSuffix(serverURL, "/") + path
 
 	pathParamsStructType := reflect.TypeOf(pathParams)
