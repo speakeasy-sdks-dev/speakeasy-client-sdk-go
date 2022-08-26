@@ -37,15 +37,13 @@ func (s *SDK) ConfigureSecurity(security models.Security) {
 	s.securityClient = utils.CreateSecurityClient(security)
 }
 
-func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*models.GetApisV1Response, error) {
-	url := strings.TrimSuffix(s.serverURL, "/") + "/v1/apis"
+func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request models.DeleteAPIEndpointV1Request) (*models.DeleteAPIEndpointV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	httpRes, err := s.securityClient.Do(req)
 	if err != nil {
@@ -59,27 +57,28 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 		contentType = "unknown"
 	}
 
-	res := &models.GetApisV1Response{
+	res := &models.DeleteAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetApisV1Responses),
+		Responses:   make(map[int64]map[string]models.DeleteAPIEndpointV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetApisV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteAPIEndpointV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
+	default:
 		switch contentType {
 		case "application/json":
-			var out []models.API
+			var out *models.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetApisV1Responses{
-				API: out,
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteAPIEndpointV1Responses{
+				Error: out,
 			}
 		default:
 			data, err := io.ReadAll(httpRes.Body)
@@ -87,7 +86,358 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteAPIEndpointV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) DeleteAPIV1(ctx context.Context, request models.DeleteAPIV1Request) (*models.DeleteAPIV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.DeleteAPIV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.DeleteAPIV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteAPIV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 200:
+	default:
+		switch contentType {
+		case "application/json":
+			var out *models.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteAPIV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteAPIV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) DeleteSchemaV1(ctx context.Context, request models.DeleteSchemaV1Request) (*models.DeleteSchemaV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.DeleteSchemaV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.DeleteSchemaV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteSchemaV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 200:
+	default:
+		switch contentType {
+		case "application/json":
+			var out *models.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteSchemaV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteSchemaV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.DeleteVersionMetadataV1Request) (*models.DeleteVersionMetadataV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/versions/{versionID}/metadata/{metaKey}/{metaValue}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.DeleteVersionMetadataV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.DeleteVersionMetadataV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteVersionMetadataV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 200:
+	default:
+		switch contentType {
+		case "application/json":
+			var out *models.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteVersionMetadataV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteVersionMetadataV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.DownloadSchemaRevisionV1Request) (*models.DownloadSchemaRevisionV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.DownloadSchemaRevisionV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.DownloadSchemaRevisionV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DownloadSchemaRevisionV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 302:
+		res.Headers = httpRes.Header
+
+	default:
+		switch contentType {
+		case "application/json":
+			var out *models.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DownloadSchemaRevisionV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DownloadSchemaRevisionV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) DownloadSchemaV1(ctx context.Context, request models.DownloadSchemaV1Request) (*models.DownloadSchemaV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.DownloadSchemaV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.DownloadSchemaV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DownloadSchemaV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 302:
+		res.Headers = httpRes.Header
+
+	default:
+		switch contentType {
+		case "application/json":
+			var out *models.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DownloadSchemaV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DownloadSchemaV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) FindAPIEndpointV1(ctx context.Context, request models.FindAPIEndpointV1Request) (*models.FindAPIEndpointV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.FindAPIEndpointV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.FindAPIEndpointV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.FindAPIEndpointV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 200:
+		switch contentType {
+		case "application/json":
+			var out *models.APIEndpoint
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.FindAPIEndpointV1Responses{
+				APIEndpoint: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.FindAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -99,7 +449,7 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.FindAPIEndpointV1Responses{
 				Error: out,
 			}
 		default:
@@ -108,7 +458,85 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.FindAPIEndpointV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request models.GetAllAPIEndpointsV1Request) (*models.GetAllAPIEndpointsV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/api_endpoints", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.GetAllAPIEndpointsV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.GetAllAPIEndpointsV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetAllAPIEndpointsV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 200:
+		switch contentType {
+		case "application/json":
+			var out []models.APIEndpoint
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllAPIEndpointsV1Responses{
+				APIEndpoint: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllAPIEndpointsV1Responses{
+				RawResponse: data,
+			}
+		}
+	default:
+		switch contentType {
+		case "application/json":
+			var out *models.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllAPIEndpointsV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllAPIEndpointsV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -197,229 +625,6 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request models.GetAllAPIV
 	return res, nil
 }
 
-func (s *SDK) UpsertAPIV1(ctx context.Context, request models.UpsertAPIV1Request) (*models.UpsertAPIV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-	if bodyReader == nil {
-		return nil, fmt.Errorf("request body is required")
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "PUT", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Content-Type", reqContentType)
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.UpsertAPIV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.UpsertAPIV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.UpsertAPIV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 200:
-		switch contentType {
-		case "application/json":
-			var out *models.API
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIV1Responses{
-				API: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIV1Responses{
-				RawResponse: data,
-			}
-		}
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request models.GetAllAPIEndpointsV1Request) (*models.GetAllAPIEndpointsV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/api_endpoints", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.GetAllAPIEndpointsV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetAllAPIEndpointsV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetAllAPIEndpointsV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 200:
-		switch contentType {
-		case "application/json":
-			var out []models.APIEndpoint
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllAPIEndpointsV1Responses{
-				APIEndpoint: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllAPIEndpointsV1Responses{
-				RawResponse: data,
-			}
-		}
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllAPIEndpointsV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllAPIEndpointsV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) DeleteAPIV1(ctx context.Context, request models.DeleteAPIV1Request) (*models.DeleteAPIV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.DeleteAPIV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DeleteAPIV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteAPIV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 200:
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteAPIV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteAPIV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
 func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request models.GetAllForVersionAPIEndpointsV1Request) (*models.GetAllForVersionAPIEndpointsV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", request.PathParams)
 
@@ -490,229 +695,6 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request models
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllForVersionAPIEndpointsV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) FindAPIEndpointV1(ctx context.Context, request models.FindAPIEndpointV1Request) (*models.FindAPIEndpointV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.FindAPIEndpointV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.FindAPIEndpointV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.FindAPIEndpointV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 200:
-		switch contentType {
-		case "application/json":
-			var out *models.APIEndpoint
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.FindAPIEndpointV1Responses{
-				APIEndpoint: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.FindAPIEndpointV1Responses{
-				RawResponse: data,
-			}
-		}
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.FindAPIEndpointV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.FindAPIEndpointV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request models.UpsertAPIEndpointV1Request) (*models.UpsertAPIEndpointV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-	if bodyReader == nil {
-		return nil, fmt.Errorf("request body is required")
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "PUT", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Content-Type", reqContentType)
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.UpsertAPIEndpointV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.UpsertAPIEndpointV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.UpsertAPIEndpointV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 200:
-		switch contentType {
-		case "application/json":
-			var out *models.APIEndpoint
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIEndpointV1Responses{
-				APIEndpoint: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIEndpointV1Responses{
-				RawResponse: data,
-			}
-		}
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIEndpointV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIEndpointV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request models.DeleteAPIEndpointV1Request) (*models.DeleteAPIEndpointV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.DeleteAPIEndpointV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DeleteAPIEndpointV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteAPIEndpointV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 200:
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteAPIEndpointV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -799,14 +781,16 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request models.GetAPIEndpoin
 	return res, nil
 }
 
-func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request) (*models.GetSchemaV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
+func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*models.GetApisV1Response, error) {
+	url := strings.TrimSuffix(s.serverURL, "/") + "/v1/apis"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+
 	httpRes, err := s.securityClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
@@ -819,27 +803,27 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 		contentType = "unknown"
 	}
 
-	res := &models.GetSchemaV1Response{
+	res := &models.GetApisV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetSchemaV1Responses),
+		Responses:   make(map[int64]map[string]models.GetApisV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetSchemaV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetApisV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.Schema
+			var out []models.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaV1Responses{
-				Schema: out,
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetApisV1Responses{
+				API: out,
 			}
 		default:
 			data, err := io.ReadAll(httpRes.Body)
@@ -847,7 +831,7 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetApisV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -859,7 +843,7 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetApisV1Responses{
 				Error: out,
 			}
 		default:
@@ -868,134 +852,7 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) RegisterSchemaV1(ctx context.Context, request models.RegisterSchemaV1Request) (*models.RegisterSchemaV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-	if bodyReader == nil {
-		return nil, fmt.Errorf("request body is required")
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Content-Type", reqContentType)
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.RegisterSchemaV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.RegisterSchemaV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.RegisterSchemaV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 200:
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.RegisterSchemaV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.RegisterSchemaV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) DownloadSchemaV1(ctx context.Context, request models.DownloadSchemaV1Request) (*models.DownloadSchemaV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.DownloadSchemaV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DownloadSchemaV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DownloadSchemaV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 302:
-		res.Headers = httpRes.Header
-
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DownloadSchemaV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DownloadSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetApisV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1082,64 +939,6 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request models.GetSchemaDiffV
 	return res, nil
 }
 
-func (s *SDK) DeleteSchemaV1(ctx context.Context, request models.DeleteSchemaV1Request) (*models.DeleteSchemaV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	httpRes, err := s.securityClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
-
-	res := &models.DeleteSchemaV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DeleteSchemaV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteSchemaV1Responses)
-	}
-
-	switch httpRes.StatusCode {
-	case 200:
-	default:
-		switch contentType {
-		case "application/json":
-			var out *models.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteSchemaV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteSchemaV1Responses{
-				RawResponse: data,
-			}
-		}
-	}
-
-	return res, nil
-}
-
 func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request models.GetSchemaRevisionV1Request) (*models.GetSchemaRevisionV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
 
@@ -1218,8 +1017,8 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request models.GetSchemaR
 	return res, nil
 }
 
-func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.DownloadSchemaRevisionV1Request) (*models.DownloadSchemaRevisionV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
+func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request) (*models.GetSchemaV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1238,20 +1037,38 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.Downl
 		contentType = "unknown"
 	}
 
-	res := &models.DownloadSchemaRevisionV1Response{
+	res := &models.GetSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DownloadSchemaRevisionV1Responses),
+		Responses:   make(map[int64]map[string]models.GetSchemaV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DownloadSchemaRevisionV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetSchemaV1Responses)
 	}
 
 	switch httpRes.StatusCode {
-	case 302:
-		res.Headers = httpRes.Header
+	case 200:
+		switch contentType {
+		case "application/json":
+			var out *models.Schema
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
 
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaV1Responses{
+				Schema: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaV1Responses{
+				RawResponse: data,
+			}
+		}
 	default:
 		switch contentType {
 		case "application/json":
@@ -1260,7 +1077,7 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.Downl
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DownloadSchemaRevisionV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaV1Responses{
 				Error: out,
 			}
 		default:
@@ -1269,7 +1086,7 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.Downl
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DownloadSchemaRevisionV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1521,13 +1338,22 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request models.Insert
 	return res, nil
 }
 
-func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.DeleteVersionMetadataV1Request) (*models.DeleteVersionMetadataV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/versions/{versionID}/metadata/{metaKey}/{metaValue}", request.PathParams)
+func (s *SDK) RegisterSchemaV1(ctx context.Context, request models.RegisterSchemaV1Request) (*models.RegisterSchemaV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
 
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+	if bodyReader == nil {
+		return nil, fmt.Errorf("request body is required")
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("Content-Type", reqContentType)
 
 	httpRes, err := s.securityClient.Do(req)
 	if err != nil {
@@ -1541,14 +1367,14 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.Delete
 		contentType = "unknown"
 	}
 
-	res := &models.DeleteVersionMetadataV1Response{
+	res := &models.RegisterSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DeleteVersionMetadataV1Responses),
+		Responses:   make(map[int64]map[string]models.RegisterSchemaV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteVersionMetadataV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.RegisterSchemaV1Responses)
 	}
 
 	switch httpRes.StatusCode {
@@ -1561,7 +1387,7 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.Delete
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.RegisterSchemaV1Responses{
 				Error: out,
 			}
 		default:
@@ -1570,7 +1396,181 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.Delete
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.RegisterSchemaV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request models.UpsertAPIEndpointV1Request) (*models.UpsertAPIEndpointV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+	if bodyReader == nil {
+		return nil, fmt.Errorf("request body is required")
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "PUT", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.UpsertAPIEndpointV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.UpsertAPIEndpointV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.UpsertAPIEndpointV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 200:
+		switch contentType {
+		case "application/json":
+			var out *models.APIEndpoint
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIEndpointV1Responses{
+				APIEndpoint: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIEndpointV1Responses{
+				RawResponse: data,
+			}
+		}
+	default:
+		switch contentType {
+		case "application/json":
+			var out *models.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIEndpointV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIEndpointV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) UpsertAPIV1(ctx context.Context, request models.UpsertAPIV1Request) (*models.UpsertAPIV1Response, error) {
+	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}", request.PathParams)
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+	if bodyReader == nil {
+		return nil, fmt.Errorf("request body is required")
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "PUT", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	httpRes, err := s.securityClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &models.UpsertAPIV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]models.UpsertAPIV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.UpsertAPIV1Responses)
+	}
+
+	switch httpRes.StatusCode {
+	case 200:
+		switch contentType {
+		case "application/json":
+			var out *models.API
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIV1Responses{
+				API: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIV1Responses{
+				RawResponse: data,
+			}
+		}
+	default:
+		switch contentType {
+		case "application/json":
+			var out *models.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIV1Responses{
 				RawResponse: data,
 			}
 		}
