@@ -124,6 +124,11 @@ func encodeMultipartFormData(w io.Writer, data interface{}) (string, error) {
 				writer.Close()
 				return "", err
 			}
+		} else {
+			if err := writer.WriteField(tag.Name, valType.String()); err != nil {
+				writer.Close()
+				return "", err
+			}
 		}
 	}
 
