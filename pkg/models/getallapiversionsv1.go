@@ -5,7 +5,7 @@ type GetAllAPIVersionsV1PathParams struct {
 }
 
 type GetAllAPIVersionsV1Op struct {
-	And bool `queryParam:"and"`
+	And bool `queryParam:"name=and"`
 }
 
 type GetAllAPIVersionsV1QueryParams struct {

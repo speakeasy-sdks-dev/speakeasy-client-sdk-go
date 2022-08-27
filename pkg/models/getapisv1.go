@@ -1,7 +1,7 @@
 package models
 
 type GetApisV1Op struct {
-	And bool `queryParam:"and"`
+	And bool `queryParam:"name=and"`
 }
 
 type GetApisV1QueryParams struct {
