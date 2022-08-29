@@ -1,4 +1,8 @@
-package models
+package operations
+
+import (
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+)
 
 type GetSchemaV1PathParams struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
@@ -10,9 +14,9 @@ type GetSchemaV1Request struct {
 }
 
 type GetSchemaV1Responses struct {
-	Error       *Error
+	Error       *shared.Error
 	RawResponse []byte
-	Schema      *Schema
+	Schema      *shared.Schema
 }
 
 type GetSchemaV1Response struct {

@@ -1,4 +1,8 @@
-package models
+package operations
+
+import (
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+)
 
 type GetApisV1Op struct {
 	And bool `queryParam:"name=and"`
@@ -14,8 +18,8 @@ type GetApisV1Request struct {
 }
 
 type GetApisV1Responses struct {
-	API         []API
-	Error       *Error
+	API         []shared.API
+	Error       *shared.Error
 	RawResponse []byte
 }
 

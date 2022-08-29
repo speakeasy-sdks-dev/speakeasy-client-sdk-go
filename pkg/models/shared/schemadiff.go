@@ -1,4 +1,4 @@
-package models
+package shared
 
 type SchemaDiffValueChange struct {
 	From string `json:"From"`

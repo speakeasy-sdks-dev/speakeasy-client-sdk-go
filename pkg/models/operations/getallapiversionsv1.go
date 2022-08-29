@@ -1,4 +1,8 @@
-package models
+package operations
+
+import (
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+)
 
 type GetAllAPIVersionsV1PathParams struct {
 	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
@@ -19,8 +23,8 @@ type GetAllAPIVersionsV1Request struct {
 }
 
 type GetAllAPIVersionsV1Responses struct {
-	API         []API
-	Error       *Error
+	API         []shared.API
+	Error       *shared.Error
 	RawResponse []byte
 }
 

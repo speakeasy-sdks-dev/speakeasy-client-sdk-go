@@ -28,12 +28,14 @@ func PopulateQueryParams(ctx context.Context, req *http.Request, queryParams int
 		// TODO: support other styles
 		switch qpTag.Style {
 		case "deepObject":
-			populateDeepObjectParams(ctx, req, qpTag.ParamName, fieldType.Type, valType)
+			populateDeepObjectParams(ctx, req, qpTag, fieldType.Type, valType)
+		case "form":
+			populateFormParams(ctx, req, qpTag, fieldType.Type, valType)
 		}
 	}
 }
 
-func populateDeepObjectParams(ctx context.Context, req *http.Request, parentName string, objType reflect.Type, objValue reflect.Value) {
+func populateDeepObjectParams(ctx context.Context, req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
 	if objType.Kind() == reflect.Pointer {
 		if objValue.IsNil() {
 			return
@@ -55,24 +57,90 @@ func populateDeepObjectParams(ctx context.Context, req *http.Request, parentName
 				continue
 			}
 
-			queryParams.Add(fmt.Sprintf("%s[%s]", parentName, qpTag.ParamName), fmt.Sprintf("%v", valType.Interface()))
+			queryParams.Add(fmt.Sprintf("%s[%s]", tag.ParamName, qpTag.ParamName), fmt.Sprintf("%v", valType.Interface()))
 		}
 	case reflect.Map:
 		iter := objValue.MapRange()
 		for iter.Next() {
-			// TODO support other types
 			switch iter.Value().Kind() {
 			case reflect.Array, reflect.Slice:
-				// TODO how deep do we want to go?
 				for i := 0; i < iter.Value().Len(); i++ {
-					queryParams.Add(fmt.Sprintf("%s[%s]", parentName, iter.Key().String()), fmt.Sprintf("%v", iter.Value().Index(i).Interface()))
+					queryParams.Add(fmt.Sprintf("%s[%s]", tag.ParamName, iter.Key().String()), fmt.Sprintf("%v", iter.Value().Index(i).Interface()))
 				}
 			default:
-				queryParams.Add(fmt.Sprintf("%s[%s]", parentName, iter.Key().String()), fmt.Sprintf("%v", iter.Value().Interface()))
+				queryParams.Add(fmt.Sprintf("%s[%s]", tag.ParamName, iter.Key().String()), fmt.Sprintf("%v", iter.Value().Interface()))
 			}
 		}
+	}
+
+	req.URL.RawQuery = queryParams.Encode()
+}
+
+func populateFormParams(ctx context.Context, req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
+	if objType.Kind() == reflect.Pointer {
+		if objValue.IsNil() {
+			return
+		}
+		objType = objType.Elem()
+		objValue = objValue.Elem()
+	}
+
+	queryParams := req.URL.Query()
+
+	switch objType.Kind() {
+	case reflect.Struct:
+		items := []string{}
+
+		for i := 0; i < objType.NumField(); i++ {
+			fieldType := objType.Field(i)
+			valType := objValue.Field(i)
+
+			qpTag := parseQueryParamTag(fieldType)
+			if qpTag == nil {
+				continue
+			}
+
+			if tag.Explode {
+				queryParams.Add(qpTag.ParamName, fmt.Sprintf("%v", valType.Interface()))
+			} else {
+				items = append(items, fmt.Sprintf("%s,%v", qpTag.ParamName, valType.Interface()))
+			}
+		}
+
+		if len(items) > 0 {
+			queryParams.Add(tag.ParamName, strings.Join(items, ","))
+		}
+	case reflect.Map:
+		items := []string{}
+
+		iter := objValue.MapRange()
+		for iter.Next() {
+			if tag.Explode {
+				queryParams.Add(iter.Key().String(), fmt.Sprintf("%v", iter.Value().Interface()))
+			} else {
+				items = append(items, fmt.Sprintf("%s,%v", iter.Key().String(), iter.Value().Interface()))
+			}
+
+			if len(items) > 0 {
+				queryParams.Add(tag.ParamName, strings.Join(items, ","))
+			}
+		}
+	case reflect.Slice, reflect.Array:
+		items := []string{}
+
+		for i := 0; i < objValue.Len(); i++ {
+			if tag.Explode {
+				queryParams.Add(tag.ParamName, fmt.Sprintf("%v", objValue.Index(i).Interface()))
+			} else {
+				items = append(items, fmt.Sprintf("%v", objValue.Index(i).Interface()))
+			}
+		}
+
+		if len(items) > 0 {
+			queryParams.Add(tag.ParamName, strings.Join(items, ","))
+		}
 	default:
-		// TODO not currently supported. Print warning?
+		queryParams.Add(tag.ParamName, fmt.Sprintf("%v", objValue.Interface()))
 	}
 
 	req.URL.RawQuery = queryParams.Encode()

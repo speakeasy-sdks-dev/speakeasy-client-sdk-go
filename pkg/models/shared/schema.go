@@ -1,6 +1,8 @@
-package models
+package shared
 
-import "time"
+import (
+	"time"
+)
 
 type Schema struct {
 	APIID       string    `json:"api_id"`
