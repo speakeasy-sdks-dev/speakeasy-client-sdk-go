@@ -1,6 +1,8 @@
-package models
+package shared
 
-import "time"
+import (
+	"time"
+)
 
 type API struct {
 	APIID       string              `json:"api_id"`

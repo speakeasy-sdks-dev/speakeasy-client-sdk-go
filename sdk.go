@@ -4,7 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/internal/utils"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"io"
 	"mime"
 	"net/http"
@@ -33,11 +34,11 @@ func New() *SDK {
 	}
 }
 
-func (s *SDK) ConfigureSecurity(security models.Security) {
+func (s *SDK) ConfigureSecurity(security shared.Security) {
 	s.securityClient = utils.CreateSecurityClient(security)
 }
 
-func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request models.DeleteAPIEndpointV1Request) (*models.DeleteAPIEndpointV1Response, error) {
+func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.DeleteAPIEndpointV1Request) (*operations.DeleteAPIEndpointV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -45,7 +46,9 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request models.DeleteAPIE
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -57,14 +60,14 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request models.DeleteAPIE
 		contentType = "unknown"
 	}
 
-	res := &models.DeleteAPIEndpointV1Response{
+	res := &operations.DeleteAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DeleteAPIEndpointV1Responses),
+		Responses:   make(map[int64]map[string]operations.DeleteAPIEndpointV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteAPIEndpointV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIEndpointV1Responses)
 	}
 
 	switch httpRes.StatusCode {
@@ -72,12 +75,12 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request models.DeleteAPIE
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DeleteAPIEndpointV1Responses{
 				Error: out,
 			}
 		default:
@@ -86,7 +89,7 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request models.DeleteAPIE
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -95,7 +98,7 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request models.DeleteAPIE
 	return res, nil
 }
 
-func (s *SDK) DeleteAPIV1(ctx context.Context, request models.DeleteAPIV1Request) (*models.DeleteAPIV1Response, error) {
+func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Request) (*operations.DeleteAPIV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -103,7 +106,9 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request models.DeleteAPIV1Request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -115,14 +120,14 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request models.DeleteAPIV1Request
 		contentType = "unknown"
 	}
 
-	res := &models.DeleteAPIV1Response{
+	res := &operations.DeleteAPIV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DeleteAPIV1Responses),
+		Responses:   make(map[int64]map[string]operations.DeleteAPIV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteAPIV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIV1Responses)
 	}
 
 	switch httpRes.StatusCode {
@@ -130,12 +135,12 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request models.DeleteAPIV1Request
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DeleteAPIV1Responses{
 				Error: out,
 			}
 		default:
@@ -144,7 +149,7 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request models.DeleteAPIV1Request
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -153,7 +158,7 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request models.DeleteAPIV1Request
 	return res, nil
 }
 
-func (s *SDK) DeleteSchemaV1(ctx context.Context, request models.DeleteSchemaV1Request) (*models.DeleteSchemaV1Response, error) {
+func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchemaV1Request) (*operations.DeleteSchemaV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -161,7 +166,9 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request models.DeleteSchemaV1R
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -173,14 +180,14 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request models.DeleteSchemaV1R
 		contentType = "unknown"
 	}
 
-	res := &models.DeleteSchemaV1Response{
+	res := &operations.DeleteSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DeleteSchemaV1Responses),
+		Responses:   make(map[int64]map[string]operations.DeleteSchemaV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteSchemaV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteSchemaV1Responses)
 	}
 
 	switch httpRes.StatusCode {
@@ -188,12 +195,12 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request models.DeleteSchemaV1R
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DeleteSchemaV1Responses{
 				Error: out,
 			}
 		default:
@@ -202,7 +209,7 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request models.DeleteSchemaV1R
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteSchemaV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -211,7 +218,7 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request models.DeleteSchemaV1R
 	return res, nil
 }
 
-func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.DeleteVersionMetadataV1Request) (*models.DeleteVersionMetadataV1Response, error) {
+func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.DeleteVersionMetadataV1Request) (*operations.DeleteVersionMetadataV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/versions/{versionID}/metadata/{metaKey}/{metaValue}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -219,7 +226,9 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.Delete
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -231,14 +240,14 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.Delete
 		contentType = "unknown"
 	}
 
-	res := &models.DeleteVersionMetadataV1Response{
+	res := &operations.DeleteVersionMetadataV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DeleteVersionMetadataV1Responses),
+		Responses:   make(map[int64]map[string]operations.DeleteVersionMetadataV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DeleteVersionMetadataV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteVersionMetadataV1Responses)
 	}
 
 	switch httpRes.StatusCode {
@@ -246,12 +255,12 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.Delete
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DeleteVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DeleteVersionMetadataV1Responses{
 				Error: out,
 			}
 		default:
@@ -260,7 +269,7 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.Delete
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DeleteVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteVersionMetadataV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -269,7 +278,7 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request models.Delete
 	return res, nil
 }
 
-func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.DownloadSchemaRevisionV1Request) (*models.DownloadSchemaRevisionV1Response, error) {
+func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request operations.DownloadSchemaRevisionV1Request) (*operations.DownloadSchemaRevisionV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -277,7 +286,9 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.Downl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -289,14 +300,14 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.Downl
 		contentType = "unknown"
 	}
 
-	res := &models.DownloadSchemaRevisionV1Response{
+	res := &operations.DownloadSchemaRevisionV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DownloadSchemaRevisionV1Responses),
+		Responses:   make(map[int64]map[string]operations.DownloadSchemaRevisionV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DownloadSchemaRevisionV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaRevisionV1Responses)
 	}
 
 	switch httpRes.StatusCode {
@@ -306,12 +317,12 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.Downl
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DownloadSchemaRevisionV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DownloadSchemaRevisionV1Responses{
 				Error: out,
 			}
 		default:
@@ -320,7 +331,7 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.Downl
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DownloadSchemaRevisionV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -329,7 +340,7 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request models.Downl
 	return res, nil
 }
 
-func (s *SDK) DownloadSchemaV1(ctx context.Context, request models.DownloadSchemaV1Request) (*models.DownloadSchemaV1Response, error) {
+func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadSchemaV1Request) (*operations.DownloadSchemaV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -337,7 +348,9 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request models.DownloadSchem
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -349,14 +362,14 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request models.DownloadSchem
 		contentType = "unknown"
 	}
 
-	res := &models.DownloadSchemaV1Response{
+	res := &operations.DownloadSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.DownloadSchemaV1Responses),
+		Responses:   make(map[int64]map[string]operations.DownloadSchemaV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.DownloadSchemaV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaV1Responses)
 	}
 
 	switch httpRes.StatusCode {
@@ -366,12 +379,12 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request models.DownloadSchem
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.DownloadSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DownloadSchemaV1Responses{
 				Error: out,
 			}
 		default:
@@ -380,7 +393,7 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request models.DownloadSchem
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.DownloadSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -389,7 +402,7 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request models.DownloadSchem
 	return res, nil
 }
 
-func (s *SDK) FindAPIEndpointV1(ctx context.Context, request models.FindAPIEndpointV1Request) (*models.FindAPIEndpointV1Response, error) {
+func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIEndpointV1Request) (*operations.FindAPIEndpointV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -397,7 +410,9 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request models.FindAPIEndpo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -409,26 +424,26 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request models.FindAPIEndpo
 		contentType = "unknown"
 	}
 
-	res := &models.FindAPIEndpointV1Response{
+	res := &operations.FindAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.FindAPIEndpointV1Responses),
+		Responses:   make(map[int64]map[string]operations.FindAPIEndpointV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.FindAPIEndpointV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.FindAPIEndpointV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.APIEndpoint
+			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.FindAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.FindAPIEndpointV1Responses{
 				APIEndpoint: out,
 			}
 		default:
@@ -437,19 +452,19 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request models.FindAPIEndpo
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.FindAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.FindAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.FindAPIEndpointV1Responses{
 				Error: out,
 			}
 		default:
@@ -458,7 +473,7 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request models.FindAPIEndpo
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.FindAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -467,7 +482,7 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request models.FindAPIEndpo
 	return res, nil
 }
 
-func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request models.GetAllAPIEndpointsV1Request) (*models.GetAllAPIEndpointsV1Response, error) {
+func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAllAPIEndpointsV1Request) (*operations.GetAllAPIEndpointsV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/api_endpoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -475,7 +490,9 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request models.GetAllAPI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -487,26 +504,26 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request models.GetAllAPI
 		contentType = "unknown"
 	}
 
-	res := &models.GetAllAPIEndpointsV1Response{
+	res := &operations.GetAllAPIEndpointsV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetAllAPIEndpointsV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetAllAPIEndpointsV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetAllAPIEndpointsV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIEndpointsV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out []models.APIEndpoint
+			var out []shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllAPIEndpointsV1Responses{
 				APIEndpoint: out,
 			}
 		default:
@@ -515,19 +532,19 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request models.GetAllAPI
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllAPIEndpointsV1Responses{
 				Error: out,
 			}
 		default:
@@ -536,7 +553,7 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request models.GetAllAPI
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -545,7 +562,7 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request models.GetAllAPI
 	return res, nil
 }
 
-func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request models.GetAllAPIVersionsV1Request) (*models.GetAllAPIVersionsV1Response, error) {
+func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAllAPIVersionsV1Request) (*operations.GetAllAPIVersionsV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -555,7 +572,9 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request models.GetAllAPIV
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -567,26 +586,26 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request models.GetAllAPIV
 		contentType = "unknown"
 	}
 
-	res := &models.GetAllAPIVersionsV1Response{
+	res := &operations.GetAllAPIVersionsV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetAllAPIVersionsV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetAllAPIVersionsV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetAllAPIVersionsV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIVersionsV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out []models.API
+			var out []shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllAPIVersionsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllAPIVersionsV1Responses{
 				API: out,
 			}
 		default:
@@ -595,19 +614,19 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request models.GetAllAPIV
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllAPIVersionsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllAPIVersionsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllAPIVersionsV1Responses{
 				Error: out,
 			}
 		default:
@@ -616,7 +635,7 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request models.GetAllAPIV
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllAPIVersionsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -625,7 +644,7 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request models.GetAllAPIV
 	return res, nil
 }
 
-func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request models.GetAllForVersionAPIEndpointsV1Request) (*models.GetAllForVersionAPIEndpointsV1Response, error) {
+func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operations.GetAllForVersionAPIEndpointsV1Request) (*operations.GetAllForVersionAPIEndpointsV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -633,7 +652,9 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request models
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -645,26 +666,26 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request models
 		contentType = "unknown"
 	}
 
-	res := &models.GetAllForVersionAPIEndpointsV1Response{
+	res := &operations.GetAllForVersionAPIEndpointsV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetAllForVersionAPIEndpointsV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetAllForVersionAPIEndpointsV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetAllForVersionAPIEndpointsV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllForVersionAPIEndpointsV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out []models.APIEndpoint
+			var out []shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllForVersionAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllForVersionAPIEndpointsV1Responses{
 				APIEndpoint: out,
 			}
 		default:
@@ -673,19 +694,19 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request models
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllForVersionAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAllForVersionAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllForVersionAPIEndpointsV1Responses{
 				Error: out,
 			}
 		default:
@@ -694,7 +715,7 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request models
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAllForVersionAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -703,7 +724,7 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request models
 	return res, nil
 }
 
-func (s *SDK) GetAPIEndpointV1(ctx context.Context, request models.GetAPIEndpointV1Request) (*models.GetAPIEndpointV1Response, error) {
+func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEndpointV1Request) (*operations.GetAPIEndpointV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -711,7 +732,9 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request models.GetAPIEndpoin
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -723,26 +746,26 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request models.GetAPIEndpoin
 		contentType = "unknown"
 	}
 
-	res := &models.GetAPIEndpointV1Response{
+	res := &operations.GetAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetAPIEndpointV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetAPIEndpointV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetAPIEndpointV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAPIEndpointV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.APIEndpoint
+			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAPIEndpointV1Responses{
 				APIEndpoint: out,
 			}
 		default:
@@ -751,19 +774,19 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request models.GetAPIEndpoin
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAPIEndpointV1Responses{
 				Error: out,
 			}
 		default:
@@ -772,7 +795,7 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request models.GetAPIEndpoin
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -781,7 +804,7 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request models.GetAPIEndpoin
 	return res, nil
 }
 
-func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*models.GetApisV1Response, error) {
+func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request) (*operations.GetApisV1Response, error) {
 	url := strings.TrimSuffix(s.serverURL, "/") + "/v1/apis"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -791,7 +814,9 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -803,26 +828,26 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 		contentType = "unknown"
 	}
 
-	res := &models.GetApisV1Response{
+	res := &operations.GetApisV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetApisV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetApisV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetApisV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetApisV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out []models.API
+			var out []shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetApisV1Responses{
 				API: out,
 			}
 		default:
@@ -831,19 +856,19 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetApisV1Responses{
 				Error: out,
 			}
 		default:
@@ -852,7 +877,7 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -861,7 +886,7 @@ func (s *SDK) GetApisV1(ctx context.Context, request models.GetApisV1Request) (*
 	return res, nil
 }
 
-func (s *SDK) GetSchemaDiffV1(ctx context.Context, request models.GetSchemaDiffV1Request) (*models.GetSchemaDiffV1Response, error) {
+func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaDiffV1Request) (*operations.GetSchemaDiffV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -869,7 +894,9 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request models.GetSchemaDiffV
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -881,26 +908,26 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request models.GetSchemaDiffV
 		contentType = "unknown"
 	}
 
-	res := &models.GetSchemaDiffV1Response{
+	res := &operations.GetSchemaDiffV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetSchemaDiffV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetSchemaDiffV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetSchemaDiffV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaDiffV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.SchemaDiff
+			var out *shared.SchemaDiff
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaDiffV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaDiffV1Responses{
 				SchemaDiff: out,
 			}
 		default:
@@ -909,19 +936,19 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request models.GetSchemaDiffV
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaDiffV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaDiffV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaDiffV1Responses{
 				Error: out,
 			}
 		default:
@@ -930,7 +957,7 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request models.GetSchemaDiffV
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaDiffV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -939,7 +966,7 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request models.GetSchemaDiffV
 	return res, nil
 }
 
-func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request models.GetSchemaRevisionV1Request) (*models.GetSchemaRevisionV1Response, error) {
+func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSchemaRevisionV1Request) (*operations.GetSchemaRevisionV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -947,7 +974,9 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request models.GetSchemaR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -959,26 +988,26 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request models.GetSchemaR
 		contentType = "unknown"
 	}
 
-	res := &models.GetSchemaRevisionV1Response{
+	res := &operations.GetSchemaRevisionV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetSchemaRevisionV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetSchemaRevisionV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetSchemaRevisionV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaRevisionV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.Schema
+			var out *shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaRevisionV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaRevisionV1Responses{
 				Schema: out,
 			}
 		default:
@@ -987,19 +1016,19 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request models.GetSchemaR
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaRevisionV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaRevisionV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaRevisionV1Responses{
 				Error: out,
 			}
 		default:
@@ -1008,7 +1037,7 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request models.GetSchemaR
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaRevisionV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1017,7 +1046,7 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request models.GetSchemaR
 	return res, nil
 }
 
-func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request) (*models.GetSchemaV1Response, error) {
+func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Request) (*operations.GetSchemaV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1025,7 +1054,9 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1037,26 +1068,26 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 		contentType = "unknown"
 	}
 
-	res := &models.GetSchemaV1Response{
+	res := &operations.GetSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetSchemaV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetSchemaV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetSchemaV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.Schema
+			var out *shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaV1Responses{
 				Schema: out,
 			}
 		default:
@@ -1065,19 +1096,19 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaV1Responses{
 				Error: out,
 			}
 		default:
@@ -1086,7 +1117,7 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1095,7 +1126,7 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request models.GetSchemaV1Request
 	return res, nil
 }
 
-func (s *SDK) GetSchemasV1(ctx context.Context, request models.GetSchemasV1Request) (*models.GetSchemasV1Response, error) {
+func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1Request) (*operations.GetSchemasV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1103,7 +1134,9 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request models.GetSchemasV1Reque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1115,26 +1148,26 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request models.GetSchemasV1Reque
 		contentType = "unknown"
 	}
 
-	res := &models.GetSchemasV1Response{
+	res := &operations.GetSchemasV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetSchemasV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetSchemasV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetSchemasV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemasV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out []models.Schema
+			var out []shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemasV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemasV1Responses{
 				Schema: out,
 			}
 		default:
@@ -1143,19 +1176,19 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request models.GetSchemasV1Reque
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemasV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetSchemasV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemasV1Responses{
 				Error: out,
 			}
 		default:
@@ -1164,7 +1197,7 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request models.GetSchemasV1Reque
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetSchemasV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1173,7 +1206,7 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request models.GetSchemasV1Reque
 	return res, nil
 }
 
-func (s *SDK) GetVersionMetadataV1(ctx context.Context, request models.GetVersionMetadataV1Request) (*models.GetVersionMetadataV1Response, error) {
+func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVersionMetadataV1Request) (*operations.GetVersionMetadataV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/versions/{versionID}/metadata", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1181,7 +1214,9 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request models.GetVersio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1193,26 +1228,26 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request models.GetVersio
 		contentType = "unknown"
 	}
 
-	res := &models.GetVersionMetadataV1Response{
+	res := &operations.GetVersionMetadataV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.GetVersionMetadataV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetVersionMetadataV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.GetVersionMetadataV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetVersionMetadataV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out []models.VersionMetadata
+			var out []shared.VersionMetadata
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetVersionMetadataV1Responses{
 				VersionMetadata: out,
 			}
 		default:
@@ -1221,19 +1256,19 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request models.GetVersio
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.GetVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetVersionMetadataV1Responses{
 				Error: out,
 			}
 		default:
@@ -1242,7 +1277,7 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request models.GetVersio
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.GetVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1251,7 +1286,7 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request models.GetVersio
 	return res, nil
 }
 
-func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request models.InsertVersionMetadataV1Request) (*models.InsertVersionMetadataV1Response, error) {
+func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.InsertVersionMetadataV1Request) (*operations.InsertVersionMetadataV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/versions/{versionID}/metadata", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1268,7 +1303,9 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request models.Insert
 	}
 	req.Header.Set("Content-Type", reqContentType)
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1280,26 +1317,26 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request models.Insert
 		contentType = "unknown"
 	}
 
-	res := &models.InsertVersionMetadataV1Response{
+	res := &operations.InsertVersionMetadataV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.InsertVersionMetadataV1Responses),
+		Responses:   make(map[int64]map[string]operations.InsertVersionMetadataV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.InsertVersionMetadataV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.InsertVersionMetadataV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.VersionMetadata
+			var out *shared.VersionMetadata
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.InsertVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.InsertVersionMetadataV1Responses{
 				VersionMetadata: out,
 			}
 		default:
@@ -1308,19 +1345,19 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request models.Insert
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.InsertVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.InsertVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.InsertVersionMetadataV1Responses{
 				Error: out,
 			}
 		default:
@@ -1329,7 +1366,7 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request models.Insert
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.InsertVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1338,7 +1375,7 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request models.Insert
 	return res, nil
 }
 
-func (s *SDK) RegisterSchemaV1(ctx context.Context, request models.RegisterSchemaV1Request) (*models.RegisterSchemaV1Response, error) {
+func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterSchemaV1Request) (*operations.RegisterSchemaV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1355,7 +1392,9 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request models.RegisterSchem
 	}
 	req.Header.Set("Content-Type", reqContentType)
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1367,14 +1406,14 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request models.RegisterSchem
 		contentType = "unknown"
 	}
 
-	res := &models.RegisterSchemaV1Response{
+	res := &operations.RegisterSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.RegisterSchemaV1Responses),
+		Responses:   make(map[int64]map[string]operations.RegisterSchemaV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.RegisterSchemaV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.RegisterSchemaV1Responses)
 	}
 
 	switch httpRes.StatusCode {
@@ -1382,12 +1421,12 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request models.RegisterSchem
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.RegisterSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.RegisterSchemaV1Responses{
 				Error: out,
 			}
 		default:
@@ -1396,7 +1435,7 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request models.RegisterSchem
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.RegisterSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.RegisterSchemaV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1405,7 +1444,7 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request models.RegisterSchem
 	return res, nil
 }
 
-func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request models.UpsertAPIEndpointV1Request) (*models.UpsertAPIEndpointV1Response, error) {
+func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.UpsertAPIEndpointV1Request) (*operations.UpsertAPIEndpointV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1422,7 +1461,9 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request models.UpsertAPIE
 	}
 	req.Header.Set("Content-Type", reqContentType)
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1434,26 +1475,26 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request models.UpsertAPIE
 		contentType = "unknown"
 	}
 
-	res := &models.UpsertAPIEndpointV1Response{
+	res := &operations.UpsertAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.UpsertAPIEndpointV1Responses),
+		Responses:   make(map[int64]map[string]operations.UpsertAPIEndpointV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.UpsertAPIEndpointV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIEndpointV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.APIEndpoint
+			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.UpsertAPIEndpointV1Responses{
 				APIEndpoint: out,
 			}
 		default:
@@ -1462,19 +1503,19 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request models.UpsertAPIE
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.UpsertAPIEndpointV1Responses{
 				Error: out,
 			}
 		default:
@@ -1483,7 +1524,7 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request models.UpsertAPIE
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointV1Responses{
 				RawResponse: data,
 			}
 		}
@@ -1492,7 +1533,7 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request models.UpsertAPIE
 	return res, nil
 }
 
-func (s *SDK) UpsertAPIV1(ctx context.Context, request models.UpsertAPIV1Request) (*models.UpsertAPIV1Response, error) {
+func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Request) (*operations.UpsertAPIV1Response, error) {
 	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1509,7 +1550,9 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request models.UpsertAPIV1Request
 	}
 	req.Header.Set("Content-Type", reqContentType)
 
-	httpRes, err := s.securityClient.Do(req)
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -1521,26 +1564,26 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request models.UpsertAPIV1Request
 		contentType = "unknown"
 	}
 
-	res := &models.UpsertAPIV1Response{
+	res := &operations.UpsertAPIV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]models.UpsertAPIV1Responses),
+		Responses:   make(map[int64]map[string]operations.UpsertAPIV1Responses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]models.UpsertAPIV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIV1Responses)
 	}
 
 	switch httpRes.StatusCode {
 	case 200:
 		switch contentType {
 		case "application/json":
-			var out *models.API
+			var out *shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.UpsertAPIV1Responses{
 				API: out,
 			}
 		default:
@@ -1549,19 +1592,19 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request models.UpsertAPIV1Request
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIV1Responses{
 				RawResponse: data,
 			}
 		}
 	default:
 		switch contentType {
 		case "application/json":
-			var out *models.Error
+			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = models.UpsertAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.UpsertAPIV1Responses{
 				Error: out,
 			}
 		default:
@@ -1570,7 +1613,7 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request models.UpsertAPIV1Request
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = models.UpsertAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIV1Responses{
 				RawResponse: data,
 			}
 		}

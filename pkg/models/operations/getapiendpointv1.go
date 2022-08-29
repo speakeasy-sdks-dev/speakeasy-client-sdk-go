@@ -1,4 +1,8 @@
-package models
+package operations
+
+import (
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+)
 
 type GetAPIEndpointV1PathParams struct {
 	APIEndpointID string `pathParam:"style=simple,explode=false,name=apiEndpointID"`
@@ -11,8 +15,8 @@ type GetAPIEndpointV1Request struct {
 }
 
 type GetAPIEndpointV1Responses struct {
-	APIEndpoint *APIEndpoint
-	Error       *Error
+	APIEndpoint *shared.APIEndpoint
+	Error       *shared.Error
 	RawResponse []byte
 }
 

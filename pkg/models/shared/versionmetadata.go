@@ -1,6 +1,8 @@
-package models
+package shared
 
-import "time"
+import (
+	"time"
+)
 
 type VersionMetadata struct {
 	APIID       string    `json:"api_id"`

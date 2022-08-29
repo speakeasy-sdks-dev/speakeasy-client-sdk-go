@@ -1,4 +1,8 @@
-package models
+package operations
+
+import (
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+)
 
 type UpsertAPIV1PathParams struct {
 	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
@@ -6,12 +10,12 @@ type UpsertAPIV1PathParams struct {
 
 type UpsertAPIV1Request struct {
 	PathParams UpsertAPIV1PathParams
-	Request    API `request:"mediaType=application/json"`
+	Request    shared.API `request:"mediaType=application/json"`
 }
 
 type UpsertAPIV1Responses struct {
-	API         *API
-	Error       *Error
+	API         *shared.API
+	Error       *shared.Error
 	RawResponse []byte
 }
 

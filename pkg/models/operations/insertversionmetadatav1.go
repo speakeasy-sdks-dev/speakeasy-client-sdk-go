@@ -1,4 +1,8 @@
-package models
+package operations
+
+import (
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+)
 
 type InsertVersionMetadataV1PathParams struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
@@ -7,13 +11,13 @@ type InsertVersionMetadataV1PathParams struct {
 
 type InsertVersionMetadataV1Request struct {
 	PathParams InsertVersionMetadataV1PathParams
-	Request    VersionMetadata `request:"mediaType=application/json"`
+	Request    shared.VersionMetadata `request:"mediaType=application/json"`
 }
 
 type InsertVersionMetadataV1Responses struct {
-	Error           *Error
+	Error           *shared.Error
 	RawResponse     []byte
-	VersionMetadata *VersionMetadata
+	VersionMetadata *shared.VersionMetadata
 }
 
 type InsertVersionMetadataV1Response struct {

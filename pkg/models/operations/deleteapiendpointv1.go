@@ -1,4 +1,8 @@
-package models
+package operations
+
+import (
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+)
 
 type DeleteAPIEndpointV1PathParams struct {
 	APIEndpointID string `pathParam:"style=simple,explode=false,name=apiEndpointID"`
@@ -11,7 +15,7 @@ type DeleteAPIEndpointV1Request struct {
 }
 
 type DeleteAPIEndpointV1Responses struct {
-	Error       *Error
+	Error       *shared.Error
 	RawResponse []byte
 }
 

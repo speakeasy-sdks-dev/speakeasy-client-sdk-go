@@ -11,10 +11,11 @@ const (
 )
 
 type securityTag struct {
-	Scheme bool
-	Name   string
-	Type   string
-	In     string
+	Option  bool
+	Scheme  bool
+	Name    string
+	Type    string
+	SubType string
 }
 
 type SecurityClient struct {
@@ -59,40 +60,77 @@ func parseSecurityStruct(security interface{}) *SecurityClient {
 		}
 
 		secTag := parseSecurityTag(fieldType)
-		if secTag != nil && secTag.Scheme {
-			return parseSecurityScheme(valType.Interface())
+		if secTag != nil {
+			if secTag.Option {
+				return parseSecurityOption(valType.Interface())
+			} else if secTag.Scheme {
+				client := newSecurityClient()
+				parseSecurityScheme(client, secTag, valType.Interface())
+				return client
+			}
 		}
 	}
 
 	return nil
 }
 
-func parseSecurityScheme(scheme interface{}) *SecurityClient {
-	schemeStructType := reflect.TypeOf(scheme)
-	schemeValType := reflect.ValueOf(scheme)
+func parseSecurityOption(option interface{}) *SecurityClient {
+	optionStructType := reflect.TypeOf(option)
+	optionValType := reflect.ValueOf(option)
 
 	client := newSecurityClient()
+
+	for i := 0; i < optionStructType.NumField(); i++ {
+		fieldType := optionStructType.Field(i)
+		valType := optionValType.Field(i)
+
+		secTag := parseSecurityTag(fieldType)
+		if secTag != nil && secTag.Scheme {
+			parseSecurityScheme(client, secTag, valType.Interface())
+		}
+	}
+
+	return client
+}
+
+func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme interface{}) {
+	schemeStructType := reflect.TypeOf(scheme)
+	schemeValType := reflect.ValueOf(scheme)
 
 	for i := 0; i < schemeStructType.NumField(); i++ {
 		fieldType := schemeStructType.Field(i)
 		valType := schemeValType.Field(i)
 
 		secTag := parseSecurityTag(fieldType)
-		if secTag == nil || secTag.Scheme {
+		if secTag == nil || secTag.Name == "" {
 			continue
 		}
 
-		// TODO: deal with other types
-		if secTag.Type == "apiKey" {
-			// ToDo: deal with other in values
-			switch secTag.In {
+		switch schemeTag.Type {
+		case "apiKey":
+			// TODO: deal with other in values
+			switch schemeTag.SubType {
 			case "header":
 				client.headers[secTag.Name] = valType.String()
+			default:
+				panic("not implemented yet")
 			}
+		case "openIdConnect":
+			client.headers[secTag.Name] = valType.String()
+		case "oauth2":
+			client.headers[secTag.Name] = valType.String()
+		case "http":
+			// TODO: deal with basic
+			switch schemeTag.SubType {
+			case "bearer":
+				client.headers[secTag.Name] = valType.String()
+			default:
+				panic("not implemented yet")
+			}
+		default:
+			panic("not implemented yet")
 		}
 	}
-
-	return client
 }
 
 func parseSecurityTag(field reflect.StructField) *securityTag {
@@ -101,10 +139,11 @@ func parseSecurityTag(field reflect.StructField) *securityTag {
 		return nil
 	}
 
+	option := false
 	scheme := false
 	name := ""
 	securityType := ""
-	securityIn := ""
+	securitySubType := ""
 
 	options := strings.Split(tag, ",")
 	for _, optionConf := range options {
@@ -113,29 +152,27 @@ func parseSecurityTag(field reflect.StructField) *securityTag {
 			continue
 		}
 
-		if len(parts) == 1 && parts[0] == "scheme" {
-			scheme = true
-			continue
-		}
-
 		switch parts[0] {
 		case "name":
 			name = parts[1]
 		case "type":
 			securityType = parts[1]
-		case "in":
-			securityIn = parts[1]
+		case "subtype":
+			securitySubType = parts[1]
+		case "option":
+			option = true
+		case "scheme":
+			scheme = true
 		}
 	}
 
-	if !scheme && (name == "" || securityType == "" || securityIn == "") {
-		return nil
-	}
+	// TODO: validate tag?
 
 	return &securityTag{
-		Scheme: scheme,
-		Name:   name,
-		Type:   securityType,
-		In:     securityIn,
+		Option:  option,
+		Scheme:  scheme,
+		Name:    name,
+		Type:    securityType,
+		SubType: securitySubType,
 	}
 }

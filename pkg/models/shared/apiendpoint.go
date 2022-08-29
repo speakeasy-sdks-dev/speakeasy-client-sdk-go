@@ -1,6 +1,8 @@
-package models
+package shared
 
-import "time"
+import (
+	"time"
+)
 
 type APIEndpoint struct {
 	APIEndpointID string    `json:"api_endpoint_id"`
