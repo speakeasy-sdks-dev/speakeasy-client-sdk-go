@@ -1,0 +1,2 @@
+go:
+  packagename: github.com/speakeasy-api/speakeasy-client-sdk-go
