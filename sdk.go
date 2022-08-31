@@ -39,7 +39,8 @@ func (s *SDK) ConfigureSecurity(security shared.Security) {
 }
 
 func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.DeleteAPIEndpointV1Request) (*operations.DeleteAPIEndpointV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
@@ -70,8 +71,8 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.Delete
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIEndpointV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
 		case "application/json":
@@ -99,7 +100,8 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.Delete
 }
 
 func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Request) (*operations.DeleteAPIV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
@@ -130,8 +132,8 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Req
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
 		case "application/json":
@@ -159,7 +161,8 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Req
 }
 
 func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchemaV1Request) (*operations.DeleteSchemaV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
@@ -190,8 +193,8 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchem
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteSchemaV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
 		case "application/json":
@@ -219,7 +222,8 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchem
 }
 
 func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.DeleteVersionMetadataV1Request) (*operations.DeleteVersionMetadataV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/versions/{versionID}/metadata/{metaKey}/{metaValue}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/versions/{versionID}/metadata/{metaKey}/{metaValue}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
@@ -250,8 +254,8 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.De
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteVersionMetadataV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
 		case "application/json":
@@ -279,7 +283,8 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.De
 }
 
 func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request operations.DownloadSchemaRevisionV1Request) (*operations.DownloadSchemaRevisionV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -310,8 +315,8 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request operations.D
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaRevisionV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 302:
+	switch {
+	case httpRes.StatusCode == 302:
 		res.Headers = httpRes.Header
 
 	default:
@@ -341,7 +346,8 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request operations.D
 }
 
 func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadSchemaV1Request) (*operations.DownloadSchemaV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -372,8 +378,8 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadS
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 302:
+	switch {
+	case httpRes.StatusCode == 302:
 		res.Headers = httpRes.Header
 
 	default:
@@ -403,7 +409,8 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadS
 }
 
 func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIEndpointV1Request) (*operations.FindAPIEndpointV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -434,8 +441,8 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIE
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.FindAPIEndpointV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out *shared.APIEndpoint
@@ -483,7 +490,8 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIE
 }
 
 func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAllAPIEndpointsV1Request) (*operations.GetAllAPIEndpointsV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/api_endpoints", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/api_endpoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -514,8 +522,8 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIEndpointsV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out []shared.APIEndpoint
@@ -563,7 +571,8 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 }
 
 func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAllAPIVersionsV1Request) (*operations.GetAllAPIVersionsV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -596,8 +605,8 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIVersionsV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out []shared.API
@@ -645,7 +654,8 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 }
 
 func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operations.GetAllForVersionAPIEndpointsV1Request) (*operations.GetAllForVersionAPIEndpointsV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -676,8 +686,8 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllForVersionAPIEndpointsV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out []shared.APIEndpoint
@@ -725,7 +735,8 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 }
 
 func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEndpointV1Request) (*operations.GetAPIEndpointV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -756,8 +767,8 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEnd
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAPIEndpointV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out *shared.APIEndpoint
@@ -805,7 +816,8 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEnd
 }
 
 func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request) (*operations.GetApisV1Response, error) {
-	url := strings.TrimSuffix(s.serverURL, "/") + "/v1/apis"
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/v1/apis"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -838,8 +850,8 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetApisV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out []shared.API
@@ -887,7 +899,8 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 }
 
 func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaDiffV1Request) (*operations.GetSchemaDiffV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -918,8 +931,8 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaD
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaDiffV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out *shared.SchemaDiff
@@ -967,7 +980,8 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaD
 }
 
 func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSchemaRevisionV1Request) (*operations.GetSchemaRevisionV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -998,8 +1012,8 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSch
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaRevisionV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out *shared.Schema
@@ -1047,7 +1061,8 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSch
 }
 
 func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Request) (*operations.GetSchemaV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1078,8 +1093,8 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Req
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out *shared.Schema
@@ -1127,7 +1142,8 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Req
 }
 
 func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1Request) (*operations.GetSchemasV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1158,8 +1174,8 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1R
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemasV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out []shared.Schema
@@ -1207,7 +1223,8 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1R
 }
 
 func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVersionMetadataV1Request) (*operations.GetVersionMetadataV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/versions/{versionID}/metadata", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/versions/{versionID}/metadata", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1238,8 +1255,8 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetVersionMetadataV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out []shared.VersionMetadata
@@ -1287,7 +1304,8 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 }
 
 func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.InsertVersionMetadataV1Request) (*operations.InsertVersionMetadataV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/versions/{versionID}/metadata", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/versions/{versionID}/metadata", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
 	if err != nil {
@@ -1327,8 +1345,8 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.In
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.InsertVersionMetadataV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out *shared.VersionMetadata
@@ -1376,7 +1394,8 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.In
 }
 
 func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterSchemaV1Request) (*operations.RegisterSchemaV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
 	if err != nil {
@@ -1416,8 +1435,8 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterS
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.RegisterSchemaV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
 		case "application/json":
@@ -1445,7 +1464,8 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterS
 }
 
 func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.UpsertAPIEndpointV1Request) (*operations.UpsertAPIEndpointV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
 	if err != nil {
@@ -1485,8 +1505,8 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.Upsert
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIEndpointV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out *shared.APIEndpoint
@@ -1534,7 +1554,8 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.Upsert
 }
 
 func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Request) (*operations.UpsertAPIV1Response, error) {
-	url := utils.GenerateURL(ctx, s.serverURL, "/v1/apis/{apiID}", request.PathParams)
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
 	if err != nil {
@@ -1574,8 +1595,8 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Req
 		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIV1Responses)
 	}
 
-	switch httpRes.StatusCode {
-	case 200:
+	switch {
+	case httpRes.StatusCode == 200:
 		switch contentType {
 		case "application/json":
 			var out *shared.API

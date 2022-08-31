@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"net/http"
 	"reflect"
 	"strings"
@@ -19,14 +20,16 @@ type securityTag struct {
 }
 
 type SecurityClient struct {
-	client  *http.Client
-	headers map[string]string
+	client      *http.Client
+	headers     map[string]string
+	queryParams map[string]string
 }
 
 func newSecurityClient() *SecurityClient {
 	return &SecurityClient{
-		client:  http.DefaultClient,
-		headers: make(map[string]string),
+		client:      http.DefaultClient,
+		headers:     make(map[string]string),
+		queryParams: make(map[string]string),
 	}
 }
 
@@ -34,6 +37,14 @@ func (c *SecurityClient) Do(req *http.Request) (*http.Response, error) {
 	for k, v := range c.headers {
 		req.Header.Set(k, v)
 	}
+
+	queryParams := req.URL.Query()
+
+	for k, v := range c.queryParams {
+		queryParams.Set(k, v)
+	}
+
+	req.URL.RawQuery = queryParams.Encode()
 
 	return c.client.Do(req)
 }
@@ -108,27 +119,30 @@ func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme 
 
 		switch schemeTag.Type {
 		case "apiKey":
-			// TODO: deal with other in values
 			switch schemeTag.SubType {
 			case "header":
 				client.headers[secTag.Name] = valType.String()
+			case "query":
+				client.queryParams[secTag.Name] = valType.String()
+			case "cookie":
+				client.headers["Cookie"] = fmt.Sprintf("%s=%s", secTag.Name, valType.String())
 			default:
-				panic("not implemented yet")
+				panic("not supported")
 			}
 		case "openIdConnect":
 			client.headers[secTag.Name] = valType.String()
 		case "oauth2":
 			client.headers[secTag.Name] = valType.String()
 		case "http":
-			// TODO: deal with basic
 			switch schemeTag.SubType {
+			case "basic":
 			case "bearer":
 				client.headers[secTag.Name] = valType.String()
 			default:
-				panic("not implemented yet")
+				panic("not supported")
 			}
 		default:
-			panic("not implemented yet")
+			panic("not supported")
 		}
 	}
 }
