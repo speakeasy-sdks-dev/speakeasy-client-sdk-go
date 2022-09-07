@@ -126,18 +126,9 @@ func populateFormParams(ctx context.Context, req *http.Request, tag *paramTag, o
 			}
 		}
 	case reflect.Slice, reflect.Array:
-		items := []string{}
-
-		for i := 0; i < objValue.Len(); i++ {
-			if tag.Explode {
-				queryParams.Add(tag.ParamName, fmt.Sprintf("%v", objValue.Index(i).Interface()))
-			} else {
-				items = append(items, fmt.Sprintf("%v", objValue.Index(i).Interface()))
-			}
-		}
-
-		if len(items) > 0 {
-			queryParams.Add(tag.ParamName, strings.Join(items, ","))
+		values := parseFormStyleArray(tag.Explode, objValue)
+		for _, v := range values {
+			queryParams.Add(tag.ParamName, v)
 		}
 	default:
 		queryParams.Add(tag.ParamName, fmt.Sprintf("%v", objValue.Interface()))

@@ -78,7 +78,7 @@ func serializeContentType(mediaType string, val reflect.Value) (*bytes.Buffer, s
 		if err := json.NewEncoder(buf).Encode(val.Interface()); err != nil {
 			return nil, "", err
 		}
-	case "multipart/form-data":
+	case "multipart/form-data", "multipart/mixed":
 		var err error
 		mediaType, err = encodeMultipartFormData(buf, val.Interface())
 		if err != nil {
@@ -109,25 +109,50 @@ func encodeMultipartFormData(w io.Writer, data interface{}) (string, error) {
 	writer := multipart.NewWriter(w)
 
 	for i := 0; i < requestStructType.NumField(); i++ {
-		fieldType := requestStructType.Field(i)
+		field := requestStructType.Field(i)
+		fieldType := field.Type
 		valType := requestValType.Field(i)
 
-		if fieldType.Type.Kind() == reflect.Pointer {
+		if fieldType.Kind() == reflect.Pointer {
 			if valType.IsNil() {
 				continue
 			}
+
+			fieldType = fieldType.Elem()
+			valType = valType.Elem()
 		}
 
-		tag := parseMultipartFormTag(fieldType)
+		tag := parseMultipartFormTag(field)
 		if tag.File {
-			if err := encodeMultipartFormDataFile(writer, fieldType.Type, valType); err != nil {
+			if err := encodeMultipartFormDataFile(writer, fieldType, valType); err != nil {
+				writer.Close()
+				return "", err
+			}
+		} else if tag.JSON {
+			jw, err := writer.CreateFormField(tag.Name)
+			if err != nil {
+				writer.Close()
+				return "", err
+			}
+			if err := json.NewEncoder(jw).Encode(valType.Interface()); err != nil {
 				writer.Close()
 				return "", err
 			}
 		} else {
-			if err := writer.WriteField(tag.Name, valType.String()); err != nil {
-				writer.Close()
-				return "", err
+			switch fieldType.Kind() {
+			case reflect.Slice, reflect.Array:
+				values := parseFormStyleArray(true, valType)
+				for _, v := range values {
+					if err := writer.WriteField(tag.Name+"[]", v); err != nil {
+						writer.Close()
+						return "", err
+					}
+				}
+			default:
+				if err := writer.WriteField(tag.Name, fmt.Sprintf("%v", valType.Interface())); err != nil {
+					writer.Close()
+					return "", err
+				}
 			}
 		}
 	}
@@ -140,10 +165,6 @@ func encodeMultipartFormData(w io.Writer, data interface{}) (string, error) {
 }
 
 func encodeMultipartFormDataFile(w *multipart.Writer, fieldType reflect.Type, valType reflect.Value) error {
-	if fieldType.Kind() == reflect.Pointer {
-		fieldType = fieldType.Elem()
-		valType = valType.Elem()
-	}
 	if fieldType.Kind() != reflect.Struct {
 		return fmt.Errorf("invalid type %s for multipart/form-data file", valType.Type())
 	}
@@ -212,6 +233,7 @@ func getRequestTag(field reflect.StructField) *requestTag {
 type multipartFormTag struct {
 	File    bool
 	Content bool
+	JSON    bool
 	Name    string
 }
 
@@ -229,6 +251,8 @@ func parseMultipartFormTag(field reflect.StructField) *multipartFormTag {
 			tag.Content = v == "true"
 		case "name":
 			tag.Name = v
+		case "json":
+			tag.JSON = v == "true"
 		}
 	}
 
