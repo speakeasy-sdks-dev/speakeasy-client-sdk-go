@@ -12,9 +12,9 @@ import (
 	"strings"
 )
 
-const (
-	ServerURL = "http://api.prod.speakeasyapi.dev"
-)
+var Servers = []string{
+	"http://api.prod.speakeasyapi.dev",
+}
 
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
@@ -26,16 +26,38 @@ type SDK struct {
 	serverURL      string
 }
 
-func New() *SDK {
-	return &SDK{
+type SDKOption func(*SDK)
+
+func WithServerURL(serverURL string, params map[string]string) SDKOption {
+	return func(sdk *SDK) {
+		if params != nil {
+			serverURL = utils.ReplaceParameters(serverURL, params)
+		}
+
+		sdk.serverURL = serverURL
+	}
+}
+
+func WithSecurity(security shared.Security) SDKOption {
+	return func(sdk *SDK) {
+		sdk.securityClient = utils.CreateSecurityClient(security)
+	}
+}
+
+func New(opts ...SDKOption) *SDK {
+	sdk := &SDK{
 		defaultClient:  http.DefaultClient,
 		securityClient: http.DefaultClient,
 		serverURL:      ServerURL,
 	}
-}
+	for _, opt := range opts {
+		opt(sdk)
+	}
+	if sdk.serverURL == "" {
+		sdk.serverURL = Servers[0]
+	}
 
-func (s *SDK) ConfigureSecurity(security shared.Security) {
-	s.securityClient = utils.CreateSecurityClient(security)
+	return sdk
 }
 
 func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.DeleteAPIEndpointV1Request) (*operations.DeleteAPIEndpointV1Response, error) {

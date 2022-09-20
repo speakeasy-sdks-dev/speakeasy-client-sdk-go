@@ -5,8 +5,11 @@ import (
 	"fmt"
 	"io"
 	"reflect"
+	"regexp"
 	"strings"
 )
+
+var paramRegex = regexp.MustCompile(`({.*?})`)
 
 func UnmarshalJsonFromResponseBody(body io.Reader, out interface{}) error {
 	data, err := io.ReadAll(body)
@@ -18,6 +21,13 @@ func UnmarshalJsonFromResponseBody(body io.Reader, out interface{}) error {
 	}
 
 	return nil
+}
+
+func ReplaceParameters(stringWithParams string, params map[string]string) string {
+	return paramRegex.ReplaceAllStringFunc(stringWithParams, func(match string) string {
+		match = match[1 : len(match)-1]
+		return params[match]
+	})
 }
 
 func parseStructTag(tagKey string, field reflect.StructField) map[string]string {

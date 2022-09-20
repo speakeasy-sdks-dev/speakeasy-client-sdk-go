@@ -4,15 +4,12 @@ import (
 	"context"
 	"fmt"
 	"reflect"
-	"regexp"
 	"strings"
 )
 
 const (
 	pathParamTagKey = "pathParam"
 )
-
-var pathParamRegex = regexp.MustCompile(`({.*?})`)
 
 func GenerateURL(ctx context.Context, serverURL, path string, pathParams interface{}) string {
 	url := strings.TrimSuffix(serverURL, "/") + path
@@ -42,10 +39,7 @@ func GenerateURL(ctx context.Context, serverURL, path string, pathParams interfa
 	}
 
 	// TODO should we handle the case where there are no matching path params?
-	return pathParamRegex.ReplaceAllStringFunc(url, func(match string) string {
-		match = match[1 : len(match)-1]
-		return parsedParameters[match]
-	})
+	return ReplaceParameters(url, parsedParameters)
 }
 
 func getSimplePathParams(ctx context.Context, parentName string, objType reflect.Type, objValue reflect.Value) map[string]string {
@@ -59,18 +53,7 @@ func getSimplePathParams(ctx context.Context, parentName string, objType reflect
 
 	pathParams := make(map[string]string)
 
-	switch objType.Kind() {
-	case reflect.String:
-		fallthrough
-	case reflect.Int64:
-		fallthrough
-	case reflect.Float64:
-		fallthrough
-	case reflect.Bool:
-		pathParams[parentName] = fmt.Sprintf("%v", objValue.Interface())
-	default:
-		// TODO: not currently supported. Print warning?
-	}
+	pathParams[parentName] = fmt.Sprintf("%v", objValue.Interface())
 
 	return pathParams
 }

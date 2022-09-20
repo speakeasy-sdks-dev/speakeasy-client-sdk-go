@@ -74,7 +74,7 @@ func serializeContentType(mediaType string, val reflect.Value) (*bytes.Buffer, s
 	buf := &bytes.Buffer{}
 
 	switch mediaType {
-	case "application/json":
+	case "application/json", "text/json":
 		if err := json.NewEncoder(buf).Encode(val.Interface()); err != nil {
 			return nil, "", err
 		}
