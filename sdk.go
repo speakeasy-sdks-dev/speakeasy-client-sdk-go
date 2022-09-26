@@ -48,7 +48,6 @@ func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		defaultClient:  http.DefaultClient,
 		securityClient: http.DefaultClient,
-		serverURL:      ServerURL,
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -1236,6 +1235,89 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1R
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasV1Responses{
+				RawResponse: data,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsageMetricsV1Request) (*operations.GetUsageMetricsV1Response, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/workspace/{workspaceID}/metrics", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentTypeHeader := httpRes.Header.Get("Content-Type")
+	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
+	if err != nil {
+		contentType = "unknown"
+	}
+
+	res := &operations.GetUsageMetricsV1Response{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GetUsageMetricsV1Responses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetUsageMetricsV1Responses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch contentType {
+		case "application/json":
+			var out []shared.UsageMetric
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetUsageMetricsV1Responses{
+				UsageMetric: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetUsageMetricsV1Responses{
+				RawResponse: data,
+			}
+		}
+	default:
+		switch contentType {
+		case "application/json":
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetUsageMetricsV1Responses{
+				Error: out,
+			}
+		default:
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetUsageMetricsV1Responses{
 				RawResponse: data,
 			}
 		}
