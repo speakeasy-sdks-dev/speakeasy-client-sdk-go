@@ -15,8 +15,7 @@ type DeleteSchemaV1Request struct {
 }
 
 type DeleteSchemaV1Responses struct {
-	Error       *shared.Error
-	RawResponse []byte
+	Error *shared.Error
 }
 
 type DeleteSchemaV1Response struct {

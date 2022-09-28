@@ -18,9 +18,8 @@ type GetUsageMetricsV1Request struct {
 }
 
 type GetUsageMetricsV1Responses struct {
-	Error       *shared.Error
-	RawResponse []byte
-	UsageMetric []shared.UsageMetric
+	Error                               *shared.Error
+	GetUsageMetricsV1200ApplicationJSON []shared.UsageMetric
 }
 
 type GetUsageMetricsV1Response struct {

@@ -15,8 +15,7 @@ type DownloadSchemaRevisionV1Request struct {
 }
 
 type DownloadSchemaRevisionV1Responses struct {
-	Error       *shared.Error
-	RawResponse []byte
+	Error *shared.Error
 }
 
 type DownloadSchemaRevisionV1Response struct {

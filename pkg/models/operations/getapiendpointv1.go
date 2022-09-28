@@ -17,7 +17,6 @@ type GetAPIEndpointV1Request struct {
 type GetAPIEndpointV1Responses struct {
 	APIEndpoint *shared.APIEndpoint
 	Error       *shared.Error
-	RawResponse []byte
 }
 
 type GetAPIEndpointV1Response struct {

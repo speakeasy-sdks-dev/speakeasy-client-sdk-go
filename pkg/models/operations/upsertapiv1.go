@@ -14,9 +14,8 @@ type UpsertAPIV1Request struct {
 }
 
 type UpsertAPIV1Responses struct {
-	API         *shared.API
-	Error       *shared.Error
-	RawResponse []byte
+	API   *shared.API
+	Error *shared.Error
 }
 
 type UpsertAPIV1Response struct {

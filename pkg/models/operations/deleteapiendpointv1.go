@@ -15,8 +15,7 @@ type DeleteAPIEndpointV1Request struct {
 }
 
 type DeleteAPIEndpointV1Responses struct {
-	Error       *shared.Error
-	RawResponse []byte
+	Error *shared.Error
 }
 
 type DeleteAPIEndpointV1Response struct {

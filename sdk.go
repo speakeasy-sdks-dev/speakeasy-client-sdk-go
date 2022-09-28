@@ -6,8 +6,6 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/internal/utils"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"io"
-	"mime"
 	"net/http"
 	"strings"
 )
@@ -76,11 +74,7 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.Delete
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -96,23 +90,14 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.Delete
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DeleteAPIEndpointV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIEndpointV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -137,11 +122,7 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Req
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteAPIV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -157,23 +138,14 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Req
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DeleteAPIV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -198,11 +170,7 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchem
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -218,23 +186,14 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchem
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DeleteSchemaV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteSchemaV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -259,11 +218,7 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.De
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteVersionMetadataV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -279,23 +234,14 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.De
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DeleteVersionMetadataV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteVersionMetadataV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -320,11 +266,7 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request operations.D
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DownloadSchemaRevisionV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -342,23 +284,14 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request operations.D
 
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DownloadSchemaRevisionV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -383,11 +316,7 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadS
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DownloadSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -405,23 +334,14 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadS
 
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.DownloadSchemaV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -446,11 +366,7 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIE
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.FindAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -465,44 +381,26 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIE
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.FindAPIEndpointV1Responses{
-				APIEndpoint: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointV1Responses{
-				RawResponse: data,
+				APIEndpoint: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.FindAPIEndpointV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -527,11 +425,7 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAllAPIEndpointsV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -546,44 +440,26 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out []shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllAPIEndpointsV1Responses{
-				APIEndpoint: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsV1Responses{
-				RawResponse: data,
+				GetAllAPIEndpointsV1200ApplicationJSON: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllAPIEndpointsV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -610,11 +486,7 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAllAPIVersionsV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -629,44 +501,26 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out []shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllAPIVersionsV1Responses{
-				API: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsV1Responses{
-				RawResponse: data,
+				GetAllAPIVersionsV1200ApplicationJSON: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllAPIVersionsV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -691,11 +545,7 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAllForVersionAPIEndpointsV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -710,44 +560,26 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out []shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllForVersionAPIEndpointsV1Responses{
-				APIEndpoint: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsV1Responses{
-				RawResponse: data,
+				GetAllForVersionAPIEndpointsV1200ApplicationJSON: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAllForVersionAPIEndpointsV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -772,11 +604,7 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEnd
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -791,44 +619,26 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEnd
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAPIEndpointV1Responses{
-				APIEndpoint: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointV1Responses{
-				RawResponse: data,
+				APIEndpoint: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetAPIEndpointV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -855,11 +665,7 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetApisV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -874,44 +680,26 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out []shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetApisV1Responses{
-				API: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisV1Responses{
-				RawResponse: data,
+				GetApisV1200ApplicationJSON: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetApisV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -936,11 +724,7 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaD
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaDiffV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -955,44 +739,26 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaD
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.SchemaDiff
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaDiffV1Responses{
-				SchemaDiff: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffV1Responses{
-				RawResponse: data,
+				SchemaDiff: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaDiffV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1017,11 +783,7 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSch
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaRevisionV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1036,44 +798,26 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSch
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaRevisionV1Responses{
-				Schema: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionV1Responses{
-				RawResponse: data,
+				Schema: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaRevisionV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1098,11 +842,7 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Req
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1117,44 +857,26 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Req
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaV1Responses{
-				Schema: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaV1Responses{
-				RawResponse: data,
+				Schema: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemaV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1179,11 +901,7 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1R
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemasV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1198,44 +916,26 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1R
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out []shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemasV1Responses{
-				Schema: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasV1Responses{
-				RawResponse: data,
+				GetSchemasV1200ApplicationJSON: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetSchemasV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1262,11 +962,7 @@ func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsage
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetUsageMetricsV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1281,44 +977,26 @@ func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsage
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out []shared.UsageMetric
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetUsageMetricsV1Responses{
-				UsageMetric: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetUsageMetricsV1Responses{
-				RawResponse: data,
+				GetUsageMetricsV1200ApplicationJSON: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetUsageMetricsV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetUsageMetricsV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1343,11 +1021,7 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetVersionMetadataV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1362,44 +1036,26 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out []shared.VersionMetadata
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetVersionMetadataV1Responses{
-				VersionMetadata: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataV1Responses{
-				RawResponse: data,
+				GetVersionMetadataV1200ApplicationJSON: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.GetVersionMetadataV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1433,11 +1089,7 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.In
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.InsertVersionMetadataV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1452,44 +1104,26 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.In
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.VersionMetadata
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.InsertVersionMetadataV1Responses{
-				VersionMetadata: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataV1Responses{
-				RawResponse: data,
+				VersionMetadata: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.InsertVersionMetadataV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1523,11 +1157,7 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterS
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.RegisterSchemaV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1543,23 +1173,14 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterS
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.RegisterSchemaV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.RegisterSchemaV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1593,11 +1214,7 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.Upsert
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpsertAPIEndpointV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1612,44 +1229,26 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.Upsert
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.UpsertAPIEndpointV1Responses{
-				APIEndpoint: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointV1Responses{
-				RawResponse: data,
+				APIEndpoint: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.UpsertAPIEndpointV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}
@@ -1683,11 +1282,7 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Req
 	}
 	defer httpRes.Body.Close()
 
-	contentTypeHeader := httpRes.Header.Get("Content-Type")
-	contentType, _, err := mime.ParseMediaType(contentTypeHeader)
-	if err != nil {
-		contentType = "unknown"
-	}
+	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpsertAPIV1Response{
 		StatusCode:  int64(httpRes.StatusCode),
@@ -1702,44 +1297,26 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Req
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.UpsertAPIV1Responses{
-				API: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIV1Responses{
-				RawResponse: data,
+				API: out,
 			}
 		}
 	default:
 		switch contentType {
-		case "application/json":
+		case `application/json`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)]["application/json"] = operations.UpsertAPIV1Responses{
-				Error: out,
-			}
-		default:
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
-			}
-
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIV1Responses{
-				RawResponse: data,
+				Error: out,
 			}
 		}
 	}

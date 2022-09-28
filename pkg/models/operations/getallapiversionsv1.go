@@ -23,9 +23,8 @@ type GetAllAPIVersionsV1Request struct {
 }
 
 type GetAllAPIVersionsV1Responses struct {
-	API         []shared.API
-	Error       *shared.Error
-	RawResponse []byte
+	Error                                 *shared.Error
+	GetAllAPIVersionsV1200ApplicationJSON []shared.API
 }
 
 type GetAllAPIVersionsV1Response struct {

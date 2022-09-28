@@ -24,8 +24,7 @@ type RegisterSchemaV1Request struct {
 }
 
 type RegisterSchemaV1Responses struct {
-	Error       *shared.Error
-	RawResponse []byte
+	Error *shared.Error
 }
 
 type RegisterSchemaV1Response struct {

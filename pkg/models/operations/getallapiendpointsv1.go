@@ -13,9 +13,8 @@ type GetAllAPIEndpointsV1Request struct {
 }
 
 type GetAllAPIEndpointsV1Responses struct {
-	APIEndpoint []shared.APIEndpoint
-	Error       *shared.Error
-	RawResponse []byte
+	Error                                  *shared.Error
+	GetAllAPIEndpointsV1200ApplicationJSON []shared.APIEndpoint
 }
 
 type GetAllAPIEndpointsV1Response struct {

@@ -16,7 +16,6 @@ type InsertVersionMetadataV1Request struct {
 
 type InsertVersionMetadataV1Responses struct {
 	Error           *shared.Error
-	RawResponse     []byte
 	VersionMetadata *shared.VersionMetadata
 }
 

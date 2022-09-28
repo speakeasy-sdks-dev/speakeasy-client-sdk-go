@@ -18,9 +18,8 @@ type GetApisV1Request struct {
 }
 
 type GetApisV1Responses struct {
-	API         []shared.API
-	Error       *shared.Error
-	RawResponse []byte
+	Error                       *shared.Error
+	GetApisV1200ApplicationJSON []shared.API
 }
 
 type GetApisV1Response struct {

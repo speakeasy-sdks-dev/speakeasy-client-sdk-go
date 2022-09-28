@@ -16,9 +16,8 @@ type GetSchemaDiffV1Request struct {
 }
 
 type GetSchemaDiffV1Responses struct {
-	Error       *shared.Error
-	RawResponse []byte
-	SchemaDiff  *shared.SchemaDiff
+	Error      *shared.Error
+	SchemaDiff *shared.SchemaDiff
 }
 
 type GetSchemaDiffV1Response struct {

@@ -18,7 +18,6 @@ type UpsertAPIEndpointV1Request struct {
 type UpsertAPIEndpointV1Responses struct {
 	APIEndpoint *shared.APIEndpoint
 	Error       *shared.Error
-	RawResponse []byte
 }
 
 type UpsertAPIEndpointV1Response struct {

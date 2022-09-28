@@ -14,9 +14,8 @@ type GetSchemasV1Request struct {
 }
 
 type GetSchemasV1Responses struct {
-	Error       *shared.Error
-	RawResponse []byte
-	Schema      []shared.Schema
+	Error                          *shared.Error
+	GetSchemasV1200ApplicationJSON []shared.Schema
 }
 
 type GetSchemasV1Response struct {

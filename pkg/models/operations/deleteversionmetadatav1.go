@@ -16,8 +16,7 @@ type DeleteVersionMetadataV1Request struct {
 }
 
 type DeleteVersionMetadataV1Responses struct {
-	Error       *shared.Error
-	RawResponse []byte
+	Error *shared.Error
 }
 
 type DeleteVersionMetadataV1Response struct {

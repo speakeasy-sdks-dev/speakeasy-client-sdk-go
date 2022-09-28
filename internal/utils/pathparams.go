@@ -47,7 +47,6 @@ func getSimplePathParams(ctx context.Context, parentName string, objType reflect
 		if objValue.IsNil() {
 			return nil
 		}
-		objType = objType.Elem()
 		objValue = objValue.Elem()
 	}
 
