@@ -14,8 +14,8 @@ type GetAllForVersionAPIEndpointsV1Request struct {
 }
 
 type GetAllForVersionAPIEndpointsV1Responses struct {
-	Error                                            *shared.Error
-	GetAllForVersionAPIEndpointsV1200ApplicationJSON []shared.APIEndpoint
+	APIEndpoints []shared.APIEndpoint
+	Error        *shared.Error
 }
 
 type GetAllForVersionAPIEndpointsV1Response struct {

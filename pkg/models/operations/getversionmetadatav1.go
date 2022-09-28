@@ -14,8 +14,8 @@ type GetVersionMetadataV1Request struct {
 }
 
 type GetVersionMetadataV1Responses struct {
-	Error                                  *shared.Error
-	GetVersionMetadataV1200ApplicationJSON []shared.VersionMetadata
+	Error           *shared.Error
+	VersionMetadata []shared.VersionMetadata
 }
 
 type GetVersionMetadataV1Response struct {

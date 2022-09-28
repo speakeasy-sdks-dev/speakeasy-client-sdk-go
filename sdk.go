@@ -447,7 +447,7 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsV1Responses{
-				GetAllAPIEndpointsV1200ApplicationJSON: out,
+				APIEndpoints: out,
 			}
 		}
 	default:
@@ -508,7 +508,7 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsV1Responses{
-				GetAllAPIVersionsV1200ApplicationJSON: out,
+				Apis: out,
 			}
 		}
 	default:
@@ -567,7 +567,7 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsV1Responses{
-				GetAllForVersionAPIEndpointsV1200ApplicationJSON: out,
+				APIEndpoints: out,
 			}
 		}
 	default:
@@ -687,7 +687,7 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisV1Responses{
-				GetApisV1200ApplicationJSON: out,
+				Apis: out,
 			}
 		}
 	default:
@@ -923,7 +923,7 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1R
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasV1Responses{
-				GetSchemasV1200ApplicationJSON: out,
+				Schemata: out,
 			}
 		}
 	default:
@@ -984,7 +984,7 @@ func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsage
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetUsageMetricsV1Responses{
-				GetUsageMetricsV1200ApplicationJSON: out,
+				UsageMetrics: out,
 			}
 		}
 	default:
@@ -1043,7 +1043,7 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 			}
 
 			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataV1Responses{
-				GetVersionMetadataV1200ApplicationJSON: out,
+				VersionMetadata: out,
 			}
 		}
 	default:

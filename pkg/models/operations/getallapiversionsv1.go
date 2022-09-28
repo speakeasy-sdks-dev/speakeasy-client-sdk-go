@@ -23,8 +23,8 @@ type GetAllAPIVersionsV1Request struct {
 }
 
 type GetAllAPIVersionsV1Responses struct {
-	Error                                 *shared.Error
-	GetAllAPIVersionsV1200ApplicationJSON []shared.API
+	Apis  []shared.API
+	Error *shared.Error
 }
 
 type GetAllAPIVersionsV1Response struct {
