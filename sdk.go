@@ -90,7 +90,7 @@ func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.Delete
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -138,7 +138,7 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Req
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -186,7 +186,7 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchem
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -234,7 +234,7 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.De
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -284,7 +284,7 @@ func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request operations.D
 
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -334,7 +334,7 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadS
 
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -381,7 +381,7 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIE
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -393,7 +393,7 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIE
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -440,7 +440,7 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out []shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -452,7 +452,7 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -501,7 +501,7 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out []shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -513,7 +513,7 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -560,7 +560,7 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out []shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -572,7 +572,7 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -619,7 +619,7 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEnd
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -631,7 +631,7 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEnd
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -680,7 +680,7 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out []shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -692,7 +692,7 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -739,7 +739,7 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaD
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.SchemaDiff
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -751,7 +751,7 @@ func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaD
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -798,7 +798,7 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSch
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -810,7 +810,7 @@ func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSch
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -857,7 +857,7 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Req
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -869,7 +869,7 @@ func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Req
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -916,7 +916,7 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1R
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out []shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -928,7 +928,7 @@ func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1R
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -977,7 +977,7 @@ func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsage
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out []shared.UsageMetric
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -989,7 +989,7 @@ func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsage
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1036,7 +1036,7 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out []shared.VersionMetadata
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1048,7 +1048,7 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1104,7 +1104,7 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.In
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.VersionMetadata
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1116,7 +1116,7 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.In
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1173,7 +1173,7 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterS
 	case httpRes.StatusCode == 200:
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1229,7 +1229,7 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.Upsert
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1241,7 +1241,7 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.Upsert
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1297,7 +1297,7 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Req
 	switch {
 	case httpRes.StatusCode == 200:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
@@ -1309,7 +1309,7 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Req
 		}
 	default:
 		switch contentType {
-		case `application/json`:
+		case `application/json; charset=UTF-8`:
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
