@@ -2,6 +2,7 @@ package utils
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"reflect"
@@ -25,13 +26,34 @@ func PopulateQueryParams(ctx context.Context, req *http.Request, queryParams int
 			continue
 		}
 
-		// TODO: support other styles
-		switch qpTag.Style {
-		case "deepObject":
-			populateDeepObjectParams(ctx, req, qpTag, fieldType.Type, valType)
-		case "form":
-			populateFormParams(ctx, req, qpTag, fieldType.Type, valType)
+		if qpTag.Serialization != "" {
+			populateSerializedParams(ctx, req, qpTag, fieldType.Type, valType)
+		} else {
+			// TODO: support other styles
+			switch qpTag.Style {
+			case "deepObject":
+				populateDeepObjectParams(ctx, req, qpTag, fieldType.Type, valType)
+			case "form":
+				populateFormParams(ctx, req, qpTag, fieldType.Type, valType)
+			}
 		}
+	}
+}
+
+func populateSerializedParams(ctx context.Context, req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
+	switch tag.Serialization {
+	case "json":
+		data, err := json.Marshal(objValue.Interface())
+		if err != nil {
+			fmt.Printf("error marshaling json: %v", err) // TODO support logging and returning error?
+			return
+		}
+
+		queryParams := req.URL.Query()
+
+		queryParams.Add(tag.ParamName, string(data))
+
+		req.URL.RawQuery = queryParams.Encode()
 	}
 }
 
@@ -138,9 +160,10 @@ func populateFormParams(ctx context.Context, req *http.Request, tag *paramTag, o
 }
 
 type paramTag struct {
-	Style     string
-	Explode   bool
-	ParamName string
+	Style         string
+	Explode       bool
+	ParamName     string
+	Serialization string
 }
 
 func parseQueryParamTag(field reflect.StructField) *paramTag {
@@ -161,6 +184,8 @@ func parseQueryParamTag(field reflect.StructField) *paramTag {
 			tag.Explode = v == "true"
 		case "name":
 			tag.ParamName = v
+		case "serialization":
+			tag.Serialization = v
 		}
 	}
 

@@ -4,22 +4,22 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 )
 
-type GetVersionMetadataV1PathParams struct {
+type GetVersionMetadataPathParams struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
-type GetVersionMetadataV1Request struct {
-	PathParams GetVersionMetadataV1PathParams
+type GetVersionMetadataRequest struct {
+	PathParams GetVersionMetadataPathParams
 }
 
-type GetVersionMetadataV1Responses struct {
+type GetVersionMetadataResponses struct {
 	Error           *shared.Error
 	VersionMetadata []shared.VersionMetadata
 }
 
-type GetVersionMetadataV1Response struct {
+type GetVersionMetadataResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]GetVersionMetadataV1Responses
+	Responses   map[int64]map[string]GetVersionMetadataResponses
 	StatusCode  int64
 }

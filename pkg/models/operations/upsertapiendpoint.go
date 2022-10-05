@@ -4,24 +4,24 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 )
 
-type UpsertAPIEndpointV1PathParams struct {
+type UpsertAPIEndpointPathParams struct {
 	APIEndpointID string `pathParam:"style=simple,explode=false,name=apiEndpointID"`
 	APIID         string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID     string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
-type UpsertAPIEndpointV1Request struct {
-	PathParams UpsertAPIEndpointV1PathParams
+type UpsertAPIEndpointRequest struct {
+	PathParams UpsertAPIEndpointPathParams
 	Request    shared.APIEndpoint `request:"mediaType=application/json"`
 }
 
-type UpsertAPIEndpointV1Responses struct {
+type UpsertAPIEndpointResponses struct {
 	APIEndpoint *shared.APIEndpoint
 	Error       *shared.Error
 }
 
-type UpsertAPIEndpointV1Response struct {
+type UpsertAPIEndpointResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]UpsertAPIEndpointV1Responses
+	Responses   map[int64]map[string]UpsertAPIEndpointResponses
 	StatusCode  int64
 }

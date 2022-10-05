@@ -6,6 +6,7 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/internal/utils"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"io"
 	"net/http"
 	"strings"
 )
@@ -57,55 +58,7 @@ func New(opts ...SDKOption) *SDK {
 	return sdk
 }
 
-func (s *SDK) DeleteAPIEndpointV1(ctx context.Context, request operations.DeleteAPIEndpointV1Request) (*operations.DeleteAPIEndpointV1Response, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	client := s.securityClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.DeleteAPIEndpointV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DeleteAPIEndpointV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIEndpointV1Responses)
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIEndpointV1Responses{
-				Error: out,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Request) (*operations.DeleteAPIV1Response, error) {
+func (s *SDK) DeleteAPI(ctx context.Context, request operations.DeleteAPIRequest) (*operations.DeleteAPIResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}", request.PathParams)
 
@@ -124,27 +77,27 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Req
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.DeleteAPIV1Response{
+	res := &operations.DeleteAPIResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DeleteAPIV1Responses),
+		Responses:   make(map[int64]map[string]operations.DeleteAPIResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIResponses{
 				Error: out,
 			}
 		}
@@ -153,7 +106,55 @@ func (s *SDK) DeleteAPIV1(ctx context.Context, request operations.DeleteAPIV1Req
 	return res, nil
 }
 
-func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchemaV1Request) (*operations.DeleteSchemaV1Response, error) {
+func (s *SDK) DeleteAPIEndpoint(ctx context.Context, request operations.DeleteAPIEndpointRequest) (*operations.DeleteAPIEndpointResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.DeleteAPIEndpointResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.DeleteAPIEndpointResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIEndpointResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIEndpointResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) DeleteSchema(ctx context.Context, request operations.DeleteSchemaRequest) (*operations.DeleteSchemaResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
 
@@ -172,27 +173,27 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchem
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.DeleteSchemaV1Response{
+	res := &operations.DeleteSchemaResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DeleteSchemaV1Responses),
+		Responses:   make(map[int64]map[string]operations.DeleteSchemaResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteSchemaV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteSchemaResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteSchemaResponses{
 				Error: out,
 			}
 		}
@@ -201,9 +202,9 @@ func (s *SDK) DeleteSchemaV1(ctx context.Context, request operations.DeleteSchem
 	return res, nil
 }
 
-func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.DeleteVersionMetadataV1Request) (*operations.DeleteVersionMetadataV1Response, error) {
+func (s *SDK) DeleteVersionMetadata(ctx context.Context, request operations.DeleteVersionMetadataRequest) (*operations.DeleteVersionMetadataResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/versions/{versionID}/metadata/{metaKey}/{metaValue}", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
@@ -220,27 +221,27 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.De
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.DeleteVersionMetadataV1Response{
+	res := &operations.DeleteVersionMetadataResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DeleteVersionMetadataV1Responses),
+		Responses:   make(map[int64]map[string]operations.DeleteVersionMetadataResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteVersionMetadataV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteVersionMetadataResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteVersionMetadataResponses{
 				Error: out,
 			}
 		}
@@ -249,57 +250,7 @@ func (s *SDK) DeleteVersionMetadataV1(ctx context.Context, request operations.De
 	return res, nil
 }
 
-func (s *SDK) DownloadSchemaRevisionV1(ctx context.Context, request operations.DownloadSchemaRevisionV1Request) (*operations.DownloadSchemaRevisionV1Response, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	client := s.securityClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.DownloadSchemaRevisionV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DownloadSchemaRevisionV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaRevisionV1Responses)
-	}
-
-	switch {
-	case httpRes.StatusCode == 302:
-		res.Headers = httpRes.Header
-
-	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionV1Responses{
-				Error: out,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadSchemaV1Request) (*operations.DownloadSchemaV1Response, error) {
+func (s *SDK) DownloadSchema(ctx context.Context, request operations.DownloadSchemaRequest) (*operations.DownloadSchemaResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request.PathParams)
 
@@ -318,29 +269,47 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadS
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.DownloadSchemaV1Response{
+	res := &operations.DownloadSchemaResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DownloadSchemaV1Responses),
+		Responses:   make(map[int64]map[string]operations.DownloadSchemaResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaResponses)
 	}
 
 	switch {
-	case httpRes.StatusCode == 302:
-		res.Headers = httpRes.Header
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []byte
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
 
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaResponses{
+				Schema: out,
+			}
+		case utils.MatchContentType(contentType, `application/x-yaml`):
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaResponses{
+				Schema: data,
+			}
+		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaResponses{
 				Error: out,
 			}
 		}
@@ -349,7 +318,75 @@ func (s *SDK) DownloadSchemaV1(ctx context.Context, request operations.DownloadS
 	return res, nil
 }
 
-func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIEndpointV1Request) (*operations.FindAPIEndpointV1Response, error) {
+func (s *SDK) DownloadSchemaRevision(ctx context.Context, request operations.DownloadSchemaRevisionRequest) (*operations.DownloadSchemaRevisionResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.DownloadSchemaRevisionResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.DownloadSchemaRevisionResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaRevisionResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []byte
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionResponses{
+				Schema: out,
+			}
+		case utils.MatchContentType(contentType, `application/x-yaml`):
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionResponses{
+				Schema: data,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) FindAPIEndpoint(ctx context.Context, request operations.FindAPIEndpointRequest) (*operations.FindAPIEndpointResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", request.PathParams)
 
@@ -368,38 +405,38 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIE
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.FindAPIEndpointV1Response{
+	res := &operations.FindAPIEndpointResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.FindAPIEndpointV1Responses),
+		Responses:   make(map[int64]map[string]operations.FindAPIEndpointResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.FindAPIEndpointV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.FindAPIEndpointResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointResponses{
 				APIEndpoint: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointResponses{
 				Error: out,
 			}
 		}
@@ -408,7 +445,302 @@ func (s *SDK) FindAPIEndpointV1(ctx context.Context, request operations.FindAPIE
 	return res, nil
 }
 
-func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAllAPIEndpointsV1Request) (*operations.GetAllAPIEndpointsV1Response, error) {
+func (s *SDK) GenerateOpenAPISpec(ctx context.Context, request operations.GenerateOpenAPISpecRequest) (*operations.GenerateOpenAPISpecResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GenerateOpenAPISpecResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GenerateOpenAPISpecResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GenerateOpenAPISpecResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.GenerateOpenAPISpecDiff
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateOpenAPISpecResponses{
+				GenerateOpenAPISpecDiff: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateOpenAPISpecResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, request operations.GenerateOpenAPISpecForAPIEndpointRequest) (*operations.GenerateOpenAPISpecForAPIEndpointResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GenerateOpenAPISpecForAPIEndpointResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GenerateOpenAPISpecForAPIEndpointResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GenerateOpenAPISpecForAPIEndpointResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.GenerateOpenAPISpecDiff
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateOpenAPISpecForAPIEndpointResponses{
+				GenerateOpenAPISpecDiff: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateOpenAPISpecForAPIEndpointResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GeneratePostmanCollection(ctx context.Context, request operations.GeneratePostmanCollectionRequest) (*operations.GeneratePostmanCollectionResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GeneratePostmanCollectionResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GeneratePostmanCollectionResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GeneratePostmanCollectionResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []byte
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GeneratePostmanCollectionResponses{
+				PostmanCollection: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GeneratePostmanCollectionResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GeneratePostmanCollectionForAPIEndpoint(ctx context.Context, request operations.GeneratePostmanCollectionForAPIEndpointRequest) (*operations.GeneratePostmanCollectionForAPIEndpointResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GeneratePostmanCollectionForAPIEndpointResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GeneratePostmanCollectionForAPIEndpointResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GeneratePostmanCollectionForAPIEndpointResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []byte
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GeneratePostmanCollectionForAPIEndpointResponses{
+				PostmanCollection: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GeneratePostmanCollectionForAPIEndpointResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GenerateRequestPostmanCollection(ctx context.Context, request operations.GenerateRequestPostmanCollectionRequest) (*operations.GenerateRequestPostmanCollectionResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}/generate/postman", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GenerateRequestPostmanCollectionResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GenerateRequestPostmanCollectionResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GenerateRequestPostmanCollectionResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []byte
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateRequestPostmanCollectionResponses{
+				PostmanCollection: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateRequestPostmanCollectionResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetAllAPIEndpoints(ctx context.Context, request operations.GetAllAPIEndpointsRequest) (*operations.GetAllAPIEndpointsResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/api_endpoints", request.PathParams)
 
@@ -427,38 +759,38 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.GetAllAPIEndpointsV1Response{
+	res := &operations.GetAllAPIEndpointsResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetAllAPIEndpointsV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetAllAPIEndpointsResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIEndpointsV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIEndpointsResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out []shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsResponses{
 				APIEndpoints: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsResponses{
 				Error: out,
 			}
 		}
@@ -467,7 +799,7 @@ func (s *SDK) GetAllAPIEndpointsV1(ctx context.Context, request operations.GetAl
 	return res, nil
 }
 
-func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAllAPIVersionsV1Request) (*operations.GetAllAPIVersionsV1Response, error) {
+func (s *SDK) GetAllAPIVersions(ctx context.Context, request operations.GetAllAPIVersionsRequest) (*operations.GetAllAPIVersionsResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}", request.PathParams)
 
@@ -488,38 +820,38 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.GetAllAPIVersionsV1Response{
+	res := &operations.GetAllAPIVersionsResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetAllAPIVersionsV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetAllAPIVersionsResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIVersionsV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIVersionsResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out []shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsResponses{
 				Apis: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsResponses{
 				Error: out,
 			}
 		}
@@ -528,7 +860,7 @@ func (s *SDK) GetAllAPIVersionsV1(ctx context.Context, request operations.GetAll
 	return res, nil
 }
 
-func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operations.GetAllForVersionAPIEndpointsV1Request) (*operations.GetAllForVersionAPIEndpointsV1Response, error) {
+func (s *SDK) GetAllForVersionAPIEndpoints(ctx context.Context, request operations.GetAllForVersionAPIEndpointsRequest) (*operations.GetAllForVersionAPIEndpointsResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", request.PathParams)
 
@@ -547,38 +879,38 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.GetAllForVersionAPIEndpointsV1Response{
+	res := &operations.GetAllForVersionAPIEndpointsResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetAllForVersionAPIEndpointsV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetAllForVersionAPIEndpointsResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllForVersionAPIEndpointsV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllForVersionAPIEndpointsResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out []shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsResponses{
 				APIEndpoints: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsResponses{
 				Error: out,
 			}
 		}
@@ -587,7 +919,7 @@ func (s *SDK) GetAllForVersionAPIEndpointsV1(ctx context.Context, request operat
 	return res, nil
 }
 
-func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEndpointV1Request) (*operations.GetAPIEndpointV1Response, error) {
+func (s *SDK) GetAPIEndpoint(ctx context.Context, request operations.GetAPIEndpointRequest) (*operations.GetAPIEndpointResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
 
@@ -606,38 +938,38 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEnd
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.GetAPIEndpointV1Response{
+	res := &operations.GetAPIEndpointResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetAPIEndpointV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetAPIEndpointResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAPIEndpointV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAPIEndpointResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.APIEndpoint
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointResponses{
 				APIEndpoint: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointResponses{
 				Error: out,
 			}
 		}
@@ -646,7 +978,7 @@ func (s *SDK) GetAPIEndpointV1(ctx context.Context, request operations.GetAPIEnd
 	return res, nil
 }
 
-func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request) (*operations.GetApisV1Response, error) {
+func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*operations.GetApisResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/apis"
 
@@ -667,38 +999,38 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.GetApisV1Response{
+	res := &operations.GetApisResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetApisV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetApisResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetApisV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetApisResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out []shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisResponses{
 				Apis: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisResponses{
 				Error: out,
 			}
 		}
@@ -707,245 +1039,9 @@ func (s *SDK) GetApisV1(ctx context.Context, request operations.GetApisV1Request
 	return res, nil
 }
 
-func (s *SDK) GetSchemaDiffV1(ctx context.Context, request operations.GetSchemaDiffV1Request) (*operations.GetSchemaDiffV1Response, error) {
+func (s *SDK) GetEmbedAccessToken(ctx context.Context, request operations.GetEmbedAccessTokenRequest) (*operations.GetEmbedAccessTokenResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	client := s.securityClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetSchemaDiffV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetSchemaDiffV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaDiffV1Responses)
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.SchemaDiff
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffV1Responses{
-				SchemaDiff: out,
-			}
-		}
-	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffV1Responses{
-				Error: out,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetSchemaRevisionV1(ctx context.Context, request operations.GetSchemaRevisionV1Request) (*operations.GetSchemaRevisionV1Response, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	client := s.securityClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetSchemaRevisionV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetSchemaRevisionV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaRevisionV1Responses)
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.Schema
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionV1Responses{
-				Schema: out,
-			}
-		}
-	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionV1Responses{
-				Error: out,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetSchemaV1(ctx context.Context, request operations.GetSchemaV1Request) (*operations.GetSchemaV1Response, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	client := s.securityClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetSchemaV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetSchemaV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaV1Responses)
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.Schema
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaV1Responses{
-				Schema: out,
-			}
-		}
-	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaV1Responses{
-				Error: out,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetSchemasV1(ctx context.Context, request operations.GetSchemasV1Request) (*operations.GetSchemasV1Response, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	client := s.securityClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetSchemasV1Response{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetSchemasV1Responses),
-	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemasV1Responses)
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out []shared.Schema
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasV1Responses{
-				Schemata: out,
-			}
-		}
-	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.Error
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasV1Responses{
-				Error: out,
-			}
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsageMetricsV1Request) (*operations.GetUsageMetricsV1Response, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/workspace/{workspaceID}/metrics", request.PathParams)
+	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspace/embed-access-token"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -964,38 +1060,38 @@ func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsage
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.GetUsageMetricsV1Response{
+	res := &operations.GetEmbedAccessTokenResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetUsageMetricsV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetEmbedAccessTokenResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetUsageMetricsV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetEmbedAccessTokenResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out []shared.UsageMetric
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.EmbedAccessTokenResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetUsageMetricsV1Responses{
-				UsageMetrics: out,
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetEmbedAccessTokenResponses{
+				EmbedAccessTokenResponse: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetUsageMetricsV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetEmbedAccessTokenResponses{
 				Error: out,
 			}
 		}
@@ -1004,9 +1100,9 @@ func (s *SDK) GetUsageMetricsV1(ctx context.Context, request operations.GetUsage
 	return res, nil
 }
 
-func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVersionMetadataV1Request) (*operations.GetVersionMetadataV1Response, error) {
+func (s *SDK) GetRequestFromEventLog(ctx context.Context, request operations.GetRequestFromEventLogRequest) (*operations.GetRequestFromEventLogResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/versions/{versionID}/metadata", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -1023,38 +1119,38 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.GetVersionMetadataV1Response{
+	res := &operations.GetRequestFromEventLogResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetVersionMetadataV1Responses),
+		Responses:   make(map[int64]map[string]operations.GetRequestFromEventLogResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetVersionMetadataV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetRequestFromEventLogResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out []shared.VersionMetadata
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.UnboundedRequest
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataV1Responses{
-				VersionMetadata: out,
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetRequestFromEventLogResponses{
+				UnboundedRequest: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetRequestFromEventLogResponses{
 				Error: out,
 			}
 		}
@@ -1063,9 +1159,363 @@ func (s *SDK) GetVersionMetadataV1(ctx context.Context, request operations.GetVe
 	return res, nil
 }
 
-func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.InsertVersionMetadataV1Request) (*operations.InsertVersionMetadataV1Response, error) {
+func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest) (*operations.GetSchemaResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/versions/{versionID}/metadata", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetSchemaResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GetSchemaResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Schema
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaResponses{
+				Schema: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDiffRequest) (*operations.GetSchemaDiffResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetSchemaDiffResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GetSchemaDiffResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaDiffResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.SchemaDiff
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffResponses{
+				SchemaDiff: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetSchemaRevision(ctx context.Context, request operations.GetSchemaRevisionRequest) (*operations.GetSchemaRevisionResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetSchemaRevisionResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GetSchemaRevisionResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaRevisionResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Schema
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionResponses{
+				Schema: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasRequest) (*operations.GetSchemasResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetSchemasResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GetSchemasResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemasResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []shared.Schema
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasResponses{
+				Schemata: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetValidEmbedAccessTokens(ctx context.Context) (*operations.GetValidEmbedAccessTokensResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspace/embed-access-tokens/valid"
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetValidEmbedAccessTokensResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GetValidEmbedAccessTokensResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetValidEmbedAccessTokensResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []shared.EmbedToken
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetValidEmbedAccessTokensResponses{
+				EmbedTokens: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetValidEmbedAccessTokensResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) GetVersionMetadata(ctx context.Context, request operations.GetVersionMetadataRequest) (*operations.GetVersionMetadataResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.GetVersionMetadataResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.GetVersionMetadataResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetVersionMetadataResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []shared.VersionMetadata
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataResponses{
+				VersionMetadata: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) InsertVersionMetadata(ctx context.Context, request operations.InsertVersionMetadataRequest) (*operations.InsertVersionMetadataResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
 	if err != nil {
@@ -1091,38 +1541,38 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.In
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.InsertVersionMetadataV1Response{
+	res := &operations.InsertVersionMetadataResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.InsertVersionMetadataV1Responses),
+		Responses:   make(map[int64]map[string]operations.InsertVersionMetadataResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.InsertVersionMetadataV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.InsertVersionMetadataResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.VersionMetadata
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataResponses{
 				VersionMetadata: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataResponses{
 				Error: out,
 			}
 		}
@@ -1131,7 +1581,68 @@ func (s *SDK) InsertVersionMetadataV1(ctx context.Context, request operations.In
 	return res, nil
 }
 
-func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterSchemaV1Request) (*operations.RegisterSchemaV1Response, error) {
+func (s *SDK) QueryEventLog(ctx context.Context, request operations.QueryEventLogRequest) (*operations.QueryEventLogResponse, error) {
+	baseURL := s.serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/v1/eventlog/query"
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.QueryEventLogResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.QueryEventLogResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.QueryEventLogResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out []shared.BoundedRequest
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.QueryEventLogResponses{
+				BoundedRequests: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.QueryEventLogResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) RegisterSchema(ctx context.Context, request operations.RegisterSchemaRequest) (*operations.RegisterSchemaResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
 
@@ -1159,27 +1670,27 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterS
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.RegisterSchemaV1Response{
+	res := &operations.RegisterSchemaResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.RegisterSchemaV1Responses),
+		Responses:   make(map[int64]map[string]operations.RegisterSchemaResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.RegisterSchemaV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.RegisterSchemaResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.RegisterSchemaV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.RegisterSchemaResponses{
 				Error: out,
 			}
 		}
@@ -1188,23 +1699,14 @@ func (s *SDK) RegisterSchemaV1(ctx context.Context, request operations.RegisterS
 	return res, nil
 }
 
-func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.UpsertAPIEndpointV1Request) (*operations.UpsertAPIEndpointV1Response, error) {
+func (s *SDK) RevokeEmbedAccessToken(ctx context.Context, request operations.RevokeEmbedAccessTokenRequest) (*operations.RevokeEmbedAccessTokenResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", request.PathParams)
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-	if bodyReader == nil {
-		return nil, fmt.Errorf("request body is required")
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "PUT", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
 
@@ -1216,38 +1718,27 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.Upsert
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.UpsertAPIEndpointV1Response{
+	res := &operations.RevokeEmbedAccessTokenResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.UpsertAPIEndpointV1Responses),
+		Responses:   make(map[int64]map[string]operations.RevokeEmbedAccessTokenResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIEndpointV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.RevokeEmbedAccessTokenResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
-			var out *shared.APIEndpoint
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointV1Responses{
-				APIEndpoint: out,
-			}
-		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.RevokeEmbedAccessTokenResponses{
 				Error: out,
 			}
 		}
@@ -1256,7 +1747,7 @@ func (s *SDK) UpsertAPIEndpointV1(ctx context.Context, request operations.Upsert
 	return res, nil
 }
 
-func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Request) (*operations.UpsertAPIV1Response, error) {
+func (s *SDK) UpsertAPI(ctx context.Context, request operations.UpsertAPIRequest) (*operations.UpsertAPIResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}", request.PathParams)
 
@@ -1284,38 +1775,106 @@ func (s *SDK) UpsertAPIV1(ctx context.Context, request operations.UpsertAPIV1Req
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.UpsertAPIV1Response{
+	res := &operations.UpsertAPIResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.UpsertAPIV1Responses),
+		Responses:   make(map[int64]map[string]operations.UpsertAPIResponses),
 	}
 
 	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIV1Responses)
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIResponses)
 	}
 
 	switch {
 	case httpRes.StatusCode == 200:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.API
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIResponses{
 				API: out,
 			}
 		}
 	default:
-		switch contentType {
-		case `application/json; charset=UTF-8`:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIV1Responses{
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIResponses{
+				Error: out,
+			}
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) UpsertAPIEndpoint(ctx context.Context, request operations.UpsertAPIEndpointRequest) (*operations.UpsertAPIEndpointResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+	if bodyReader == nil {
+		return nil, fmt.Errorf("request body is required")
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "PUT", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := s.securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.UpsertAPIEndpointResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+		Responses:   make(map[int64]map[string]operations.UpsertAPIEndpointResponses),
+	}
+
+	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
+		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIEndpointResponses)
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.APIEndpoint
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointResponses{
+				APIEndpoint: out,
+			}
+		}
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointResponses{
 				Error: out,
 			}
 		}

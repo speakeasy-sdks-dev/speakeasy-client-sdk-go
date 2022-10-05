@@ -4,22 +4,22 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 )
 
-type DeleteAPIEndpointV1PathParams struct {
+type DeleteAPIEndpointPathParams struct {
 	APIEndpointID string `pathParam:"style=simple,explode=false,name=apiEndpointID"`
 	APIID         string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID     string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
-type DeleteAPIEndpointV1Request struct {
-	PathParams DeleteAPIEndpointV1PathParams
+type DeleteAPIEndpointRequest struct {
+	PathParams DeleteAPIEndpointPathParams
 }
 
-type DeleteAPIEndpointV1Responses struct {
+type DeleteAPIEndpointResponses struct {
 	Error *shared.Error
 }
 
-type DeleteAPIEndpointV1Response struct {
+type DeleteAPIEndpointResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]DeleteAPIEndpointV1Responses
+	Responses   map[int64]map[string]DeleteAPIEndpointResponses
 	StatusCode  int64
 }
