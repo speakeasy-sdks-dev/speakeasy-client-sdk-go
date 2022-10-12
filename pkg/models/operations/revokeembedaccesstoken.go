@@ -12,12 +12,8 @@ type RevokeEmbedAccessTokenRequest struct {
 	PathParams RevokeEmbedAccessTokenPathParams
 }
 
-type RevokeEmbedAccessTokenResponses struct {
-	Error *shared.Error
-}
-
 type RevokeEmbedAccessTokenResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]RevokeEmbedAccessTokenResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

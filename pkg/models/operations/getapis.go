@@ -17,13 +17,9 @@ type GetApisRequest struct {
 	QueryParams GetApisQueryParams
 }
 
-type GetApisResponses struct {
-	Apis  []shared.API
-	Error *shared.Error
-}
-
 type GetApisResponse struct {
+	Apis        []shared.API
 	ContentType string
-	Responses   map[int64]map[string]GetApisResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

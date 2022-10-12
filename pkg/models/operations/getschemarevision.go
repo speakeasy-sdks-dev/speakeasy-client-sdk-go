@@ -14,13 +14,9 @@ type GetSchemaRevisionRequest struct {
 	PathParams GetSchemaRevisionPathParams
 }
 
-type GetSchemaRevisionResponses struct {
-	Error  *shared.Error
-	Schema *shared.Schema
-}
-
 type GetSchemaRevisionResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]GetSchemaRevisionResponses
+	Error       *shared.Error
+	Schema      *shared.Schema
 	StatusCode  int64
 }

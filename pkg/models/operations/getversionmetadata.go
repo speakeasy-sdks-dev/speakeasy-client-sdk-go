@@ -13,13 +13,9 @@ type GetVersionMetadataRequest struct {
 	PathParams GetVersionMetadataPathParams
 }
 
-type GetVersionMetadataResponses struct {
-	Error           *shared.Error
-	VersionMetadata []shared.VersionMetadata
-}
-
 type GetVersionMetadataResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]GetVersionMetadataResponses
-	StatusCode  int64
+	ContentType     string
+	Error           *shared.Error
+	StatusCode      int64
+	VersionMetadata []shared.VersionMetadata
 }

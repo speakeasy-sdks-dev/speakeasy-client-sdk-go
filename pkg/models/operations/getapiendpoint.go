@@ -14,13 +14,9 @@ type GetAPIEndpointRequest struct {
 	PathParams GetAPIEndpointPathParams
 }
 
-type GetAPIEndpointResponses struct {
-	APIEndpoint *shared.APIEndpoint
-	Error       *shared.Error
-}
-
 type GetAPIEndpointResponse struct {
+	APIEndpoint *shared.APIEndpoint
 	ContentType string
-	Responses   map[int64]map[string]GetAPIEndpointResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

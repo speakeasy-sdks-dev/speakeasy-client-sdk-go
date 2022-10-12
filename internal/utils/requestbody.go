@@ -7,13 +7,22 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
+	"net/url"
 	"reflect"
+	"regexp"
 )
 
 const (
 	requestTagKey       = "request"
 	requestFieldName    = "Request"
 	multipartFormTagKey = "multipartForm"
+	formTagKey          = "form"
+)
+
+var (
+	jsonEncodingRegex       = regexp.MustCompile(`(application|text)\/.*?\+*json.*`)
+	multipartEncodingRegex  = regexp.MustCompile(`multipart\/.*`)
+	urlEncodedEncodingRegex = regexp.MustCompile(`application\/x-www-form-urlencoded.*`)
 )
 
 func SerializeRequestBody(ctx context.Context, request interface{}) (*bytes.Buffer, string, error) {
@@ -42,7 +51,7 @@ func SerializeRequestBody(ctx context.Context, request interface{}) (*bytes.Buff
 			return nil, "", nil
 		}
 
-		return serializeContentType(tag.MediaType, requestVal)
+		return serializeContentType(requestFieldName, tag.MediaType, requestVal)
 	}
 
 	// Multi Request Object at First Level
@@ -64,24 +73,28 @@ func SerializeRequestBody(ctx context.Context, request interface{}) (*bytes.Buff
 			return nil, "", fmt.Errorf("missing request tag on request body field %s", fieldType.Name)
 		}
 
-		return serializeContentType(tag.MediaType, valType)
+		return serializeContentType(fieldType.Name, tag.MediaType, valType)
 	}
 
 	return nil, "", nil
 }
 
-func serializeContentType(mediaType string, val reflect.Value) (*bytes.Buffer, string, error) {
+func serializeContentType(fieldName string, mediaType string, val reflect.Value) (*bytes.Buffer, string, error) {
 	buf := &bytes.Buffer{}
 
-	switch mediaType {
-	case "application/json", "text/json":
+	switch {
+	case jsonEncodingRegex.MatchString(mediaType):
 		if err := json.NewEncoder(buf).Encode(val.Interface()); err != nil {
 			return nil, "", err
 		}
-	case "multipart/form-data", "multipart/mixed":
+	case multipartEncodingRegex.MatchString(mediaType):
 		var err error
 		mediaType, err = encodeMultipartFormData(buf, val.Interface())
 		if err != nil {
+			return nil, "", err
+		}
+	case urlEncodedEncodingRegex.MatchString(mediaType):
+		if err := encodeFormData(fieldName, buf, val.Interface()); err != nil {
 			return nil, "", err
 		}
 	default:
@@ -205,6 +218,79 @@ func encodeMultipartFormDataFile(w *multipart.Writer, fieldType reflect.Type, va
 	return nil
 }
 
+func encodeFormData(fieldName string, w io.Writer, data interface{}) error {
+	requestType := reflect.TypeOf(data)
+	requestValType := reflect.ValueOf(data)
+
+	if requestType.Kind() == reflect.Pointer {
+		requestType = requestType.Elem()
+		requestValType = requestValType.Elem()
+	}
+
+	dataValues := url.Values{}
+
+	switch requestType.Kind() {
+	case reflect.Struct:
+		for i := 0; i < requestType.NumField(); i++ {
+			field := requestType.Field(i)
+			fieldType := field.Type
+			valType := requestValType.Field(i)
+
+			if fieldType.Kind() == reflect.Pointer {
+				if valType.IsNil() {
+					continue
+				}
+
+				fieldType = fieldType.Elem()
+				valType = valType.Elem()
+			}
+
+			tag := parseFormTag(field)
+			if tag.JSON {
+				data, err := json.Marshal(valType.Interface())
+				if err != nil {
+					return err
+				}
+				dataValues.Set(tag.Name, string(data))
+			} else {
+				switch tag.Style {
+				// TODO: support other styles
+				case "form":
+					values := populateForm(tag.Name, tag.Explode, fieldType, valType, func(sf reflect.StructField) string {
+						tag := parseFormTag(field)
+						if tag == nil {
+							return ""
+						}
+
+						return tag.Name
+					})
+					for k, v := range values {
+						for _, vv := range v {
+							dataValues.Add(k, vv)
+						}
+					}
+				}
+			}
+		}
+	case reflect.Map:
+		for _, k := range requestValType.MapKeys() {
+			v := requestValType.MapIndex(k)
+			dataValues.Set(fmt.Sprintf("%v", k.Interface()), fmt.Sprintf("%v", v.Interface()))
+		}
+	case reflect.Slice, reflect.Array:
+		for i := 0; i < requestValType.Len(); i++ {
+			v := requestValType.Index(i)
+			dataValues.Set(fieldName, fmt.Sprintf("%v", v.Interface()))
+		}
+	}
+
+	if _, err := w.Write([]byte(dataValues.Encode())); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 type requestTag struct {
 	MediaType string
 }
@@ -253,6 +339,38 @@ func parseMultipartFormTag(field reflect.StructField) *multipartFormTag {
 			tag.Name = v
 		case "json":
 			tag.JSON = v == "true"
+		}
+	}
+
+	return tag
+}
+
+type formTag struct {
+	Name    string
+	JSON    bool
+	Style   string
+	Explode bool
+}
+
+func parseFormTag(field reflect.StructField) *formTag {
+	// example `form:"name=propName,style=spaceDelimited,explode"`
+	values := parseStructTag(formTagKey, field)
+
+	tag := &formTag{
+		Style:   "form",
+		Explode: true,
+	}
+
+	for k, v := range values {
+		switch k {
+		case "name":
+			tag.Name = v
+		case "json":
+			tag.JSON = v == "true"
+		case "style":
+			tag.Style = v
+		case "explode":
+			tag.Explode = v == "true"
 		}
 	}
 

@@ -14,12 +14,8 @@ type DeleteAPIEndpointRequest struct {
 	PathParams DeleteAPIEndpointPathParams
 }
 
-type DeleteAPIEndpointResponses struct {
-	Error *shared.Error
-}
-
 type DeleteAPIEndpointResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]DeleteAPIEndpointResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

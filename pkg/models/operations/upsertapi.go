@@ -13,13 +13,9 @@ type UpsertAPIRequest struct {
 	Request    shared.API `request:"mediaType=application/json"`
 }
 
-type UpsertAPIResponses struct {
-	API   *shared.API
-	Error *shared.Error
-}
-
 type UpsertAPIResponse struct {
+	API         *shared.API
 	ContentType string
-	Responses   map[int64]map[string]UpsertAPIResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

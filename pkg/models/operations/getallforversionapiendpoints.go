@@ -13,13 +13,9 @@ type GetAllForVersionAPIEndpointsRequest struct {
 	PathParams GetAllForVersionAPIEndpointsPathParams
 }
 
-type GetAllForVersionAPIEndpointsResponses struct {
-	APIEndpoints []shared.APIEndpoint
-	Error        *shared.Error
-}
-
 type GetAllForVersionAPIEndpointsResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]GetAllForVersionAPIEndpointsResponses
-	StatusCode  int64
+	APIEndpoints []shared.APIEndpoint
+	ContentType  string
+	Error        *shared.Error
+	StatusCode   int64
 }

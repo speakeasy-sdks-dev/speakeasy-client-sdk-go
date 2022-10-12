@@ -12,13 +12,9 @@ type GenerateRequestPostmanCollectionRequest struct {
 	PathParams GenerateRequestPostmanCollectionPathParams
 }
 
-type GenerateRequestPostmanCollectionResponses struct {
+type GenerateRequestPostmanCollectionResponse struct {
+	ContentType       string
 	Error             *shared.Error
 	PostmanCollection []byte
-}
-
-type GenerateRequestPostmanCollectionResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]GenerateRequestPostmanCollectionResponses
-	StatusCode  int64
+	StatusCode        int64
 }

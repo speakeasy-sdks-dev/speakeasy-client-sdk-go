@@ -27,20 +27,20 @@ func PopulateQueryParams(ctx context.Context, req *http.Request, queryParams int
 		}
 
 		if qpTag.Serialization != "" {
-			populateSerializedParams(ctx, req, qpTag, fieldType.Type, valType)
+			populateSerializedParams(req, qpTag, fieldType.Type, valType)
 		} else {
 			// TODO: support other styles
 			switch qpTag.Style {
 			case "deepObject":
-				populateDeepObjectParams(ctx, req, qpTag, fieldType.Type, valType)
+				populateDeepObjectParams(req, qpTag, fieldType.Type, valType)
 			case "form":
-				populateFormParams(ctx, req, qpTag, fieldType.Type, valType)
+				populateFormParams(req, qpTag, fieldType.Type, valType)
 			}
 		}
 	}
 }
 
-func populateSerializedParams(ctx context.Context, req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
+func populateSerializedParams(req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
 	switch tag.Serialization {
 	case "json":
 		data, err := json.Marshal(objValue.Interface())
@@ -57,7 +57,7 @@ func populateSerializedParams(ctx context.Context, req *http.Request, tag *param
 	}
 }
 
-func populateDeepObjectParams(ctx context.Context, req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
+func populateDeepObjectParams(req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
 	if objType.Kind() == reflect.Pointer {
 		if objValue.IsNil() {
 			return
@@ -98,63 +98,15 @@ func populateDeepObjectParams(ctx context.Context, req *http.Request, tag *param
 	req.URL.RawQuery = queryParams.Encode()
 }
 
-func populateFormParams(ctx context.Context, req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
-	if objType.Kind() == reflect.Pointer {
-		if objValue.IsNil() {
-			return
-		}
-		objType = objType.Elem()
-		objValue = objValue.Elem()
-	}
-
-	queryParams := req.URL.Query()
-
-	switch objType.Kind() {
-	case reflect.Struct:
-		items := []string{}
-
-		for i := 0; i < objType.NumField(); i++ {
-			fieldType := objType.Field(i)
-			valType := objValue.Field(i)
-
-			qpTag := parseQueryParamTag(fieldType)
-			if qpTag == nil {
-				continue
-			}
-
-			if tag.Explode {
-				queryParams.Add(qpTag.ParamName, fmt.Sprintf("%v", valType.Interface()))
-			} else {
-				items = append(items, fmt.Sprintf("%s,%v", qpTag.ParamName, valType.Interface()))
-			}
+func populateFormParams(req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
+	queryParams := populateForm(tag.ParamName, tag.Explode, objType, objValue, func(fieldType reflect.StructField) string {
+		qpTag := parseQueryParamTag(fieldType)
+		if qpTag == nil {
+			return ""
 		}
 
-		if len(items) > 0 {
-			queryParams.Add(tag.ParamName, strings.Join(items, ","))
-		}
-	case reflect.Map:
-		items := []string{}
-
-		iter := objValue.MapRange()
-		for iter.Next() {
-			if tag.Explode {
-				queryParams.Add(iter.Key().String(), fmt.Sprintf("%v", iter.Value().Interface()))
-			} else {
-				items = append(items, fmt.Sprintf("%s,%v", iter.Key().String(), iter.Value().Interface()))
-			}
-
-			if len(items) > 0 {
-				queryParams.Add(tag.ParamName, strings.Join(items, ","))
-			}
-		}
-	case reflect.Slice, reflect.Array:
-		values := parseFormStyleArray(tag.Explode, objValue)
-		for _, v := range values {
-			queryParams.Add(tag.ParamName, v)
-		}
-	default:
-		queryParams.Add(tag.ParamName, fmt.Sprintf("%v", objValue.Interface()))
-	}
+		return qpTag.ParamName
+	})
 
 	req.URL.RawQuery = queryParams.Encode()
 }

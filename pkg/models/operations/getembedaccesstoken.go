@@ -14,13 +14,9 @@ type GetEmbedAccessTokenRequest struct {
 	QueryParams GetEmbedAccessTokenQueryParams
 }
 
-type GetEmbedAccessTokenResponses struct {
+type GetEmbedAccessTokenResponse struct {
+	ContentType              string
 	EmbedAccessTokenResponse *shared.EmbedAccessTokenResponse
 	Error                    *shared.Error
-}
-
-type GetEmbedAccessTokenResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]GetEmbedAccessTokenResponses
-	StatusCode  int64
+	StatusCode               int64
 }

@@ -13,13 +13,9 @@ type DownloadSchemaRequest struct {
 	PathParams DownloadSchemaPathParams
 }
 
-type DownloadSchemaResponses struct {
-	Error  *shared.Error
-	Schema []byte
-}
-
 type DownloadSchemaResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]DownloadSchemaResponses
+	Error       *shared.Error
+	Schema      []byte
 	StatusCode  int64
 }

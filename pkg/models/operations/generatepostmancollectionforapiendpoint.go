@@ -14,13 +14,9 @@ type GeneratePostmanCollectionForAPIEndpointRequest struct {
 	PathParams GeneratePostmanCollectionForAPIEndpointPathParams
 }
 
-type GeneratePostmanCollectionForAPIEndpointResponses struct {
+type GeneratePostmanCollectionForAPIEndpointResponse struct {
+	ContentType       string
 	Error             *shared.Error
 	PostmanCollection []byte
-}
-
-type GeneratePostmanCollectionForAPIEndpointResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]GeneratePostmanCollectionForAPIEndpointResponses
-	StatusCode  int64
+	StatusCode        int64
 }

@@ -15,12 +15,8 @@ type DeleteVersionMetadataRequest struct {
 	PathParams DeleteVersionMetadataPathParams
 }
 
-type DeleteVersionMetadataResponses struct {
-	Error *shared.Error
-}
-
 type DeleteVersionMetadataResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]DeleteVersionMetadataResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

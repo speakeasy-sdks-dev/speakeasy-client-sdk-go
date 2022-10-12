@@ -14,13 +14,9 @@ type InsertVersionMetadataRequest struct {
 	Request    shared.VersionMetadata `request:"mediaType=application/json"`
 }
 
-type InsertVersionMetadataResponses struct {
-	Error           *shared.Error
-	VersionMetadata *shared.VersionMetadata
-}
-
 type InsertVersionMetadataResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]InsertVersionMetadataResponses
-	StatusCode  int64
+	ContentType     string
+	Error           *shared.Error
+	StatusCode      int64
+	VersionMetadata *shared.VersionMetadata
 }

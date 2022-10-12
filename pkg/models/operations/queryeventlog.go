@@ -12,13 +12,9 @@ type QueryEventLogRequest struct {
 	QueryParams QueryEventLogQueryParams
 }
 
-type QueryEventLogResponses struct {
-	BoundedRequests []shared.BoundedRequest
-	Error           *shared.Error
-}
-
 type QueryEventLogResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]QueryEventLogResponses
-	StatusCode  int64
+	BoundedRequests []shared.BoundedRequest
+	ContentType     string
+	Error           *shared.Error
+	StatusCode      int64
 }

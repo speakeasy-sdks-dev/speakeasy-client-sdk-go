@@ -14,12 +14,8 @@ type DeleteSchemaRequest struct {
 	PathParams DeleteSchemaPathParams
 }
 
-type DeleteSchemaResponses struct {
-	Error *shared.Error
-}
-
 type DeleteSchemaResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]DeleteSchemaResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

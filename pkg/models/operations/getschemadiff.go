@@ -15,13 +15,9 @@ type GetSchemaDiffRequest struct {
 	PathParams GetSchemaDiffPathParams
 }
 
-type GetSchemaDiffResponses struct {
-	Error      *shared.Error
-	SchemaDiff *shared.SchemaDiff
-}
-
 type GetSchemaDiffResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]GetSchemaDiffResponses
+	Error       *shared.Error
+	SchemaDiff  *shared.SchemaDiff
 	StatusCode  int64
 }

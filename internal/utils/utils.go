@@ -59,23 +59,3 @@ func parseStructTag(tagKey string, field reflect.StructField) map[string]string 
 
 	return values
 }
-
-func parseFormStyleArray(explode bool, objValue reflect.Value) []string {
-	values := []string{}
-
-	items := []string{}
-
-	for i := 0; i < objValue.Len(); i++ {
-		if explode {
-			values = append(values, fmt.Sprintf("%v", objValue.Index(i).Interface()))
-		} else {
-			items = append(items, fmt.Sprintf("%v", objValue.Index(i).Interface()))
-		}
-	}
-
-	if len(items) > 0 {
-		values = append(values, strings.Join(items, ","))
-	}
-
-	return values
-}

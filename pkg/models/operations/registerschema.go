@@ -23,12 +23,8 @@ type RegisterSchemaRequest struct {
 	Request    RegisterSchemaRequestBody `request:"mediaType=multipart/form-data"`
 }
 
-type RegisterSchemaResponses struct {
-	Error *shared.Error
-}
-
 type RegisterSchemaResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]RegisterSchemaResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

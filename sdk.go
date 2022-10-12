@@ -80,13 +80,7 @@ func (s *SDK) DeleteAPI(ctx context.Context, request operations.DeleteAPIRequest
 	res := &operations.DeleteAPIResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DeleteAPIResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
@@ -97,9 +91,7 @@ func (s *SDK) DeleteAPI(ctx context.Context, request operations.DeleteAPIRequest
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -128,13 +120,7 @@ func (s *SDK) DeleteAPIEndpoint(ctx context.Context, request operations.DeleteAP
 	res := &operations.DeleteAPIEndpointResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DeleteAPIEndpointResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteAPIEndpointResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
@@ -145,9 +131,7 @@ func (s *SDK) DeleteAPIEndpoint(ctx context.Context, request operations.DeleteAP
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteAPIEndpointResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -176,13 +160,7 @@ func (s *SDK) DeleteSchema(ctx context.Context, request operations.DeleteSchemaR
 	res := &operations.DeleteSchemaResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DeleteSchemaResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteSchemaResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
@@ -193,9 +171,7 @@ func (s *SDK) DeleteSchema(ctx context.Context, request operations.DeleteSchemaR
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteSchemaResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -224,13 +200,7 @@ func (s *SDK) DeleteVersionMetadata(ctx context.Context, request operations.Dele
 	res := &operations.DeleteVersionMetadataResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DeleteVersionMetadataResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DeleteVersionMetadataResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
@@ -241,9 +211,7 @@ func (s *SDK) DeleteVersionMetadata(ctx context.Context, request operations.Dele
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DeleteVersionMetadataResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -272,13 +240,7 @@ func (s *SDK) DownloadSchema(ctx context.Context, request operations.DownloadSch
 	res := &operations.DownloadSchemaResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DownloadSchemaResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -288,18 +250,14 @@ func (s *SDK) DownloadSchema(ctx context.Context, request operations.DownloadSch
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaResponses{
-				Schema: out,
-			}
+			res.Schema = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaResponses{
-				Schema: data,
-			}
+			res.Schema = data
 		}
 	default:
 		switch {
@@ -309,9 +267,7 @@ func (s *SDK) DownloadSchema(ctx context.Context, request operations.DownloadSch
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -340,13 +296,7 @@ func (s *SDK) DownloadSchemaRevision(ctx context.Context, request operations.Dow
 	res := &operations.DownloadSchemaRevisionResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.DownloadSchemaRevisionResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.DownloadSchemaRevisionResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -356,18 +306,14 @@ func (s *SDK) DownloadSchemaRevision(ctx context.Context, request operations.Dow
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionResponses{
-				Schema: out,
-			}
+			res.Schema = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionResponses{
-				Schema: data,
-			}
+			res.Schema = data
 		}
 	default:
 		switch {
@@ -377,9 +323,7 @@ func (s *SDK) DownloadSchemaRevision(ctx context.Context, request operations.Dow
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.DownloadSchemaRevisionResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -408,13 +352,7 @@ func (s *SDK) FindAPIEndpoint(ctx context.Context, request operations.FindAPIEnd
 	res := &operations.FindAPIEndpointResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.FindAPIEndpointResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.FindAPIEndpointResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -424,9 +362,7 @@ func (s *SDK) FindAPIEndpoint(ctx context.Context, request operations.FindAPIEnd
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointResponses{
-				APIEndpoint: out,
-			}
+			res.APIEndpoint = out
 		}
 	default:
 		switch {
@@ -436,9 +372,7 @@ func (s *SDK) FindAPIEndpoint(ctx context.Context, request operations.FindAPIEnd
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.FindAPIEndpointResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -467,13 +401,7 @@ func (s *SDK) GenerateOpenAPISpec(ctx context.Context, request operations.Genera
 	res := &operations.GenerateOpenAPISpecResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GenerateOpenAPISpecResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GenerateOpenAPISpecResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -483,9 +411,7 @@ func (s *SDK) GenerateOpenAPISpec(ctx context.Context, request operations.Genera
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateOpenAPISpecResponses{
-				GenerateOpenAPISpecDiff: out,
-			}
+			res.GenerateOpenAPISpecDiff = out
 		}
 	default:
 		switch {
@@ -495,9 +421,7 @@ func (s *SDK) GenerateOpenAPISpec(ctx context.Context, request operations.Genera
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateOpenAPISpecResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -526,13 +450,7 @@ func (s *SDK) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, request ope
 	res := &operations.GenerateOpenAPISpecForAPIEndpointResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GenerateOpenAPISpecForAPIEndpointResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GenerateOpenAPISpecForAPIEndpointResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -542,9 +460,7 @@ func (s *SDK) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, request ope
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateOpenAPISpecForAPIEndpointResponses{
-				GenerateOpenAPISpecDiff: out,
-			}
+			res.GenerateOpenAPISpecDiff = out
 		}
 	default:
 		switch {
@@ -554,9 +470,7 @@ func (s *SDK) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, request ope
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateOpenAPISpecForAPIEndpointResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -585,13 +499,7 @@ func (s *SDK) GeneratePostmanCollection(ctx context.Context, request operations.
 	res := &operations.GeneratePostmanCollectionResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GeneratePostmanCollectionResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GeneratePostmanCollectionResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -601,9 +509,7 @@ func (s *SDK) GeneratePostmanCollection(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GeneratePostmanCollectionResponses{
-				PostmanCollection: out,
-			}
+			res.PostmanCollection = out
 		}
 	default:
 		switch {
@@ -613,9 +519,7 @@ func (s *SDK) GeneratePostmanCollection(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GeneratePostmanCollectionResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -644,13 +548,7 @@ func (s *SDK) GeneratePostmanCollectionForAPIEndpoint(ctx context.Context, reque
 	res := &operations.GeneratePostmanCollectionForAPIEndpointResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GeneratePostmanCollectionForAPIEndpointResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GeneratePostmanCollectionForAPIEndpointResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -660,9 +558,7 @@ func (s *SDK) GeneratePostmanCollectionForAPIEndpoint(ctx context.Context, reque
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GeneratePostmanCollectionForAPIEndpointResponses{
-				PostmanCollection: out,
-			}
+			res.PostmanCollection = out
 		}
 	default:
 		switch {
@@ -672,9 +568,7 @@ func (s *SDK) GeneratePostmanCollectionForAPIEndpoint(ctx context.Context, reque
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GeneratePostmanCollectionForAPIEndpointResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -703,13 +597,7 @@ func (s *SDK) GenerateRequestPostmanCollection(ctx context.Context, request oper
 	res := &operations.GenerateRequestPostmanCollectionResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GenerateRequestPostmanCollectionResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GenerateRequestPostmanCollectionResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -719,9 +607,7 @@ func (s *SDK) GenerateRequestPostmanCollection(ctx context.Context, request oper
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateRequestPostmanCollectionResponses{
-				PostmanCollection: out,
-			}
+			res.PostmanCollection = out
 		}
 	default:
 		switch {
@@ -731,9 +617,7 @@ func (s *SDK) GenerateRequestPostmanCollection(ctx context.Context, request oper
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GenerateRequestPostmanCollectionResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -762,13 +646,7 @@ func (s *SDK) GetAllAPIEndpoints(ctx context.Context, request operations.GetAllA
 	res := &operations.GetAllAPIEndpointsResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetAllAPIEndpointsResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIEndpointsResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -778,9 +656,7 @@ func (s *SDK) GetAllAPIEndpoints(ctx context.Context, request operations.GetAllA
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsResponses{
-				APIEndpoints: out,
-			}
+			res.APIEndpoints = out
 		}
 	default:
 		switch {
@@ -790,9 +666,7 @@ func (s *SDK) GetAllAPIEndpoints(ctx context.Context, request operations.GetAllA
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIEndpointsResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -823,13 +697,7 @@ func (s *SDK) GetAllAPIVersions(ctx context.Context, request operations.GetAllAP
 	res := &operations.GetAllAPIVersionsResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetAllAPIVersionsResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllAPIVersionsResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -839,9 +707,7 @@ func (s *SDK) GetAllAPIVersions(ctx context.Context, request operations.GetAllAP
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsResponses{
-				Apis: out,
-			}
+			res.Apis = out
 		}
 	default:
 		switch {
@@ -851,9 +717,7 @@ func (s *SDK) GetAllAPIVersions(ctx context.Context, request operations.GetAllAP
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllAPIVersionsResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -882,13 +746,7 @@ func (s *SDK) GetAllForVersionAPIEndpoints(ctx context.Context, request operatio
 	res := &operations.GetAllForVersionAPIEndpointsResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetAllForVersionAPIEndpointsResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAllForVersionAPIEndpointsResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -898,9 +756,7 @@ func (s *SDK) GetAllForVersionAPIEndpoints(ctx context.Context, request operatio
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsResponses{
-				APIEndpoints: out,
-			}
+			res.APIEndpoints = out
 		}
 	default:
 		switch {
@@ -910,9 +766,7 @@ func (s *SDK) GetAllForVersionAPIEndpoints(ctx context.Context, request operatio
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAllForVersionAPIEndpointsResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -941,13 +795,7 @@ func (s *SDK) GetAPIEndpoint(ctx context.Context, request operations.GetAPIEndpo
 	res := &operations.GetAPIEndpointResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetAPIEndpointResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetAPIEndpointResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -957,9 +805,7 @@ func (s *SDK) GetAPIEndpoint(ctx context.Context, request operations.GetAPIEndpo
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointResponses{
-				APIEndpoint: out,
-			}
+			res.APIEndpoint = out
 		}
 	default:
 		switch {
@@ -969,9 +815,7 @@ func (s *SDK) GetAPIEndpoint(ctx context.Context, request operations.GetAPIEndpo
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetAPIEndpointResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1002,13 +846,7 @@ func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*
 	res := &operations.GetApisResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetApisResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetApisResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1018,9 +856,7 @@ func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisResponses{
-				Apis: out,
-			}
+			res.Apis = out
 		}
 	default:
 		switch {
@@ -1030,9 +866,7 @@ func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetApisResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1063,13 +897,7 @@ func (s *SDK) GetEmbedAccessToken(ctx context.Context, request operations.GetEmb
 	res := &operations.GetEmbedAccessTokenResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetEmbedAccessTokenResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetEmbedAccessTokenResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1079,9 +907,7 @@ func (s *SDK) GetEmbedAccessToken(ctx context.Context, request operations.GetEmb
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetEmbedAccessTokenResponses{
-				EmbedAccessTokenResponse: out,
-			}
+			res.EmbedAccessTokenResponse = out
 		}
 	default:
 		switch {
@@ -1091,9 +917,7 @@ func (s *SDK) GetEmbedAccessToken(ctx context.Context, request operations.GetEmb
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetEmbedAccessTokenResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1122,13 +946,7 @@ func (s *SDK) GetRequestFromEventLog(ctx context.Context, request operations.Get
 	res := &operations.GetRequestFromEventLogResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetRequestFromEventLogResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetRequestFromEventLogResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1138,9 +956,7 @@ func (s *SDK) GetRequestFromEventLog(ctx context.Context, request operations.Get
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetRequestFromEventLogResponses{
-				UnboundedRequest: out,
-			}
+			res.UnboundedRequest = out
 		}
 	default:
 		switch {
@@ -1150,9 +966,7 @@ func (s *SDK) GetRequestFromEventLog(ctx context.Context, request operations.Get
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetRequestFromEventLogResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1181,13 +995,7 @@ func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest
 	res := &operations.GetSchemaResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetSchemaResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1197,9 +1005,7 @@ func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaResponses{
-				Schema: out,
-			}
+			res.Schema = out
 		}
 	default:
 		switch {
@@ -1209,9 +1015,7 @@ func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1240,13 +1044,7 @@ func (s *SDK) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDif
 	res := &operations.GetSchemaDiffResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetSchemaDiffResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaDiffResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1256,9 +1054,7 @@ func (s *SDK) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDif
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffResponses{
-				SchemaDiff: out,
-			}
+			res.SchemaDiff = out
 		}
 	default:
 		switch {
@@ -1268,9 +1064,7 @@ func (s *SDK) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDif
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaDiffResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1299,13 +1093,7 @@ func (s *SDK) GetSchemaRevision(ctx context.Context, request operations.GetSchem
 	res := &operations.GetSchemaRevisionResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetSchemaRevisionResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemaRevisionResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1315,9 +1103,7 @@ func (s *SDK) GetSchemaRevision(ctx context.Context, request operations.GetSchem
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionResponses{
-				Schema: out,
-			}
+			res.Schema = out
 		}
 	default:
 		switch {
@@ -1327,9 +1113,7 @@ func (s *SDK) GetSchemaRevision(ctx context.Context, request operations.GetSchem
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemaRevisionResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1358,13 +1142,7 @@ func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasReque
 	res := &operations.GetSchemasResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetSchemasResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetSchemasResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1374,9 +1152,7 @@ func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasReque
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasResponses{
-				Schemata: out,
-			}
+			res.Schemata = out
 		}
 	default:
 		switch {
@@ -1386,9 +1162,7 @@ func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasReque
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetSchemasResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1417,13 +1191,7 @@ func (s *SDK) GetValidEmbedAccessTokens(ctx context.Context) (*operations.GetVal
 	res := &operations.GetValidEmbedAccessTokensResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetValidEmbedAccessTokensResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetValidEmbedAccessTokensResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1433,9 +1201,7 @@ func (s *SDK) GetValidEmbedAccessTokens(ctx context.Context) (*operations.GetVal
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetValidEmbedAccessTokensResponses{
-				EmbedTokens: out,
-			}
+			res.EmbedTokens = out
 		}
 	default:
 		switch {
@@ -1445,9 +1211,7 @@ func (s *SDK) GetValidEmbedAccessTokens(ctx context.Context) (*operations.GetVal
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetValidEmbedAccessTokensResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1476,13 +1240,7 @@ func (s *SDK) GetVersionMetadata(ctx context.Context, request operations.GetVers
 	res := &operations.GetVersionMetadataResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.GetVersionMetadataResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.GetVersionMetadataResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1492,9 +1250,7 @@ func (s *SDK) GetVersionMetadata(ctx context.Context, request operations.GetVers
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataResponses{
-				VersionMetadata: out,
-			}
+			res.VersionMetadata = out
 		}
 	default:
 		switch {
@@ -1504,9 +1260,7 @@ func (s *SDK) GetVersionMetadata(ctx context.Context, request operations.GetVers
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.GetVersionMetadataResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1544,13 +1298,7 @@ func (s *SDK) InsertVersionMetadata(ctx context.Context, request operations.Inse
 	res := &operations.InsertVersionMetadataResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.InsertVersionMetadataResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.InsertVersionMetadataResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1560,9 +1308,7 @@ func (s *SDK) InsertVersionMetadata(ctx context.Context, request operations.Inse
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataResponses{
-				VersionMetadata: out,
-			}
+			res.VersionMetadata = out
 		}
 	default:
 		switch {
@@ -1572,9 +1318,7 @@ func (s *SDK) InsertVersionMetadata(ctx context.Context, request operations.Inse
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.InsertVersionMetadataResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1605,13 +1349,7 @@ func (s *SDK) QueryEventLog(ctx context.Context, request operations.QueryEventLo
 	res := &operations.QueryEventLogResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.QueryEventLogResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.QueryEventLogResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1621,9 +1359,7 @@ func (s *SDK) QueryEventLog(ctx context.Context, request operations.QueryEventLo
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.QueryEventLogResponses{
-				BoundedRequests: out,
-			}
+			res.BoundedRequests = out
 		}
 	default:
 		switch {
@@ -1633,9 +1369,7 @@ func (s *SDK) QueryEventLog(ctx context.Context, request operations.QueryEventLo
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.QueryEventLogResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1673,13 +1407,7 @@ func (s *SDK) RegisterSchema(ctx context.Context, request operations.RegisterSch
 	res := &operations.RegisterSchemaResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.RegisterSchemaResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.RegisterSchemaResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
@@ -1690,9 +1418,7 @@ func (s *SDK) RegisterSchema(ctx context.Context, request operations.RegisterSch
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.RegisterSchemaResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1721,13 +1447,7 @@ func (s *SDK) RevokeEmbedAccessToken(ctx context.Context, request operations.Rev
 	res := &operations.RevokeEmbedAccessTokenResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.RevokeEmbedAccessTokenResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.RevokeEmbedAccessTokenResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 	default:
@@ -1738,9 +1458,7 @@ func (s *SDK) RevokeEmbedAccessToken(ctx context.Context, request operations.Rev
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.RevokeEmbedAccessTokenResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1778,13 +1496,7 @@ func (s *SDK) UpsertAPI(ctx context.Context, request operations.UpsertAPIRequest
 	res := &operations.UpsertAPIResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.UpsertAPIResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1794,9 +1506,7 @@ func (s *SDK) UpsertAPI(ctx context.Context, request operations.UpsertAPIRequest
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIResponses{
-				API: out,
-			}
+			res.API = out
 		}
 	default:
 		switch {
@@ -1806,9 +1516,7 @@ func (s *SDK) UpsertAPI(ctx context.Context, request operations.UpsertAPIRequest
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 
@@ -1846,13 +1554,7 @@ func (s *SDK) UpsertAPIEndpoint(ctx context.Context, request operations.UpsertAP
 	res := &operations.UpsertAPIEndpointResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
-		Responses:   make(map[int64]map[string]operations.UpsertAPIEndpointResponses),
 	}
-
-	if _, ok := res.Responses[int64(httpRes.StatusCode)]; !ok {
-		res.Responses[int64(httpRes.StatusCode)] = make(map[string]operations.UpsertAPIEndpointResponses)
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1862,9 +1564,7 @@ func (s *SDK) UpsertAPIEndpoint(ctx context.Context, request operations.UpsertAP
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointResponses{
-				APIEndpoint: out,
-			}
+			res.APIEndpoint = out
 		}
 	default:
 		switch {
@@ -1874,9 +1574,7 @@ func (s *SDK) UpsertAPIEndpoint(ctx context.Context, request operations.UpsertAP
 				return nil, err
 			}
 
-			res.Responses[int64(httpRes.StatusCode)][contentType] = operations.UpsertAPIEndpointResponses{
-				Error: out,
-			}
+			res.Error = out
 		}
 	}
 

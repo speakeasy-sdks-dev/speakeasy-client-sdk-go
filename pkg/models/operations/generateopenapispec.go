@@ -13,13 +13,9 @@ type GenerateOpenAPISpecRequest struct {
 	PathParams GenerateOpenAPISpecPathParams
 }
 
-type GenerateOpenAPISpecResponses struct {
+type GenerateOpenAPISpecResponse struct {
+	ContentType             string
 	Error                   *shared.Error
 	GenerateOpenAPISpecDiff *shared.GenerateOpenAPISpecDiff
-}
-
-type GenerateOpenAPISpecResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]GenerateOpenAPISpecResponses
-	StatusCode  int64
+	StatusCode              int64
 }

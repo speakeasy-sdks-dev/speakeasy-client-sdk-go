@@ -22,13 +22,9 @@ type GetAllAPIVersionsRequest struct {
 	QueryParams GetAllAPIVersionsQueryParams
 }
 
-type GetAllAPIVersionsResponses struct {
-	Apis  []shared.API
-	Error *shared.Error
-}
-
 type GetAllAPIVersionsResponse struct {
+	Apis        []shared.API
 	ContentType string
-	Responses   map[int64]map[string]GetAllAPIVersionsResponses
+	Error       *shared.Error
 	StatusCode  int64
 }

@@ -12,13 +12,9 @@ type GetRequestFromEventLogRequest struct {
 	PathParams GetRequestFromEventLogPathParams
 }
 
-type GetRequestFromEventLogResponses struct {
-	Error            *shared.Error
-	UnboundedRequest *shared.UnboundedRequest
-}
-
 type GetRequestFromEventLogResponse struct {
-	ContentType string
-	Responses   map[int64]map[string]GetRequestFromEventLogResponses
-	StatusCode  int64
+	ContentType      string
+	Error            *shared.Error
+	StatusCode       int64
+	UnboundedRequest *shared.UnboundedRequest
 }

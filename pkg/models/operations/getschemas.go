@@ -13,13 +13,9 @@ type GetSchemasRequest struct {
 	PathParams GetSchemasPathParams
 }
 
-type GetSchemasResponses struct {
-	Error    *shared.Error
-	Schemata []shared.Schema
-}
-
 type GetSchemasResponse struct {
 	ContentType string
-	Responses   map[int64]map[string]GetSchemasResponses
+	Error       *shared.Error
+	Schemata    []shared.Schema
 	StatusCode  int64
 }
