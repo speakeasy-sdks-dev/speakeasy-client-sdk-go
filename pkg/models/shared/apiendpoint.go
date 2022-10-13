@@ -10,7 +10,7 @@ type APIEndpoint struct {
 	CreatedAt     time.Time `json:"created_at"`
 	Description   string    `json:"description"`
 	DisplayName   string    `json:"display_name"`
-	Matched       *bool     `json:"matched"`
+	Matched       *bool     `json:"matched,omitempty"`
 	Method        string    `json:"method"`
 	Path          string    `json:"path"`
 	UpdatedAt     time.Time `json:"updated_at"`

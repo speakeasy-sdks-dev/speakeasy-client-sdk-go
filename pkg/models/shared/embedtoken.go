@@ -11,8 +11,8 @@ type EmbedToken struct {
 	ExpiresAt   time.Time  `json:"expires_at"`
 	Filters     string     `json:"filters"`
 	ID          string     `json:"id"`
-	LastUsed    *time.Time `json:"last_used"`
-	RevokedAt   *time.Time `json:"revoked_at"`
-	RevokedBy   *string    `json:"revoked_by"`
+	LastUsed    *time.Time `json:"last_used,omitempty"`
+	RevokedAt   *time.Time `json:"revoked_at,omitempty"`
+	RevokedBy   *string    `json:"revoked_by,omitempty"`
 	WorkspaceID string     `json:"workspace_id"`
 }
