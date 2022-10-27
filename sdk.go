@@ -252,12 +252,12 @@ func (s *SDK) DownloadSchema(ctx context.Context, request operations.DownloadSch
 
 			res.Schema = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Schema = data
+			res.Schema = out
 		}
 	default:
 		switch {
@@ -308,12 +308,12 @@ func (s *SDK) DownloadSchemaRevision(ctx context.Context, request operations.Dow
 
 			res.Schema = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Schema = data
+			res.Schema = out
 		}
 	default:
 		switch {
@@ -1283,6 +1283,7 @@ func (s *SDK) InsertVersionMetadata(ctx context.Context, request operations.Inse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1392,6 +1393,7 @@ func (s *SDK) RegisterSchema(ctx context.Context, request operations.RegisterSch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1481,6 +1483,7 @@ func (s *SDK) UpsertAPI(ctx context.Context, request operations.UpsertAPIRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1539,6 +1542,7 @@ func (s *SDK) UpsertAPIEndpoint(ctx context.Context, request operations.UpsertAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
