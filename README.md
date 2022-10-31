@@ -26,16 +26,16 @@ import (
 )
 
 func main() {
-    ctx := context.Background()
+	ctx := context.Background()
 
-	sdk := sdk.New()
-	sdk.ConfigureSecurity(shared.Security{
+	s := sdk.New()
+	s.ConfigureSecurity(shared.Security{
 		APIKey: shared.SchemeAPIKey{
 			APIKey: "YOUR_API_KEY", // Replace with your API key from your Speakeasy Workspace
 		},
 	})
 
-	res, err := sdk.GetApis(ctx, operations.GetApisRequest{
+	res, err := s.GetApis(ctx, operations.GetApisRequest{
 		QueryParams: operations.GetApisQueryParams{
 			Metadata: map[string][]string{
 				"label": {"1"},
