@@ -12,7 +12,7 @@ import (
 )
 
 var Servers = []string{
-	"http://api.prod.speakeasyapi.dev",
+	"https://api.prod.speakeasyapi.dev",
 }
 
 type HTTPClient interface {
