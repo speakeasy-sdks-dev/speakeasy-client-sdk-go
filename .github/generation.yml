@@ -3,7 +3,7 @@ name: Generate
 on: pull_request
 
 jobs:
-  build:
+  generate:
     name: Generate SDK
     runs-on: ubuntu-latest
     steps:
