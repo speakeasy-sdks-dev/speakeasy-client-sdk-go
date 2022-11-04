@@ -13,6 +13,7 @@ jobs:
         with:
           speakeasy-version: latest
           openapi-doc-location: https://docs.speakeasyapi.dev/openapi.yaml
-          github-access-token: test
+          github-access-token: ${{ secrets.GIT_ACCESS_TOKEN }}
           languages: |-
             - go
+            - python
