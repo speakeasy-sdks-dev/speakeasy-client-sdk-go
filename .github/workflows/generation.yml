@@ -9,7 +9,7 @@ jobs:
     name: Generate SDK
     runs-on: ubuntu-latest
     steps:
-      - uses: speakeasy-api/sdk-generation-action
+      - uses: speakeasy-api/sdk-generation-action@v0
         with:
           speakeasy-version: latest
           openapi-doc-location: https://docs.speakeasyapi.dev/openapi.yaml
