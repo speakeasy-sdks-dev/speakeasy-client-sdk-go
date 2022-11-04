@@ -4,12 +4,12 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 )
 
-type GetAllAPIVersionsPathParams struct {
-	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
-}
-
 type GetAllAPIVersionsOp struct {
 	And bool `queryParam:"name=and"`
+}
+
+type GetAllAPIVersionsPathParams struct {
+	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
 }
 
 type GetAllAPIVersionsQueryParams struct {

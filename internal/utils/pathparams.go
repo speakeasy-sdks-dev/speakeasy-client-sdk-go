@@ -27,7 +27,7 @@ func GenerateURL(ctx context.Context, serverURL, path string, pathParams interfa
 		// TODO: support other styles
 		switch ppTag.Style {
 		case "simple":
-			simpleParams := getSimplePathParams(ctx, ppTag.ParamName, fieldType.Type, valType)
+			simpleParams := getSimplePathParams(ctx, ppTag.ParamName, fieldType.Type, valType, ppTag.Explode)
 			for k, v := range simpleParams {
 				parsedParameters[k] = v
 			}
@@ -38,17 +38,40 @@ func GenerateURL(ctx context.Context, serverURL, path string, pathParams interfa
 	return ReplaceParameters(url, parsedParameters)
 }
 
-func getSimplePathParams(ctx context.Context, parentName string, objType reflect.Type, objValue reflect.Value) map[string]string {
-	if objType.Kind() == reflect.Pointer {
+func getSimplePathParams(ctx context.Context, parentName string, objType reflect.Type, objValue reflect.Value, explode bool) map[string]string {
+	pathParams := make(map[string]string)
+
+	switch objType.Kind() {
+	case reflect.Pointer:
 		if objValue.IsNil() {
 			return nil
 		}
 		objValue = objValue.Elem()
+	case reflect.Array, reflect.Slice:
+		if objValue.Len() == 0 {
+			return nil
+		}
+		var ppVals []string
+		for i := 0; i < objValue.Len(); i++ {
+			ppVals = append(ppVals, fmt.Sprintf("%v", objValue.Index(i).Interface()))
+		}
+		pathParams[parentName] = strings.Join(ppVals, ",")
+	case reflect.Struct:
+		var ppVals []string
+		for i := 0; i < objType.NumField(); i++ {
+			fieldType := objType.Field(i)
+			valType := objValue.Field(i)
+
+			if explode {
+				ppVals = append(ppVals, fmt.Sprintf("%s=%v", fieldType.Name, valType.Interface()))
+			} else {
+				ppVals = append(ppVals, fmt.Sprintf("%s,%v", fieldType.Name, valType.Interface()))
+			}
+		}
+		pathParams[parentName] = strings.Join(ppVals, ",")
+	default:
+		pathParams[parentName] = fmt.Sprintf("%v", objValue.Interface())
 	}
-
-	pathParams := make(map[string]string)
-
-	pathParams[parentName] = fmt.Sprintf("%v", objValue.Interface())
 
 	return pathParams
 }
