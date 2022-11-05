@@ -4,8 +4,6 @@ import (
 	"time"
 )
 
-// API
-// An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
 type API struct {
 	APIID       string              `json:"api_id"`
 	CreatedAt   time.Time           `json:"created_at"`

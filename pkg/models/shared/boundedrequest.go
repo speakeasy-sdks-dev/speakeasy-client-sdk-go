@@ -4,8 +4,6 @@ import (
 	"time"
 )
 
-// BoundedRequest
-// A BoundedRequest is a request that has been logged by the Speakeasy without the contents of the request.
 type BoundedRequest struct {
 	APIEndpointID     string              `json:"api_endpoint_id"`
 	APIID             string              `json:"api_id"`
