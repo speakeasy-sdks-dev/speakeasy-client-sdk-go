@@ -1,2 +1,3 @@
 go:
-  packagename: github.com/speakeasy-api/speakeasy-client-sdk-go
+    packagename: github.com/speakeasy-api/speakeasy-client-sdk-go
+    version: 0.1.3
