@@ -56,12 +56,32 @@ func getSimplePathParams(ctx context.Context, parentName string, objType reflect
 			ppVals = append(ppVals, fmt.Sprintf("%v", objValue.Index(i).Interface()))
 		}
 		pathParams[parentName] = strings.Join(ppVals, ",")
+	case reflect.Map:
+		if objValue.Len() == 0 {
+			return nil
+		}
+		var ppVals []string
+		objMap := objValue.MapRange()
+		for objMap.Next() {
+			if explode {
+				ppVals = append(ppVals, fmt.Sprintf("%s=%v", objMap.Key().String(), objMap.Value().Interface()))
+			} else {
+				ppVals = append(ppVals, fmt.Sprintf("%s,%v", objMap.Key().String(), objMap.Value().Interface()))
+			}
+		}
+		pathParams[parentName] = strings.Join(ppVals, ",")
 	case reflect.Struct:
 		var ppVals []string
 		for i := 0; i < objType.NumField(); i++ {
 			fieldType := objType.Field(i)
 			valType := objValue.Field(i)
 
+			if fieldType.Type.Kind() == reflect.Pointer {
+				if valType.IsNil() {
+					continue
+				}
+				valType = valType.Elem()
+			}
 			if explode {
 				ppVals = append(ppVals, fmt.Sprintf("%s=%v", fieldType.Name, valType.Interface()))
 			} else {

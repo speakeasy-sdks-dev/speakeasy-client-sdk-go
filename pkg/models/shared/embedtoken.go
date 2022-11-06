@@ -4,8 +4,6 @@ import (
 	"time"
 )
 
-// EmbedToken
-// A representation of an embed token granted for working with Speakeasy components.
 type EmbedToken struct {
 	CreatedAt   time.Time  `json:"created_at"`
 	CreatedBy   string     `json:"created_by"`
