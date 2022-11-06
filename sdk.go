@@ -19,6 +19,7 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.speakeasyapi.dev - The Speakeasy Platform Documentation
 type SDK struct {
 	defaultClient  HTTPClient
 	securityClient HTTPClient
@@ -58,6 +59,8 @@ func New(opts ...SDKOption) *SDK {
 	return sdk
 }
 
+// DeleteAPI - Delete an Api.
+// Delete a particular version of an Api. The will also delete all associated ApiEndpoints, Metadata, Schemas & Request Logs (if using a Postgres datastore).
 func (s *SDK) DeleteAPI(ctx context.Context, request operations.DeleteAPIRequest) (*operations.DeleteAPIResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}", request.PathParams)
@@ -98,6 +101,8 @@ func (s *SDK) DeleteAPI(ctx context.Context, request operations.DeleteAPIRequest
 	return res, nil
 }
 
+// DeleteAPIEndpoint - Delete an ApiEndpoint.
+// Delete an ApiEndpoint. This will also delete all associated Request Logs (if using a Postgres datastore).
 func (s *SDK) DeleteAPIEndpoint(ctx context.Context, request operations.DeleteAPIEndpointRequest) (*operations.DeleteAPIEndpointResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
@@ -138,6 +143,7 @@ func (s *SDK) DeleteAPIEndpoint(ctx context.Context, request operations.DeleteAP
 	return res, nil
 }
 
+// DeleteSchema - Delete a particular schema revision for an Api.
 func (s *SDK) DeleteSchema(ctx context.Context, request operations.DeleteSchemaRequest) (*operations.DeleteSchemaResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
@@ -178,6 +184,7 @@ func (s *SDK) DeleteSchema(ctx context.Context, request operations.DeleteSchemaR
 	return res, nil
 }
 
+// DeleteVersionMetadata - Delete metadata for a particular apiID and versionID.
 func (s *SDK) DeleteVersionMetadata(ctx context.Context, request operations.DeleteVersionMetadataRequest) (*operations.DeleteVersionMetadataResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", request.PathParams)
@@ -218,6 +225,7 @@ func (s *SDK) DeleteVersionMetadata(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DownloadSchema - Download the latest schema for a particular apiID.
 func (s *SDK) DownloadSchema(ctx context.Context, request operations.DownloadSchemaRequest) (*operations.DownloadSchemaResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request.PathParams)
@@ -274,6 +282,7 @@ func (s *SDK) DownloadSchema(ctx context.Context, request operations.DownloadSch
 	return res, nil
 }
 
+// DownloadSchemaRevision - Download a particular schema revision for an Api.
 func (s *SDK) DownloadSchemaRevision(ctx context.Context, request operations.DownloadSchemaRevisionRequest) (*operations.DownloadSchemaRevisionResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
@@ -330,6 +339,9 @@ func (s *SDK) DownloadSchemaRevision(ctx context.Context, request operations.Dow
 	return res, nil
 }
 
+// FindAPIEndpoint - Find an ApiEndpoint via its displayName.
+// Find an ApiEndpoint via its displayName (set by operationId from a registered OpenAPI schema).
+// This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID} endpoints.
 func (s *SDK) FindAPIEndpoint(ctx context.Context, request operations.FindAPIEndpointRequest) (*operations.FindAPIEndpointResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", request.PathParams)
@@ -379,6 +391,9 @@ func (s *SDK) FindAPIEndpoint(ctx context.Context, request operations.FindAPIEnd
 	return res, nil
 }
 
+// GenerateOpenAPISpec - Generate an OpenAPI specification for a particular Api.
+// This endpoint will generate any missing operations in any registered OpenAPI document if the operation does not already exist in the document.
+// Returns the original document and the newly generated document allowing a diff to be performed to see what has changed.
 func (s *SDK) GenerateOpenAPISpec(ctx context.Context, request operations.GenerateOpenAPISpecRequest) (*operations.GenerateOpenAPISpecResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", request.PathParams)
@@ -428,6 +443,9 @@ func (s *SDK) GenerateOpenAPISpec(ctx context.Context, request operations.Genera
 	return res, nil
 }
 
+// GenerateOpenAPISpecForAPIEndpoint - Generate an OpenAPI specification for a particular ApiEndpoint.
+// This endpoint will generate a new operation in any registered OpenAPI document if the operation does not already exist in the document.
+// Returns the original document and the newly generated document allowing a diff to be performed to see what has changed.
 func (s *SDK) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, request operations.GenerateOpenAPISpecForAPIEndpointRequest) (*operations.GenerateOpenAPISpecForAPIEndpointResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", request.PathParams)
@@ -477,6 +495,8 @@ func (s *SDK) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, request ope
 	return res, nil
 }
 
+// GeneratePostmanCollection - Generate a Postman collection for a particular Api.
+// Generates a postman collection containing all endpoints for a particular API. Includes variables produced for any path/query/header parameters included in the OpenAPI document.
 func (s *SDK) GeneratePostmanCollection(ctx context.Context, request operations.GeneratePostmanCollectionRequest) (*operations.GeneratePostmanCollectionResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", request.PathParams)
@@ -526,6 +546,8 @@ func (s *SDK) GeneratePostmanCollection(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GeneratePostmanCollectionForAPIEndpoint - Generate a Postman collection for a particular ApiEndpoint.
+// Generates a postman collection that allows the endpoint to be called from postman variables produced for any path/query/header parameters included in the OpenAPI document.
 func (s *SDK) GeneratePostmanCollectionForAPIEndpoint(ctx context.Context, request operations.GeneratePostmanCollectionForAPIEndpointRequest) (*operations.GeneratePostmanCollectionForAPIEndpointResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", request.PathParams)
@@ -575,6 +597,9 @@ func (s *SDK) GeneratePostmanCollectionForAPIEndpoint(ctx context.Context, reque
 	return res, nil
 }
 
+// GenerateRequestPostmanCollection - Generate a Postman collection for a particular request.
+// Generates a Postman collection for a particular request.
+// Allowing it to be replayed with the same inputs that were captured by the SDK.
 func (s *SDK) GenerateRequestPostmanCollection(ctx context.Context, request operations.GenerateRequestPostmanCollectionRequest) (*operations.GenerateRequestPostmanCollectionResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}/generate/postman", request.PathParams)
@@ -624,6 +649,7 @@ func (s *SDK) GenerateRequestPostmanCollection(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetAllAPIEndpoints - Get all Api endpoints for a particular apiID.
 func (s *SDK) GetAllAPIEndpoints(ctx context.Context, request operations.GetAllAPIEndpointsRequest) (*operations.GetAllAPIEndpointsResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/api_endpoints", request.PathParams)
@@ -673,6 +699,9 @@ func (s *SDK) GetAllAPIEndpoints(ctx context.Context, request operations.GetAllA
 	return res, nil
 }
 
+// GetAllAPIVersions - Get all Api versions for a particular ApiEndpoint.
+// Get all Api versions for a particular ApiEndpoint.
+// Supports filtering the versions based on metadata attributes.
 func (s *SDK) GetAllAPIVersions(ctx context.Context, request operations.GetAllAPIVersionsRequest) (*operations.GetAllAPIVersionsResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}", request.PathParams)
@@ -724,6 +753,7 @@ func (s *SDK) GetAllAPIVersions(ctx context.Context, request operations.GetAllAP
 	return res, nil
 }
 
+// GetAllForVersionAPIEndpoints - Get all ApiEndpoints for a particular apiID and versionID.
 func (s *SDK) GetAllForVersionAPIEndpoints(ctx context.Context, request operations.GetAllForVersionAPIEndpointsRequest) (*operations.GetAllForVersionAPIEndpointsResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", request.PathParams)
@@ -773,6 +803,7 @@ func (s *SDK) GetAllForVersionAPIEndpoints(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAPIEndpoint - Get an ApiEndpoint.
 func (s *SDK) GetAPIEndpoint(ctx context.Context, request operations.GetAPIEndpointRequest) (*operations.GetAPIEndpointResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)
@@ -822,6 +853,9 @@ func (s *SDK) GetAPIEndpoint(ctx context.Context, request operations.GetAPIEndpo
 	return res, nil
 }
 
+// GetApis - Get a list of Apis for a given workspace
+// Get a list of all Apis and their versions for a given workspace.
+// Supports filtering the APIs based on metadata attributes.
 func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*operations.GetApisResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/apis"
@@ -873,6 +907,9 @@ func (s *SDK) GetApis(ctx context.Context, request operations.GetApisRequest) (*
 	return res, nil
 }
 
+// GetEmbedAccessToken - Get an embed access token for the current workspace.
+// Returns an embed access token for the current workspace. This can be used to authenticate access to externally embedded content.
+// Filters can be applied allowing views to be filtered to things like particular customerIds.
 func (s *SDK) GetEmbedAccessToken(ctx context.Context, request operations.GetEmbedAccessTokenRequest) (*operations.GetEmbedAccessTokenResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspace/embed-access-token"
@@ -924,6 +961,7 @@ func (s *SDK) GetEmbedAccessToken(ctx context.Context, request operations.GetEmb
 	return res, nil
 }
 
+// GetRequestFromEventLog - Get information about a particular request.
 func (s *SDK) GetRequestFromEventLog(ctx context.Context, request operations.GetRequestFromEventLogRequest) (*operations.GetRequestFromEventLogResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}", request.PathParams)
@@ -973,6 +1011,9 @@ func (s *SDK) GetRequestFromEventLog(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetSchema - Get information about the latest schema.
+// Returns information about the last uploaded schema for a particular API version.
+// This won't include the schema itself, that can be retrieved via the downloadSchema operation.
 func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest) (*operations.GetSchemaResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
@@ -1022,6 +1063,7 @@ func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest
 	return res, nil
 }
 
+// GetSchemaDiff - Get a diff of two schema revisions for an Api.
 func (s *SDK) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDiffRequest) (*operations.GetSchemaDiffResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request.PathParams)
@@ -1071,6 +1113,9 @@ func (s *SDK) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDif
 	return res, nil
 }
 
+// GetSchemaRevision - Get information about a particular schema revision for an Api.
+// Returns information about the last uploaded schema for a particular schema revision.
+// This won't include the schema itself, that can be retrieved via the downloadSchema operation.
 func (s *SDK) GetSchemaRevision(ctx context.Context, request operations.GetSchemaRevisionRequest) (*operations.GetSchemaRevisionResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
@@ -1120,6 +1165,9 @@ func (s *SDK) GetSchemaRevision(ctx context.Context, request operations.GetSchem
 	return res, nil
 }
 
+// GetSchemas - Get information about all schemas associated with a particular apiID.
+// Returns information the schemas associated with a particular apiID.
+// This won't include the schemas themselves, they can be retrieved via the downloadSchema operation.
 func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasRequest) (*operations.GetSchemasResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request.PathParams)
@@ -1169,6 +1217,7 @@ func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasReque
 	return res, nil
 }
 
+// GetValidEmbedAccessTokens - Get all valid embed access tokens for the current workspace.
 func (s *SDK) GetValidEmbedAccessTokens(ctx context.Context) (*operations.GetValidEmbedAccessTokensResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspace/embed-access-tokens/valid"
@@ -1218,6 +1267,7 @@ func (s *SDK) GetValidEmbedAccessTokens(ctx context.Context) (*operations.GetVal
 	return res, nil
 }
 
+// GetVersionMetadata - Get all metadata for a particular apiID and versionID.
 func (s *SDK) GetVersionMetadata(ctx context.Context, request operations.GetVersionMetadataRequest) (*operations.GetVersionMetadataResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", request.PathParams)
@@ -1267,6 +1317,7 @@ func (s *SDK) GetVersionMetadata(ctx context.Context, request operations.GetVers
 	return res, nil
 }
 
+// InsertVersionMetadata - Insert metadata for a particular apiID and versionID.
 func (s *SDK) InsertVersionMetadata(ctx context.Context, request operations.InsertVersionMetadataRequest) (*operations.InsertVersionMetadataResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", request.PathParams)
@@ -1326,6 +1377,9 @@ func (s *SDK) InsertVersionMetadata(ctx context.Context, request operations.Inse
 	return res, nil
 }
 
+// QueryEventLog - Query the event log to retrieve a list of requests.
+// Supports retrieving a list of request captured by the SDK for this workspace.
+// Allows the filtering of requests on a number of criteria such as ApiID, VersionID, Path, Method, etc.
 func (s *SDK) QueryEventLog(ctx context.Context, request operations.QueryEventLogRequest) (*operations.QueryEventLogResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/eventlog/query"
@@ -1377,6 +1431,9 @@ func (s *SDK) QueryEventLog(ctx context.Context, request operations.QueryEventLo
 	return res, nil
 }
 
+// RegisterSchema - Register a schema.
+// Allows uploading a schema for a particular API version.
+// This will be used to populate ApiEndpoints and used as a base for any schema generation if present.
 func (s *SDK) RegisterSchema(ctx context.Context, request operations.RegisterSchemaRequest) (*operations.RegisterSchemaResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
@@ -1427,6 +1484,7 @@ func (s *SDK) RegisterSchema(ctx context.Context, request operations.RegisterSch
 	return res, nil
 }
 
+// RevokeEmbedAccessToken - Revoke an embed access EmbedToken.
 func (s *SDK) RevokeEmbedAccessToken(ctx context.Context, request operations.RevokeEmbedAccessTokenRequest) (*operations.RevokeEmbedAccessTokenResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", request.PathParams)
@@ -1467,6 +1525,9 @@ func (s *SDK) RevokeEmbedAccessToken(ctx context.Context, request operations.Rev
 	return res, nil
 }
 
+// UpsertAPI - Upsert an Api
+// Upsert an Api. If the Api does not exist, it will be created.
+// If the Api exists, it will be updated.
 func (s *SDK) UpsertAPI(ctx context.Context, request operations.UpsertAPIRequest) (*operations.UpsertAPIResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}", request.PathParams)
@@ -1526,6 +1587,8 @@ func (s *SDK) UpsertAPI(ctx context.Context, request operations.UpsertAPIRequest
 	return res, nil
 }
 
+// UpsertAPIEndpoint - Upsert an ApiEndpoint.
+// Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, otherwise it will be updated.
 func (s *SDK) UpsertAPIEndpoint(ctx context.Context, request operations.UpsertAPIEndpointRequest) (*operations.UpsertAPIEndpointResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", request.PathParams)

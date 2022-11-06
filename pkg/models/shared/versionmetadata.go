@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VersionMetadata
+// A set of keys and associated values, attached to a particular version of an Api.
 type VersionMetadata struct {
 	APIID       string    `json:"api_id"`
 	CreatedAt   time.Time `json:"created_at"`

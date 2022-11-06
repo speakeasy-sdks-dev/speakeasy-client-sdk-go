@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// APIEndpoint
+// An ApiEndpoint is a description of an Endpoint for an API.
 type APIEndpoint struct {
 	APIEndpointID string    `json:"api_endpoint_id"`
 	APIID         string    `json:"api_id"`
