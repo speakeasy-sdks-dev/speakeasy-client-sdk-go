@@ -10,8 +10,8 @@ jobs:
     steps:
       - uses: speakeasy-api/sdk-generation-action@v1
         with:
-          speakeasy-version: latest
-          openapi-doc-location: https://docs.speakeasyapi.dev/openapi.yaml
-          github-access-token: ${{ secrets.GIT_ACCESS_TOKEN }}
+          speakeasy_version: latest
+          openapi_doc_location: https://docs.speakeasyapi.dev/openapi.yaml
+          github_access_token: ${{ secrets.GIT_ACCESS_TOKEN }}
           languages: |-
             - go
