@@ -23,6 +23,7 @@ type HTTPClient interface {
 type SDK struct {
 	defaultClient  HTTPClient
 	securityClient HTTPClient
+	security       *shared.Security
 	serverURL      string
 }
 
@@ -38,20 +39,35 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 	}
 }
 
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk.defaultClient = client
+	}
+}
+
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk.security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
-	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
-	}
+	sdk := &SDK{}
 	for _, opt := range opts {
 		opt(sdk)
 	}
+
+	if sdk.defaultClient == nil {
+		sdk.defaultClient = http.DefaultClient
+	}
+	if sdk.securityClient == nil {
+		if sdk.security != nil {
+			sdk.securityClient = utils.ConfigureSecurityClient(sdk.defaultClient, sdk.security)
+		} else {
+			sdk.securityClient = sdk.defaultClient
+		}
+	}
+
 	if sdk.serverURL == "" {
 		sdk.serverURL = Servers[0]
 	}
