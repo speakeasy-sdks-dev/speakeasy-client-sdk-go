@@ -61,11 +61,13 @@ func New(opts ...SDKOption) *SDK {
 		sdk.defaultClient = http.DefaultClient
 	}
 	if sdk.securityClient == nil {
+
 		if sdk.security != nil {
 			sdk.securityClient = utils.ConfigureSecurityClient(sdk.defaultClient, sdk.security)
 		} else {
 			sdk.securityClient = sdk.defaultClient
 		}
+
 	}
 
 	if sdk.serverURL == "" {
