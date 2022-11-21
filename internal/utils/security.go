@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"encoding/base64"
 	"fmt"
 	"net/http"
 	"reflect"
@@ -118,6 +119,11 @@ func parseSecurityOption(c HTTPClient, option interface{}) *SecurityClient {
 }
 
 func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme interface{}) {
+	if schemeTag.Type == "http" && schemeTag.SubType == "basic" {
+		parseBasicAuthScheme(client, scheme)
+		return
+	}
+
 	schemeStructType := reflect.TypeOf(scheme)
 	schemeValType := reflect.ValueOf(scheme)
 
@@ -148,7 +154,6 @@ func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme 
 			client.headers[secTag.Name] = valType.String()
 		case "http":
 			switch schemeTag.SubType {
-			case "basic":
 			case "bearer":
 				client.headers[secTag.Name] = valType.String()
 			default:
@@ -158,6 +163,32 @@ func parseSecurityScheme(client *SecurityClient, schemeTag *securityTag, scheme 
 			panic("not supported")
 		}
 	}
+}
+
+func parseBasicAuthScheme(client *SecurityClient, scheme interface{}) {
+	schemeStructType := reflect.TypeOf(scheme)
+	schemeValType := reflect.ValueOf(scheme)
+
+	var username, password string
+
+	for i := 0; i < schemeStructType.NumField(); i++ {
+		fieldType := schemeStructType.Field(i)
+		valType := schemeValType.Field(i)
+
+		secTag := parseSecurityTag(fieldType)
+		if secTag == nil || secTag.Name == "" {
+			continue
+		}
+
+		switch secTag.Name {
+		case "username":
+			username = valType.String()
+		case "password":
+			password = valType.String()
+		}
+	}
+
+	client.headers["Authorization"] = fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", username, password))))
 }
 
 func parseSecurityTag(field reflect.StructField) *securityTag {
