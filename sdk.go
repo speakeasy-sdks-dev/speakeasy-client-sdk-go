@@ -1,13 +1,18 @@
 package sdk
 
 import (
+	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/internal/utils"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"net/http"
 )
 
-var ServerList = []string{
-	"https://api.prod.speakeasyapi.dev",
+const (
+	ServerProd string = "prod"
+)
+
+var ServerList = map[string]string{
+	ServerProd: "https://api.prod.speakeasyapi.dev",
 }
 
 type HTTPClient interface {
@@ -44,6 +49,17 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 	}
 }
 
+func WithServer(server string, params map[string]string) SDKOption {
+	return func(sdk *SDK) {
+		serverURL, ok := ServerList[server]
+		if !ok {
+			panic(fmt.Sprintf("server %s not found", server))
+		}
+
+		WithServerURL(serverURL, params)(sdk)
+	}
+}
+
 func WithClient(client HTTPClient) SDKOption {
 	return func(sdk *SDK) {
 		sdk._defaultClient = client
@@ -59,7 +75,7 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		_language:   "go",
-		_sdkVersion: "0.5.4",
+		_sdkVersion: "0.6.0",
 		_genVersion: "internal",
 	}
 	for _, opt := range opts {
@@ -80,7 +96,7 @@ func New(opts ...SDKOption) *SDK {
 	}
 
 	if sdk._serverURL == "" {
-		sdk._serverURL = ServerList[0]
+		sdk._serverURL = ServerList[ServerProd]
 	}
 
 	sdk.APIEndpoints = NewAPIEndpoints(
