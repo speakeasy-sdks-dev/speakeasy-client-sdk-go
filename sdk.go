@@ -2,8 +2,8 @@ package sdk
 
 import (
 	"fmt"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/internal/utils"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"net/http"
 )
 
@@ -75,8 +75,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		_language:   "go",
-		_sdkVersion: "0.6.0",
-		_genVersion: "internal",
+		_sdkVersion: "0.7.0",
+		_genVersion: "",
 	}
 	for _, opt := range opts {
 		opt(sdk)

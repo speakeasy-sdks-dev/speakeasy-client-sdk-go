@@ -3,9 +3,9 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/internal/utils"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"net/http"
 	"strings"
 )
