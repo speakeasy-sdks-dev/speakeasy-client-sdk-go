@@ -45,6 +45,13 @@ func serializeHeader(objType reflect.Type, objValue reflect.Value, explode bool)
 			fieldType := objType.Field(i)
 			valType := objValue.Field(i)
 
+			if fieldType.Type.Kind() == reflect.Pointer {
+				if valType.IsNil() {
+					continue
+				}
+				valType = valType.Elem()
+			}
+
 			tag := parseParamTag(headerParamTagKey, fieldType, "simple", false)
 			if tag == nil {
 				continue

@@ -58,6 +58,15 @@ func SerializeRequestBody(ctx context.Context, request interface{}) (*bytes.Buff
 	requestStructType = requestField.Type
 	requestValType = requestValType.FieldByName(requestFieldName)
 
+	if requestStructType.Kind() == reflect.Pointer {
+		if requestValType.IsNil() {
+			return nil, "", nil
+		}
+
+		requestStructType = requestStructType.Elem()
+		requestValType = requestValType.Elem()
+	}
+
 	for i := 0; i < requestStructType.NumField(); i++ {
 		fieldType := requestStructType.Field(i)
 		valType := requestValType.Field(i)

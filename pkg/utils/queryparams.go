@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"reflect"
 )
 
@@ -36,6 +37,17 @@ func PopulateQueryParams(ctx context.Context, req *http.Request, queryParams int
 }
 
 func populateSerializedParams(req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
+	if objType.Kind() == reflect.Pointer {
+		if objValue.IsNil() {
+			return
+		}
+		objType = objType.Elem()
+		objValue = objValue.Elem()
+	}
+	if objValue.Interface() == nil {
+		return
+	}
+
 	switch tag.Serialization {
 	case "json":
 		data, err := json.Marshal(objValue.Interface())
@@ -43,12 +55,15 @@ func populateSerializedParams(req *http.Request, tag *paramTag, objType reflect.
 			fmt.Printf("error marshaling json: %v", err) // TODO support logging and returning error?
 			return
 		}
-
-		queryParams := req.URL.Query()
-
+		queryParams := url.Values{}
 		queryParams.Add(tag.ParamName, string(data))
+		decoded, err := url.QueryUnescape(queryParams.Encode())
+		if err != nil {
+			fmt.Printf("error decoding query params: %v", err)
+			return
+		}
 
-		req.URL.RawQuery = queryParams.Encode()
+		req.URL.RawQuery += decoded
 	}
 }
 
@@ -61,13 +76,20 @@ func populateDeepObjectParams(req *http.Request, tag *paramTag, objType reflect.
 		objValue = objValue.Elem()
 	}
 
-	queryParams := req.URL.Query()
+	queryParams := url.Values{}
 
 	switch objType.Kind() {
 	case reflect.Struct:
 		for i := 0; i < objType.NumField(); i++ {
 			fieldType := objType.Field(i)
 			valType := objValue.Field(i)
+
+			if fieldType.Type.Kind() == reflect.Pointer {
+				if valType.IsNil() {
+					continue
+				}
+				valType = valType.Elem()
+			}
 
 			qpTag := parseQueryParamTag(fieldType)
 			if qpTag == nil {
@@ -90,7 +112,7 @@ func populateDeepObjectParams(req *http.Request, tag *paramTag, objType reflect.
 		}
 	}
 
-	req.URL.RawQuery = queryParams.Encode()
+	req.URL.RawQuery += queryParams.Encode()
 }
 
 func populateFormParams(req *http.Request, tag *paramTag, objType reflect.Type, objValue reflect.Value) {
@@ -103,7 +125,13 @@ func populateFormParams(req *http.Request, tag *paramTag, objType reflect.Type, 
 		return qpTag.ParamName
 	})
 
-	req.URL.RawQuery = queryParams.Encode()
+	decoded, err := url.PathUnescape(queryParams.Encode())
+	if err != nil {
+		fmt.Printf("error decoding query params: %v", err)
+		return
+	}
+
+	req.URL.RawQuery += decoded
 }
 
 type paramTag struct {

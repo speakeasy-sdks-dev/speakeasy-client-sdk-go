@@ -11,7 +11,7 @@ import (
 
 const (
 	queryParamTagKey  = "queryParam"
-	headerParamTagKey = "headerParam"
+	headerParamTagKey = "header"
 	pathParamTagKey   = "pathParam"
 )
 
