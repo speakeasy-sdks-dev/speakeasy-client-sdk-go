@@ -5,4 +5,4 @@ management:
     openapi-checksum: 8e8183d84cace76310a3208e63cd7855
     openapi-version: 0.1.0
     speakeasy-version: 0.17.4
-telemetryenabled: null
+telemetryenabled: true
