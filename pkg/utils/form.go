@@ -20,7 +20,7 @@ func populateForm(paramName string, explode bool, objType reflect.Type, objValue
 
 	switch objType.Kind() {
 	case reflect.Struct:
-		items := []string{}
+		var items []string
 
 		for i := 0; i < objType.NumField(); i++ {
 			fieldType := objType.Field(i)
@@ -32,7 +32,14 @@ func populateForm(paramName string, explode bool, objType reflect.Type, objValue
 			}
 
 			if explode {
-				formValues.Add(fieldName, fmt.Sprintf("%v", valType.Interface()))
+				var value string
+				if valType.Type().Kind() == reflect.Ptr {
+					value = fmt.Sprintf("%v", valType.Elem())
+
+				} else {
+					value = fmt.Sprintf("%v", valType.Interface())
+				}
+				formValues.Add(fieldName, value)
 			} else {
 				items = append(items, fmt.Sprintf("%s,%v", fieldName, valType.Interface()))
 			}
