@@ -39,6 +39,7 @@ func (s *APIEndpoints) DeleteAPIEndpoint(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -82,6 +83,7 @@ func (s *APIEndpoints) FindAPIEndpoint(ctx context.Context, request operations.F
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -134,6 +136,7 @@ func (s *APIEndpoints) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -185,6 +188,7 @@ func (s *APIEndpoints) GeneratePostmanCollectionForAPIEndpoint(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -235,6 +239,7 @@ func (s *APIEndpoints) GetAllAPIEndpoints(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -285,6 +290,7 @@ func (s *APIEndpoints) GetAllForVersionAPIEndpoints(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -335,6 +341,7 @@ func (s *APIEndpoints) GetAPIEndpoint(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -394,6 +401,7 @@ func (s *APIEndpoints) UpsertAPIEndpoint(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 

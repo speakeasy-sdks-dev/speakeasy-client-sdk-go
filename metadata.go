@@ -38,6 +38,7 @@ func (s *Metadata) DeleteVersionMetadata(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -79,6 +80,7 @@ func (s *Metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -137,6 +139,7 @@ func (s *Metadata) InsertVersionMetadata(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 

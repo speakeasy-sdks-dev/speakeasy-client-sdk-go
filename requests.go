@@ -41,6 +41,7 @@ func (s *Requests) GenerateRequestPostmanCollection(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -91,6 +92,7 @@ func (s *Requests) GetRequestFromEventLog(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -143,6 +145,7 @@ func (s *Requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

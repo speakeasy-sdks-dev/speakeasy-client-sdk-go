@@ -41,6 +41,7 @@ func (s *Embeds) GetEmbedAccessToken(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -93,6 +94,7 @@ func (s *Embeds) GetValidEmbedAccessTokens(ctx context.Context) (*operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -143,6 +145,7 @@ func (s *Embeds) RevokeEmbedAccessToken(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 

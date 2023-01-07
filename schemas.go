@@ -39,6 +39,7 @@ func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -80,6 +81,7 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -137,6 +139,7 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -196,6 +199,7 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -246,6 +250,7 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -298,6 +303,7 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -350,6 +356,7 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -410,6 +417,7 @@ func (s *Schemas) RegisterSchema(ctx context.Context, request operations.Registe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 

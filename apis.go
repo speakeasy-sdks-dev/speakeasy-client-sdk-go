@@ -40,6 +40,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -83,6 +84,7 @@ func (s *Apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -134,6 +136,7 @@ func (s *Apis) GeneratePostmanCollection(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	client := s._securityClient
 
@@ -186,6 +189,7 @@ func (s *Apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -240,6 +244,7 @@ func (s *Apis) GetApis(ctx context.Context, request operations.GetApisRequest) (
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -302,6 +307,7 @@ func (s *Apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
