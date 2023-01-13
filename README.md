@@ -65,10 +65,6 @@ func main() {
 <!-- Start SDK Available Operations -->
 ## SDK Available Operations
 
-### SDK SDK
-
-* `ValidateAPIKey` - Validate the current api key.
-
 ### ApiEndpoints
 
 * `DeleteAPIEndpoint` - Delete an ApiEndpoint.
