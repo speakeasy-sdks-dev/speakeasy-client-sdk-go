@@ -1,10 +1,13 @@
 package sdk
 
 import (
+	"context"
 	"fmt"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"net/http"
+	"strings"
 )
 
 const (
@@ -75,8 +78,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		_language:   "go",
-		_sdkVersion: "0.12.0",
-		_genVersion: "0.20.0",
+		_sdkVersion: "0.13.0",
+		_genVersion: "0.20.1",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -154,4 +157,46 @@ func New(opts ...SDKOption) *SDK {
 	)
 
 	return sdk
+}
+
+// ValidateAPIKey - Validate the current api key.
+func (s *SDK) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyResponse, error) {
+	baseURL := s._serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/v1/auth/validate"
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
+
+	client := s._securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.ValidateAPIKeyResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+	default:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.Error
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Error = out
+		}
+	}
+
+	return res, nil
 }
