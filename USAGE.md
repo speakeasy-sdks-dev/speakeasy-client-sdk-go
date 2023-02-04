@@ -24,9 +24,20 @@ func main() {
     req := operations.GetApisRequest{
         QueryParams: operations.GetApisQueryParams{
             Metadata: map[string][]string{
-                "voluptas": []string{
-                    "expedita",
-                    "consequuntur",
+                "deserunt": []string{
+                    "nulla",
+                    "id",
+                    "vero",
+                },
+                "perspiciatis": []string{
+                    "nihil",
+                    "fuga",
+                    "facilis",
+                    "eum",
+                },
+                "iusto": []string{
+                    "saepe",
+                    "inventore",
                 },
             },
             Op: &operations.GetApisOp{

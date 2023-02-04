@@ -57,7 +57,7 @@ func WithServer(server string, params map[string]string) SDKOption {
 	return func(sdk *SDK) {
 		serverURL, ok := ServerList[server]
 		if !ok {
-			panic(fmt.Sprintf("server %s not found", server))
+			panic(fmt.Errorf("server %s not found", server))
 		}
 
 		WithServerURL(serverURL, params)(sdk)
@@ -79,8 +79,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		_language:   "go",
-		_sdkVersion: "0.15.1",
-		_genVersion: "0.22.1",
+		_sdkVersion: "1.0.0",
+		_genVersion: "1.0.0",
 	}
 	for _, opt := range opts {
 		opt(sdk)
