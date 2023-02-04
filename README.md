@@ -101,6 +101,12 @@ func main() {
 * `GetVersionMetadata` - Get all metadata for a particular apiID and versionID.
 * `InsertVersionMetadata` - Insert metadata for a particular apiID and versionID.
 
+### Plugins
+
+* `GetPlugins` - Get all plugins for the current workspace.
+* `RunPlugin` - Run a plugin
+* `UpsertPlugin` - Upsert a plugin
+
 ### Requests
 
 * `GenerateRequestPostmanCollection` - Generate a Postman collection for a particular request.

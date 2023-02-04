@@ -28,6 +28,7 @@ type SDK struct {
 	Apis         *Apis
 	Embeds       *Embeds
 	Metadata     *Metadata
+	Plugins      *Plugins
 	Requests     *Requests
 	Schemas      *Schemas
 
@@ -78,8 +79,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		_language:   "go",
-		_sdkVersion: "0.15.0",
-		_genVersion: "0.22.0",
+		_sdkVersion: "0.15.1",
+		_genVersion: "0.22.1",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -130,6 +131,15 @@ func New(opts ...SDKOption) *SDK {
 	)
 
 	sdk.Metadata = NewMetadata(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Plugins = NewPlugins(
 		sdk._defaultClient,
 		sdk._securityClient,
 		sdk._serverURL,
