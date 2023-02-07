@@ -84,7 +84,7 @@ func (s *Plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 // RunPlugin - Run a plugin
 func (s *Plugins) RunPlugin(ctx context.Context, request operations.RunPluginRequest) (*operations.RunPluginResponse, error) {
 	baseURL := s._serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/plugin/{pluginID}", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/plugins/{pluginID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
 	if err != nil {
@@ -137,7 +137,7 @@ func (s *Plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 // UpsertPlugin - Upsert a plugin
 func (s *Plugins) UpsertPlugin(ctx context.Context, request operations.UpsertPluginRequest) (*operations.UpsertPluginResponse, error) {
 	baseURL := s._serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugin"
+	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugins"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
 	if err != nil {
