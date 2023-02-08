@@ -8,6 +8,7 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"net/http"
 	"strings"
+	"time"
 )
 
 const (
@@ -24,14 +25,15 @@ type HTTPClient interface {
 
 // SDK Documentation: https://docs.speakeasyapi.dev - The Speakeasy Platform Documentation
 type SDK struct {
-	APIEndpoints *APIEndpoints
-	Apis         *Apis
-	Embeds       *Embeds
-	Metadata     *Metadata
-	Plugins      *Plugins
-	Requests     *Requests
-	Schemas      *Schemas
+	APIEndpoints *apiEndpoints
+	Apis         *apis
+	Embeds       *embeds
+	Metadata     *metadata
+	Plugins      *plugins
+	Requests     *requests
+	Schemas      *schemas
 
+	// Non-idiomatic field names below are to namespace fields from the fields names above to avoid name conflicts
 	_defaultClient  HTTPClient
 	_securityClient HTTPClient
 	_security       *shared.Security
@@ -79,15 +81,16 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		_language:   "go",
-		_sdkVersion: "1.0.1",
-		_genVersion: "1.0.0",
+		_sdkVersion: "1.1.0",
+		_genVersion: "1.1.1",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
 
+	// Use WithClient to override the default client if you would like to customize the timeout
 	if sdk._defaultClient == nil {
-		sdk._defaultClient = http.DefaultClient
+		sdk._defaultClient = &http.Client{Timeout: 60 * time.Second}
 	}
 	if sdk._securityClient == nil {
 
@@ -103,7 +106,7 @@ func New(opts ...SDKOption) *SDK {
 		sdk._serverURL = ServerList[ServerProd]
 	}
 
-	sdk.APIEndpoints = NewAPIEndpoints(
+	sdk.APIEndpoints = newAPIEndpoints(
 		sdk._defaultClient,
 		sdk._securityClient,
 		sdk._serverURL,
@@ -112,7 +115,7 @@ func New(opts ...SDKOption) *SDK {
 		sdk._genVersion,
 	)
 
-	sdk.Apis = NewApis(
+	sdk.Apis = newApis(
 		sdk._defaultClient,
 		sdk._securityClient,
 		sdk._serverURL,
@@ -121,7 +124,7 @@ func New(opts ...SDKOption) *SDK {
 		sdk._genVersion,
 	)
 
-	sdk.Embeds = NewEmbeds(
+	sdk.Embeds = newEmbeds(
 		sdk._defaultClient,
 		sdk._securityClient,
 		sdk._serverURL,
@@ -130,7 +133,7 @@ func New(opts ...SDKOption) *SDK {
 		sdk._genVersion,
 	)
 
-	sdk.Metadata = NewMetadata(
+	sdk.Metadata = newMetadata(
 		sdk._defaultClient,
 		sdk._securityClient,
 		sdk._serverURL,
@@ -139,7 +142,7 @@ func New(opts ...SDKOption) *SDK {
 		sdk._genVersion,
 	)
 
-	sdk.Plugins = NewPlugins(
+	sdk.Plugins = newPlugins(
 		sdk._defaultClient,
 		sdk._securityClient,
 		sdk._serverURL,
@@ -148,7 +151,7 @@ func New(opts ...SDKOption) *SDK {
 		sdk._genVersion,
 	)
 
-	sdk.Requests = NewRequests(
+	sdk.Requests = newRequests(
 		sdk._defaultClient,
 		sdk._securityClient,
 		sdk._serverURL,
@@ -157,7 +160,7 @@ func New(opts ...SDKOption) *SDK {
 		sdk._genVersion,
 	)
 
-	sdk.Schemas = NewSchemas(
+	sdk.Schemas = newSchemas(
 		sdk._defaultClient,
 		sdk._securityClient,
 		sdk._serverURL,
@@ -185,6 +188,9 @@ func (s *SDK) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRes
 	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	if httpRes == nil {
+		return nil, fmt.Errorf("error sending request: no response")
 	}
 	defer httpRes.Body.Close()
 

@@ -10,42 +10,45 @@ import (
 	"strings"
 )
 
-type Plugins struct {
-	_defaultClient  HTTPClient
-	_securityClient HTTPClient
-	_serverURL      string
-	_language       string
-	_sdkVersion     string
-	_genVersion     string
+type plugins struct {
+	defaultClient  HTTPClient
+	securityClient HTTPClient
+	serverURL      string
+	language       string
+	sdkVersion     string
+	genVersion     string
 }
 
-func NewPlugins(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *Plugins {
-	return &Plugins{
-		_defaultClient:  defaultClient,
-		_securityClient: securityClient,
-		_serverURL:      serverURL,
-		_language:       language,
-		_sdkVersion:     sdkVersion,
-		_genVersion:     genVersion,
+func newPlugins(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *plugins {
+	return &plugins{
+		defaultClient:  defaultClient,
+		securityClient: securityClient,
+		serverURL:      serverURL,
+		language:       language,
+		sdkVersion:     sdkVersion,
+		genVersion:     genVersion,
 	}
 }
 
 // GetPlugins - Get all plugins for the current workspace.
-func (s *Plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsResponse, error) {
-	baseURL := s._serverURL
+func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsResponse, error) {
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugins"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	client := s._securityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	if httpRes == nil {
+		return nil, fmt.Errorf("error sending request: no response")
 	}
 	defer httpRes.Body.Close()
 
@@ -82,23 +85,26 @@ func (s *Plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 }
 
 // RunPlugin - Run a plugin
-func (s *Plugins) RunPlugin(ctx context.Context, request operations.RunPluginRequest) (*operations.RunPluginResponse, error) {
-	baseURL := s._serverURL
+func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginRequest) (*operations.RunPluginResponse, error) {
+	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/plugins/{pluginID}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s._securityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	if httpRes == nil {
+		return nil, fmt.Errorf("error sending request: no response")
 	}
 	defer httpRes.Body.Close()
 
@@ -135,8 +141,8 @@ func (s *Plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 }
 
 // UpsertPlugin - Upsert a plugin
-func (s *Plugins) UpsertPlugin(ctx context.Context, request operations.UpsertPluginRequest) (*operations.UpsertPluginResponse, error) {
-	baseURL := s._serverURL
+func (s *plugins) UpsertPlugin(ctx context.Context, request operations.UpsertPluginRequest) (*operations.UpsertPluginResponse, error) {
+	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugins"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -151,15 +157,18 @@ func (s *Plugins) UpsertPlugin(ctx context.Context, request operations.UpsertPlu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s._language, s._sdkVersion, s._genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s._securityClient
+	client := s.securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	if httpRes == nil {
+		return nil, fmt.Errorf("error sending request: no response")
 	}
 	defer httpRes.Body.Close()
 

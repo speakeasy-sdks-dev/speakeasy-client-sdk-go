@@ -3,6 +3,7 @@
 package main
 
 import (
+    "log"
     "github.com/speakeasy-api/speakeasy-client-sdk-go"
     "github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
     "github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
