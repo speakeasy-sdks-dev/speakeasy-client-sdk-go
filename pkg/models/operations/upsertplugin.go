@@ -12,5 +12,5 @@ type UpsertPluginResponse struct {
 	ContentType string
 	Error       *shared.Error
 	Plugin      *shared.Plugin
-	StatusCode  int64
+	StatusCode  int
 }

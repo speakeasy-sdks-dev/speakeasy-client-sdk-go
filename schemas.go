@@ -55,7 +55,7 @@ func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteSchemaResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -100,7 +100,7 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DownloadSchemaResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -161,7 +161,7 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DownloadSchemaRevisionResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -224,7 +224,7 @@ func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -278,7 +278,7 @@ func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaDiffResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -334,7 +334,7 @@ func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaRevisionResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -390,7 +390,7 @@ func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemasResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -456,7 +456,7 @@ func (s *schemas) RegisterSchema(ctx context.Context, request operations.Registe
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.RegisterSchemaResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {

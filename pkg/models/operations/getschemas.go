@@ -17,5 +17,5 @@ type GetSchemasResponse struct {
 	ContentType string
 	Error       *shared.Error
 	Schemata    []shared.Schema
-	StatusCode  int64
+	StatusCode  int
 }

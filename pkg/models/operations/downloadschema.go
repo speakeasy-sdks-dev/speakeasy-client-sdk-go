@@ -17,5 +17,5 @@ type DownloadSchemaResponse struct {
 	ContentType string
 	Error       *shared.Error
 	Schema      []byte
-	StatusCode  int64
+	StatusCode  int
 }

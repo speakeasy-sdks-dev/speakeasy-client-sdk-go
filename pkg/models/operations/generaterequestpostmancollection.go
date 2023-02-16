@@ -16,5 +16,5 @@ type GenerateRequestPostmanCollectionResponse struct {
 	ContentType       string
 	Error             *shared.Error
 	PostmanCollection []byte
-	StatusCode        int64
+	StatusCode        int
 }

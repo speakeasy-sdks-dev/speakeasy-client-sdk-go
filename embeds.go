@@ -43,7 +43,9 @@ func (s *embeds) GetEmbedAccessToken(ctx context.Context, request operations.Get
 	}
 	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	client := s.securityClient
 
@@ -59,7 +61,7 @@ func (s *embeds) GetEmbedAccessToken(ctx context.Context, request operations.Get
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetEmbedAccessTokenResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -113,7 +115,7 @@ func (s *embeds) GetValidEmbedAccessTokens(ctx context.Context) (*operations.Get
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetValidEmbedAccessTokensResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -167,7 +169,7 @@ func (s *embeds) RevokeEmbedAccessToken(ctx context.Context, request operations.
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.RevokeEmbedAccessTokenResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {

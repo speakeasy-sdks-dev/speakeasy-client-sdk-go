@@ -18,5 +18,5 @@ type DeleteVersionMetadataRequest struct {
 type DeleteVersionMetadataResponse struct {
 	ContentType string
 	Error       *shared.Error
-	StatusCode  int64
+	StatusCode  int
 }

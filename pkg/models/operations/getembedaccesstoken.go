@@ -18,5 +18,5 @@ type GetEmbedAccessTokenResponse struct {
 	ContentType              string
 	EmbedAccessTokenResponse *shared.EmbedAccessTokenResponse
 	Error                    *shared.Error
-	StatusCode               int64
+	StatusCode               int
 }

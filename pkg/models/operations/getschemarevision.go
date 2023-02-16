@@ -18,5 +18,5 @@ type GetSchemaRevisionResponse struct {
 	ContentType string
 	Error       *shared.Error
 	Schema      *shared.Schema
-	StatusCode  int64
+	StatusCode  int
 }

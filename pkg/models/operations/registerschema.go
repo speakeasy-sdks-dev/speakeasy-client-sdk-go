@@ -26,5 +26,5 @@ type RegisterSchemaRequest struct {
 type RegisterSchemaResponse struct {
 	ContentType string
 	Error       *shared.Error
-	StatusCode  int64
+	StatusCode  int
 }

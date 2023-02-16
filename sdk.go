@@ -81,8 +81,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		_language:   "go",
-		_sdkVersion: "1.3.0",
-		_genVersion: "1.3.1",
+		_sdkVersion: "1.3.1",
+		_genVersion: "1.3.2",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -197,7 +197,7 @@ func (s *SDK) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRes
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.ValidateAPIKeyResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {

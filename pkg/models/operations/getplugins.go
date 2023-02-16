@@ -8,5 +8,5 @@ type GetPluginsResponse struct {
 	ContentType string
 	Error       *shared.Error
 	Plugins     []shared.Plugin
-	StatusCode  int64
+	StatusCode  int
 }

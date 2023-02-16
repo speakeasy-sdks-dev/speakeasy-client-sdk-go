@@ -19,5 +19,5 @@ type UpsertAPIEndpointResponse struct {
 	APIEndpoint *shared.APIEndpoint
 	ContentType string
 	Error       *shared.Error
-	StatusCode  int64
+	StatusCode  int
 }

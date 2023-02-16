@@ -16,6 +16,6 @@ type GetVersionMetadataRequest struct {
 type GetVersionMetadataResponse struct {
 	ContentType     string
 	Error           *shared.Error
-	StatusCode      int64
+	StatusCode      int
 	VersionMetadata []shared.VersionMetadata
 }

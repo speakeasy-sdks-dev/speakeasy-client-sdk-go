@@ -15,6 +15,6 @@ type GetRequestFromEventLogRequest struct {
 type GetRequestFromEventLogResponse struct {
 	ContentType      string
 	Error            *shared.Error
-	StatusCode       int64
+	StatusCode       int
 	UnboundedRequest *shared.UnboundedRequest
 }

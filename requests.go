@@ -58,7 +58,7 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GenerateRequestPostmanCollectionResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -112,7 +112,7 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetRequestFromEventLogResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -154,7 +154,9 @@ func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 	}
 	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	client := s.securityClient
 
@@ -170,7 +172,7 @@ func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.QueryEventLogResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {

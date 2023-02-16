@@ -19,5 +19,5 @@ type GetSchemaDiffResponse struct {
 	ContentType string
 	Error       *shared.Error
 	SchemaDiff  *shared.SchemaDiff
-	StatusCode  int64
+	StatusCode  int
 }

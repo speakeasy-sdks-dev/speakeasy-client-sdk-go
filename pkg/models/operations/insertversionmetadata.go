@@ -17,6 +17,6 @@ type InsertVersionMetadataRequest struct {
 type InsertVersionMetadataResponse struct {
 	ContentType     string
 	Error           *shared.Error
-	StatusCode      int64
+	StatusCode      int
 	VersionMetadata *shared.VersionMetadata
 }

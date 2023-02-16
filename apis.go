@@ -57,7 +57,7 @@ func (s *apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteAPIResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -104,7 +104,7 @@ func (s *apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GenerateOpenAPISpecResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -159,7 +159,7 @@ func (s *apis) GeneratePostmanCollection(ctx context.Context, request operations
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GeneratePostmanCollectionResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -201,7 +201,9 @@ func (s *apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 	}
 	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	client := s.securityClient
 
@@ -217,7 +219,7 @@ func (s *apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAllAPIVersionsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -259,7 +261,9 @@ func (s *apis) GetApis(ctx context.Context, request operations.GetApisRequest) (
 	}
 	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	client := s.securityClient
 
@@ -275,7 +279,7 @@ func (s *apis) GetApis(ctx context.Context, request operations.GetApisRequest) (
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetApisResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -341,7 +345,7 @@ func (s *apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpsertAPIResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {

@@ -56,7 +56,7 @@ func (s *apiEndpoints) DeleteAPIEndpoint(ctx context.Context, request operations
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteAPIEndpointResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -103,7 +103,7 @@ func (s *apiEndpoints) FindAPIEndpoint(ctx context.Context, request operations.F
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.FindAPIEndpointResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -159,7 +159,7 @@ func (s *apiEndpoints) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, re
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GenerateOpenAPISpecForAPIEndpointResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -214,7 +214,7 @@ func (s *apiEndpoints) GeneratePostmanCollectionForAPIEndpoint(ctx context.Conte
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GeneratePostmanCollectionForAPIEndpointResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -268,7 +268,7 @@ func (s *apiEndpoints) GetAllAPIEndpoints(ctx context.Context, request operation
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAllAPIEndpointsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -322,7 +322,7 @@ func (s *apiEndpoints) GetAllForVersionAPIEndpoints(ctx context.Context, request
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAllForVersionAPIEndpointsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -376,7 +376,7 @@ func (s *apiEndpoints) GetAPIEndpoint(ctx context.Context, request operations.Ge
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAPIEndpointResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -441,7 +441,7 @@ func (s *apiEndpoints) UpsertAPIEndpoint(ctx context.Context, request operations
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpsertAPIEndpointResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {

@@ -54,7 +54,7 @@ func (s *metadata) DeleteVersionMetadata(ctx context.Context, request operations
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteVersionMetadataResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -99,7 +99,7 @@ func (s *metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetVersionMetadataResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -163,7 +163,7 @@ func (s *metadata) InsertVersionMetadata(ctx context.Context, request operations
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.InsertVersionMetadataResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {

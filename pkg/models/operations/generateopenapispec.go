@@ -17,5 +17,5 @@ type GenerateOpenAPISpecResponse struct {
 	ContentType             string
 	Error                   *shared.Error
 	GenerateOpenAPISpecDiff *shared.GenerateOpenAPISpecDiff
-	StatusCode              int64
+	StatusCode              int
 }

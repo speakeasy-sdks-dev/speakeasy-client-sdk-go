@@ -8,5 +8,5 @@ type GetValidEmbedAccessTokensResponse struct {
 	ContentType string
 	EmbedTokens []shared.EmbedToken
 	Error       *shared.Error
-	StatusCode  int64
+	StatusCode  int
 }

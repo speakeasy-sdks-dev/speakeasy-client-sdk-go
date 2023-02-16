@@ -55,7 +55,7 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetPluginsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -95,7 +95,9 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 	}
 	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	client := s.securityClient
 
@@ -111,7 +113,7 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.RunPluginResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
@@ -175,7 +177,7 @@ func (s *plugins) UpsertPlugin(ctx context.Context, request operations.UpsertPlu
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpsertPluginResponse{
-		StatusCode:  int64(httpRes.StatusCode),
+		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 	}
 	switch {
