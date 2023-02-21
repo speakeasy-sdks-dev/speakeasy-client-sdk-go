@@ -3,11 +3,12 @@ package sdk
 import (
 	"context"
 	"fmt"
+	"io"
+	"net/http"
+
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
-	"io"
-	"net/http"
 )
 
 type schemas struct {
