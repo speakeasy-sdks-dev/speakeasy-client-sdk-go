@@ -3,13 +3,12 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"net/http"
-	"strings"
-	"time"
-
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
+	"net/http"
+	"strings"
+	"time"
 )
 
 const (
@@ -82,8 +81,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		_language:   "go",
-		_sdkVersion: "1.4.1",
-		_genVersion: "1.4.2",
+		_sdkVersion: "1.4.2",
+		_genVersion: "1.4.5",
 	}
 	for _, opt := range opts {
 		opt(sdk)

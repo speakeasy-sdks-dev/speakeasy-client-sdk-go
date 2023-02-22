@@ -3,12 +3,11 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"net/http"
-	"strings"
-
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
+	"net/http"
+	"strings"
 )
 
 type plugins struct {
