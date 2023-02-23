@@ -2,10 +2,10 @@ configVersion: 1.0.0
 management:
     docChecksum: 2bba3b8f9d211b02569b3f9aff0d34b4
     docVersion: 0.3.0
-    speakeasyVersion: 1.4.5
+    speakeasyVersion: 1.4.8
 generation:
     telemetryEnabled: true
     sdkClassName: SDK
 go:
-    version: 1.4.2
+    version: 1.4.3
     packageName: github.com/speakeasy-api/speakeasy-client-sdk-go
