@@ -3,6 +3,7 @@
 package main
 
 import (
+    "context"
     "log"
     "github.com/speakeasy-api/speakeasy-client-sdk-go"
     "github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
@@ -16,7 +17,7 @@ func main() {
                 APIKey: shared.SchemeAPIKey{
                     APIKey: "YOUR_API_KEY_HERE",
                 },
-            }
+            },
         ),
     }
 
@@ -46,7 +47,8 @@ func main() {
             },
         },
     }
-    
+
+    ctx := context.Background()
     res, err := s.Apis.GetApis(ctx, req)
     if err != nil {
         log.Fatal(err)
@@ -55,5 +57,6 @@ func main() {
     if res.Apis != nil {
         // handle response
     }
+}
 ```
 <!-- End SDK Example Usage -->
