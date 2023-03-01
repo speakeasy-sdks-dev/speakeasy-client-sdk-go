@@ -22,17 +22,13 @@ import (
 )
 
 func main() {
-    opts := []sdk.SDKOption{
-        sdk.WithSecurity(
-            shared.Security{
-                APIKey: shared.SchemeAPIKey{
-                    APIKey: "YOUR_API_KEY_HERE",
-                },
+    s := sdk.New(sdk.WithSecurity(
+        shared.Security{
+            APIKey: shared.SchemeAPIKey{
+                APIKey: "YOUR_API_KEY_HERE",
             },
-        ),
-    }
-
-    s := sdk.New(opts...)
+        },
+    ))
     
     req := operations.GetApisRequest{
         QueryParams: operations.GetApisQueryParams{
