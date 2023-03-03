@@ -1,4 +1,4 @@
-package sdk
+package speakeasy
 
 import (
 	"context"
@@ -56,6 +56,7 @@ func (s *metadata) DeleteVersionMetadata(ctx context.Context, request operations
 	res := &operations.DeleteVersionMetadataResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -101,6 +102,7 @@ func (s *metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 	res := &operations.GetVersionMetadataResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -165,6 +167,7 @@ func (s *metadata) InsertVersionMetadata(ctx context.Context, request operations
 	res := &operations.InsertVersionMetadataResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

@@ -5,7 +5,7 @@ metadata.go
 plugins.go
 requests.go
 schemas.go
-sdk.go
+speakeasy.go
 go.mod
 go.sum
 pkg/types/date.go
@@ -18,7 +18,6 @@ pkg/utils/requestbody.go
 pkg/utils/retries.go
 pkg/utils/security.go
 pkg/utils/utils.go
-strings.go
 pkg/models/operations/deleteapiendpoint.go
 pkg/models/operations/findapiendpoint.go
 pkg/models/operations/generateopenapispecforapiendpoint.go

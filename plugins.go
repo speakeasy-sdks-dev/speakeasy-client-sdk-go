@@ -1,4 +1,4 @@
-package sdk
+package speakeasy
 
 import (
 	"context"
@@ -57,6 +57,7 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 	res := &operations.GetPluginsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -115,6 +116,7 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 	res := &operations.RunPluginResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -179,6 +181,7 @@ func (s *plugins) UpsertPlugin(ctx context.Context, request operations.UpsertPlu
 	res := &operations.UpsertPluginResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

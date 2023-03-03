@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"net/http"
 )
 
 type GenerateRequestPostmanCollectionPathParams struct {
@@ -17,4 +18,5 @@ type GenerateRequestPostmanCollectionResponse struct {
 	Error             *shared.Error
 	PostmanCollection []byte
 	StatusCode        int
+	RawResponse       *http.Response
 }

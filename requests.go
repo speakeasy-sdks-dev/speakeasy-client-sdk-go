@@ -1,4 +1,4 @@
-package sdk
+package speakeasy
 
 import (
 	"context"
@@ -60,6 +60,7 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 	res := &operations.GenerateRequestPostmanCollectionResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -114,6 +115,7 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 	res := &operations.GetRequestFromEventLogResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -174,6 +176,7 @@ func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 	res := &operations.QueryEventLogResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

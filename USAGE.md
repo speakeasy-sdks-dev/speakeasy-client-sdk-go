@@ -11,11 +11,9 @@ import (
 )
 
 func main() {
-    s := sdk.New(sdk.WithSecurity(
+    s := speakeasy.New(speakeasy.WithSecurity(
         shared.Security{
-            APIKey: shared.SchemeAPIKey{
-                APIKey: "YOUR_API_KEY_HERE",
-            },
+            APIKey: "YOUR_API_KEY_HERE",
         },
     ))
     

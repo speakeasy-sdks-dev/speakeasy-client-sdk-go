@@ -1,4 +1,4 @@
-package sdk
+package speakeasy
 
 import (
 	"context"
@@ -23,8 +23,12 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
-// SDK Documentation: https://docs.speakeasyapi.dev - The Speakeasy Platform Documentation
-type SDK struct {
+// String provides a helper function to return a pointer to a string
+func String(s string) *string { return &s }
+
+// SDK Documentation: The Speakeasy API allows teams to manage common operations with their APIs
+// https://docs.speakeasyapi.dev - The Speakeasy Platform Documentation
+type Speakeasy struct {
 	APIEndpoints *apiEndpoints
 	Apis         *apis
 	Embeds       *embeds
@@ -43,10 +47,16 @@ type SDK struct {
 	_genVersion     string
 }
 
-type SDKOption func(*SDK)
+type SDKOption func(*Speakeasy)
 
-func WithServerURL(serverURL string, params map[string]string) SDKOption {
-	return func(sdk *SDK) {
+func WithServerURL(serverURL string) SDKOption {
+	return func(sdk *Speakeasy) {
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOption {
+	return func(sdk *Speakeasy) {
 		if params != nil {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
@@ -55,34 +65,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 	}
 }
 
-func WithServer(server string, params map[string]string) SDKOption {
-	return func(sdk *SDK) {
+func WithServer(server string) SDKOption {
+	return func(sdk *Speakeasy) {
 		serverURL, ok := ServerList[server]
 		if !ok {
 			panic(fmt.Errorf("server %s not found", server))
 		}
 
-		WithServerURL(serverURL, params)(sdk)
+		WithServerURL(serverURL)(sdk)
+	}
+}
+
+func WithTemplatedServer(server string, params map[string]string) SDKOption {
+	return func(sdk *Speakeasy) {
+		serverURL, ok := ServerList[server]
+		if !ok {
+			panic(fmt.Errorf("server %s not found", server))
+		}
+
+		WithTemplatedServerURL(serverURL, params)(sdk)
 	}
 }
 
 func WithClient(client HTTPClient) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *Speakeasy) {
 		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *Speakeasy) {
 		sdk._security = &security
 	}
 }
 
-func New(opts ...SDKOption) *SDK {
-	sdk := &SDK{
+func New(opts ...SDKOption) *Speakeasy {
+	sdk := &Speakeasy{
 		_language:   "go",
-		_sdkVersion: "1.7.0",
-		_genVersion: "1.7.1",
+		_sdkVersion: "1.8.0",
+		_genVersion: "1.8.0",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -173,7 +194,7 @@ func New(opts ...SDKOption) *SDK {
 }
 
 // ValidateAPIKey - Validate the current api key.
-func (s *SDK) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyResponse, error) {
+func (s *Speakeasy) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/auth/validate"
 
@@ -199,6 +220,7 @@ func (s *SDK) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRes
 	res := &operations.ValidateAPIKeyResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

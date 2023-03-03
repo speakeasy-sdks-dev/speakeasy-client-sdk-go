@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"net/http"
 )
 
 type GetPluginsResponse struct {
@@ -9,4 +10,5 @@ type GetPluginsResponse struct {
 	Error       *shared.Error
 	Plugins     []shared.Plugin
 	StatusCode  int
+	RawResponse *http.Response
 }

@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"net/http"
 )
 
 type GenerateOpenAPISpecPathParams struct {
@@ -18,4 +19,5 @@ type GenerateOpenAPISpecResponse struct {
 	Error                   *shared.Error
 	GenerateOpenAPISpecDiff *shared.GenerateOpenAPISpecDiff
 	StatusCode              int
+	RawResponse             *http.Response
 }

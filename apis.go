@@ -1,4 +1,4 @@
-package sdk
+package speakeasy
 
 import (
 	"context"
@@ -59,6 +59,7 @@ func (s *apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 	res := &operations.DeleteAPIResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -106,6 +107,7 @@ func (s *apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 	res := &operations.GenerateOpenAPISpecResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -161,6 +163,7 @@ func (s *apis) GeneratePostmanCollection(ctx context.Context, request operations
 	res := &operations.GeneratePostmanCollectionResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -221,6 +224,7 @@ func (s *apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 	res := &operations.GetAllAPIVersionsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -281,6 +285,7 @@ func (s *apis) GetApis(ctx context.Context, request operations.GetApisRequest) (
 	res := &operations.GetApisResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -347,6 +352,7 @@ func (s *apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 	res := &operations.UpsertAPIResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

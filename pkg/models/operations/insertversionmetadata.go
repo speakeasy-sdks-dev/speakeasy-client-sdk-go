@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"net/http"
 )
 
 type InsertVersionMetadataPathParams struct {
@@ -18,5 +19,6 @@ type InsertVersionMetadataResponse struct {
 	ContentType     string
 	Error           *shared.Error
 	StatusCode      int
+	RawResponse     *http.Response
 	VersionMetadata *shared.VersionMetadata
 }

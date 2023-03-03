@@ -1,4 +1,4 @@
-package sdk
+package speakeasy
 
 import (
 	"context"
@@ -63,6 +63,7 @@ func (s *embeds) GetEmbedAccessToken(ctx context.Context, request operations.Get
 	res := &operations.GetEmbedAccessTokenResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -117,6 +118,7 @@ func (s *embeds) GetValidEmbedAccessTokens(ctx context.Context) (*operations.Get
 	res := &operations.GetValidEmbedAccessTokensResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -171,6 +173,7 @@ func (s *embeds) RevokeEmbedAccessToken(ctx context.Context, request operations.
 	res := &operations.RevokeEmbedAccessTokenResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

@@ -22,11 +22,9 @@ import (
 )
 
 func main() {
-    s := sdk.New(sdk.WithSecurity(
+    s := speakeasy.New(speakeasy.WithSecurity(
         shared.Security{
-            APIKey: shared.SchemeAPIKey{
-                APIKey: "YOUR_API_KEY_HERE",
-            },
+            APIKey: "YOUR_API_KEY_HERE",
         },
     ))
     
@@ -71,7 +69,7 @@ func main() {
 <!-- Start SDK Available Operations -->
 ## SDK Available Operations
 
-### SDK SDK
+### Speakeasy SDK
 
 * `ValidateAPIKey` - Validate the current api key.
 

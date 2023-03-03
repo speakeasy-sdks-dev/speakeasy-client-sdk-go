@@ -1,4 +1,4 @@
-package sdk
+package speakeasy
 
 import (
 	"context"
@@ -58,6 +58,7 @@ func (s *apiEndpoints) DeleteAPIEndpoint(ctx context.Context, request operations
 	res := &operations.DeleteAPIEndpointResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -105,6 +106,7 @@ func (s *apiEndpoints) FindAPIEndpoint(ctx context.Context, request operations.F
 	res := &operations.FindAPIEndpointResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -161,6 +163,7 @@ func (s *apiEndpoints) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, re
 	res := &operations.GenerateOpenAPISpecForAPIEndpointResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -216,6 +219,7 @@ func (s *apiEndpoints) GeneratePostmanCollectionForAPIEndpoint(ctx context.Conte
 	res := &operations.GeneratePostmanCollectionForAPIEndpointResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -270,6 +274,7 @@ func (s *apiEndpoints) GetAllAPIEndpoints(ctx context.Context, request operation
 	res := &operations.GetAllAPIEndpointsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -324,6 +329,7 @@ func (s *apiEndpoints) GetAllForVersionAPIEndpoints(ctx context.Context, request
 	res := &operations.GetAllForVersionAPIEndpointsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -378,6 +384,7 @@ func (s *apiEndpoints) GetAPIEndpoint(ctx context.Context, request operations.Ge
 	res := &operations.GetAPIEndpointResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -443,6 +450,7 @@ func (s *apiEndpoints) UpsertAPIEndpoint(ctx context.Context, request operations
 	res := &operations.UpsertAPIEndpointResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

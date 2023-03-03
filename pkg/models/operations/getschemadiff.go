@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"net/http"
 )
 
 type GetSchemaDiffPathParams struct {
@@ -20,4 +21,5 @@ type GetSchemaDiffResponse struct {
 	Error       *shared.Error
 	SchemaDiff  *shared.SchemaDiff
 	StatusCode  int
+	RawResponse *http.Response
 }

@@ -1,4 +1,4 @@
-package sdk
+package speakeasy
 
 import (
 	"context"
@@ -57,6 +57,7 @@ func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 	res := &operations.DeleteSchemaResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -102,6 +103,7 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 	res := &operations.DownloadSchemaResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -163,6 +165,7 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 	res := &operations.DownloadSchemaRevisionResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -226,6 +229,7 @@ func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 	res := &operations.GetSchemaResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -280,6 +284,7 @@ func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 	res := &operations.GetSchemaDiffResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -336,6 +341,7 @@ func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 	res := &operations.GetSchemaRevisionResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -392,6 +398,7 @@ func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 	res := &operations.GetSchemasResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -458,6 +465,7 @@ func (s *schemas) RegisterSchema(ctx context.Context, request operations.Registe
 	res := &operations.RegisterSchemaResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"net/http"
 )
 
 type GetSchemasPathParams struct {
@@ -18,4 +19,5 @@ type GetSchemasResponse struct {
 	Error       *shared.Error
 	Schemata    []shared.Schema
 	StatusCode  int
+	RawResponse *http.Response
 }

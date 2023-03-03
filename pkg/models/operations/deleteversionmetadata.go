@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"net/http"
 )
 
 type DeleteVersionMetadataPathParams struct {
@@ -19,4 +20,5 @@ type DeleteVersionMetadataResponse struct {
 	ContentType string
 	Error       *shared.Error
 	StatusCode  int
+	RawResponse *http.Response
 }
