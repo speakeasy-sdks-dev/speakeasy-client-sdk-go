@@ -5,15 +5,11 @@ import (
 	"net/http"
 )
 
-type DeleteVersionMetadataPathParams struct {
+type DeleteVersionMetadataRequest struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
 	MetaKey   string `pathParam:"style=simple,explode=false,name=metaKey"`
 	MetaValue string `pathParam:"style=simple,explode=false,name=metaValue"`
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type DeleteVersionMetadataRequest struct {
-	PathParams DeleteVersionMetadataPathParams
 }
 
 type DeleteVersionMetadataResponse struct {

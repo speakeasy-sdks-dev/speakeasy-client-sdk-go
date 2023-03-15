@@ -5,12 +5,8 @@ import (
 	"net/http"
 )
 
-type RevokeEmbedAccessTokenPathParams struct {
-	TokenID string `pathParam:"style=simple,explode=false,name=tokenID"`
-}
-
 type RevokeEmbedAccessTokenRequest struct {
-	PathParams RevokeEmbedAccessTokenPathParams
+	TokenID string `pathParam:"style=simple,explode=false,name=tokenID"`
 }
 
 type RevokeEmbedAccessTokenResponse struct {

@@ -5,14 +5,10 @@ import (
 	"net/http"
 )
 
-type DeleteSchemaPathParams struct {
+type DeleteSchemaRequest struct {
 	APIID      string `pathParam:"style=simple,explode=false,name=apiID"`
 	RevisionID string `pathParam:"style=simple,explode=false,name=revisionID"`
 	VersionID  string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type DeleteSchemaRequest struct {
-	PathParams DeleteSchemaPathParams
 }
 
 type DeleteSchemaResponse struct {

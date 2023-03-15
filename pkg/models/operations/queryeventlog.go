@@ -5,12 +5,8 @@ import (
 	"net/http"
 )
 
-type QueryEventLogQueryParams struct {
-	Filters *shared.Filters `queryParam:"serialization=json,name=filters"`
-}
-
 type QueryEventLogRequest struct {
-	QueryParams QueryEventLogQueryParams
+	Filters *shared.Filters `queryParam:"serialization=json,name=filters"`
 }
 
 type QueryEventLogResponse struct {

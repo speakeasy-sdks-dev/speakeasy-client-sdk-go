@@ -5,17 +5,9 @@ import (
 	"net/http"
 )
 
-type RunPluginPathParams struct {
-	PluginID string `pathParam:"style=simple,explode=false,name=pluginID"`
-}
-
-type RunPluginQueryParams struct {
-	Filters *shared.Filters `queryParam:"serialization=json,name=filters"`
-}
-
 type RunPluginRequest struct {
-	PathParams  RunPluginPathParams
-	QueryParams RunPluginQueryParams
+	Filters  *shared.Filters `queryParam:"serialization=json,name=filters"`
+	PluginID string          `pathParam:"style=simple,explode=false,name=pluginID"`
 }
 
 type RunPluginResponse struct {

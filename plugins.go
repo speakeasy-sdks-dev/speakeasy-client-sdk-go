@@ -88,7 +88,7 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 // RunPlugin - Run a plugin
 func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginRequest) (*operations.RunPluginResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/plugins/{pluginID}", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/plugins/{pluginID}", request, nil)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
 	if err != nil {
@@ -96,7 +96,7 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 	}
 	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -145,11 +145,11 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 }
 
 // UpsertPlugin - Upsert a plugin
-func (s *plugins) UpsertPlugin(ctx context.Context, request operations.UpsertPluginRequest) (*operations.UpsertPluginResponse, error) {
+func (s *plugins) UpsertPlugin(ctx context.Context, request shared.Plugin) (*operations.UpsertPluginResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugins"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}

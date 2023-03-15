@@ -5,13 +5,9 @@ import (
 	"net/http"
 )
 
-type GetVersionMetadataPathParams struct {
+type GetVersionMetadataRequest struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type GetVersionMetadataRequest struct {
-	PathParams GetVersionMetadataPathParams
 }
 
 type GetVersionMetadataResponse struct {

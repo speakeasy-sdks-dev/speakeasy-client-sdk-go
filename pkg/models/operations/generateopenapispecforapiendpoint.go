@@ -5,14 +5,10 @@ import (
 	"net/http"
 )
 
-type GenerateOpenAPISpecForAPIEndpointPathParams struct {
+type GenerateOpenAPISpecForAPIEndpointRequest struct {
 	APIEndpointID string `pathParam:"style=simple,explode=false,name=apiEndpointID"`
 	APIID         string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID     string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type GenerateOpenAPISpecForAPIEndpointRequest struct {
-	PathParams GenerateOpenAPISpecForAPIEndpointPathParams
 }
 
 type GenerateOpenAPISpecForAPIEndpointResponse struct {

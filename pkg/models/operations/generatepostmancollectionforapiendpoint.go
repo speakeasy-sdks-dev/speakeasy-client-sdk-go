@@ -5,14 +5,10 @@ import (
 	"net/http"
 )
 
-type GeneratePostmanCollectionForAPIEndpointPathParams struct {
+type GeneratePostmanCollectionForAPIEndpointRequest struct {
 	APIEndpointID string `pathParam:"style=simple,explode=false,name=apiEndpointID"`
 	APIID         string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID     string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type GeneratePostmanCollectionForAPIEndpointRequest struct {
-	PathParams GeneratePostmanCollectionForAPIEndpointPathParams
 }
 
 type GeneratePostmanCollectionForAPIEndpointResponse struct {

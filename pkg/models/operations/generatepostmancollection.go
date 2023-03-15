@@ -5,13 +5,9 @@ import (
 	"net/http"
 )
 
-type GeneratePostmanCollectionPathParams struct {
+type GeneratePostmanCollectionRequest struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type GeneratePostmanCollectionRequest struct {
-	PathParams GeneratePostmanCollectionPathParams
 }
 
 type GeneratePostmanCollectionResponse struct {

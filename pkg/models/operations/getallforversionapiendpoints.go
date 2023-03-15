@@ -5,13 +5,9 @@ import (
 	"net/http"
 )
 
-type GetAllForVersionAPIEndpointsPathParams struct {
+type GetAllForVersionAPIEndpointsRequest struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type GetAllForVersionAPIEndpointsRequest struct {
-	PathParams GetAllForVersionAPIEndpointsPathParams
 }
 
 type GetAllForVersionAPIEndpointsResponse struct {

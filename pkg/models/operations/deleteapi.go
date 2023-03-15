@@ -5,13 +5,9 @@ import (
 	"net/http"
 )
 
-type DeleteAPIPathParams struct {
+type DeleteAPIRequest struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type DeleteAPIRequest struct {
-	PathParams DeleteAPIPathParams
 }
 
 type DeleteAPIResponse struct {

@@ -5,10 +5,6 @@ import (
 	"net/http"
 )
 
-type UpsertPluginRequest struct {
-	Request shared.Plugin `request:"mediaType=application/json"`
-}
-
 type UpsertPluginResponse struct {
 	ContentType string
 	Error       *shared.Error

@@ -5,15 +5,11 @@ import (
 	"net/http"
 )
 
-type UpsertAPIEndpointPathParams struct {
-	APIEndpointID string `pathParam:"style=simple,explode=false,name=apiEndpointID"`
-	APIID         string `pathParam:"style=simple,explode=false,name=apiID"`
-	VersionID     string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
 type UpsertAPIEndpointRequest struct {
-	PathParams UpsertAPIEndpointPathParams
-	Request    shared.APIEndpointInput `request:"mediaType=application/json"`
+	APIEndpointInput shared.APIEndpointInput `request:"mediaType=application/json"`
+	APIEndpointID    string                  `pathParam:"style=simple,explode=false,name=apiEndpointID"`
+	APIID            string                  `pathParam:"style=simple,explode=false,name=apiID"`
+	VersionID        string                  `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
 type UpsertAPIEndpointResponse struct {

@@ -5,12 +5,8 @@ import (
 	"net/http"
 )
 
-type GenerateRequestPostmanCollectionPathParams struct {
-	RequestID string `pathParam:"style=simple,explode=false,name=requestID"`
-}
-
 type GenerateRequestPostmanCollectionRequest struct {
-	PathParams GenerateRequestPostmanCollectionPathParams
+	RequestID string `pathParam:"style=simple,explode=false,name=requestID"`
 }
 
 type GenerateRequestPostmanCollectionResponse struct {

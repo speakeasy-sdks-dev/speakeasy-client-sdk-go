@@ -5,22 +5,14 @@ import (
 	"net/http"
 )
 
-type GetAllAPIVersionsPathParams struct {
-	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
-}
-
 type GetAllAPIVersionsOp struct {
 	And bool `queryParam:"name=and"`
 }
 
-type GetAllAPIVersionsQueryParams struct {
+type GetAllAPIVersionsRequest struct {
+	APIID    string               `pathParam:"style=simple,explode=false,name=apiID"`
 	Metadata map[string][]string  `queryParam:"style=deepObject,explode=true,name=metadata"`
 	Op       *GetAllAPIVersionsOp `queryParam:"style=deepObject,explode=true,name=op"`
-}
-
-type GetAllAPIVersionsRequest struct {
-	PathParams  GetAllAPIVersionsPathParams
-	QueryParams GetAllAPIVersionsQueryParams
 }
 
 type GetAllAPIVersionsResponse struct {

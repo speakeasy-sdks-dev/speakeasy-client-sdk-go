@@ -5,13 +5,9 @@ import (
 	"net/http"
 )
 
-type GetSchemasPathParams struct {
+type GetSchemasRequest struct {
 	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type GetSchemasRequest struct {
-	PathParams GetSchemasPathParams
 }
 
 type GetSchemasResponse struct {

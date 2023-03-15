@@ -5,12 +5,8 @@ import (
 	"net/http"
 )
 
-type GetAllAPIEndpointsPathParams struct {
-	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
-}
-
 type GetAllAPIEndpointsRequest struct {
-	PathParams GetAllAPIEndpointsPathParams
+	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
 }
 
 type GetAllAPIEndpointsResponse struct {

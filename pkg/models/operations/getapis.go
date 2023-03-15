@@ -9,13 +9,9 @@ type GetApisOp struct {
 	And bool `queryParam:"name=and"`
 }
 
-type GetApisQueryParams struct {
+type GetApisRequest struct {
 	Metadata map[string][]string `queryParam:"style=deepObject,explode=true,name=metadata"`
 	Op       *GetApisOp          `queryParam:"style=deepObject,explode=true,name=op"`
-}
-
-type GetApisRequest struct {
-	QueryParams GetApisQueryParams
 }
 
 type GetApisResponse struct {

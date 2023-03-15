@@ -5,13 +5,9 @@ import (
 	"net/http"
 )
 
-type UpsertAPIPathParams struct {
-	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
-}
-
 type UpsertAPIRequest struct {
-	PathParams UpsertAPIPathParams
-	Request    shared.APIInput `request:"mediaType=application/json"`
+	APIInput shared.APIInput `request:"mediaType=application/json"`
+	APIID    string          `pathParam:"style=simple,explode=false,name=apiID"`
 }
 
 type UpsertAPIResponse struct {

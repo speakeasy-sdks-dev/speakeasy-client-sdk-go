@@ -5,15 +5,11 @@ import (
 	"net/http"
 )
 
-type GetSchemaDiffPathParams struct {
+type GetSchemaDiffRequest struct {
 	APIID            string `pathParam:"style=simple,explode=false,name=apiID"`
 	BaseRevisionID   string `pathParam:"style=simple,explode=false,name=baseRevisionID"`
 	TargetRevisionID string `pathParam:"style=simple,explode=false,name=targetRevisionID"`
 	VersionID        string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type GetSchemaDiffRequest struct {
-	PathParams GetSchemaDiffPathParams
 }
 
 type GetSchemaDiffResponse struct {

@@ -5,14 +5,10 @@ import (
 	"net/http"
 )
 
-type InsertVersionMetadataPathParams struct {
-	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
-	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
 type InsertVersionMetadataRequest struct {
-	PathParams InsertVersionMetadataPathParams
-	Request    shared.VersionMetadataInput `request:"mediaType=application/json"`
+	VersionMetadataInput shared.VersionMetadataInput `request:"mediaType=application/json"`
+	APIID                string                      `pathParam:"style=simple,explode=false,name=apiID"`
+	VersionID            string                      `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
 type InsertVersionMetadataResponse struct {

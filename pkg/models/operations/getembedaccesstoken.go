@@ -5,14 +5,10 @@ import (
 	"net/http"
 )
 
-type GetEmbedAccessTokenQueryParams struct {
+type GetEmbedAccessTokenRequest struct {
 	Description *string         `queryParam:"style=form,explode=true,name=description"`
 	Duration    *int64          `queryParam:"style=form,explode=true,name=duration"`
 	Filters     *shared.Filters `queryParam:"serialization=json,name=filters"`
-}
-
-type GetEmbedAccessTokenRequest struct {
-	QueryParams GetEmbedAccessTokenQueryParams
 }
 
 type GetEmbedAccessTokenResponse struct {

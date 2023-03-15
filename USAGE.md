@@ -11,34 +11,32 @@ import (
 )
 
 func main() {
-    s := speakeasy.New(speakeasy.WithSecurity(
-        shared.Security{
+    s := speakeasy.New(
+        WithSecurity(        shared.Security{
             APIKey: "YOUR_API_KEY_HERE",
-        },
-    ))
-    
+        }),
+    )
+
     req := operations.GetApisRequest{
-        QueryParams: operations.GetApisQueryParams{
-            Metadata: map[string][]string{
-                "deserunt": []string{
-                    "nulla",
-                    "id",
-                    "vero",
-                },
-                "perspiciatis": []string{
-                    "nihil",
-                    "fuga",
-                    "facilis",
-                    "eum",
-                },
-                "iusto": []string{
-                    "saepe",
-                    "inventore",
-                },
+        Metadata: map[string][]string{
+            "deserunt": []string{
+                "nulla",
+                "id",
+                "vero",
             },
-            Op: &operations.GetApisOp{
-                And: false,
+            "perspiciatis": []string{
+                "nihil",
+                "fuga",
+                "facilis",
+                "eum",
             },
+            "iusto": []string{
+                "saepe",
+                "inventore",
+            },
+        },
+        Op: &operations.GetApisOp{
+            And: false,
         },
     }
 

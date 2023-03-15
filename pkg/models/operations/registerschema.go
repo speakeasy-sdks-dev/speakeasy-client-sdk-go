@@ -5,11 +5,6 @@ import (
 	"net/http"
 )
 
-type RegisterSchemaPathParams struct {
-	APIID     string `pathParam:"style=simple,explode=false,name=apiID"`
-	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
 type RegisterSchemaRequestBodyFile struct {
 	Content []byte `multipartForm:"content"`
 	File    string `multipartForm:"name=file"`
@@ -20,8 +15,9 @@ type RegisterSchemaRequestBody struct {
 }
 
 type RegisterSchemaRequest struct {
-	PathParams RegisterSchemaPathParams
-	Request    RegisterSchemaRequestBody `request:"mediaType=multipart/form-data"`
+	RequestBody RegisterSchemaRequestBody `request:"mediaType=multipart/form-data"`
+	APIID       string                    `pathParam:"style=simple,explode=false,name=apiID"`
+	VersionID   string                    `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
 type RegisterSchemaResponse struct {

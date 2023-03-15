@@ -5,12 +5,8 @@ import (
 	"net/http"
 )
 
-type GetRequestFromEventLogPathParams struct {
-	RequestID string `pathParam:"style=simple,explode=false,name=requestID"`
-}
-
 type GetRequestFromEventLogRequest struct {
-	PathParams GetRequestFromEventLogPathParams
+	RequestID string `pathParam:"style=simple,explode=false,name=requestID"`
 }
 
 type GetRequestFromEventLogResponse struct {

@@ -5,14 +5,10 @@ import (
 	"net/http"
 )
 
-type GetSchemaRevisionPathParams struct {
+type GetSchemaRevisionRequest struct {
 	APIID      string `pathParam:"style=simple,explode=false,name=apiID"`
 	RevisionID string `pathParam:"style=simple,explode=false,name=revisionID"`
 	VersionID  string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type GetSchemaRevisionRequest struct {
-	PathParams GetSchemaRevisionPathParams
 }
 
 type GetSchemaRevisionResponse struct {

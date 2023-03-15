@@ -5,14 +5,10 @@ import (
 	"net/http"
 )
 
-type FindAPIEndpointPathParams struct {
+type FindAPIEndpointRequest struct {
 	APIID       string `pathParam:"style=simple,explode=false,name=apiID"`
 	DisplayName string `pathParam:"style=simple,explode=false,name=displayName"`
 	VersionID   string `pathParam:"style=simple,explode=false,name=versionID"`
-}
-
-type FindAPIEndpointRequest struct {
-	PathParams FindAPIEndpointPathParams
 }
 
 type FindAPIEndpointResponse struct {

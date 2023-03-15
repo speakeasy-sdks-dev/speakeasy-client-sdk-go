@@ -33,7 +33,7 @@ func newSchemas(defaultClient, securityClient HTTPClient, serverURL, language, s
 // DeleteSchema - Delete a particular schema revision for an Api.
 func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSchemaRequest) (*operations.DeleteSchemaResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request, nil)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
 	if err != nil {
@@ -79,7 +79,7 @@ func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 // DownloadSchema - Download the latest schema for a particular apiID.
 func (s *schemas) DownloadSchema(ctx context.Context, request operations.DownloadSchemaRequest) (*operations.DownloadSchemaResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request, nil)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -141,7 +141,7 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 // DownloadSchemaRevision - Download a particular schema revision for an Api.
 func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations.DownloadSchemaRevisionRequest) (*operations.DownloadSchemaRevisionResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request, nil)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -205,7 +205,7 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 // This won't include the schema itself, that can be retrieved via the downloadSchema operation.
 func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaRequest) (*operations.GetSchemaResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request, nil)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -260,7 +260,7 @@ func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 // GetSchemaDiff - Get a diff of two schema revisions for an Api.
 func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDiffRequest) (*operations.GetSchemaDiffResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request, nil)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -317,7 +317,7 @@ func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 // This won't include the schema itself, that can be retrieved via the downloadSchema operation.
 func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetSchemaRevisionRequest) (*operations.GetSchemaRevisionResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request, nil)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -374,7 +374,7 @@ func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 // This won't include the schemas themselves, they can be retrieved via the downloadSchema operation.
 func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasRequest) (*operations.GetSchemasResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request, nil)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -431,9 +431,9 @@ func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 // This will be used to populate ApiEndpoints and used as a base for any schema generation if present.
 func (s *schemas) RegisterSchema(ctx context.Context, request operations.RegisterSchemaRequest) (*operations.RegisterSchemaResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request.PathParams)
+	url := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request, nil)
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "RequestBody", "multipart")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
