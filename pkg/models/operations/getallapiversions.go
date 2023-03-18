@@ -5,6 +5,8 @@ import (
 	"net/http"
 )
 
+// GetAllAPIVersionsOp
+// Configuration for filter operations
 type GetAllAPIVersionsOp struct {
 	And bool `queryParam:"name=and"`
 }

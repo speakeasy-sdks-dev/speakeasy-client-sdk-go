@@ -5,6 +5,8 @@ import (
 	"net/http"
 )
 
+// GetApisOp
+// Configuration for filter operations
 type GetApisOp struct {
 	And bool `queryParam:"name=and"`
 }

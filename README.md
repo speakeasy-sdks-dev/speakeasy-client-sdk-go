@@ -23,7 +23,7 @@ import (
 
 func main() {
     s := speakeasy.New(
-        WithSecurity(        shared.Security{
+        speakeasy.WithSecurity(shared.Security{
             APIKey: "YOUR_API_KEY_HERE",
         }),
     )
