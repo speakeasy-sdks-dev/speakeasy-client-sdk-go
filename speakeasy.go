@@ -120,8 +120,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *Speakeasy {
 	sdk := &Speakeasy{
 		_language:   "go",
-		_sdkVersion: "1.12.0",
-		_genVersion: "2.12.10",
+		_sdkVersion: "1.13.0",
+		_genVersion: "2.16.7",
 	}
 	for _, opt := range opts {
 		opt(sdk)

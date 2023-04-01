@@ -30,20 +30,20 @@ func main() {
 
     req := operations.GetApisRequest{
         Metadata: map[string][]string{
-            "deserunt": []string{
+            "provident": []string{
+                "quibusdam",
+                "unde",
                 "nulla",
-                "id",
-                "vero",
             },
-            "perspiciatis": []string{
-                "nihil",
-                "fuga",
-                "facilis",
-                "eum",
+            "corrupti": []string{
+                "vel",
+                "error",
+                "deserunt",
+                "suscipit",
             },
-            "iusto": []string{
-                "saepe",
-                "inventore",
+            "iure": []string{
+                "debitis",
+                "ipsa",
             },
         },
         Op: &operations.GetApisOp{
@@ -65,7 +65,7 @@ func main() {
 <!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
-## SDK Available Operations
+## Available Resources and Operations
 
 ### Speakeasy SDK
 
