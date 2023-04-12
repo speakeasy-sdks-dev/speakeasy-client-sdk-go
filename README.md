@@ -28,6 +28,7 @@ func main() {
         }),
     )
 
+    ctx := context.Background()    
     req := operations.GetApisRequest{
         Metadata: map[string][]string{
             "provident": []string{
@@ -51,7 +52,6 @@ func main() {
         },
     }
 
-    ctx := context.Background()
     res, err := s.Apis.GetApis(ctx, req)
     if err != nil {
         log.Fatal(err)
