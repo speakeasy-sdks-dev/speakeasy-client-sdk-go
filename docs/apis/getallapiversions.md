@@ -1,4 +1,10 @@
-<!-- Start SDK Example Usage -->
+# GetAllAPIVersions
+Available in: `Apis`
+
+Get all Api versions for a particular ApiEndpoint.
+Supports filtering the versions based on metadata attributes.
+
+## Example Usage
 ```go
 package main
 
@@ -17,30 +23,28 @@ func main() {
     )
 
     ctx := context.Background()    
-    req := operations.GetApisRequest{
+    req := operations.GetAllAPIVersionsRequest{
+        APIID: "nam",
         Metadata: map[string][]string{
-            "provident": []string{
-                "quibusdam",
-                "unde",
-                "nulla",
+            "occaecati": []string{
+                "deleniti",
             },
-            "corrupti": []string{
-                "vel",
-                "error",
-                "deserunt",
-                "suscipit",
+            "hic": []string{
+                "totam",
+                "beatae",
+                "commodi",
+                "molestiae",
             },
-            "iure": []string{
-                "debitis",
-                "ipsa",
+            "modi": []string{
+                "impedit",
             },
         },
-        Op: &operations.GetApisOp{
+        Op: &operations.GetAllAPIVersionsOp{
             And: false,
         },
     }
 
-    res, err := s.Apis.GetApis(ctx, req)
+    res, err := s.Apis.GetAllAPIVersions(ctx, req)
     if err != nil {
         log.Fatal(err)
     }
@@ -50,4 +54,3 @@ func main() {
     }
 }
 ```
-<!-- End SDK Example Usage -->

@@ -39,7 +39,10 @@ func newRequests(defaultClient, securityClient HTTPClient, serverURL, language, 
 // Allowing it to be replayed with the same inputs that were captured by the SDK.
 func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request operations.GenerateRequestPostmanCollectionRequest) (*operations.GenerateRequestPostmanCollectionResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}/generate/postman", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}/generate/postman", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
@@ -94,7 +97,10 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 // GetRequestFromEventLog - Get information about a particular request.
 func (s *requests) GetRequestFromEventLog(ctx context.Context, request operations.GetRequestFromEventLogRequest) (*operations.GetRequestFromEventLogResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {

@@ -1,4 +1,10 @@
-<!-- Start SDK Example Usage -->
+# GetApis
+Available in: `Apis`
+
+Get a list of all Apis and their versions for a given workspace.
+Supports filtering the APIs based on metadata attributes.
+
+## Example Usage
 ```go
 package main
 
@@ -19,20 +25,14 @@ func main() {
     ctx := context.Background()    
     req := operations.GetApisRequest{
         Metadata: map[string][]string{
-            "provident": []string{
-                "quibusdam",
-                "unde",
-                "nulla",
+            "esse": []string{
+                "excepturi",
             },
-            "corrupti": []string{
-                "vel",
-                "error",
-                "deserunt",
-                "suscipit",
+            "aspernatur": []string{
+                "ad",
             },
-            "iure": []string{
-                "debitis",
-                "ipsa",
+            "natus": []string{
+                "iste",
             },
         },
         Op: &operations.GetApisOp{
@@ -50,4 +50,3 @@ func main() {
     }
 }
 ```
-<!-- End SDK Example Usage -->

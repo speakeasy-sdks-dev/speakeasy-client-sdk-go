@@ -91,7 +91,10 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 // RunPlugin - Run a plugin
 func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginRequest) (*operations.RunPluginResponse, error) {
 	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/plugins/{pluginID}", request, nil)
+	url, err := utils.GenerateURL(ctx, baseURL, "/v1/plugins/{pluginID}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
 	if err != nil {
