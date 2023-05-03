@@ -35,8 +35,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetEmbedAccessTokenRequest{
+    ctx := context.Background()
+    res, err := s.Embeds.GetEmbedAccessToken(ctx, operations.GetEmbedAccessTokenRequest{
         Description: speakeasy.String("laborum"),
         Duration: speakeasy.Int64(170909),
         Filters: &shared.Filters{
@@ -51,9 +51,7 @@ func main() {
             Offset: 607831,
             Operator: "nemo",
         },
-    }
-
-    res, err := s.Embeds.GetEmbedAccessToken(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -121,12 +119,10 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.RevokeEmbedAccessTokenRequest{
+    ctx := context.Background()
+    res, err := s.Embeds.RevokeEmbedAccessToken(ctx, operations.RevokeEmbedAccessTokenRequest{
         TokenID: "minima",
-    }
-
-    res, err := s.Embeds.RevokeEmbedAccessToken(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }

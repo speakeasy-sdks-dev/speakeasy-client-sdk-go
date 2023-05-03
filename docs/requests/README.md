@@ -34,12 +34,10 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GenerateRequestPostmanCollectionRequest{
+    ctx := context.Background()
+    res, err := s.Requests.GenerateRequestPostmanCollection(ctx, operations.GenerateRequestPostmanCollectionRequest{
         RequestID: "quo",
-    }
-
-    res, err := s.Requests.GenerateRequestPostmanCollection(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -73,12 +71,10 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetRequestFromEventLogRequest{
+    ctx := context.Background()
+    res, err := s.Requests.GetRequestFromEventLog(ctx, operations.GetRequestFromEventLogRequest{
         RequestID: "sequi",
-    }
-
-    res, err := s.Requests.GetRequestFromEventLog(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -114,8 +110,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.QueryEventLogRequest{
+    ctx := context.Background()
+    res, err := s.Requests.QueryEventLog(ctx, operations.QueryEventLogRequest{
         Filters: &shared.Filters{
             Filters: []shared.Filter{
                 shared.Filter{
@@ -143,9 +139,7 @@ func main() {
             Offset: 509624,
             Operator: "voluptatibus",
         },
-    }
-
-    res, err := s.Requests.QueryEventLog(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }

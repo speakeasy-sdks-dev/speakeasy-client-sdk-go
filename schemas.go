@@ -34,6 +34,7 @@ func newSchemas(defaultClient, securityClient HTTPClient, serverURL, language, s
 }
 
 // DeleteSchema - Delete a particular schema revision for an Api.
+
 func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSchemaRequest) (*operations.DeleteSchemaResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request, nil)
@@ -83,6 +84,7 @@ func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 }
 
 // DownloadSchema - Download the latest schema for a particular apiID.
+
 func (s *schemas) DownloadSchema(ctx context.Context, request operations.DownloadSchemaRequest) (*operations.DownloadSchemaResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", request, nil)
@@ -148,6 +150,7 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 }
 
 // DownloadSchemaRevision - Download a particular schema revision for an Api.
+
 func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations.DownloadSchemaRevisionRequest) (*operations.DownloadSchemaRevisionResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", request, nil)
@@ -215,6 +218,7 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 // GetSchema - Get information about the latest schema.
 // Returns information about the last uploaded schema for a particular API version.
 // This won't include the schema itself, that can be retrieved via the downloadSchema operation.
+
 func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaRequest) (*operations.GetSchemaResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request, nil)
@@ -273,6 +277,7 @@ func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 }
 
 // GetSchemaDiff - Get a diff of two schema revisions for an Api.
+
 func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDiffRequest) (*operations.GetSchemaDiffResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request, nil)
@@ -333,6 +338,7 @@ func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 // GetSchemaRevision - Get information about a particular schema revision for an Api.
 // Returns information about the last uploaded schema for a particular schema revision.
 // This won't include the schema itself, that can be retrieved via the downloadSchema operation.
+
 func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetSchemaRevisionRequest) (*operations.GetSchemaRevisionResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request, nil)
@@ -393,6 +399,7 @@ func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 // GetSchemas - Get information about all schemas associated with a particular apiID.
 // Returns information the schemas associated with a particular apiID.
 // This won't include the schemas themselves, they can be retrieved via the downloadSchema operation.
+
 func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasRequest) (*operations.GetSchemasResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request, nil)
@@ -453,6 +460,7 @@ func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 // RegisterSchema - Register a schema.
 // Allows uploading a schema for a particular API version.
 // This will be used to populate ApiEndpoints and used as a base for any schema generation if present.
+
 func (s *schemas) RegisterSchema(ctx context.Context, request operations.RegisterSchemaRequest) (*operations.RegisterSchemaResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request, nil)

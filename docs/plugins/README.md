@@ -68,8 +68,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.RunPluginRequest{
+    ctx := context.Background()
+    res, err := s.Plugins.RunPlugin(ctx, operations.RunPluginRequest{
         Filters: &shared.Filters{
             Filters: []shared.Filter{
                 shared.Filter{
@@ -83,9 +83,7 @@ func main() {
             Operator: "quam",
         },
         PluginID: "molestiae",
-    }
-
-    res, err := s.Plugins.RunPlugin(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -120,8 +118,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := shared.Plugin{
+    ctx := context.Background()
+    res, err := s.Plugins.UpsertPlugin(ctx, shared.Plugin{
         Code: "velit",
         CreatedAt: types.MustTimeFromString("2022-09-06T22:51:09.401Z"),
         EvalHash: speakeasy.String("quis"),
@@ -129,9 +127,7 @@ func main() {
         Title: "Miss",
         UpdatedAt: types.MustTimeFromString("2022-05-14T10:37:30.872Z"),
         WorkspaceID: "odit",
-    }
-
-    res, err := s.Plugins.UpsertPlugin(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }

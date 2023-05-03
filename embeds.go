@@ -36,6 +36,7 @@ func newEmbeds(defaultClient, securityClient HTTPClient, serverURL, language, sd
 // GetEmbedAccessToken - Get an embed access token for the current workspace.
 // Returns an embed access token for the current workspace. This can be used to authenticate access to externally embedded content.
 // Filters can be applied allowing views to be filtered to things like particular customerIds.
+
 func (s *embeds) GetEmbedAccessToken(ctx context.Context, request operations.GetEmbedAccessTokenRequest) (*operations.GetEmbedAccessTokenResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspace/embed-access-token"
@@ -95,6 +96,7 @@ func (s *embeds) GetEmbedAccessToken(ctx context.Context, request operations.Get
 }
 
 // GetValidEmbedAccessTokens - Get all valid embed access tokens for the current workspace.
+
 func (s *embeds) GetValidEmbedAccessTokens(ctx context.Context) (*operations.GetValidEmbedAccessTokensResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspace/embed-access-tokens/valid"
@@ -150,6 +152,7 @@ func (s *embeds) GetValidEmbedAccessTokens(ctx context.Context) (*operations.Get
 }
 
 // RevokeEmbedAccessToken - Revoke an embed access EmbedToken.
+
 func (s *embeds) RevokeEmbedAccessToken(ctx context.Context, request operations.RevokeEmbedAccessTokenRequest) (*operations.RevokeEmbedAccessTokenResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", request, nil)

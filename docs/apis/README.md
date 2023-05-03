@@ -36,13 +36,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.DeleteAPIRequest{
+    ctx := context.Background()
+    res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
         APIID: "quod",
         VersionID: "esse",
-    }
-
-    res, err := s.Apis.DeleteAPI(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -77,13 +75,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GenerateOpenAPISpecRequest{
+    ctx := context.Background()
+    res, err := s.Apis.GenerateOpenAPISpec(ctx, operations.GenerateOpenAPISpecRequest{
         APIID: "totam",
         VersionID: "porro",
-    }
-
-    res, err := s.Apis.GenerateOpenAPISpec(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -117,13 +113,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GeneratePostmanCollectionRequest{
+    ctx := context.Background()
+    res, err := s.Apis.GeneratePostmanCollection(ctx, operations.GeneratePostmanCollectionRequest{
         APIID: "dolorum",
         VersionID: "dicta",
-    }
-
-    res, err := s.Apis.GeneratePostmanCollection(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -158,8 +152,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetAllAPIVersionsRequest{
+    ctx := context.Background()
+    res, err := s.Apis.GetAllAPIVersions(ctx, operations.GetAllAPIVersionsRequest{
         APIID: "nam",
         Metadata: map[string][]string{
             "occaecati": []string{
@@ -178,9 +172,7 @@ func main() {
         Op: &operations.GetAllAPIVersionsOp{
             And: false,
         },
-    }
-
-    res, err := s.Apis.GetAllAPIVersions(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -215,8 +207,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetApisRequest{
+    ctx := context.Background()
+    res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{
         Metadata: map[string][]string{
             "esse": []string{
                 "excepturi",
@@ -231,9 +223,7 @@ func main() {
         Op: &operations.GetApisOp{
             And: false,
         },
-    }
-
-    res, err := s.Apis.GetApis(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -269,8 +259,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.UpsertAPIRequest{
+    ctx := context.Background()
+    res, err := s.Apis.UpsertAPI(ctx, operations.UpsertAPIRequest{
         APIInput: shared.APIInput{
             APIID: "dolor",
             Description: "natus",
@@ -291,9 +281,7 @@ func main() {
             VersionID: "est",
         },
         APIID: "mollitia",
-    }
-
-    res, err := s.Apis.UpsertAPI(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }

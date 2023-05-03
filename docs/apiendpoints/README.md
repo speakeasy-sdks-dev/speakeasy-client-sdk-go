@@ -38,14 +38,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.DeleteAPIEndpointRequest{
+    ctx := context.Background()
+    res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, operations.DeleteAPIEndpointRequest{
         APIEndpointID: "delectus",
         APIID: "tempora",
         VersionID: "suscipit",
-    }
-
-    res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -80,14 +78,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.FindAPIEndpointRequest{
+    ctx := context.Background()
+    res, err := s.APIEndpoints.FindAPIEndpoint(ctx, operations.FindAPIEndpointRequest{
         APIID: "molestiae",
         DisplayName: "minus",
         VersionID: "placeat",
-    }
-
-    res, err := s.APIEndpoints.FindAPIEndpoint(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -122,14 +118,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GenerateOpenAPISpecForAPIEndpointRequest{
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, operations.GenerateOpenAPISpecForAPIEndpointRequest{
         APIEndpointID: "voluptatum",
         APIID: "iusto",
         VersionID: "excepturi",
-    }
-
-    res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -163,14 +157,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GeneratePostmanCollectionForAPIEndpointRequest{
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, operations.GeneratePostmanCollectionForAPIEndpointRequest{
         APIEndpointID: "nisi",
         APIID: "recusandae",
         VersionID: "temporibus",
-    }
-
-    res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -204,12 +196,10 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetAllAPIEndpointsRequest{
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, operations.GetAllAPIEndpointsRequest{
         APIID: "ab",
-    }
-
-    res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -243,13 +233,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetAllForVersionAPIEndpointsRequest{
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, operations.GetAllForVersionAPIEndpointsRequest{
         APIID: "quis",
         VersionID: "veritatis",
-    }
-
-    res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -283,14 +271,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetAPIEndpointRequest{
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GetAPIEndpoint(ctx, operations.GetAPIEndpointRequest{
         APIEndpointID: "deserunt",
         APIID: "perferendis",
         VersionID: "ipsam",
-    }
-
-    res, err := s.APIEndpoints.GetAPIEndpoint(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -325,8 +311,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.UpsertAPIEndpointRequest{
+    ctx := context.Background()
+    res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, operations.UpsertAPIEndpointRequest{
         APIEndpointInput: shared.APIEndpointInput{
             APIEndpointID: "repellendus",
             Description: "sapiente",
@@ -338,9 +324,7 @@ func main() {
         APIEndpointID: "maiores",
         APIID: "molestiae",
         VersionID: "quod",
-    }
-
-    res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }

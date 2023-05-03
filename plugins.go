@@ -34,6 +34,7 @@ func newPlugins(defaultClient, securityClient HTTPClient, serverURL, language, s
 }
 
 // GetPlugins - Get all plugins for the current workspace.
+
 func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugins"
@@ -89,6 +90,7 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 }
 
 // RunPlugin - Run a plugin
+
 func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginRequest) (*operations.RunPluginResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/plugins/{pluginID}", request, nil)
@@ -151,6 +153,7 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 }
 
 // UpsertPlugin - Upsert a plugin
+
 func (s *plugins) UpsertPlugin(ctx context.Context, request shared.Plugin) (*operations.UpsertPluginResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugins"

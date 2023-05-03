@@ -37,6 +37,7 @@ func newRequests(defaultClient, securityClient HTTPClient, serverURL, language, 
 // GenerateRequestPostmanCollection - Generate a Postman collection for a particular request.
 // Generates a Postman collection for a particular request.
 // Allowing it to be replayed with the same inputs that were captured by the SDK.
+
 func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request operations.GenerateRequestPostmanCollectionRequest) (*operations.GenerateRequestPostmanCollectionResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}/generate/postman", request, nil)
@@ -95,6 +96,7 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 }
 
 // GetRequestFromEventLog - Get information about a particular request.
+
 func (s *requests) GetRequestFromEventLog(ctx context.Context, request operations.GetRequestFromEventLogRequest) (*operations.GetRequestFromEventLogResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}", request, nil)
@@ -155,6 +157,7 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 // QueryEventLog - Query the event log to retrieve a list of requests.
 // Supports retrieving a list of request captured by the SDK for this workspace.
 // Allows the filtering of requests on a number of criteria such as ApiID, VersionID, Path, Method, etc.
+
 func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEventLogRequest) (*operations.QueryEventLogResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/eventlog/query"

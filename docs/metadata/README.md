@@ -33,15 +33,13 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.DeleteVersionMetadataRequest{
+    ctx := context.Background()
+    res, err := s.Metadata.DeleteVersionMetadata(ctx, operations.DeleteVersionMetadataRequest{
         APIID: "excepturi",
         MetaKey: "accusantium",
         MetaValue: "iure",
         VersionID: "culpa",
-    }
-
-    res, err := s.Metadata.DeleteVersionMetadata(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -75,13 +73,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetVersionMetadataRequest{
+    ctx := context.Background()
+    res, err := s.Metadata.GetVersionMetadata(ctx, operations.GetVersionMetadataRequest{
         APIID: "doloribus",
         VersionID: "sapiente",
-    }
-
-    res, err := s.Metadata.GetVersionMetadata(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -116,17 +112,15 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.InsertVersionMetadataRequest{
+    ctx := context.Background()
+    res, err := s.Metadata.InsertVersionMetadata(ctx, operations.InsertVersionMetadataRequest{
         VersionMetadataInput: shared.VersionMetadataInput{
             MetaKey: "architecto",
             MetaValue: "mollitia",
         },
         APIID: "dolorem",
         VersionID: "culpa",
-    }
-
-    res, err := s.Metadata.InsertVersionMetadata(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
