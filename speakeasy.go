@@ -135,8 +135,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *Speakeasy {
 	sdk := &Speakeasy{
 		_language:   "go",
-		_sdkVersion: "1.16.0",
-		_genVersion: "2.24.0",
+		_sdkVersion: "1.17.0",
+		_genVersion: "2.28.0",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -225,7 +225,6 @@ func New(opts ...SDKOption) *Speakeasy {
 }
 
 // ValidateAPIKey - Validate the current api key.
-
 func (s *Speakeasy) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/auth/validate"

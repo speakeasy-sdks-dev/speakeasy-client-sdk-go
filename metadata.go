@@ -33,7 +33,6 @@ func newMetadata(defaultClient, securityClient HTTPClient, serverURL, language, 
 }
 
 // DeleteVersionMetadata - Delete metadata for a particular apiID and versionID.
-
 func (s *metadata) DeleteVersionMetadata(ctx context.Context, request operations.DeleteVersionMetadataRequest) (*operations.DeleteVersionMetadataResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", request, nil)
@@ -83,7 +82,6 @@ func (s *metadata) DeleteVersionMetadata(ctx context.Context, request operations
 }
 
 // GetVersionMetadata - Get all metadata for a particular apiID and versionID.
-
 func (s *metadata) GetVersionMetadata(ctx context.Context, request operations.GetVersionMetadataRequest) (*operations.GetVersionMetadataResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", request, nil)
@@ -142,7 +140,6 @@ func (s *metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 }
 
 // InsertVersionMetadata - Insert metadata for a particular apiID and versionID.
-
 func (s *metadata) InsertVersionMetadata(ctx context.Context, request operations.InsertVersionMetadataRequest) (*operations.InsertVersionMetadataResponse, error) {
 	baseURL := s.serverURL
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", request, nil)
