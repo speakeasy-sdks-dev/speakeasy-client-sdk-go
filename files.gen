@@ -6,6 +6,7 @@ plugins.go
 requests.go
 schemas.go
 speakeasy.go
+.gitignore
 go.mod
 go.sum
 pkg/types/bigint.go
