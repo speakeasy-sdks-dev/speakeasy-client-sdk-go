@@ -16,22 +16,12 @@ import (
 
 // requests - REST APIs for retrieving request information
 type requests struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
-	language       string
-	sdkVersion     string
-	genVersion     string
+	sdkConfiguration sdkConfiguration
 }
 
-func newRequests(defaultClient, securityClient HTTPClient, serverURL, language, sdkVersion, genVersion string) *requests {
+func newRequests(sdkConfig sdkConfiguration) *requests {
 	return &requests{
-		defaultClient:  defaultClient,
-		securityClient: securityClient,
-		serverURL:      serverURL,
-		language:       language,
-		sdkVersion:     sdkVersion,
-		genVersion:     genVersion,
+		sdkConfiguration: sdkConfig,
 	}
 }
 
@@ -39,7 +29,7 @@ func newRequests(defaultClient, securityClient HTTPClient, serverURL, language, 
 // Generates a Postman collection for a particular request.
 // Allowing it to be replayed with the same inputs that were captured by the SDK.
 func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request operations.GenerateRequestPostmanCollectionRequest) (*operations.GenerateRequestPostmanCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}/generate/postman", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -50,9 +40,9 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/octet-stream;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.securityClient
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -99,7 +89,7 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 
 // GetRequestFromEventLog - Get information about a particular request.
 func (s *requests) GetRequestFromEventLog(ctx context.Context, request operations.GetRequestFromEventLogRequest) (*operations.GetRequestFromEventLogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
@@ -110,9 +100,9 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
-	client := s.securityClient
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -166,7 +156,7 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 // Supports retrieving a list of request captured by the SDK for this workspace.
 // Allows the filtering of requests on a number of criteria such as ApiID, VersionID, Path, Method, etc.
 func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEventLogRequest) (*operations.QueryEventLogResponse, error) {
-	baseURL := s.serverURL
+	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/eventlog/query"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -174,13 +164,13 @@ func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json;q=1, application/json;q=0")
-	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s", s.language, s.sdkVersion, s.genVersion))
+	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.securityClient
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
