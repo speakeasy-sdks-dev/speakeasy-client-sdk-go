@@ -14,6 +14,20 @@ type VersionMetadataInput struct {
 	MetaValue string `json:"meta_value"`
 }
 
+func (o *VersionMetadataInput) GetMetaKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetaKey
+}
+
+func (o *VersionMetadataInput) GetMetaValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetaValue
+}
+
 // VersionMetadata - A set of keys and associated values, attached to a particular version of an Api.
 type VersionMetadata struct {
 	// The ID of the Api this Metadata belongs to.
@@ -28,4 +42,46 @@ type VersionMetadata struct {
 	VersionID string `json:"version_id"`
 	// The workspace ID this Metadata belongs to.
 	WorkspaceID string `json:"workspace_id"`
+}
+
+func (o *VersionMetadata) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *VersionMetadata) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *VersionMetadata) GetMetaKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetaKey
+}
+
+func (o *VersionMetadata) GetMetaValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetaValue
+}
+
+func (o *VersionMetadata) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
+func (o *VersionMetadata) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
 }

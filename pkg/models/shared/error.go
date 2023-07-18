@@ -9,3 +9,17 @@ type Error struct {
 	// The HTTP status code
 	StatusCode int `json:"status_code"`
 }
+
+func (o *Error) GetMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.Message
+}
+
+func (o *Error) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}

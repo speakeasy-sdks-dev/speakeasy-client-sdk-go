@@ -6,3 +6,10 @@ package shared
 type EmbedAccessTokenResponse struct {
 	AccessToken string `json:"access_token"`
 }
+
+func (o *EmbedAccessTokenResponse) GetAccessToken() string {
+	if o == nil {
+		return ""
+	}
+	return o.AccessToken
+}

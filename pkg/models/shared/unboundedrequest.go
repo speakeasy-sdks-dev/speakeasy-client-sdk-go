@@ -19,3 +19,38 @@ type UnboundedRequest struct {
 	// The workspace ID this request was made to.
 	WorkspaceID string `json:"workspace_id"`
 }
+
+func (o *UnboundedRequest) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *UnboundedRequest) GetHar() string {
+	if o == nil {
+		return ""
+	}
+	return o.Har
+}
+
+func (o *UnboundedRequest) GetHarSizeBytes() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.HarSizeBytes
+}
+
+func (o *UnboundedRequest) GetRequestID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RequestID
+}
+
+func (o *UnboundedRequest) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}

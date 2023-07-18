@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"io"
@@ -71,6 +72,8 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
 			res.PostmanCollection = rawBody
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -81,6 +84,8 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -136,6 +141,8 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 			}
 
 			res.UnboundedRequest = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -146,6 +153,8 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -204,6 +213,8 @@ func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 			}
 
 			res.BoundedRequests = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -214,6 +225,8 @@ func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

@@ -18,10 +18,66 @@ type DeleteVersionMetadataRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *DeleteVersionMetadataRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *DeleteVersionMetadataRequest) GetMetaKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetaKey
+}
+
+func (o *DeleteVersionMetadataRequest) GetMetaValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.MetaValue
+}
+
+func (o *DeleteVersionMetadataRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type DeleteVersionMetadataResponse struct {
 	ContentType string
 	// Default error response
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *DeleteVersionMetadataResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteVersionMetadataResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *DeleteVersionMetadataResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteVersionMetadataResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

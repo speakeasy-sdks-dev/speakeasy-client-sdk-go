@@ -16,3 +16,38 @@ type GetValidEmbedAccessTokensResponse struct {
 	StatusCode  int
 	RawResponse *http.Response
 }
+
+func (o *GetValidEmbedAccessTokensResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetValidEmbedAccessTokensResponse) GetEmbedTokens() []shared.EmbedToken {
+	if o == nil {
+		return nil
+	}
+	return o.EmbedTokens
+}
+
+func (o *GetValidEmbedAccessTokensResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetValidEmbedAccessTokensResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetValidEmbedAccessTokensResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}

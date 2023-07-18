@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"io"
@@ -76,6 +77,8 @@ func (s *apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -133,6 +136,8 @@ func (s *apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 			}
 
 			res.GenerateOpenAPISpecDiff = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -143,6 +148,8 @@ func (s *apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -194,6 +201,8 @@ func (s *apis) GeneratePostmanCollection(ctx context.Context, request operations
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
 			res.PostmanCollection = rawBody
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -204,6 +213,8 @@ func (s *apis) GeneratePostmanCollection(ctx context.Context, request operations
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -265,6 +276,8 @@ func (s *apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 			}
 
 			res.Apis = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -275,6 +288,8 @@ func (s *apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -333,6 +348,8 @@ func (s *apis) GetApis(ctx context.Context, request operations.GetApisRequest) (
 			}
 
 			res.Apis = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -343,6 +360,8 @@ func (s *apis) GetApis(ctx context.Context, request operations.GetApisRequest) (
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -410,6 +429,8 @@ func (s *apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 			}
 
 			res.API = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -420,6 +441,8 @@ func (s *apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

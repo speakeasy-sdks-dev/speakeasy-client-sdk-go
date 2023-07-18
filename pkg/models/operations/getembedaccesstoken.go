@@ -16,6 +16,27 @@ type GetEmbedAccessTokenRequest struct {
 	Filters *shared.Filters `queryParam:"serialization=json,name=filters"`
 }
 
+func (o *GetEmbedAccessTokenRequest) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *GetEmbedAccessTokenRequest) GetDuration() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.Duration
+}
+
+func (o *GetEmbedAccessTokenRequest) GetFilters() *shared.Filters {
+	if o == nil {
+		return nil
+	}
+	return o.Filters
+}
+
 type GetEmbedAccessTokenResponse struct {
 	ContentType string
 	// OK
@@ -24,4 +45,39 @@ type GetEmbedAccessTokenResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *GetEmbedAccessTokenResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetEmbedAccessTokenResponse) GetEmbedAccessTokenResponse() *shared.EmbedAccessTokenResponse {
+	if o == nil {
+		return nil
+	}
+	return o.EmbedAccessTokenResponse
+}
+
+func (o *GetEmbedAccessTokenResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetEmbedAccessTokenResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetEmbedAccessTokenResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

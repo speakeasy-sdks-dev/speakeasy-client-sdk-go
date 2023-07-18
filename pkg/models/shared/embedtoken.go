@@ -29,3 +29,73 @@ type EmbedToken struct {
 	// The workspace ID this token belongs to.
 	WorkspaceID string `json:"workspace_id"`
 }
+
+func (o *EmbedToken) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *EmbedToken) GetCreatedBy() string {
+	if o == nil {
+		return ""
+	}
+	return o.CreatedBy
+}
+
+func (o *EmbedToken) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *EmbedToken) GetExpiresAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.ExpiresAt
+}
+
+func (o *EmbedToken) GetFilters() string {
+	if o == nil {
+		return ""
+	}
+	return o.Filters
+}
+
+func (o *EmbedToken) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *EmbedToken) GetLastUsed() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.LastUsed
+}
+
+func (o *EmbedToken) GetRevokedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.RevokedAt
+}
+
+func (o *EmbedToken) GetRevokedBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RevokedBy
+}
+
+func (o *EmbedToken) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}

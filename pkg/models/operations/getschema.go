@@ -14,6 +14,20 @@ type GetSchemaRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *GetSchemaRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *GetSchemaRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type GetSchemaResponse struct {
 	ContentType string
 	// Default error response
@@ -22,4 +36,39 @@ type GetSchemaResponse struct {
 	Schema      *shared.Schema
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *GetSchemaResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetSchemaResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetSchemaResponse) GetSchema() *shared.Schema {
+	if o == nil {
+		return nil
+	}
+	return o.Schema
+}
+
+func (o *GetSchemaResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetSchemaResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

@@ -13,6 +13,13 @@ type GetAllAPIVersionsOp struct {
 	And bool `queryParam:"name=and"`
 }
 
+func (o *GetAllAPIVersionsOp) GetAnd() bool {
+	if o == nil {
+		return false
+	}
+	return o.And
+}
+
 type GetAllAPIVersionsRequest struct {
 	// The ID of the Api to retrieve.
 	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
@@ -20,6 +27,27 @@ type GetAllAPIVersionsRequest struct {
 	Metadata map[string][]string `queryParam:"style=deepObject,explode=true,name=metadata"`
 	// Configuration for filter operations
 	Op *GetAllAPIVersionsOp `queryParam:"style=deepObject,explode=true,name=op"`
+}
+
+func (o *GetAllAPIVersionsRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *GetAllAPIVersionsRequest) GetMetadata() map[string][]string {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *GetAllAPIVersionsRequest) GetOp() *GetAllAPIVersionsOp {
+	if o == nil {
+		return nil
+	}
+	return o.Op
 }
 
 type GetAllAPIVersionsResponse struct {
@@ -30,4 +58,39 @@ type GetAllAPIVersionsResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *GetAllAPIVersionsResponse) GetApis() []shared.API {
+	if o == nil {
+		return nil
+	}
+	return o.Apis
+}
+
+func (o *GetAllAPIVersionsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetAllAPIVersionsResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetAllAPIVersionsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetAllAPIVersionsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"io"
@@ -71,6 +72,8 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 			}
 
 			res.Plugins = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -81,6 +84,8 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -140,6 +145,8 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 			}
 
 			res.BoundedRequests = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -150,6 +157,8 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -212,6 +221,8 @@ func (s *plugins) UpsertPlugin(ctx context.Context, request shared.Plugin) (*ope
 			}
 
 			res.Plugin = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -222,6 +233,8 @@ func (s *plugins) UpsertPlugin(ctx context.Context, request shared.Plugin) (*ope
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

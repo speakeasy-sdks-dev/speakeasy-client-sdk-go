@@ -12,10 +12,45 @@ type RevokeEmbedAccessTokenRequest struct {
 	TokenID string `pathParam:"style=simple,explode=false,name=tokenID"`
 }
 
+func (o *RevokeEmbedAccessTokenRequest) GetTokenID() string {
+	if o == nil {
+		return ""
+	}
+	return o.TokenID
+}
+
 type RevokeEmbedAccessTokenResponse struct {
 	ContentType string
 	// Default error response
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *RevokeEmbedAccessTokenResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RevokeEmbedAccessTokenResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *RevokeEmbedAccessTokenResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RevokeEmbedAccessTokenResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

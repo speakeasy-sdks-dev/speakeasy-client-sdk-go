@@ -18,6 +18,34 @@ type UpsertAPIEndpointRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *UpsertAPIEndpointRequest) GetAPIEndpointInput() shared.APIEndpointInput {
+	if o == nil {
+		return shared.APIEndpointInput{}
+	}
+	return o.APIEndpointInput
+}
+
+func (o *UpsertAPIEndpointRequest) GetAPIEndpointID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIEndpointID
+}
+
+func (o *UpsertAPIEndpointRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *UpsertAPIEndpointRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type UpsertAPIEndpointResponse struct {
 	// OK
 	APIEndpoint *shared.APIEndpoint
@@ -26,4 +54,39 @@ type UpsertAPIEndpointResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *UpsertAPIEndpointResponse) GetAPIEndpoint() *shared.APIEndpoint {
+	if o == nil {
+		return nil
+	}
+	return o.APIEndpoint
+}
+
+func (o *UpsertAPIEndpointResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpsertAPIEndpointResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *UpsertAPIEndpointResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpsertAPIEndpointResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

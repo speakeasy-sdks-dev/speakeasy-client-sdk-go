@@ -18,6 +18,34 @@ type GetSchemaDiffRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *GetSchemaDiffRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *GetSchemaDiffRequest) GetBaseRevisionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseRevisionID
+}
+
+func (o *GetSchemaDiffRequest) GetTargetRevisionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.TargetRevisionID
+}
+
+func (o *GetSchemaDiffRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type GetSchemaDiffResponse struct {
 	ContentType string
 	// Default error response
@@ -26,4 +54,39 @@ type GetSchemaDiffResponse struct {
 	SchemaDiff  *shared.SchemaDiff
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *GetSchemaDiffResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetSchemaDiffResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetSchemaDiffResponse) GetSchemaDiff() *shared.SchemaDiff {
+	if o == nil {
+		return nil
+	}
+	return o.SchemaDiff
+}
+
+func (o *GetSchemaDiffResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetSchemaDiffResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

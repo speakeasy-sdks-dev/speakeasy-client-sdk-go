@@ -18,6 +18,34 @@ type APIInput struct {
 	VersionID string `json:"version_id"`
 }
 
+func (o *APIInput) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *APIInput) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *APIInput) GetMetaData() map[string][]string {
+	if o == nil {
+		return nil
+	}
+	return o.MetaData
+}
+
+func (o *APIInput) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 // API - An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
 type API struct {
 	// The ID of this Api. This is a human-readable name (subject to change).
@@ -36,4 +64,60 @@ type API struct {
 	VersionID string `json:"version_id"`
 	// The workspace ID this Api belongs to.
 	WorkspaceID string `json:"workspace_id"`
+}
+
+func (o *API) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *API) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *API) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *API) GetMatched() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Matched
+}
+
+func (o *API) GetMetaData() map[string][]string {
+	if o == nil {
+		return nil
+	}
+	return o.MetaData
+}
+
+func (o *API) GetUpdatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.UpdatedAt
+}
+
+func (o *API) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
+func (o *API) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
 }

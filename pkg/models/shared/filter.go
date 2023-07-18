@@ -11,3 +11,24 @@ type Filter struct {
 	// The value of the filter.
 	Value string `json:"value"`
 }
+
+func (o *Filter) GetKey() string {
+	if o == nil {
+		return ""
+	}
+	return o.Key
+}
+
+func (o *Filter) GetOperator() string {
+	if o == nil {
+		return ""
+	}
+	return o.Operator
+}
+
+func (o *Filter) GetValue() string {
+	if o == nil {
+		return ""
+	}
+	return o.Value
+}

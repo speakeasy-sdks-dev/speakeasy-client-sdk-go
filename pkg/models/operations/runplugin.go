@@ -14,6 +14,20 @@ type RunPluginRequest struct {
 	PluginID string `pathParam:"style=simple,explode=false,name=pluginID"`
 }
 
+func (o *RunPluginRequest) GetFilters() *shared.Filters {
+	if o == nil {
+		return nil
+	}
+	return o.Filters
+}
+
+func (o *RunPluginRequest) GetPluginID() string {
+	if o == nil {
+		return ""
+	}
+	return o.PluginID
+}
+
 type RunPluginResponse struct {
 	// OK
 	BoundedRequests []shared.BoundedRequest
@@ -22,4 +36,39 @@ type RunPluginResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *RunPluginResponse) GetBoundedRequests() []shared.BoundedRequest {
+	if o == nil {
+		return nil
+	}
+	return o.BoundedRequests
+}
+
+func (o *RunPluginResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *RunPluginResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *RunPluginResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *RunPluginResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

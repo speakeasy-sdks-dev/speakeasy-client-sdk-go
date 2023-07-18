@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"io"
@@ -74,6 +75,8 @@ func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -126,6 +129,8 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 			res.Schema = rawBody
 		case utils.MatchContentType(contentType, `application/x-yaml`):
 			res.Schema = rawBody
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -136,6 +141,8 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -188,6 +195,8 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 			res.Schema = rawBody
 		case utils.MatchContentType(contentType, `application/x-yaml`):
 			res.Schema = rawBody
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -198,6 +207,8 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -255,6 +266,8 @@ func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 			}
 
 			res.Schema = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -265,6 +278,8 @@ func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -320,6 +335,8 @@ func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 			}
 
 			res.SchemaDiff = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -330,6 +347,8 @@ func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -387,6 +406,8 @@ func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 			}
 
 			res.Schema = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -397,6 +418,8 @@ func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -454,6 +477,8 @@ func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 			}
 
 			res.Schemata = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	default:
 		switch {
@@ -464,6 +489,8 @@ func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -532,6 +559,8 @@ func (s *schemas) RegisterSchema(ctx context.Context, request operations.Registe
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

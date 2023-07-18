@@ -12,6 +12,13 @@ type GetRequestFromEventLogRequest struct {
 	RequestID string `pathParam:"style=simple,explode=false,name=requestID"`
 }
 
+func (o *GetRequestFromEventLogRequest) GetRequestID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RequestID
+}
+
 type GetRequestFromEventLogResponse struct {
 	ContentType string
 	// Default error response
@@ -20,4 +27,39 @@ type GetRequestFromEventLogResponse struct {
 	RawResponse *http.Response
 	// OK
 	UnboundedRequest *shared.UnboundedRequest
+}
+
+func (o *GetRequestFromEventLogResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetRequestFromEventLogResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetRequestFromEventLogResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetRequestFromEventLogResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetRequestFromEventLogResponse) GetUnboundedRequest() *shared.UnboundedRequest {
+	if o == nil {
+		return nil
+	}
+	return o.UnboundedRequest
 }

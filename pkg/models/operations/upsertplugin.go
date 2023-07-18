@@ -16,3 +16,38 @@ type UpsertPluginResponse struct {
 	StatusCode  int
 	RawResponse *http.Response
 }
+
+func (o *UpsertPluginResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpsertPluginResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *UpsertPluginResponse) GetPlugin() *shared.Plugin {
+	if o == nil {
+		return nil
+	}
+	return o.Plugin
+}
+
+func (o *UpsertPluginResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpsertPluginResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}

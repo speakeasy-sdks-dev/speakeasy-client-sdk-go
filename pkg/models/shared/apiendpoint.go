@@ -22,6 +22,48 @@ type APIEndpointInput struct {
 	VersionID string `json:"version_id"`
 }
 
+func (o *APIEndpointInput) GetAPIEndpointID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIEndpointID
+}
+
+func (o *APIEndpointInput) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *APIEndpointInput) GetDisplayName() string {
+	if o == nil {
+		return ""
+	}
+	return o.DisplayName
+}
+
+func (o *APIEndpointInput) GetMethod() string {
+	if o == nil {
+		return ""
+	}
+	return o.Method
+}
+
+func (o *APIEndpointInput) GetPath() string {
+	if o == nil {
+		return ""
+	}
+	return o.Path
+}
+
+func (o *APIEndpointInput) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 // APIEndpoint - An ApiEndpoint is a description of an Endpoint for an API.
 type APIEndpoint struct {
 	// The ID of this ApiEndpoint. This is a hash of the method and path.
@@ -46,4 +88,81 @@ type APIEndpoint struct {
 	VersionID string `json:"version_id"`
 	// The workspace ID this ApiEndpoint belongs to.
 	WorkspaceID string `json:"workspace_id"`
+}
+
+func (o *APIEndpoint) GetAPIEndpointID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIEndpointID
+}
+
+func (o *APIEndpoint) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *APIEndpoint) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *APIEndpoint) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *APIEndpoint) GetDisplayName() string {
+	if o == nil {
+		return ""
+	}
+	return o.DisplayName
+}
+
+func (o *APIEndpoint) GetMatched() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Matched
+}
+
+func (o *APIEndpoint) GetMethod() string {
+	if o == nil {
+		return ""
+	}
+	return o.Method
+}
+
+func (o *APIEndpoint) GetPath() string {
+	if o == nil {
+		return ""
+	}
+	return o.Path
+}
+
+func (o *APIEndpoint) GetUpdatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.UpdatedAt
+}
+
+func (o *APIEndpoint) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
+func (o *APIEndpoint) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
 }

@@ -16,10 +16,59 @@ type DeleteAPIEndpointRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *DeleteAPIEndpointRequest) GetAPIEndpointID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIEndpointID
+}
+
+func (o *DeleteAPIEndpointRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *DeleteAPIEndpointRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type DeleteAPIEndpointResponse struct {
 	ContentType string
 	// Default error response
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *DeleteAPIEndpointResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DeleteAPIEndpointResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *DeleteAPIEndpointResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DeleteAPIEndpointResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

@@ -21,3 +21,45 @@ type Schema struct {
 	// The workspace ID this Schema belongs to.
 	WorkspaceID string `json:"workspace_id"`
 }
+
+func (o *Schema) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *Schema) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *Schema) GetDescription() string {
+	if o == nil {
+		return ""
+	}
+	return o.Description
+}
+
+func (o *Schema) GetRevisionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RevisionID
+}
+
+func (o *Schema) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
+func (o *Schema) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}

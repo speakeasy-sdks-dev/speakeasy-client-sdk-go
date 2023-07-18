@@ -13,3 +13,31 @@ type Filters struct {
 	// The operator to use when combining filters.
 	Operator string `json:"operator"`
 }
+
+func (o *Filters) GetFilters() []Filter {
+	if o == nil {
+		return []Filter{}
+	}
+	return o.Filters
+}
+
+func (o *Filters) GetLimit() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Limit
+}
+
+func (o *Filters) GetOffset() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Offset
+}
+
+func (o *Filters) GetOperator() string {
+	if o == nil {
+		return ""
+	}
+	return o.Operator
+}

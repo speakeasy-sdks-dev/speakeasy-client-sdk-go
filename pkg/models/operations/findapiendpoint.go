@@ -16,6 +16,27 @@ type FindAPIEndpointRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *FindAPIEndpointRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *FindAPIEndpointRequest) GetDisplayName() string {
+	if o == nil {
+		return ""
+	}
+	return o.DisplayName
+}
+
+func (o *FindAPIEndpointRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type FindAPIEndpointResponse struct {
 	// OK
 	APIEndpoint *shared.APIEndpoint
@@ -24,4 +45,39 @@ type FindAPIEndpointResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *FindAPIEndpointResponse) GetAPIEndpoint() *shared.APIEndpoint {
+	if o == nil {
+		return nil
+	}
+	return o.APIEndpoint
+}
+
+func (o *FindAPIEndpointResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *FindAPIEndpointResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *FindAPIEndpointResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *FindAPIEndpointResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

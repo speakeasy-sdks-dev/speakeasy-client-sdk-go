@@ -5,7 +5,7 @@
 Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
 
 The Speakeasy Platform Documentation
-<https://docs.speakeasyapi.dev>
+<https://speakeasyapi.dev/docs/>
 ### Available Operations
 
 * [ValidateAPIKey](#validateapikey) - Validate the current api key.
@@ -23,6 +23,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 )
 
 func main() {

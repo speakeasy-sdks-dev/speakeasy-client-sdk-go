@@ -16,3 +16,52 @@ type Plugin struct {
 	UpdatedAt   *time.Time `json:"updated_at,omitempty"`
 	WorkspaceID string     `json:"workspace_id"`
 }
+
+func (o *Plugin) GetCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.Code
+}
+
+func (o *Plugin) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
+func (o *Plugin) GetEvalHash() *string {
+	if o == nil {
+		return nil
+	}
+	return o.EvalHash
+}
+
+func (o *Plugin) GetPluginID() string {
+	if o == nil {
+		return ""
+	}
+	return o.PluginID
+}
+
+func (o *Plugin) GetTitle() string {
+	if o == nil {
+		return ""
+	}
+	return o.Title
+}
+
+func (o *Plugin) GetUpdatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
+}
+
+func (o *Plugin) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}

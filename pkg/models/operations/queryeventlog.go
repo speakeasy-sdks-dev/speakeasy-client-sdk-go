@@ -12,6 +12,13 @@ type QueryEventLogRequest struct {
 	Filters *shared.Filters `queryParam:"serialization=json,name=filters"`
 }
 
+func (o *QueryEventLogRequest) GetFilters() *shared.Filters {
+	if o == nil {
+		return nil
+	}
+	return o.Filters
+}
+
 type QueryEventLogResponse struct {
 	// OK
 	BoundedRequests []shared.BoundedRequest
@@ -20,4 +27,39 @@ type QueryEventLogResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *QueryEventLogResponse) GetBoundedRequests() []shared.BoundedRequest {
+	if o == nil {
+		return nil
+	}
+	return o.BoundedRequests
+}
+
+func (o *QueryEventLogResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *QueryEventLogResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *QueryEventLogResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *QueryEventLogResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

@@ -14,6 +14,20 @@ type UpsertAPIRequest struct {
 	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
 }
 
+func (o *UpsertAPIRequest) GetAPIInput() shared.APIInput {
+	if o == nil {
+		return shared.APIInput{}
+	}
+	return o.APIInput
+}
+
+func (o *UpsertAPIRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
 type UpsertAPIResponse struct {
 	// OK
 	API         *shared.API
@@ -22,4 +36,39 @@ type UpsertAPIResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *UpsertAPIResponse) GetAPI() *shared.API {
+	if o == nil {
+		return nil
+	}
+	return o.API
+}
+
+func (o *UpsertAPIResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *UpsertAPIResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *UpsertAPIResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *UpsertAPIResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

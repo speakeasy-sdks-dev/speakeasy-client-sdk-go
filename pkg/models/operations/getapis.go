@@ -13,11 +13,32 @@ type GetApisOp struct {
 	And bool `queryParam:"name=and"`
 }
 
+func (o *GetApisOp) GetAnd() bool {
+	if o == nil {
+		return false
+	}
+	return o.And
+}
+
 type GetApisRequest struct {
 	// Metadata to filter Apis on
 	Metadata map[string][]string `queryParam:"style=deepObject,explode=true,name=metadata"`
 	// Configuration for filter operations
 	Op *GetApisOp `queryParam:"style=deepObject,explode=true,name=op"`
+}
+
+func (o *GetApisRequest) GetMetadata() map[string][]string {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *GetApisRequest) GetOp() *GetApisOp {
+	if o == nil {
+		return nil
+	}
+	return o.Op
 }
 
 type GetApisResponse struct {
@@ -28,4 +49,39 @@ type GetApisResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *GetApisResponse) GetApis() []shared.API {
+	if o == nil {
+		return nil
+	}
+	return o.Apis
+}
+
+func (o *GetApisResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetApisResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetApisResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetApisResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

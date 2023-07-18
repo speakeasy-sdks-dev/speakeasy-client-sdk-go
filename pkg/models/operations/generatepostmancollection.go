@@ -14,6 +14,20 @@ type GeneratePostmanCollectionRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *GeneratePostmanCollectionRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *GeneratePostmanCollectionRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type GeneratePostmanCollectionResponse struct {
 	ContentType string
 	// Default error response
@@ -22,4 +36,39 @@ type GeneratePostmanCollectionResponse struct {
 	PostmanCollection []byte
 	StatusCode        int
 	RawResponse       *http.Response
+}
+
+func (o *GeneratePostmanCollectionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GeneratePostmanCollectionResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GeneratePostmanCollectionResponse) GetPostmanCollection() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.PostmanCollection
+}
+
+func (o *GeneratePostmanCollectionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GeneratePostmanCollectionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

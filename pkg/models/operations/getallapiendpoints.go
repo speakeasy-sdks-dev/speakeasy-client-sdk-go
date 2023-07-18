@@ -12,6 +12,13 @@ type GetAllAPIEndpointsRequest struct {
 	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
 }
 
+func (o *GetAllAPIEndpointsRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
 type GetAllAPIEndpointsResponse struct {
 	// OK
 	APIEndpoints []shared.APIEndpoint
@@ -20,4 +27,39 @@ type GetAllAPIEndpointsResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *GetAllAPIEndpointsResponse) GetAPIEndpoints() []shared.APIEndpoint {
+	if o == nil {
+		return nil
+	}
+	return o.APIEndpoints
+}
+
+func (o *GetAllAPIEndpointsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetAllAPIEndpointsResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetAllAPIEndpointsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetAllAPIEndpointsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

@@ -16,6 +16,27 @@ type GeneratePostmanCollectionForAPIEndpointRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *GeneratePostmanCollectionForAPIEndpointRequest) GetAPIEndpointID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIEndpointID
+}
+
+func (o *GeneratePostmanCollectionForAPIEndpointRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *GeneratePostmanCollectionForAPIEndpointRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type GeneratePostmanCollectionForAPIEndpointResponse struct {
 	ContentType string
 	// Default error response
@@ -24,4 +45,39 @@ type GeneratePostmanCollectionForAPIEndpointResponse struct {
 	PostmanCollection []byte
 	StatusCode        int
 	RawResponse       *http.Response
+}
+
+func (o *GeneratePostmanCollectionForAPIEndpointResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GeneratePostmanCollectionForAPIEndpointResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GeneratePostmanCollectionForAPIEndpointResponse) GetPostmanCollection() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.PostmanCollection
+}
+
+func (o *GeneratePostmanCollectionForAPIEndpointResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GeneratePostmanCollectionForAPIEndpointResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

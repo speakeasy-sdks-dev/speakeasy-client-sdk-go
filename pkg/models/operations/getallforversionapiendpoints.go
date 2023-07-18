@@ -14,6 +14,20 @@ type GetAllForVersionAPIEndpointsRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *GetAllForVersionAPIEndpointsRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *GetAllForVersionAPIEndpointsRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type GetAllForVersionAPIEndpointsResponse struct {
 	// OK
 	APIEndpoints []shared.APIEndpoint
@@ -22,4 +36,39 @@ type GetAllForVersionAPIEndpointsResponse struct {
 	Error       *shared.Error
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *GetAllForVersionAPIEndpointsResponse) GetAPIEndpoints() []shared.APIEndpoint {
+	if o == nil {
+		return nil
+	}
+	return o.APIEndpoints
+}
+
+func (o *GetAllForVersionAPIEndpointsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetAllForVersionAPIEndpointsResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetAllForVersionAPIEndpointsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetAllForVersionAPIEndpointsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

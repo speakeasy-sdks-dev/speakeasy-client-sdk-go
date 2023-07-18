@@ -16,6 +16,27 @@ type InsertVersionMetadataRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *InsertVersionMetadataRequest) GetVersionMetadataInput() shared.VersionMetadataInput {
+	if o == nil {
+		return shared.VersionMetadataInput{}
+	}
+	return o.VersionMetadataInput
+}
+
+func (o *InsertVersionMetadataRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *InsertVersionMetadataRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type InsertVersionMetadataResponse struct {
 	ContentType string
 	// Default error response
@@ -24,4 +45,39 @@ type InsertVersionMetadataResponse struct {
 	RawResponse *http.Response
 	// OK
 	VersionMetadata *shared.VersionMetadata
+}
+
+func (o *InsertVersionMetadataResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *InsertVersionMetadataResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *InsertVersionMetadataResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *InsertVersionMetadataResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *InsertVersionMetadataResponse) GetVersionMetadata() *shared.VersionMetadata {
+	if o == nil {
+		return nil
+	}
+	return o.VersionMetadata
 }

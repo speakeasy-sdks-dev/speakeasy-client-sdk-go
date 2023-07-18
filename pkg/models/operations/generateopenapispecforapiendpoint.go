@@ -16,6 +16,27 @@ type GenerateOpenAPISpecForAPIEndpointRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *GenerateOpenAPISpecForAPIEndpointRequest) GetAPIEndpointID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIEndpointID
+}
+
+func (o *GenerateOpenAPISpecForAPIEndpointRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *GenerateOpenAPISpecForAPIEndpointRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type GenerateOpenAPISpecForAPIEndpointResponse struct {
 	ContentType string
 	// Default error response
@@ -24,4 +45,39 @@ type GenerateOpenAPISpecForAPIEndpointResponse struct {
 	GenerateOpenAPISpecDiff *shared.GenerateOpenAPISpecDiff
 	StatusCode              int
 	RawResponse             *http.Response
+}
+
+func (o *GenerateOpenAPISpecForAPIEndpointResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GenerateOpenAPISpecForAPIEndpointResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GenerateOpenAPISpecForAPIEndpointResponse) GetGenerateOpenAPISpecDiff() *shared.GenerateOpenAPISpecDiff {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateOpenAPISpecDiff
+}
+
+func (o *GenerateOpenAPISpecForAPIEndpointResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GenerateOpenAPISpecForAPIEndpointResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

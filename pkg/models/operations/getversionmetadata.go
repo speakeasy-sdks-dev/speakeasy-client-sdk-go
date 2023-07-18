@@ -14,6 +14,20 @@ type GetVersionMetadataRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *GetVersionMetadataRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *GetVersionMetadataRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type GetVersionMetadataResponse struct {
 	ContentType string
 	// Default error response
@@ -22,4 +36,39 @@ type GetVersionMetadataResponse struct {
 	RawResponse *http.Response
 	// OK
 	VersionMetadata []shared.VersionMetadata
+}
+
+func (o *GetVersionMetadataResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetVersionMetadataResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetVersionMetadataResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetVersionMetadataResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}
+
+func (o *GetVersionMetadataResponse) GetVersionMetadata() []shared.VersionMetadata {
+	if o == nil {
+		return nil
+	}
+	return o.VersionMetadata
 }

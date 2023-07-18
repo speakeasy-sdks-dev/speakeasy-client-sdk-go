@@ -10,6 +10,8 @@ go get github.com/speakeasy-api/speakeasy-client-sdk-go
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
+
+
 ```go
 package main
 
@@ -17,6 +19,7 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 )
 

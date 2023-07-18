@@ -16,6 +16,27 @@ type DownloadSchemaRevisionRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
+func (o *DownloadSchemaRevisionRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *DownloadSchemaRevisionRequest) GetRevisionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RevisionID
+}
+
+func (o *DownloadSchemaRevisionRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
 type DownloadSchemaRevisionResponse struct {
 	ContentType string
 	// Default error response
@@ -24,4 +45,39 @@ type DownloadSchemaRevisionResponse struct {
 	Schema      []byte
 	StatusCode  int
 	RawResponse *http.Response
+}
+
+func (o *DownloadSchemaRevisionResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *DownloadSchemaRevisionResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *DownloadSchemaRevisionResponse) GetSchema() []byte {
+	if o == nil {
+		return nil
+	}
+	return o.Schema
+}
+
+func (o *DownloadSchemaRevisionResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *DownloadSchemaRevisionResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
 }

@@ -37,3 +37,101 @@ type BoundedRequest struct {
 	// The workspace ID this request was made to.
 	WorkspaceID string `json:"workspace_id"`
 }
+
+func (o *BoundedRequest) GetAPIEndpointID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIEndpointID
+}
+
+func (o *BoundedRequest) GetAPIID() string {
+	if o == nil {
+		return ""
+	}
+	return o.APIID
+}
+
+func (o *BoundedRequest) GetCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.CreatedAt
+}
+
+func (o *BoundedRequest) GetCustomerID() string {
+	if o == nil {
+		return ""
+	}
+	return o.CustomerID
+}
+
+func (o *BoundedRequest) GetLatency() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Latency
+}
+
+func (o *BoundedRequest) GetMetadata() []RequestMetadata {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *BoundedRequest) GetMethod() string {
+	if o == nil {
+		return ""
+	}
+	return o.Method
+}
+
+func (o *BoundedRequest) GetPath() string {
+	if o == nil {
+		return ""
+	}
+	return o.Path
+}
+
+func (o *BoundedRequest) GetRequestFinishTime() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.RequestFinishTime
+}
+
+func (o *BoundedRequest) GetRequestID() string {
+	if o == nil {
+		return ""
+	}
+	return o.RequestID
+}
+
+func (o *BoundedRequest) GetRequestStartTime() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.RequestStartTime
+}
+
+func (o *BoundedRequest) GetStatus() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.Status
+}
+
+func (o *BoundedRequest) GetVersionID() string {
+	if o == nil {
+		return ""
+	}
+	return o.VersionID
+}
+
+func (o *BoundedRequest) GetWorkspaceID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceID
+}

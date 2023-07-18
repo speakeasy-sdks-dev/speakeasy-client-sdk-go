@@ -16,3 +16,38 @@ type GetPluginsResponse struct {
 	StatusCode  int
 	RawResponse *http.Response
 }
+
+func (o *GetPluginsResponse) GetContentType() string {
+	if o == nil {
+		return ""
+	}
+	return o.ContentType
+}
+
+func (o *GetPluginsResponse) GetError() *shared.Error {
+	if o == nil {
+		return nil
+	}
+	return o.Error
+}
+
+func (o *GetPluginsResponse) GetPlugins() []shared.Plugin {
+	if o == nil {
+		return nil
+	}
+	return o.Plugins
+}
+
+func (o *GetPluginsResponse) GetStatusCode() int {
+	if o == nil {
+		return 0
+	}
+	return o.StatusCode
+}
+
+func (o *GetPluginsResponse) GetRawResponse() *http.Response {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponse
+}

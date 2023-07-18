@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
 	"io"
@@ -72,7 +73,7 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 }
 
 // Speakeasy - Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
-// https://docs.speakeasyapi.dev - The Speakeasy Platform Documentation
+// https://speakeasyapi.dev/docs/ - The Speakeasy Platform Documentation
 type Speakeasy struct {
 	// APIEndpoints - REST APIs for managing ApiEndpoint entities
 	APIEndpoints *apiEndpoints
@@ -144,8 +145,8 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.3.0",
-			SDKVersion:        "1.21.0",
-			GenVersion:        "2.38.0",
+			SDKVersion:        "1.22.0",
+			GenVersion:        "2.70.0",
 		},
 	}
 	for _, opt := range opts {
@@ -228,6 +229,8 @@ func (s *Speakeasy) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPI
 			}
 
 			res.Error = out
+		default:
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
