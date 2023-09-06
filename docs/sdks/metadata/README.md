@@ -36,10 +36,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Metadata.DeleteVersionMetadata(ctx, operations.DeleteVersionMetadataRequest{
-        APIID: "excepturi",
-        MetaKey: "accusantium",
-        MetaValue: "iure",
-        VersionID: "culpa",
+        APIID: "optio",
+        MetaKey: "totam",
+        MetaValue: "beatae",
+        VersionID: "commodi",
     })
     if err != nil {
         log.Fatal(err)
@@ -90,8 +90,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Metadata.GetVersionMetadata(ctx, operations.GetVersionMetadataRequest{
-        APIID: "doloribus",
-        VersionID: "sapiente",
+        APIID: "molestiae",
+        VersionID: "modi",
     })
     if err != nil {
         log.Fatal(err)
@@ -143,11 +143,11 @@ func main() {
     ctx := context.Background()
     res, err := s.Metadata.InsertVersionMetadata(ctx, operations.InsertVersionMetadataRequest{
         VersionMetadataInput: shared.VersionMetadataInput{
-            MetaKey: "architecto",
-            MetaValue: "mollitia",
+            MetaKey: "qui",
+            MetaValue: "impedit",
         },
-        APIID: "dolorem",
-        VersionID: "culpa",
+        APIID: "cum",
+        VersionID: "esse",
     })
     if err != nil {
         log.Fatal(err)

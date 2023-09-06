@@ -86,16 +86,16 @@ func main() {
         Filters: &shared.Filters{
             Filters: []shared.Filter{
                 shared.Filter{
-                    Key: "repellat",
-                    Operator: "mollitia",
-                    Value: "occaecati",
+                    Key: "ipsum",
+                    Operator: "excepturi",
+                    Value: "aspernatur",
                 },
             },
-            Limit: 253291,
-            Offset: 414369,
-            Operator: "quam",
+            Limit: 18789,
+            Offset: 324141,
+            Operator: "natus",
         },
-        PluginID: "molestiae",
+        PluginID: "sed",
     })
     if err != nil {
         log.Fatal(err)
@@ -146,13 +146,13 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Plugins.UpsertPlugin(ctx, shared.Plugin{
-        Code: "velit",
-        CreatedAt: types.MustTimeFromString("2022-09-06T22:51:09.401Z"),
-        EvalHash: speakeasy.String("quis"),
-        PluginID: "vitae",
-        Title: "Miss",
-        UpdatedAt: types.MustTimeFromString("2022-05-14T10:37:30.872Z"),
-        WorkspaceID: "odit",
+        Code: "iste",
+        CreatedAt: types.MustTimeFromString("2022-05-20T19:39:29.035Z"),
+        EvalHash: speakeasy.String("laboriosam"),
+        PluginID: "hic",
+        Title: "Dr.",
+        UpdatedAt: types.MustTimeFromString("2022-02-06T12:52:33.708Z"),
+        WorkspaceID: "corporis",
     })
     if err != nil {
         log.Fatal(err)

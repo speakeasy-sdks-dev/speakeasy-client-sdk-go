@@ -41,9 +41,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.DeleteSchema(ctx, operations.DeleteSchemaRequest{
-        APIID: "ipsa",
-        RevisionID: "omnis",
-        VersionID: "voluptate",
+        APIID: "mollitia",
+        RevisionID: "laborum",
+        VersionID: "dolores",
     })
     if err != nil {
         log.Fatal(err)
@@ -94,8 +94,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.DownloadSchema(ctx, operations.DownloadSchemaRequest{
-        APIID: "cum",
-        VersionID: "perferendis",
+        APIID: "dolorem",
+        VersionID: "corporis",
     })
     if err != nil {
         log.Fatal(err)
@@ -146,9 +146,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.DownloadSchemaRevision(ctx, operations.DownloadSchemaRevisionRequest{
-        APIID: "doloremque",
-        RevisionID: "reprehenderit",
-        VersionID: "ut",
+        APIID: "explicabo",
+        RevisionID: "nobis",
+        VersionID: "enim",
     })
     if err != nil {
         log.Fatal(err)
@@ -200,8 +200,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.GetSchema(ctx, operations.GetSchemaRequest{
-        APIID: "maiores",
-        VersionID: "dicta",
+        APIID: "omnis",
+        VersionID: "nemo",
     })
     if err != nil {
         log.Fatal(err)
@@ -252,10 +252,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.GetSchemaDiff(ctx, operations.GetSchemaDiffRequest{
-        APIID: "corporis",
-        BaseRevisionID: "dolore",
-        TargetRevisionID: "iusto",
-        VersionID: "dicta",
+        APIID: "minima",
+        BaseRevisionID: "excepturi",
+        TargetRevisionID: "accusantium",
+        VersionID: "iure",
     })
     if err != nil {
         log.Fatal(err)
@@ -307,9 +307,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.GetSchemaRevision(ctx, operations.GetSchemaRevisionRequest{
-        APIID: "harum",
-        RevisionID: "enim",
-        VersionID: "accusamus",
+        APIID: "culpa",
+        RevisionID: "doloribus",
+        VersionID: "sapiente",
     })
     if err != nil {
         log.Fatal(err)
@@ -361,8 +361,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.GetSchemas(ctx, operations.GetSchemasRequest{
-        APIID: "commodi",
-        VersionID: "repudiandae",
+        APIID: "architecto",
+        VersionID: "mollitia",
     })
     if err != nil {
         log.Fatal(err)
@@ -416,12 +416,12 @@ func main() {
     res, err := s.Schemas.RegisterSchema(ctx, operations.RegisterSchemaRequest{
         RequestBody: operations.RegisterSchemaRequestBody{
             File: operations.RegisterSchemaRequestBodyFile{
-                Content: []byte("quae"),
-                File: "ipsum",
+                Content: []byte("dolorem"),
+                File: "culpa",
             },
         },
-        APIID: "quidem",
-        VersionID: "molestias",
+        APIID: "consequuntur",
+        VersionID: "repellat",
     })
     if err != nil {
         log.Fatal(err)

@@ -39,8 +39,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
-        APIID: "quod",
-        VersionID: "esse",
+        APIID: "quis",
+        VersionID: "veritatis",
     })
     if err != nil {
         log.Fatal(err)
@@ -92,8 +92,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GenerateOpenAPISpec(ctx, operations.GenerateOpenAPISpecRequest{
-        APIID: "totam",
-        VersionID: "porro",
+        APIID: "deserunt",
+        VersionID: "perferendis",
     })
     if err != nil {
         log.Fatal(err)
@@ -144,8 +144,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GeneratePostmanCollection(ctx, operations.GeneratePostmanCollectionRequest{
-        APIID: "dolorum",
-        VersionID: "dicta",
+        APIID: "ipsam",
+        VersionID: "repellendus",
     })
     if err != nil {
         log.Fatal(err)
@@ -197,19 +197,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GetAllAPIVersions(ctx, operations.GetAllAPIVersionsRequest{
-        APIID: "nam",
+        APIID: "sapiente",
         Metadata: map[string][]string{
-            "occaecati": []string{
-                "deleniti",
-            },
-            "hic": []string{
-                "totam",
-                "beatae",
-                "commodi",
-                "molestiae",
-            },
-            "modi": []string{
-                "impedit",
+            "quo": []string{
+                "odit",
             },
         },
         Op: &operations.GetAllAPIVersionsOp{
@@ -267,14 +258,8 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{
         Metadata: map[string][]string{
-            "esse": []string{
-                "excepturi",
-            },
-            "aspernatur": []string{
-                "ad",
-            },
-            "natus": []string{
-                "iste",
+            "at": []string{
+                "at",
             },
         },
         Op: &operations.GetApisOp{
@@ -332,25 +317,16 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.UpsertAPI(ctx, operations.UpsertAPIRequest{
         APIInput: shared.APIInput{
-            APIID: "dolor",
-            Description: "natus",
+            APIID: "maiores",
+            Description: "molestiae",
             MetaData: map[string][]string{
-                "hic": []string{
-                    "fuga",
-                    "in",
-                    "corporis",
-                    "iste",
-                },
-                "iure": []string{
-                    "quidem",
-                    "architecto",
-                    "ipsa",
-                    "reiciendis",
+                "quod": []string{
+                    "quod",
                 },
             },
-            VersionID: "est",
+            VersionID: "esse",
         },
-        APIID: "mollitia",
+        APIID: "totam",
     })
     if err != nil {
         log.Fatal(err)

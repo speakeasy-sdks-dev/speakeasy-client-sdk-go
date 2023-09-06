@@ -41,9 +41,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, operations.DeleteAPIEndpointRequest{
-        APIEndpointID: "delectus",
-        APIID: "tempora",
-        VersionID: "suscipit",
+        APIEndpointID: "distinctio",
+        APIID: "quibusdam",
+        VersionID: "unde",
     })
     if err != nil {
         log.Fatal(err)
@@ -95,9 +95,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.FindAPIEndpoint(ctx, operations.FindAPIEndpointRequest{
-        APIID: "molestiae",
-        DisplayName: "minus",
-        VersionID: "placeat",
+        APIID: "nulla",
+        DisplayName: "corrupti",
+        VersionID: "illum",
     })
     if err != nil {
         log.Fatal(err)
@@ -149,9 +149,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, operations.GenerateOpenAPISpecForAPIEndpointRequest{
-        APIEndpointID: "voluptatum",
-        APIID: "iusto",
-        VersionID: "excepturi",
+        APIEndpointID: "vel",
+        APIID: "error",
+        VersionID: "deserunt",
     })
     if err != nil {
         log.Fatal(err)
@@ -202,9 +202,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, operations.GeneratePostmanCollectionForAPIEndpointRequest{
-        APIEndpointID: "nisi",
-        APIID: "recusandae",
-        VersionID: "temporibus",
+        APIEndpointID: "suscipit",
+        APIID: "iure",
+        VersionID: "magnam",
     })
     if err != nil {
         log.Fatal(err)
@@ -255,7 +255,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, operations.GetAllAPIEndpointsRequest{
-        APIID: "ab",
+        APIID: "debitis",
     })
     if err != nil {
         log.Fatal(err)
@@ -306,8 +306,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, operations.GetAllForVersionAPIEndpointsRequest{
-        APIID: "quis",
-        VersionID: "veritatis",
+        APIID: "ipsa",
+        VersionID: "delectus",
     })
     if err != nil {
         log.Fatal(err)
@@ -358,9 +358,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAPIEndpoint(ctx, operations.GetAPIEndpointRequest{
-        APIEndpointID: "deserunt",
-        APIID: "perferendis",
-        VersionID: "ipsam",
+        APIEndpointID: "tempora",
+        APIID: "suscipit",
+        VersionID: "molestiae",
     })
     if err != nil {
         log.Fatal(err)
@@ -412,16 +412,16 @@ func main() {
     ctx := context.Background()
     res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, operations.UpsertAPIEndpointRequest{
         APIEndpointInput: shared.APIEndpointInput{
-            APIEndpointID: "repellendus",
-            Description: "sapiente",
-            DisplayName: "quo",
-            Method: "odit",
-            Path: "at",
-            VersionID: "at",
+            APIEndpointID: "minus",
+            Description: "placeat",
+            DisplayName: "voluptatum",
+            Method: "iusto",
+            Path: "excepturi",
+            VersionID: "nisi",
         },
-        APIEndpointID: "maiores",
-        APIID: "molestiae",
-        VersionID: "quod",
+        APIEndpointID: "recusandae",
+        APIID: "temporibus",
+        VersionID: "ab",
     })
     if err != nil {
         log.Fatal(err)

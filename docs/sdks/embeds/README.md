@@ -37,19 +37,19 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Embeds.GetEmbedAccessToken(ctx, operations.GetEmbedAccessTokenRequest{
-        Description: speakeasy.String("laborum"),
-        Duration: speakeasy.Int64(170909),
+        Description: speakeasy.String("porro"),
+        Duration: speakeasy.Int64(678880),
         Filters: &shared.Filters{
             Filters: []shared.Filter{
                 shared.Filter{
-                    Key: "corporis",
-                    Operator: "explicabo",
-                    Value: "nobis",
+                    Key: "dicta",
+                    Operator: "nam",
+                    Value: "officia",
                 },
             },
-            Limit: 315428,
-            Offset: 607831,
-            Operator: "nemo",
+            Limit: 582020,
+            Offset: 143353,
+            Operator: "deleniti",
         },
     })
     if err != nil {
@@ -148,7 +148,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Embeds.RevokeEmbedAccessToken(ctx, operations.RevokeEmbedAccessTokenRequest{
-        TokenID: "minima",
+        TokenID: "hic",
     })
     if err != nil {
         log.Fatal(err)

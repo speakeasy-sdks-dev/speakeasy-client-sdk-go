@@ -22,20 +22,8 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{
         Metadata: map[string][]string{
-            "provident": []string{
-                "quibusdam",
-                "unde",
-                "nulla",
-            },
             "corrupti": []string{
-                "vel",
-                "error",
-                "deserunt",
-                "suscipit",
-            },
-            "iure": []string{
-                "debitis",
-                "ipsa",
+                "provident",
             },
         },
         Op: &operations.GetApisOp{
