@@ -8,6 +8,9 @@ generation:
   sdkClassName: speakeasy
   singleTagPerOp: false
   telemetryEnabled: true
+  devContainers:
+    enabled: true
+    schemaPath: https://docs.speakeasyapi.dev/openapi.yaml
 features:
   go:
     core: 2.86.4
