@@ -1,4 +1,5 @@
 # Plugins
+(*Plugins*)
 
 ## Overview
 
@@ -22,13 +23,13 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 )
 
 func main() {
-    s := speakeasy.New(
-        speakeasy.WithSecurity(shared.Security{
+    s := speakeasyclientsdkgo.New(
+        speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: "",
         }),
     )
@@ -69,14 +70,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
 )
 
 func main() {
-    s := speakeasy.New(
-        speakeasy.WithSecurity(shared.Security{
+    s := speakeasyclientsdkgo.New(
+        speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: "",
         }),
     )
@@ -86,16 +87,16 @@ func main() {
         Filters: &shared.Filters{
             Filters: []shared.Filter{
                 shared.Filter{
-                    Key: "ipsum",
-                    Operator: "excepturi",
-                    Value: "aspernatur",
+                    Key: "<key>",
+                    Operator: "West parse Pickup",
+                    Value: "purple Pants",
                 },
             },
-            Limit: 18789,
-            Offset: 324141,
-            Operator: "natus",
+            Limit: 996936,
+            Offset: 273299,
+            Operator: "Bedfordshire meaningfully",
         },
-        PluginID: "sed",
+        PluginID: "Botswana Metal",
     })
     if err != nil {
         log.Fatal(err)
@@ -132,27 +133,27 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/types"
 )
 
 func main() {
-    s := speakeasy.New(
-        speakeasy.WithSecurity(shared.Security{
+    s := speakeasyclientsdkgo.New(
+        speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: "",
         }),
     )
 
     ctx := context.Background()
     res, err := s.Plugins.UpsertPlugin(ctx, shared.Plugin{
-        Code: "iste",
-        CreatedAt: types.MustTimeFromString("2022-05-20T19:39:29.035Z"),
-        EvalHash: speakeasy.String("laboriosam"),
-        PluginID: "hic",
-        Title: "Dr.",
-        UpdatedAt: types.MustTimeFromString("2022-02-06T12:52:33.708Z"),
-        WorkspaceID: "corporis",
+        Code: "drafty",
+        CreatedAt: types.MustTimeFromString("2023-03-17T19:17:52.123Z"),
+        EvalHash: speakeasyclientsdkgo.String("Benin Berkshire"),
+        PluginID: "Soul Kuna",
+        Title: "Plastic siemens navigate",
+        UpdatedAt: types.MustTimeFromString("2022-12-27T19:05:38.030Z"),
+        WorkspaceID: "owlishly JSON till",
     })
     if err != nil {
         log.Fatal(err)
