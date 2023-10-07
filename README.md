@@ -31,8 +31,8 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{
         Metadata: map[string][]string{
-            "aut": []string{
-                "bypassing",
+            "South": []string{
+                "Southwest",
             },
         },
         Op: &operations.GetApisOp{
@@ -116,7 +116,6 @@ func main() {
 
 
 <!-- Start Dev Containers -->
-
 # Dev Containers
 <div align="left">
     <a href="https://codespaces.new/speakeasy-api/speakeasy-client-sdk-go.git/tree/main"><img src="https://github.com/codespaces/badge.svg" /></a>
@@ -126,9 +125,6 @@ func main() {
 Experience our SDK in an enhanced sandbox environment. Try it now in **GitHub Codespaces**!
 
 * [Explore Dev Containers](.devcontainer/README.md)
-
-
-
 <!-- End Dev Containers -->
 
 
@@ -141,8 +137,6 @@ returned response object will have a `Next` method that can be called to pull do
 return value of `Next` is `nil`, then there are no more pages to be fetched.
 
 Here's an example of one such pagination call:
-
-
 <!-- End Pagination -->
 
 

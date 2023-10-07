@@ -38,13 +38,11 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Embeds.GetEmbedAccessToken(ctx, operations.GetEmbedAccessTokenRequest{
-        Description: speakeasyclientsdkgo.String("Versatile asynchronous leverage"),
-        Duration: speakeasyclientsdkgo.Int64(554373),
         Filters: &shared.Filters{
             Filters: []shared.Filter{
                 shared.Filter{
                     Key: "<key>",
-                    Operator: "Account",
+                    Operator: "Northeast compress Account",
                     Value: "unless to frame",
                 },
             },

@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"io"
 	"net/http"
 )
 
@@ -25,7 +26,8 @@ type GenerateRequestPostmanCollectionResponse struct {
 	// Default error response
 	Error *shared.Error
 	// OK
-	PostmanCollection []byte
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	PostmanCollection io.ReadCloser
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -46,7 +48,7 @@ func (o *GenerateRequestPostmanCollectionResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *GenerateRequestPostmanCollectionResponse) GetPostmanCollection() []byte {
+func (o *GenerateRequestPostmanCollectionResponse) GetPostmanCollection() io.ReadCloser {
 	if o == nil {
 		return nil
 	}

@@ -24,6 +24,7 @@ pkg/utils/requestbody.go
 pkg/utils/retries.go
 pkg/utils/security.go
 pkg/utils/utils.go
+tests/helpers.go
 pkg/models/operations/deleteapiendpoint.go
 pkg/models/operations/findapiendpoint.go
 pkg/models/operations/generateopenapispecforapiendpoint.go

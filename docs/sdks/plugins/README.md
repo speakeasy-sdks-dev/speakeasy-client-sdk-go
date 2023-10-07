@@ -135,7 +135,6 @@ import(
 	"log"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/types"
 )
 
 func main() {
@@ -148,12 +147,9 @@ func main() {
     ctx := context.Background()
     res, err := s.Plugins.UpsertPlugin(ctx, shared.Plugin{
         Code: "drafty",
-        CreatedAt: types.MustTimeFromString("2023-03-17T19:17:52.123Z"),
-        EvalHash: speakeasyclientsdkgo.String("Benin Berkshire"),
-        PluginID: "Soul Kuna",
-        Title: "Plastic siemens navigate",
-        UpdatedAt: types.MustTimeFromString("2022-12-27T19:05:38.030Z"),
-        WorkspaceID: "owlishly JSON till",
+        PluginID: "Rock North exuding",
+        Title: "navigating schemas",
+        WorkspaceID: "Plastic siemens navigate",
     })
     if err != nil {
         log.Fatal(err)

@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 8c4f3932e054e1b349a9a34f12cf7e8c
   docVersion: 0.3.0
-  speakeasyVersion: 1.94.0
-  generationVersion: 2.147.0
+  speakeasyVersion: 1.96.1
+  generationVersion: 2.150.0
 generation:
   devContainers:
     enabled: true
@@ -13,14 +13,16 @@ generation:
   telemetryEnabled: true
 features:
   go:
-    core: 2.91.2
+    core: 2.91.4
     devContainers: 2.89.0
+    downloadStreams: 0.1.0
     examples: 2.81.2
-    globalSecurity: 2.82.1
+    globalSecurity: 2.82.2
     globalServerURLs: 2.82.0
     inputOutputModels: 2.81.1
     serverIDs: 2.81.1
 go:
-  version: 1.27.0
+  version: 1.27.1
+  flattenGlobalSecurity: true
   maxMethodParams: 0
   packageName: github.com/speakeasy-api/speakeasy-client-sdk-go

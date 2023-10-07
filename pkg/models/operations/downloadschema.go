@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"io"
 	"net/http"
 )
 
@@ -34,7 +35,8 @@ type DownloadSchemaResponse struct {
 	// Default error response
 	Error *shared.Error
 	// OK
-	Schema []byte
+	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
+	Schema io.ReadCloser
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -55,7 +57,7 @@ func (o *DownloadSchemaResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *DownloadSchemaResponse) GetSchema() []byte {
+func (o *DownloadSchemaResponse) GetSchema() io.ReadCloser {
 	if o == nil {
 		return nil
 	}

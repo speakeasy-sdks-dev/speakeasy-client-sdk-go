@@ -200,8 +200,8 @@ func main() {
     res, err := s.Apis.GetAllAPIVersions(ctx, operations.GetAllAPIVersionsRequest{
         APIID: "yum Rustic Berkshire",
         Metadata: map[string][]string{
-            "assumenda": []string{
-                "Fresh",
+            "Dodge": []string{
+                "Salad",
             },
         },
         Op: &operations.GetAllAPIVersionsOp{
@@ -259,8 +259,8 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{
         Metadata: map[string][]string{
-            "aut": []string{
-                "bypassing",
+            "South": []string{
+                "Southwest",
             },
         },
         Op: &operations.GetApisOp{
@@ -321,8 +321,8 @@ func main() {
             APIID: "Martinique redefine Garland",
             Description: "Balanced 24/7 utilisation",
             MetaData: map[string][]string{
-                "deleniti": []string{
-                    "male",
+                "pixel": []string{
+                    "Buckinghamshire",
                 },
             },
             VersionID: "Forward",
