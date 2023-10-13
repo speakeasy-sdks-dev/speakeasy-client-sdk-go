@@ -22,14 +22,14 @@ go run root.go
 
 The speakeasy CLI allows you to generate more usage snippets. Here's how:
 
-- For a specific OperationID, use:
+- To generate a sample for a specific operation by providing an operation ID, use:
 
 ```
-speakeasy generate usage -s https://docs.speakeasyapi.dev/openapi.yaml -l go -i operation_id -o ./samples
+speakeasy generate usage -s https://docs.speakeasyapi.dev/openapi.yaml -l go -i {INPUT_OPERATION_ID} -o ./samples
 ```
 
 - To generate samples for an entire namespace (like a tag or group name), use:
 
 ```
-speakeasy generate usage -s https://docs.speakeasyapi.dev/openapi.yaml -l go -n namespace -o ./samples
+speakeasy generate usage -s https://docs.speakeasyapi.dev/openapi.yaml -l go -n {INPUT_TAG_NAME} -o ./samples
 ```

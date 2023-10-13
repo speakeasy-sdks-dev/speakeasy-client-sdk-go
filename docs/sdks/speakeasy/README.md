@@ -29,9 +29,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(shared.Security{
-            APIKey: "",
-        }),
+        speakeasyclientsdkgo.WithSecurity(""),
     )
 
     ctx := context.Background()
