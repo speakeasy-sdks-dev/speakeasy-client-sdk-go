@@ -40,13 +40,13 @@ func main() {
             Filters: []shared.Filter{
                 shared.Filter{
                     Key: "<key>",
-                    Operator: "Northeast compress Account",
-                    Value: "unless to frame",
+                    Operator: "along",
+                    Value: "quos",
                 },
             },
-            Limit: 792058,
-            Offset: 425010,
-            Operator: "kilogram innovative Virginia",
+            Limit: 263313,
+            Offset: 411277,
+            Operator: "male",
         },
     })
     if err != nil {
@@ -141,7 +141,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Embeds.RevokeEmbedAccessToken(ctx, operations.RevokeEmbedAccessTokenRequest{
-        TokenID: "Small",
+        TokenID: "Ball",
     })
     if err != nil {
         log.Fatal(err)

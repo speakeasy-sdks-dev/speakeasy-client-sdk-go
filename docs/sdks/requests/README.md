@@ -36,7 +36,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Requests.GenerateRequestPostmanCollection(ctx, operations.GenerateRequestPostmanCollectionRequest{
-        RequestID: "payment male Rustic",
+        RequestID: "Architect",
     })
     if err != nil {
         log.Fatal(err)
@@ -85,7 +85,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Requests.GetRequestFromEventLog(ctx, operations.GetRequestFromEventLogRequest{
-        RequestID: "Tuna Concrete North",
+        RequestID: "Chevrolet",
     })
     if err != nil {
         log.Fatal(err)
@@ -139,13 +139,13 @@ func main() {
             Filters: []shared.Filter{
                 shared.Filter{
                     Key: "<key>",
-                    Operator: "payment",
-                    Value: "West Practical port",
+                    Operator: "Cotton",
+                    Value: "Interactions",
                 },
             },
-            Limit: 736151,
-            Offset: 477827,
-            Operator: "Burg",
+            Limit: 6323,
+            Offset: 788512,
+            Operator: "Practical",
         },
     })
     if err != nil {

@@ -40,9 +40,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, operations.DeleteAPIEndpointRequest{
-        APIEndpointID: "bus Gasoline Southwest",
-        APIID: "candela",
-        VersionID: "indexing maxime bypassing",
+        APIEndpointID: "blue",
+        APIID: "Gasoline",
+        VersionID: "Southwest",
     })
     if err != nil {
         log.Fatal(err)
@@ -92,9 +92,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.FindAPIEndpoint(ctx, operations.FindAPIEndpointRequest{
-        APIID: "insignificant",
-        DisplayName: "payment",
-        VersionID: "Highland North Awesome",
+        APIID: "Cotton",
+        DisplayName: "Chief",
+        VersionID: "Wooden",
     })
     if err != nil {
         log.Fatal(err)
@@ -144,9 +144,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, operations.GenerateOpenAPISpecForAPIEndpointRequest{
-        APIEndpointID: "Tactics ew explicabo",
-        APIID: "gray act",
-        VersionID: "bah",
+        APIEndpointID: "Mazda",
+        APIID: "web",
+        VersionID: "explicabo",
     })
     if err != nil {
         log.Fatal(err)
@@ -195,9 +195,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, operations.GeneratePostmanCollectionForAPIEndpointRequest{
-        APIEndpointID: "silver Bronze Outdoors",
-        APIID: "Virtual admirable Southeast",
-        VersionID: "Northeast Bicycle mark",
+        APIEndpointID: "indigo",
+        APIID: "barring",
+        VersionID: "Senior",
     })
     if err != nil {
         log.Fatal(err)
@@ -246,7 +246,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, operations.GetAllAPIEndpointsRequest{
-        APIID: "Director JSON candela",
+        APIID: "unless",
     })
     if err != nil {
         log.Fatal(err)
@@ -295,8 +295,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, operations.GetAllForVersionAPIEndpointsRequest{
-        APIID: "THX Tuna sparkling",
-        VersionID: "Assurance",
+        APIID: "now",
+        VersionID: "Diesel",
     })
     if err != nil {
         log.Fatal(err)
@@ -345,9 +345,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAPIEndpoint(ctx, operations.GetAPIEndpointRequest{
-        APIEndpointID: "Optimized male SSD",
-        APIID: "Soul Land",
-        VersionID: "Androgyne Hydrogen",
+        APIEndpointID: "flog",
+        APIID: "synthesize",
+        VersionID: "Barium",
     })
     if err != nil {
         log.Fatal(err)
@@ -397,16 +397,16 @@ func main() {
     ctx := context.Background()
     res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, operations.UpsertAPIEndpointRequest{
         APIEndpointInput: shared.APIEndpointInput{
-            APIEndpointID: "Convertible Turner Cotton",
-            Description: "Triple-buffered optimal methodology",
-            DisplayName: "Langosh Northwest Mabelle",
-            Method: "South",
-            Path: "/rescue",
-            VersionID: "East Land viral",
+            APIEndpointID: "Facilitator",
+            Description: "Cross-group bottom-line productivity",
+            DisplayName: "nor",
+            Method: "Northwest",
+            Path: "/private",
+            VersionID: "what",
         },
-        APIEndpointID: "Electric Operations systems",
-        APIID: "Operations East Unbranded",
-        VersionID: "parsing Convertible",
+        APIEndpointID: "Trans",
+        APIID: "Kia",
+        VersionID: "Electronic",
     })
     if err != nil {
         log.Fatal(err)

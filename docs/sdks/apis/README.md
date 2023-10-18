@@ -38,8 +38,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
-        APIID: "Applications Mercedes fuchsia",
-        VersionID: "Conroe",
+        APIID: "plaintive",
+        VersionID: "THX",
     })
     if err != nil {
         log.Fatal(err)
@@ -89,8 +89,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GenerateOpenAPISpec(ctx, operations.GenerateOpenAPISpecRequest{
-        APIID: "frictionless District South",
-        VersionID: "West Global",
+        APIID: "fixed",
+        VersionID: "bandwidth",
     })
     if err != nil {
         log.Fatal(err)
@@ -139,8 +139,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GeneratePostmanCollection(ctx, operations.GeneratePostmanCollectionRequest{
-        APIID: "extend Security",
-        VersionID: "reconfirm",
+        APIID: "Paradigm",
+        VersionID: "olive",
     })
     if err != nil {
         log.Fatal(err)
@@ -190,10 +190,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GetAllAPIVersions(ctx, operations.GetAllAPIVersionsRequest{
-        APIID: "yum Rustic Berkshire",
+        APIID: "azure",
         Metadata: map[string][]string{
-            "Dodge": []string{
-                "Salad",
+            "enhance": []string{
+                "Garrison",
             },
         },
         Op: &operations.GetAllAPIVersionsOp{
@@ -306,16 +306,16 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.UpsertAPI(ctx, operations.UpsertAPIRequest{
         APIInput: shared.APIInput{
-            APIID: "Martinique redefine Garland",
-            Description: "Balanced 24/7 utilisation",
+            APIID: "Van",
+            Description: "Front-line zero defect algorithm",
             MetaData: map[string][]string{
-                "pixel": []string{
-                    "Buckinghamshire",
+                "Balanced": []string{
+                    "West",
                 },
             },
-            VersionID: "Forward",
+            VersionID: "pixel",
         },
-        APIID: "Facilitator",
+        APIID: "Buckinghamshire",
     })
     if err != nil {
         log.Fatal(err)
