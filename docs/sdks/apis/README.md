@@ -38,8 +38,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
-        APIID: "plaintive",
-        VersionID: "THX",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -89,8 +89,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GenerateOpenAPISpec(ctx, operations.GenerateOpenAPISpecRequest{
-        APIID: "fixed",
-        VersionID: "bandwidth",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -139,8 +139,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GeneratePostmanCollection(ctx, operations.GeneratePostmanCollectionRequest{
-        APIID: "Paradigm",
-        VersionID: "olive",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -190,10 +190,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.GetAllAPIVersions(ctx, operations.GetAllAPIVersionsRequest{
-        APIID: "azure",
+        APIID: "string",
         Metadata: map[string][]string{
-            "enhance": []string{
-                "Garrison",
+            "key": []string{
+                "string",
             },
         },
         Op: &operations.GetAllAPIVersionsOp{
@@ -249,8 +249,8 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{
         Metadata: map[string][]string{
-            "South": []string{
-                "Southwest",
+            "key": []string{
+                "string",
             },
         },
         Op: &operations.GetApisOp{
@@ -306,16 +306,16 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.UpsertAPI(ctx, operations.UpsertAPIRequest{
         APIInput: shared.APIInput{
-            APIID: "Van",
-            Description: "Front-line zero defect algorithm",
+            APIID: "string",
+            Description: "Synchronised 5th generation knowledge user",
             MetaData: map[string][]string{
-                "Balanced": []string{
-                    "West",
+                "key": []string{
+                    "string",
                 },
             },
-            VersionID: "pixel",
+            VersionID: "string",
         },
-        APIID: "Buckinghamshire",
+        APIID: "string",
     })
     if err != nil {
         log.Fatal(err)

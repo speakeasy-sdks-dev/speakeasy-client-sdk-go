@@ -84,15 +84,15 @@ func main() {
             Filters: []shared.Filter{
                 shared.Filter{
                     Key: "<key>",
-                    Operator: "Designer",
-                    Value: "Pickup",
+                    Operator: "string",
+                    Value: "string",
                 },
             },
-            Limit: 455139,
-            Offset: 173644,
-            Operator: "Indiana",
+            Limit: 669298,
+            Offset: 94585,
+            Operator: "string",
         },
-        PluginID: "Chrysler",
+        PluginID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -140,10 +140,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Plugins.UpsertPlugin(ctx, shared.Plugin{
-        Code: "Fish",
-        PluginID: "Rock",
-        Title: "North",
-        WorkspaceID: "exuding",
+        Code: "string",
+        PluginID: "string",
+        Title: "string",
+        WorkspaceID: "string",
     })
     if err != nil {
         log.Fatal(err)

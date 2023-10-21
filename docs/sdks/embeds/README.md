@@ -40,13 +40,13 @@ func main() {
             Filters: []shared.Filter{
                 shared.Filter{
                     Key: "<key>",
-                    Operator: "along",
-                    Value: "quos",
+                    Operator: "string",
+                    Value: "string",
                 },
             },
-            Limit: 263313,
-            Offset: 411277,
-            Operator: "male",
+            Limit: 964408,
+            Offset: 95617,
+            Operator: "string",
         },
     })
     if err != nil {
@@ -141,7 +141,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Embeds.RevokeEmbedAccessToken(ctx, operations.RevokeEmbedAccessTokenRequest{
-        TokenID: "Ball",
+        TokenID: "string",
     })
     if err != nil {
         log.Fatal(err)

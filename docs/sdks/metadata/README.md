@@ -35,10 +35,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Metadata.DeleteVersionMetadata(ctx, operations.DeleteVersionMetadataRequest{
-        APIID: "Hydrogen",
-        MetaKey: "Cargo",
-        MetaValue: "Minnetonka",
-        VersionID: "communities",
+        APIID: "string",
+        MetaKey: "string",
+        MetaValue: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -87,8 +87,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Metadata.GetVersionMetadata(ctx, operations.GetVersionMetadataRequest{
-        APIID: "Bronze",
-        VersionID: "Buckinghamshire",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -138,11 +138,11 @@ func main() {
     ctx := context.Background()
     res, err := s.Metadata.InsertVersionMetadata(ctx, operations.InsertVersionMetadataRequest{
         VersionMetadataInput: shared.VersionMetadataInput{
-            MetaKey: "Borders",
-            MetaValue: "Potassium",
+            MetaKey: "string",
+            MetaValue: "string",
         },
-        APIID: "Bedfordshire",
-        VersionID: "Dram",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)

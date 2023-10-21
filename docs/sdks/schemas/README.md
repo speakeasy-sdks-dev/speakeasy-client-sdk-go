@@ -40,9 +40,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.DeleteSchema(ctx, operations.DeleteSchemaRequest{
-        APIID: "West",
-        RevisionID: "Tricycle",
-        VersionID: "Funk",
+        APIID: "string",
+        RevisionID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -91,8 +91,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.DownloadSchema(ctx, operations.DownloadSchemaRequest{
-        APIID: "SMTP",
-        VersionID: "North",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -141,9 +141,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.DownloadSchemaRevision(ctx, operations.DownloadSchemaRevisionRequest{
-        APIID: "Cargo",
-        RevisionID: "hacking",
-        VersionID: "firewall",
+        APIID: "string",
+        RevisionID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -193,8 +193,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.GetSchema(ctx, operations.GetSchemaRequest{
-        APIID: "Handcrafted",
-        VersionID: "Hybrid",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -243,10 +243,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.GetSchemaDiff(ctx, operations.GetSchemaDiffRequest{
-        APIID: "North",
-        BaseRevisionID: "Central",
-        TargetRevisionID: "South",
-        VersionID: "Van",
+        APIID: "string",
+        BaseRevisionID: "string",
+        TargetRevisionID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -296,9 +296,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.GetSchemaRevision(ctx, operations.GetSchemaRevisionRequest{
-        APIID: "City",
-        RevisionID: "web",
-        VersionID: "sternly",
+        APIID: "string",
+        RevisionID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -348,8 +348,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Schemas.GetSchemas(ctx, operations.GetSchemasRequest{
-        APIID: "indigo",
-        VersionID: "Fantastic",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -402,11 +402,11 @@ func main() {
         RequestBody: operations.RegisterSchemaRequestBody{
             File: operations.RegisterSchemaRequestBodyFile{
                 Content: []byte("mg|mf\".]!\"),
-                File: "Avon",
+                File: "string",
             },
         },
-        APIID: "Pants",
-        VersionID: "Table",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)

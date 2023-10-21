@@ -40,9 +40,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, operations.DeleteAPIEndpointRequest{
-        APIEndpointID: "blue",
-        APIID: "Gasoline",
-        VersionID: "Southwest",
+        APIEndpointID: "string",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -92,9 +92,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.FindAPIEndpoint(ctx, operations.FindAPIEndpointRequest{
-        APIID: "Cotton",
-        DisplayName: "Chief",
-        VersionID: "Wooden",
+        APIID: "string",
+        DisplayName: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -144,9 +144,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, operations.GenerateOpenAPISpecForAPIEndpointRequest{
-        APIEndpointID: "Mazda",
-        APIID: "web",
-        VersionID: "explicabo",
+        APIEndpointID: "string",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -195,9 +195,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, operations.GeneratePostmanCollectionForAPIEndpointRequest{
-        APIEndpointID: "indigo",
-        APIID: "barring",
-        VersionID: "Senior",
+        APIEndpointID: "string",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -246,7 +246,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, operations.GetAllAPIEndpointsRequest{
-        APIID: "unless",
+        APIID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -295,8 +295,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, operations.GetAllForVersionAPIEndpointsRequest{
-        APIID: "now",
-        VersionID: "Diesel",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -345,9 +345,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAPIEndpoint(ctx, operations.GetAPIEndpointRequest{
-        APIEndpointID: "flog",
-        APIID: "synthesize",
-        VersionID: "Barium",
+        APIEndpointID: "string",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -397,16 +397,16 @@ func main() {
     ctx := context.Background()
     res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, operations.UpsertAPIEndpointRequest{
         APIEndpointInput: shared.APIEndpointInput{
-            APIEndpointID: "Facilitator",
-            Description: "Cross-group bottom-line productivity",
-            DisplayName: "nor",
-            Method: "Northwest",
-            Path: "/private",
-            VersionID: "what",
+            APIEndpointID: "string",
+            Description: "Public-key systematic attitude",
+            DisplayName: "string",
+            Method: "string",
+            Path: "/etc/periodic",
+            VersionID: "string",
         },
-        APIEndpointID: "Trans",
-        APIID: "Kia",
-        VersionID: "Electronic",
+        APIEndpointID: "string",
+        APIID: "string",
+        VersionID: "string",
     })
     if err != nil {
         log.Fatal(err)
