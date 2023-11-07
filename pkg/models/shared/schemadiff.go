@@ -2,21 +2,21 @@
 
 package shared
 
-type SchemaDiffValueChange struct {
+type ValueChange struct {
 	// Represents the previous value of the element.
 	From string `json:"From"`
 	// Represents the current value of the element.
 	To string `json:"To"`
 }
 
-func (o *SchemaDiffValueChange) GetFrom() string {
+func (o *ValueChange) GetFrom() string {
 	if o == nil {
 		return ""
 	}
 	return o.From
 }
 
-func (o *SchemaDiffValueChange) GetTo() string {
+func (o *ValueChange) GetTo() string {
 	if o == nil {
 		return ""
 	}
@@ -30,7 +30,7 @@ type SchemaDiff struct {
 	// Holds every deletion change in the diff.
 	Deletions []string `json:"deletions"`
 	// Holds every modification change in the diff.
-	Modifications map[string]SchemaDiffValueChange `json:"modifications"`
+	Modifications map[string]ValueChange `json:"modifications"`
 }
 
 func (o *SchemaDiff) GetAdditions() []string {
@@ -47,9 +47,9 @@ func (o *SchemaDiff) GetDeletions() []string {
 	return o.Deletions
 }
 
-func (o *SchemaDiff) GetModifications() map[string]SchemaDiffValueChange {
+func (o *SchemaDiff) GetModifications() map[string]ValueChange {
 	if o == nil {
-		return map[string]SchemaDiffValueChange{}
+		return map[string]ValueChange{}
 	}
 	return o.Modifications
 }

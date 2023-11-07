@@ -3,21 +3,21 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
 type GetValidEmbedAccessTokensResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// OK
-	EmbedTokens []shared.EmbedToken
 	// Default error response
 	Error *shared.Error
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	Classes []shared.EmbedToken
 }
 
 func (o *GetValidEmbedAccessTokensResponse) GetContentType() string {
@@ -25,13 +25,6 @@ func (o *GetValidEmbedAccessTokensResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *GetValidEmbedAccessTokensResponse) GetEmbedTokens() []shared.EmbedToken {
-	if o == nil {
-		return nil
-	}
-	return o.EmbedTokens
 }
 
 func (o *GetValidEmbedAccessTokensResponse) GetError() *shared.Error {
@@ -53,4 +46,11 @@ func (o *GetValidEmbedAccessTokensResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetValidEmbedAccessTokensResponse) GetClasses() []shared.EmbedToken {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

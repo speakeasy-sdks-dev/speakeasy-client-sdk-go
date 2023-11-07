@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -29,8 +29,6 @@ func (o *RunPluginRequest) GetPluginID() string {
 }
 
 type RunPluginResponse struct {
-	// OK
-	BoundedRequests []shared.BoundedRequest
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
@@ -39,13 +37,8 @@ type RunPluginResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *RunPluginResponse) GetBoundedRequests() []shared.BoundedRequest {
-	if o == nil {
-		return nil
-	}
-	return o.BoundedRequests
+	// OK
+	Classes []shared.BoundedRequest
 }
 
 func (o *RunPluginResponse) GetContentType() string {
@@ -74,4 +67,11 @@ func (o *RunPluginResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *RunPluginResponse) GetClasses() []shared.BoundedRequest {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

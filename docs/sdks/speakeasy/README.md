@@ -23,8 +23,8 @@ package main
 import(
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 )
 
 func main() {
@@ -33,7 +33,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Speakeasy.ValidateAPIKey(ctx)
+    res, err := s.ValidateAPIKey(ctx)
     if err != nil {
         log.Fatal(err)
     }

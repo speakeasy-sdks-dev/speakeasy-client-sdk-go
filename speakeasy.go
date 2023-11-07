@@ -6,10 +6,10 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/sdkerrors"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
@@ -78,20 +78,20 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 //
 // /docs - The Speakeasy Platform Documentation
 type Speakeasy struct {
-	// REST APIs for managing ApiEndpoint entities
-	APIEndpoints *apiEndpoints
 	// REST APIs for managing Api entities
-	Apis *apis
-	// REST APIs for managing embeds
-	Embeds *embeds
+	Apis *Apis
+	// REST APIs for managing ApiEndpoint entities
+	APIEndpoints *APIEndpoints
 	// REST APIs for managing Version Metadata entities
-	Metadata *metadata
-	// REST APIs for managing and running plugins
-	Plugins *plugins
-	// REST APIs for retrieving request information
-	Requests *requests
+	Metadata *Metadata
 	// REST APIs for managing Schema entities
-	Schemas *schemas
+	Schemas *Schemas
+	// REST APIs for retrieving request information
+	Requests *Requests
+	// REST APIs for managing and running plugins
+	Plugins *Plugins
+	// REST APIs for managing embeds
+	Embeds *Embeds
 
 	sdkConfiguration sdkConfiguration
 }
@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.3.0",
-			SDKVersion:        "1.29.0",
-			GenVersion:        "2.169.0",
-			UserAgent:         "speakeasy-sdk/go 1.29.0 2.169.0 0.3.0 github.com/speakeasy-api/speakeasy-client-sdk-go",
+			SDKVersion:        "2.0.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 2.0.0 2.181.1 0.3.0 github.com/speakeasy-api/speakeasy-client-sdk-go",
 		},
 	}
 	for _, opt := range opts {
@@ -183,19 +183,19 @@ func New(opts ...SDKOption) *Speakeasy {
 		}
 	}
 
-	sdk.APIEndpoints = newAPIEndpoints(sdk.sdkConfiguration)
-
 	sdk.Apis = newApis(sdk.sdkConfiguration)
 
-	sdk.Embeds = newEmbeds(sdk.sdkConfiguration)
+	sdk.APIEndpoints = newAPIEndpoints(sdk.sdkConfiguration)
 
 	sdk.Metadata = newMetadata(sdk.sdkConfiguration)
 
-	sdk.Plugins = newPlugins(sdk.sdkConfiguration)
+	sdk.Schemas = newSchemas(sdk.sdkConfiguration)
 
 	sdk.Requests = newRequests(sdk.sdkConfiguration)
 
-	sdk.Schemas = newSchemas(sdk.sdkConfiguration)
+	sdk.Plugins = newPlugins(sdk.sdkConfiguration)
+
+	sdk.Embeds = newEmbeds(sdk.sdkConfiguration)
 
 	return sdk
 }
@@ -238,6 +238,10 @@ func (s *Speakeasy) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPI
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):

@@ -6,27 +6,27 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/sdkerrors"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/utils"
 	"io"
 	"net/http"
 )
 
-// metadata - REST APIs for managing Version Metadata entities
-type metadata struct {
+// Metadata - REST APIs for managing Version Metadata entities
+type Metadata struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newMetadata(sdkConfig sdkConfiguration) *metadata {
-	return &metadata{
+func newMetadata(sdkConfig sdkConfiguration) *Metadata {
+	return &Metadata{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // DeleteVersionMetadata - Delete metadata for a particular apiID and versionID.
-func (s *metadata) DeleteVersionMetadata(ctx context.Context, request operations.DeleteVersionMetadataRequest) (*operations.DeleteVersionMetadataResponse, error) {
+func (s *Metadata) DeleteVersionMetadata(ctx context.Context, request operations.DeleteVersionMetadataRequest) (*operations.DeleteVersionMetadataResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", request, nil)
 	if err != nil {
@@ -66,6 +66,10 @@ func (s *metadata) DeleteVersionMetadata(ctx context.Context, request operations
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -84,7 +88,7 @@ func (s *metadata) DeleteVersionMetadata(ctx context.Context, request operations
 }
 
 // GetVersionMetadata - Get all metadata for a particular apiID and versionID.
-func (s *metadata) GetVersionMetadata(ctx context.Context, request operations.GetVersionMetadataRequest) (*operations.GetVersionMetadataResponse, error) {
+func (s *Metadata) GetVersionMetadata(ctx context.Context, request operations.GetVersionMetadataRequest) (*operations.GetVersionMetadataResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", request, nil)
 	if err != nil {
@@ -131,10 +135,14 @@ func (s *metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 				return nil, err
 			}
 
-			res.VersionMetadata = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -153,14 +161,14 @@ func (s *metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 }
 
 // InsertVersionMetadata - Insert metadata for a particular apiID and versionID.
-func (s *metadata) InsertVersionMetadata(ctx context.Context, request operations.InsertVersionMetadataRequest) (*operations.InsertVersionMetadataResponse, error) {
+func (s *Metadata) InsertVersionMetadata(ctx context.Context, request operations.InsertVersionMetadataRequest) (*operations.InsertVersionMetadataResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "VersionMetadataInput", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "VersionMetadata", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -214,6 +222,10 @@ func (s *metadata) InsertVersionMetadata(ctx context.Context, request operations
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):

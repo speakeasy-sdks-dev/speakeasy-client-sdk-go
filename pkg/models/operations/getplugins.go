@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -12,12 +12,12 @@ type GetPluginsResponse struct {
 	ContentType string
 	// Default error response
 	Error *shared.Error
-	// OK
-	Plugins []shared.Plugin
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	Classes []shared.Plugin
 }
 
 func (o *GetPluginsResponse) GetContentType() string {
@@ -34,13 +34,6 @@ func (o *GetPluginsResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *GetPluginsResponse) GetPlugins() []shared.Plugin {
-	if o == nil {
-		return nil
-	}
-	return o.Plugins
-}
-
 func (o *GetPluginsResponse) GetStatusCode() int {
 	if o == nil {
 		return 0
@@ -53,4 +46,11 @@ func (o *GetPluginsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetPluginsResponse) GetClasses() []shared.Plugin {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

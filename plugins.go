@@ -6,28 +6,28 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/sdkerrors"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// plugins - REST APIs for managing and running plugins
-type plugins struct {
+// Plugins - REST APIs for managing and running plugins
+type Plugins struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newPlugins(sdkConfig sdkConfiguration) *plugins {
-	return &plugins{
+func newPlugins(sdkConfig sdkConfiguration) *Plugins {
+	return &Plugins{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // GetPlugins - Get all plugins for the current workspace.
-func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsResponse, error) {
+func (s *Plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugins"
 
@@ -71,10 +71,14 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 				return nil, err
 			}
 
-			res.Plugins = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -93,7 +97,7 @@ func (s *plugins) GetPlugins(ctx context.Context) (*operations.GetPluginsRespons
 }
 
 // RunPlugin - Run a plugin
-func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginRequest) (*operations.RunPluginResponse, error) {
+func (s *Plugins) RunPlugin(ctx context.Context, request operations.RunPluginRequest) (*operations.RunPluginResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/plugins/{pluginID}", request, nil)
 	if err != nil {
@@ -144,10 +148,14 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 				return nil, err
 			}
 
-			res.BoundedRequests = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -166,7 +174,7 @@ func (s *plugins) RunPlugin(ctx context.Context, request operations.RunPluginReq
 }
 
 // UpsertPlugin - Upsert a plugin
-func (s *plugins) UpsertPlugin(ctx context.Context, request shared.Plugin) (*operations.UpsertPluginResponse, error) {
+func (s *Plugins) UpsertPlugin(ctx context.Context, request shared.Plugin) (*operations.UpsertPluginResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/plugins"
 
@@ -224,6 +232,10 @@ func (s *plugins) UpsertPlugin(ctx context.Context, request shared.Plugin) (*ope
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):

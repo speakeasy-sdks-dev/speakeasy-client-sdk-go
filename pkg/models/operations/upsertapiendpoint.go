@@ -3,13 +3,13 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
 type UpsertAPIEndpointRequest struct {
 	// A JSON representation of the ApiEndpoint to upsert.
-	APIEndpointInput shared.APIEndpointInput `request:"mediaType=application/json"`
+	APIEndpoint shared.APIEndpointInput `request:"mediaType=application/json"`
 	// The ID of the ApiEndpoint to upsert.
 	APIEndpointID string `pathParam:"style=simple,explode=false,name=apiEndpointID"`
 	// The ID of the Api the ApiEndpoint belongs to.
@@ -18,11 +18,11 @@ type UpsertAPIEndpointRequest struct {
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
-func (o *UpsertAPIEndpointRequest) GetAPIEndpointInput() shared.APIEndpointInput {
+func (o *UpsertAPIEndpointRequest) GetAPIEndpoint() shared.APIEndpointInput {
 	if o == nil {
 		return shared.APIEndpointInput{}
 	}
-	return o.APIEndpointInput
+	return o.APIEndpoint
 }
 
 func (o *UpsertAPIEndpointRequest) GetAPIEndpointID() string {

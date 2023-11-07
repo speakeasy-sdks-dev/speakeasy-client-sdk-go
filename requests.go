@@ -6,22 +6,22 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/sdkerrors"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
 )
 
-// requests - REST APIs for retrieving request information
-type requests struct {
+// Requests - REST APIs for retrieving request information
+type Requests struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newRequests(sdkConfig sdkConfiguration) *requests {
-	return &requests{
+func newRequests(sdkConfig sdkConfiguration) *Requests {
+	return &Requests{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -29,7 +29,7 @@ func newRequests(sdkConfig sdkConfiguration) *requests {
 // GenerateRequestPostmanCollection - Generate a Postman collection for a particular request.
 // Generates a Postman collection for a particular request.
 // Allowing it to be replayed with the same inputs that were captured by the SDK.
-func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request operations.GenerateRequestPostmanCollectionRequest, opts ...operations.Option) (*operations.GenerateRequestPostmanCollectionResponse, error) {
+func (s *Requests) GenerateRequestPostmanCollection(ctx context.Context, request operations.GenerateRequestPostmanCollectionRequest, opts ...operations.Option) (*operations.GenerateRequestPostmanCollectionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -94,6 +94,10 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -112,7 +116,7 @@ func (s *requests) GenerateRequestPostmanCollection(ctx context.Context, request
 }
 
 // GetRequestFromEventLog - Get information about a particular request.
-func (s *requests) GetRequestFromEventLog(ctx context.Context, request operations.GetRequestFromEventLogRequest) (*operations.GetRequestFromEventLogResponse, error) {
+func (s *Requests) GetRequestFromEventLog(ctx context.Context, request operations.GetRequestFromEventLogRequest) (*operations.GetRequestFromEventLogResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/eventlog/{requestID}", request, nil)
 	if err != nil {
@@ -163,6 +167,10 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -183,7 +191,7 @@ func (s *requests) GetRequestFromEventLog(ctx context.Context, request operation
 // QueryEventLog - Query the event log to retrieve a list of requests.
 // Supports retrieving a list of request captured by the SDK for this workspace.
 // Allows the filtering of requests on a number of criteria such as ApiID, VersionID, Path, Method, etc.
-func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEventLogRequest) (*operations.QueryEventLogResponse, error) {
+func (s *Requests) QueryEventLog(ctx context.Context, request operations.QueryEventLogRequest) (*operations.QueryEventLogResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/eventlog/query"
 
@@ -231,10 +239,14 @@ func (s *requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 				return nil, err
 			}
 
-			res.BoundedRequests = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):

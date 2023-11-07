@@ -1,4 +1,4 @@
-module github.com/speakeasy-api/speakeasy-client-sdk-go
+module github.com/speakeasy-api/speakeasy-client-sdk-go/v2
 
 go 1.14
 

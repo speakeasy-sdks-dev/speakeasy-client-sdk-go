@@ -3,22 +3,22 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
 type UpsertAPIRequest struct {
 	// A JSON representation of the Api to upsert
-	APIInput shared.APIInput `request:"mediaType=application/json"`
+	API shared.APIInput `request:"mediaType=application/json"`
 	// The ID of the Api to upsert.
 	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
 }
 
-func (o *UpsertAPIRequest) GetAPIInput() shared.APIInput {
+func (o *UpsertAPIRequest) GetAPI() shared.APIInput {
 	if o == nil {
 		return shared.APIInput{}
 	}
-	return o.APIInput
+	return o.API
 }
 
 func (o *UpsertAPIRequest) GetAPIID() string {

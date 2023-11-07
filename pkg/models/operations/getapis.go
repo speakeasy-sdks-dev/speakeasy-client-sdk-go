@@ -3,17 +3,17 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
-// GetApisOp - Configuration for filter operations
-type GetApisOp struct {
+// QueryParamOp - Configuration for filter operations
+type QueryParamOp struct {
 	// Whether to AND or OR the filters
 	And bool `queryParam:"name=and"`
 }
 
-func (o *GetApisOp) GetAnd() bool {
+func (o *QueryParamOp) GetAnd() bool {
 	if o == nil {
 		return false
 	}
@@ -24,7 +24,7 @@ type GetApisRequest struct {
 	// Metadata to filter Apis on
 	Metadata map[string][]string `queryParam:"style=deepObject,explode=true,name=metadata"`
 	// Configuration for filter operations
-	Op *GetApisOp `queryParam:"style=deepObject,explode=true,name=op"`
+	Op *QueryParamOp `queryParam:"style=deepObject,explode=true,name=op"`
 }
 
 func (o *GetApisRequest) GetMetadata() map[string][]string {
@@ -34,7 +34,7 @@ func (o *GetApisRequest) GetMetadata() map[string][]string {
 	return o.Metadata
 }
 
-func (o *GetApisRequest) GetOp() *GetApisOp {
+func (o *GetApisRequest) GetOp() *QueryParamOp {
 	if o == nil {
 		return nil
 	}
@@ -42,8 +42,6 @@ func (o *GetApisRequest) GetOp() *GetApisOp {
 }
 
 type GetApisResponse struct {
-	// OK
-	Apis []shared.API
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
@@ -52,13 +50,8 @@ type GetApisResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *GetApisResponse) GetApis() []shared.API {
-	if o == nil {
-		return nil
-	}
-	return o.Apis
+	// OK
+	Classes []shared.API
 }
 
 func (o *GetApisResponse) GetContentType() string {
@@ -87,4 +80,11 @@ func (o *GetApisResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetApisResponse) GetClasses() []shared.API {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

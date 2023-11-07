@@ -1,5 +1,5 @@
 # Apis
-(*Apis*)
+(*.Apis*)
 
 ## Overview
 
@@ -26,9 +26,9 @@ package main
 import(
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
 )
 
 func main() {
@@ -77,9 +77,9 @@ package main
 import(
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
 )
 
 func main() {
@@ -127,9 +127,9 @@ package main
 import(
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
 )
 
 func main() {
@@ -178,9 +178,9 @@ package main
 import(
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
 )
 
 func main() {
@@ -196,7 +196,7 @@ func main() {
                 "string",
             },
         },
-        Op: &operations.GetAllAPIVersionsOp{
+        Op: &operations.Op{
             And: false,
         },
     })
@@ -204,7 +204,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Apis != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -236,9 +236,9 @@ package main
 import(
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
 )
 
 func main() {
@@ -253,7 +253,7 @@ func main() {
                 "string",
             },
         },
-        Op: &operations.GetApisOp{
+        Op: &operations.QueryParamOp{
             And: false,
         },
     })
@@ -261,7 +261,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Apis != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -293,9 +293,9 @@ package main
 import(
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
 )
 
 func main() {
@@ -305,7 +305,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apis.UpsertAPI(ctx, operations.UpsertAPIRequest{
-        APIInput: shared.APIInput{
+        API: shared.APIInput{
             APIID: "string",
             Description: "Synchronised 5th generation knowledge user",
             MetaData: map[string][]string{

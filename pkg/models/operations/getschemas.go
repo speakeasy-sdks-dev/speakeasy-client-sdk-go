@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -33,12 +33,12 @@ type GetSchemasResponse struct {
 	ContentType string
 	// Default error response
 	Error *shared.Error
-	// OK
-	Schemata []shared.Schema
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	Classes []shared.Schema
 }
 
 func (o *GetSchemasResponse) GetContentType() string {
@@ -55,13 +55,6 @@ func (o *GetSchemasResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *GetSchemasResponse) GetSchemata() []shared.Schema {
-	if o == nil {
-		return nil
-	}
-	return o.Schemata
-}
-
 func (o *GetSchemasResponse) GetStatusCode() int {
 	if o == nil {
 		return 0
@@ -74,4 +67,11 @@ func (o *GetSchemasResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetSchemasResponse) GetClasses() []shared.Schema {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

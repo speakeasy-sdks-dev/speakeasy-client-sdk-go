@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -38,7 +38,7 @@ type GetVersionMetadataResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	VersionMetadata []shared.VersionMetadata
+	Classes []shared.VersionMetadata
 }
 
 func (o *GetVersionMetadataResponse) GetContentType() string {
@@ -69,9 +69,9 @@ func (o *GetVersionMetadataResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *GetVersionMetadataResponse) GetVersionMetadata() []shared.VersionMetadata {
+func (o *GetVersionMetadataResponse) GetClasses() []shared.VersionMetadata {
 	if o == nil {
 		return nil
 	}
-	return o.VersionMetadata
+	return o.Classes
 }

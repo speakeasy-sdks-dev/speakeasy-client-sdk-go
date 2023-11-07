@@ -3,37 +3,37 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
-type RegisterSchemaRequestBodyFile struct {
-	Content []byte `multipartForm:"content"`
-	File    string `multipartForm:"name=file"`
+type File struct {
+	Content  []byte `multipartForm:"content"`
+	FileName string `multipartForm:"name=file"`
 }
 
-func (o *RegisterSchemaRequestBodyFile) GetContent() []byte {
+func (o *File) GetContent() []byte {
 	if o == nil {
 		return []byte{}
 	}
 	return o.Content
 }
 
-func (o *RegisterSchemaRequestBodyFile) GetFile() string {
+func (o *File) GetFileName() string {
 	if o == nil {
 		return ""
 	}
-	return o.File
+	return o.FileName
 }
 
 // RegisterSchemaRequestBody - The schema file to upload provided as a multipart/form-data file segment.
 type RegisterSchemaRequestBody struct {
-	File RegisterSchemaRequestBodyFile `multipartForm:"file"`
+	File File `multipartForm:"file"`
 }
 
-func (o *RegisterSchemaRequestBody) GetFile() RegisterSchemaRequestBodyFile {
+func (o *RegisterSchemaRequestBody) GetFile() File {
 	if o == nil {
-		return RegisterSchemaRequestBodyFile{}
+		return File{}
 	}
 	return o.File
 }

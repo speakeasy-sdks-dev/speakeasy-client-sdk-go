@@ -3,24 +3,24 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
 type InsertVersionMetadataRequest struct {
 	// A JSON representation of the metadata to insert.
-	VersionMetadataInput shared.VersionMetadataInput `request:"mediaType=application/json"`
+	VersionMetadata shared.VersionMetadataInput `request:"mediaType=application/json"`
 	// The ID of the Api to insert metadata for.
 	APIID string `pathParam:"style=simple,explode=false,name=apiID"`
 	// The version ID of the Api to insert metadata for.
 	VersionID string `pathParam:"style=simple,explode=false,name=versionID"`
 }
 
-func (o *InsertVersionMetadataRequest) GetVersionMetadataInput() shared.VersionMetadataInput {
+func (o *InsertVersionMetadataRequest) GetVersionMetadata() shared.VersionMetadataInput {
 	if o == nil {
 		return shared.VersionMetadataInput{}
 	}
-	return o.VersionMetadataInput
+	return o.VersionMetadata
 }
 
 func (o *InsertVersionMetadataRequest) GetAPIID() string {

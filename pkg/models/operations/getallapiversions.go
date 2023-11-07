@@ -3,17 +3,17 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
-// GetAllAPIVersionsOp - Configuration for filter operations
-type GetAllAPIVersionsOp struct {
+// Op - Configuration for filter operations
+type Op struct {
 	// Whether to AND or OR the filters
 	And bool `queryParam:"name=and"`
 }
 
-func (o *GetAllAPIVersionsOp) GetAnd() bool {
+func (o *Op) GetAnd() bool {
 	if o == nil {
 		return false
 	}
@@ -26,7 +26,7 @@ type GetAllAPIVersionsRequest struct {
 	// Metadata to filter Apis on
 	Metadata map[string][]string `queryParam:"style=deepObject,explode=true,name=metadata"`
 	// Configuration for filter operations
-	Op *GetAllAPIVersionsOp `queryParam:"style=deepObject,explode=true,name=op"`
+	Op *Op `queryParam:"style=deepObject,explode=true,name=op"`
 }
 
 func (o *GetAllAPIVersionsRequest) GetAPIID() string {
@@ -43,7 +43,7 @@ func (o *GetAllAPIVersionsRequest) GetMetadata() map[string][]string {
 	return o.Metadata
 }
 
-func (o *GetAllAPIVersionsRequest) GetOp() *GetAllAPIVersionsOp {
+func (o *GetAllAPIVersionsRequest) GetOp() *Op {
 	if o == nil {
 		return nil
 	}
@@ -51,8 +51,6 @@ func (o *GetAllAPIVersionsRequest) GetOp() *GetAllAPIVersionsOp {
 }
 
 type GetAllAPIVersionsResponse struct {
-	// OK
-	Apis []shared.API
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
@@ -61,13 +59,8 @@ type GetAllAPIVersionsResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *GetAllAPIVersionsResponse) GetApis() []shared.API {
-	if o == nil {
-		return nil
-	}
-	return o.Apis
+	// OK
+	Classes []shared.API
 }
 
 func (o *GetAllAPIVersionsResponse) GetContentType() string {
@@ -96,4 +89,11 @@ func (o *GetAllAPIVersionsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetAllAPIVersionsResponse) GetClasses() []shared.API {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

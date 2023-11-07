@@ -6,27 +6,27 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/sdkerrors"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/sdkerrors"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/utils"
 	"io"
 	"net/http"
 )
 
-// schemas - REST APIs for managing Schema entities
-type schemas struct {
+// Schemas - REST APIs for managing Schema entities
+type Schemas struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newSchemas(sdkConfig sdkConfiguration) *schemas {
-	return &schemas{
+func newSchemas(sdkConfig sdkConfiguration) *Schemas {
+	return &Schemas{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // DeleteSchema - Delete a particular schema revision for an Api.
-func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSchemaRequest) (*operations.DeleteSchemaResponse, error) {
+func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSchemaRequest) (*operations.DeleteSchemaResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request, nil)
 	if err != nil {
@@ -66,6 +66,10 @@ func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -84,7 +88,7 @@ func (s *schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 }
 
 // DownloadSchema - Download the latest schema for a particular apiID.
-func (s *schemas) DownloadSchema(ctx context.Context, request operations.DownloadSchemaRequest, opts ...operations.Option) (*operations.DownloadSchemaResponse, error) {
+func (s *Schemas) DownloadSchema(ctx context.Context, request operations.DownloadSchemaRequest, opts ...operations.Option) (*operations.DownloadSchemaResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -132,12 +136,12 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 	}
 
 	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `application/json`) {
-		res.Schema = httpRes.Body
+		res.TwoHundredApplicationJSONSchema = httpRes.Body
 
 		return res, nil
 	}
 	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `application/x-yaml`) {
-		res.Schema = httpRes.Body
+		res.TwoHundredApplicationXYamlSchema = httpRes.Body
 
 		return res, nil
 	}
@@ -154,6 +158,10 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -172,7 +180,7 @@ func (s *schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 }
 
 // DownloadSchemaRevision - Download a particular schema revision for an Api.
-func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations.DownloadSchemaRevisionRequest, opts ...operations.Option) (*operations.DownloadSchemaRevisionResponse, error) {
+func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations.DownloadSchemaRevisionRequest, opts ...operations.Option) (*operations.DownloadSchemaRevisionResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -220,12 +228,12 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 	}
 
 	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `application/json`) {
-		res.Schema = httpRes.Body
+		res.TwoHundredApplicationJSONSchema = httpRes.Body
 
 		return res, nil
 	}
 	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `application/x-yaml`) {
-		res.Schema = httpRes.Body
+		res.TwoHundredApplicationXYamlSchema = httpRes.Body
 
 		return res, nil
 	}
@@ -242,6 +250,10 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -262,7 +274,7 @@ func (s *schemas) DownloadSchemaRevision(ctx context.Context, request operations
 // GetSchema - Get information about the latest schema.
 // Returns information about the last uploaded schema for a particular API version.
 // This won't include the schema itself, that can be retrieved via the downloadSchema operation.
-func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaRequest) (*operations.GetSchemaResponse, error) {
+func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaRequest) (*operations.GetSchemaResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request, nil)
 	if err != nil {
@@ -313,6 +325,10 @@ func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -331,7 +347,7 @@ func (s *schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 }
 
 // GetSchemaDiff - Get a diff of two schema revisions for an Api.
-func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDiffRequest) (*operations.GetSchemaDiffResponse, error) {
+func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchemaDiffRequest) (*operations.GetSchemaDiffResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", request, nil)
 	if err != nil {
@@ -382,6 +398,10 @@ func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -402,7 +422,7 @@ func (s *schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 // GetSchemaRevision - Get information about a particular schema revision for an Api.
 // Returns information about the last uploaded schema for a particular schema revision.
 // This won't include the schema itself, that can be retrieved via the downloadSchema operation.
-func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetSchemaRevisionRequest) (*operations.GetSchemaRevisionResponse, error) {
+func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetSchemaRevisionRequest) (*operations.GetSchemaRevisionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", request, nil)
 	if err != nil {
@@ -453,6 +473,10 @@ func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -473,7 +497,7 @@ func (s *schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 // GetSchemas - Get information about all schemas associated with a particular apiID.
 // Returns information the schemas associated with a particular apiID.
 // This won't include the schemas themselves, they can be retrieved via the downloadSchema operation.
-func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasRequest) (*operations.GetSchemasResponse, error) {
+func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasRequest) (*operations.GetSchemasResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", request, nil)
 	if err != nil {
@@ -520,10 +544,14 @@ func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 				return nil, err
 			}
 
-			res.Schemata = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
@@ -544,7 +572,7 @@ func (s *schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 // RegisterSchema - Register a schema.
 // Allows uploading a schema for a particular API version.
 // This will be used to populate ApiEndpoints and used as a base for any schema generation if present.
-func (s *schemas) RegisterSchema(ctx context.Context, request operations.RegisterSchemaRequest) (*operations.RegisterSchemaResponse, error) {
+func (s *Schemas) RegisterSchema(ctx context.Context, request operations.RegisterSchemaRequest) (*operations.RegisterSchemaResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", request, nil)
 	if err != nil {
@@ -594,6 +622,10 @@ func (s *schemas) RegisterSchema(ctx context.Context, request operations.Registe
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):

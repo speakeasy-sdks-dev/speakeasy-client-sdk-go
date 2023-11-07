@@ -6,9 +6,9 @@ package main
 
 import (
 	"context"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"log"
 )
 
@@ -24,7 +24,7 @@ func main() {
 				"string",
 			},
 		},
-		Op: &operations.GetApisOp{
+		Op: &operations.QueryParamOp{
 			And: false,
 		},
 	})
@@ -32,7 +32,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if res.Apis != nil {
+	if res.Classes != nil {
 		// handle response
 	}
 }

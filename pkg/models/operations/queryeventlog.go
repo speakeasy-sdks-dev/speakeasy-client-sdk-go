@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 	"net/http"
 )
 
@@ -20,8 +20,6 @@ func (o *QueryEventLogRequest) GetFilters() *shared.Filters {
 }
 
 type QueryEventLogResponse struct {
-	// OK
-	BoundedRequests []shared.BoundedRequest
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
@@ -30,13 +28,8 @@ type QueryEventLogResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-}
-
-func (o *QueryEventLogResponse) GetBoundedRequests() []shared.BoundedRequest {
-	if o == nil {
-		return nil
-	}
-	return o.BoundedRequests
+	// OK
+	Classes []shared.BoundedRequest
 }
 
 func (o *QueryEventLogResponse) GetContentType() string {
@@ -65,4 +58,11 @@ func (o *QueryEventLogResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *QueryEventLogResponse) GetClasses() []shared.BoundedRequest {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }
