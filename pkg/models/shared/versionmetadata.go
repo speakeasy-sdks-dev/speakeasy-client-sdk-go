@@ -7,28 +7,6 @@ import (
 	"time"
 )
 
-// VersionMetadataInput - A set of keys and associated values, attached to a particular version of an Api.
-type VersionMetadataInput struct {
-	// The key for this metadata.
-	MetaKey string `json:"meta_key"`
-	// One of the values for this metadata.
-	MetaValue string `json:"meta_value"`
-}
-
-func (o *VersionMetadataInput) GetMetaKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.MetaKey
-}
-
-func (o *VersionMetadataInput) GetMetaValue() string {
-	if o == nil {
-		return ""
-	}
-	return o.MetaValue
-}
-
 // VersionMetadata - A set of keys and associated values, attached to a particular version of an Api.
 type VersionMetadata struct {
 	// The ID of the Api this Metadata belongs to.

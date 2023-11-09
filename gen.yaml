@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: ba638b2ad28966c596e28321a2003686
   docVersion: 0.3.0
-  speakeasyVersion: 1.114.1
-  generationVersion: 2.181.1
+  speakeasyVersion: 1.116.0
+  generationVersion: 2.185.0
 generation:
   comments: {}
   devContainers:
@@ -13,16 +13,16 @@ generation:
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
 features:
   go:
-    core: 3.1.0
+    core: 3.1.2
     devContainers: 2.90.0
     downloadStreams: 0.1.1
     examples: 2.81.3
     globalSecurity: 2.82.2
     globalServerURLs: 2.82.0
-    inputOutputModels: 2.81.1
+    inputOutputModels: 2.82.0
     serverIDs: 2.81.1
 go:
-  version: 2.0.0
+  version: 2.1.0
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:
@@ -33,8 +33,10 @@ go:
       operations: pkg/models/operations
       shared: pkg/models/shared
       webhooks: pkg/models/webhooks
+  inputModelSuffix: input
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
   maxMethodParams: 0
+  outputModelSuffix: output
   packageName: github.com/speakeasy-api/speakeasy-client-sdk-go
   published: true
   repoSubDirectory: .

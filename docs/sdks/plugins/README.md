@@ -1,5 +1,5 @@
 # Plugins
-(*.Plugins*)
+(*Plugins*)
 
 ## Overview
 
@@ -53,8 +53,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetPluginsResponse](../../models/operations/getpluginsresponse.md), error**
-
+**[*operations.GetPluginsResponse](../../pkg/models/operations/getpluginsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## RunPlugin
 
@@ -106,16 +108,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `request`                                                                  | [operations.RunPluginRequest](../../models/operations/runpluginrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [operations.RunPluginRequest](../../pkg/models/operations/runpluginrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
 
-**[*operations.RunPluginResponse](../../models/operations/runpluginresponse.md), error**
-
+**[*operations.RunPluginResponse](../../pkg/models/operations/runpluginresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpsertPlugin
 
@@ -160,10 +164,12 @@ func main() {
 | Parameter                                             | Type                                                  | Required                                              | Description                                           |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
-| `request`                                             | [shared.Plugin](../../models/shared/plugin.md)        | :heavy_check_mark:                                    | The request object to use for the request.            |
+| `request`                                             | [shared.Plugin](../../pkg/models/shared/plugin.md)    | :heavy_check_mark:                                    | The request object to use for the request.            |
 
 
 ### Response
 
-**[*operations.UpsertPluginResponse](../../models/operations/upsertpluginresponse.md), error**
-
+**[*operations.UpsertPluginResponse](../../pkg/models/operations/upsertpluginresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

@@ -53,5 +53,7 @@ func main() {
 
 ### Response
 
-**[*operations.ValidateAPIKeyResponse](../../models/operations/validateapikeyresponse.md), error**
-
+**[*operations.ValidateAPIKeyResponse](../../pkg/models/operations/validateapikeyresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

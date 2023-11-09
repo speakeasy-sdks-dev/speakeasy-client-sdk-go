@@ -56,7 +56,7 @@ func main() {
 
 * [ValidateAPIKey](docs/sdks/speakeasy/README.md#validateapikey) - Validate the current api key.
 
-### [.Apis](docs/sdks/apis/README.md)
+### [Apis](docs/sdks/apis/README.md)
 
 * [DeleteAPI](docs/sdks/apis/README.md#deleteapi) - Delete an Api.
 * [GenerateOpenAPISpec](docs/sdks/apis/README.md#generateopenapispec) - Generate an OpenAPI specification for a particular Api.
@@ -65,7 +65,7 @@ func main() {
 * [GetApis](docs/sdks/apis/README.md#getapis) - Get a list of Apis for a given workspace
 * [UpsertAPI](docs/sdks/apis/README.md#upsertapi) - Upsert an Api
 
-### [.APIEndpoints](docs/sdks/apiendpoints/README.md)
+### [APIEndpoints](docs/sdks/apiendpoints/README.md)
 
 * [DeleteAPIEndpoint](docs/sdks/apiendpoints/README.md#deleteapiendpoint) - Delete an ApiEndpoint.
 * [FindAPIEndpoint](docs/sdks/apiendpoints/README.md#findapiendpoint) - Find an ApiEndpoint via its displayName.
@@ -76,13 +76,13 @@ func main() {
 * [GetAPIEndpoint](docs/sdks/apiendpoints/README.md#getapiendpoint) - Get an ApiEndpoint.
 * [UpsertAPIEndpoint](docs/sdks/apiendpoints/README.md#upsertapiendpoint) - Upsert an ApiEndpoint.
 
-### [.Metadata](docs/sdks/metadata/README.md)
+### [Metadata](docs/sdks/metadata/README.md)
 
 * [DeleteVersionMetadata](docs/sdks/metadata/README.md#deleteversionmetadata) - Delete metadata for a particular apiID and versionID.
 * [GetVersionMetadata](docs/sdks/metadata/README.md#getversionmetadata) - Get all metadata for a particular apiID and versionID.
 * [InsertVersionMetadata](docs/sdks/metadata/README.md#insertversionmetadata) - Insert metadata for a particular apiID and versionID.
 
-### [.Schemas](docs/sdks/schemas/README.md)
+### [Schemas](docs/sdks/schemas/README.md)
 
 * [DeleteSchema](docs/sdks/schemas/README.md#deleteschema) - Delete a particular schema revision for an Api.
 * [DownloadSchema](docs/sdks/schemas/README.md#downloadschema) - Download the latest schema for a particular apiID.
@@ -93,19 +93,19 @@ func main() {
 * [GetSchemas](docs/sdks/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
 * [RegisterSchema](docs/sdks/schemas/README.md#registerschema) - Register a schema.
 
-### [.Requests](docs/sdks/requests/README.md)
+### [Requests](docs/sdks/requests/README.md)
 
 * [GenerateRequestPostmanCollection](docs/sdks/requests/README.md#generaterequestpostmancollection) - Generate a Postman collection for a particular request.
 * [GetRequestFromEventLog](docs/sdks/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
 * [QueryEventLog](docs/sdks/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
 
-### [.Plugins](docs/sdks/plugins/README.md)
+### [Plugins](docs/sdks/plugins/README.md)
 
 * [GetPlugins](docs/sdks/plugins/README.md#getplugins) - Get all plugins for the current workspace.
 * [RunPlugin](docs/sdks/plugins/README.md#runplugin) - Run a plugin
 * [UpsertPlugin](docs/sdks/plugins/README.md#upsertplugin) - Upsert a plugin
 
-### [.Embeds](docs/sdks/embeds/README.md)
+### [Embeds](docs/sdks/embeds/README.md)
 
 * [GetEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
 * [GetValidEmbedAccessTokens](docs/sdks/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
@@ -149,9 +149,43 @@ Here's an example of one such pagination call:
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 
+## Example
+
+```go
+package main
+
+import (
+	"context"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := speakeasyclientsdkgo.New(
+		speakeasyclientsdkgo.WithSecurity(""),
+	)
+
+	ctx := context.Background()
+	res, err := s.ValidateAPIKey(ctx)
+	if err != nil {
+
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+	}
+}
+
+```
 <!-- End Error Handling -->
 
 
@@ -267,12 +301,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security scheme globally:
+This SDK supports the following security scheme globally:
 
 | Name     | Type     | Scheme   |
 | -------- | -------- | -------- |
