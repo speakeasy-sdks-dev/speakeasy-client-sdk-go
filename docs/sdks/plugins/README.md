@@ -21,10 +21,10 @@ Get all plugins for the current workspace.
 package main
 
 import(
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 )
 
 func main() {
@@ -68,11 +68,11 @@ Run a plugin
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -131,10 +131,10 @@ Upsert a plugin
 package main
 
 import(
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 )
 
 func main() {

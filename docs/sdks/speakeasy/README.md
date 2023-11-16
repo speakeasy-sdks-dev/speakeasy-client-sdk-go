@@ -21,10 +21,11 @@ Validate the current api key.
 package main
 
 import(
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	"net/http"
 )
 
 func main() {

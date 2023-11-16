@@ -21,11 +21,12 @@ Delete metadata for a particular apiID and versionID.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
+	"net/http"
 )
 
 func main() {
@@ -75,11 +76,11 @@ Get all metadata for a particular apiID and versionID.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -127,11 +128,11 @@ Insert metadata for a particular apiID and versionID.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {

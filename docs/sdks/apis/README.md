@@ -24,11 +24,12 @@ Delete a particular version of an Api. The will also delete all associated ApiEn
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
+	"net/http"
 )
 
 func main() {
@@ -77,11 +78,11 @@ Returns the original document and the newly generated document allowing a diff t
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -129,11 +130,11 @@ Generates a postman collection containing all endpoints for a particular API. In
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -182,11 +183,11 @@ Supports filtering the versions based on metadata attributes.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -242,11 +243,11 @@ Supports filtering the APIs based on metadata attributes.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -301,11 +302,11 @@ If the Api exists, it will be updated.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {

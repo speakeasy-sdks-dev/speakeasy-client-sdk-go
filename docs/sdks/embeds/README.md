@@ -22,11 +22,11 @@ Filters can be applied allowing views to be filtered to things like particular c
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -84,10 +84,10 @@ Get all valid embed access tokens for the current workspace.
 package main
 
 import(
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"context"
 	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
 )
 
 func main() {
@@ -131,11 +131,12 @@ Revoke an embed access EmbedToken.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
+	"net/http"
 )
 
 func main() {

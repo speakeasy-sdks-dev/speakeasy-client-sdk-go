@@ -22,11 +22,11 @@ Allowing it to be replayed with the same inputs that were captured by the SDK.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -73,11 +73,11 @@ Get information about a particular request.
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -125,11 +125,11 @@ Allows the filtering of requests on a number of criteria such as ApiID, VersionI
 package main
 
 import(
-	"context"
-	"log"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
