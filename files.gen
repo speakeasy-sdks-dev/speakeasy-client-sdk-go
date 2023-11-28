@@ -79,7 +79,6 @@ pkg/utils/utils.go
 /pkg/models/shared/embedaccesstokenresponse.go
 /pkg/models/shared/embedtoken.go
 /pkg/models/shared/security.go
-USAGE.md
 docs/pkg/models/operations/validateapikeyresponse.md
 docs/pkg/models/operations/deleteapirequest.md
 docs/pkg/models/operations/deleteapiresponse.md
@@ -178,6 +177,7 @@ docs/sdks/schemas/README.md
 docs/sdks/requests/README.md
 docs/sdks/plugins/README.md
 docs/sdks/embeds/README.md
+USAGE.md
 pkg/models/operations/options.go
 .gitattributes
 .devcontainer/README.md
