@@ -36,7 +36,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(""),
+        speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()
@@ -89,7 +89,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(""),
+        speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()
@@ -141,7 +141,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(""),
+        speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()
@@ -195,7 +195,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(""),
+        speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()
@@ -247,7 +247,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(""),
+        speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()
@@ -302,7 +302,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(""),
+        speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()
@@ -356,7 +356,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(""),
+        speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()
@@ -410,7 +410,7 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New(
-        speakeasyclientsdkgo.WithSecurity(""),
+        speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()

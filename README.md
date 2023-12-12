@@ -26,7 +26,7 @@ import (
 
 func main() {
 	s := speakeasyclientsdkgo.New(
-		speakeasyclientsdkgo.WithSecurity(""),
+		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -123,6 +123,8 @@ func main() {
 
 <!-- Start Special Types [types] -->
 ## Special Types
+
+
 <!-- End Special Types [types] -->
 
 
@@ -152,7 +154,7 @@ import (
 
 func main() {
 	s := speakeasyclientsdkgo.New(
-		speakeasyclientsdkgo.WithSecurity(""),
+		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -199,7 +201,7 @@ import (
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithServer("prod"),
-		speakeasyclientsdkgo.WithSecurity(""),
+		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -233,7 +235,7 @@ import (
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithServerURL("https://api.prod.speakeasyapi.dev"),
-		speakeasyclientsdkgo.WithSecurity(""),
+		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -307,7 +309,7 @@ import (
 
 func main() {
 	s := speakeasyclientsdkgo.New(
-		speakeasyclientsdkgo.WithSecurity(""),
+		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
 	ctx := context.Background()
