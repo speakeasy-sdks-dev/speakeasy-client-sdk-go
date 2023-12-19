@@ -65,7 +65,7 @@ func main() {
 **[*operations.DeleteAPIResponse](../../pkg/models/operations/deleteapiresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GenerateOpenAPISpec
 
@@ -118,7 +118,7 @@ func main() {
 **[*operations.GenerateOpenAPISpecResponse](../../pkg/models/operations/generateopenapispecresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GeneratePostmanCollection
 
@@ -170,7 +170,7 @@ func main() {
 **[*operations.GeneratePostmanCollectionResponse](../../pkg/models/operations/generatepostmancollectionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetAllAPIVersions
 
@@ -230,7 +230,7 @@ func main() {
 **[*operations.GetAllAPIVersionsResponse](../../pkg/models/operations/getallapiversionsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetApis
 
@@ -289,7 +289,7 @@ func main() {
 **[*operations.GetApisResponse](../../pkg/models/operations/getapisresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpsertAPI
 
@@ -351,4 +351,4 @@ func main() {
 **[*operations.UpsertAPIResponse](../../pkg/models/operations/upsertapiresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

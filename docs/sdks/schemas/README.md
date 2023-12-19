@@ -68,7 +68,7 @@ func main() {
 **[*operations.DeleteSchemaResponse](../../pkg/models/operations/deleteschemaresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DownloadSchema
 
@@ -120,7 +120,7 @@ func main() {
 **[*operations.DownloadSchemaResponse](../../pkg/models/operations/downloadschemaresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## DownloadSchemaRevision
 
@@ -173,7 +173,7 @@ func main() {
 **[*operations.DownloadSchemaRevisionResponse](../../pkg/models/operations/downloadschemarevisionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetSchema
 
@@ -226,7 +226,7 @@ func main() {
 **[*operations.GetSchemaResponse](../../pkg/models/operations/getschemaresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetSchemaDiff
 
@@ -280,7 +280,7 @@ func main() {
 **[*operations.GetSchemaDiffResponse](../../pkg/models/operations/getschemadiffresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetSchemaRevision
 
@@ -334,7 +334,7 @@ func main() {
 **[*operations.GetSchemaRevisionResponse](../../pkg/models/operations/getschemarevisionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetSchemas
 
@@ -387,7 +387,7 @@ func main() {
 **[*operations.GetSchemasResponse](../../pkg/models/operations/getschemasresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## RegisterSchema
 
@@ -447,4 +447,4 @@ func main() {
 **[*operations.RegisterSchemaResponse](../../pkg/models/operations/registerschemaresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

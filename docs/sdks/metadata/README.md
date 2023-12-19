@@ -64,7 +64,7 @@ func main() {
 **[*operations.DeleteVersionMetadataResponse](../../pkg/models/operations/deleteversionmetadataresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetVersionMetadata
 
@@ -116,7 +116,7 @@ func main() {
 **[*operations.GetVersionMetadataResponse](../../pkg/models/operations/getversionmetadataresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## InsertVersionMetadata
 
@@ -172,4 +172,4 @@ func main() {
 **[*operations.InsertVersionMetadataResponse](../../pkg/models/operations/insertversionmetadataresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

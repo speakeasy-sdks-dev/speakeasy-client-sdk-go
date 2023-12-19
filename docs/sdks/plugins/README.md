@@ -56,7 +56,7 @@ func main() {
 **[*operations.GetPluginsResponse](../../pkg/models/operations/getpluginsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## RunPlugin
 
@@ -119,7 +119,7 @@ func main() {
 **[*operations.RunPluginResponse](../../pkg/models/operations/runpluginresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpsertPlugin
 
@@ -172,4 +172,4 @@ func main() {
 **[*operations.UpsertPluginResponse](../../pkg/models/operations/upsertpluginresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

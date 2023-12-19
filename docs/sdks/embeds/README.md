@@ -72,7 +72,7 @@ func main() {
 **[*operations.GetEmbedAccessTokenResponse](../../pkg/models/operations/getembedaccesstokenresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetValidEmbedAccessTokens
 
@@ -119,7 +119,7 @@ func main() {
 **[*operations.GetValidEmbedAccessTokensResponse](../../pkg/models/operations/getvalidembedaccesstokensresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## RevokeEmbedAccessToken
 
@@ -171,4 +171,4 @@ func main() {
 **[*operations.RevokeEmbedAccessTokenResponse](../../pkg/models/operations/revokeembedaccesstokenresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

@@ -61,7 +61,7 @@ func main() {
 **[*operations.GenerateRequestPostmanCollectionResponse](../../pkg/models/operations/generaterequestpostmancollectionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetRequestFromEventLog
 
@@ -112,7 +112,7 @@ func main() {
 **[*operations.GetRequestFromEventLogResponse](../../pkg/models/operations/getrequestfromeventlogresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## QueryEventLog
 
@@ -175,4 +175,4 @@ func main() {
 **[*operations.QueryEventLogResponse](../../pkg/models/operations/queryeventlogresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

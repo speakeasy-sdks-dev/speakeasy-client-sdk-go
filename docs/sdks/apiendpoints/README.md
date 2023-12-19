@@ -68,7 +68,7 @@ func main() {
 **[*operations.DeleteAPIEndpointResponse](../../pkg/models/operations/deleteapiendpointresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## FindAPIEndpoint
 
@@ -122,7 +122,7 @@ func main() {
 **[*operations.FindAPIEndpointResponse](../../pkg/models/operations/findapiendpointresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GenerateOpenAPISpecForAPIEndpoint
 
@@ -176,7 +176,7 @@ func main() {
 **[*operations.GenerateOpenAPISpecForAPIEndpointResponse](../../pkg/models/operations/generateopenapispecforapiendpointresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GeneratePostmanCollectionForAPIEndpoint
 
@@ -229,7 +229,7 @@ func main() {
 **[*operations.GeneratePostmanCollectionForAPIEndpointResponse](../../pkg/models/operations/generatepostmancollectionforapiendpointresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetAllAPIEndpoints
 
@@ -280,7 +280,7 @@ func main() {
 **[*operations.GetAllAPIEndpointsResponse](../../pkg/models/operations/getallapiendpointsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetAllForVersionAPIEndpoints
 
@@ -332,7 +332,7 @@ func main() {
 **[*operations.GetAllForVersionAPIEndpointsResponse](../../pkg/models/operations/getallforversionapiendpointsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetAPIEndpoint
 
@@ -385,7 +385,7 @@ func main() {
 **[*operations.GetAPIEndpointResponse](../../pkg/models/operations/getapiendpointresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpsertAPIEndpoint
 
@@ -446,4 +446,4 @@ func main() {
 **[*operations.UpsertAPIEndpointResponse](../../pkg/models/operations/upsertapiendpointresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
