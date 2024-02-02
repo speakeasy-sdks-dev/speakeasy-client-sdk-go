@@ -4,9 +4,9 @@ package main
 
 import (
 	"context"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
 )
 

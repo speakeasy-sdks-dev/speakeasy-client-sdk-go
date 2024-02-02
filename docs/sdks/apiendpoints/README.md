@@ -26,10 +26,10 @@ Delete an ApiEndpoint. This will also delete all associated Request Logs (if usi
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 	"net/http"
 )
@@ -81,10 +81,10 @@ This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiI
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -135,10 +135,10 @@ Returns the original document and the newly generated document allowing a diff t
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -188,10 +188,10 @@ Generates a postman collection that allows the endpoint to be called from postma
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -241,10 +241,10 @@ Get all Api endpoints for a particular apiID.
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -292,10 +292,10 @@ Get all ApiEndpoints for a particular apiID and versionID.
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -344,10 +344,10 @@ Get an ApiEndpoint.
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -397,10 +397,10 @@ Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, oth
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 

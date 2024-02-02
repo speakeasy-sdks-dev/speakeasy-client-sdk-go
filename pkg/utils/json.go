@@ -12,7 +12,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/types"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/types"
 
 	"github.com/ericlagergren/decimal"
 )

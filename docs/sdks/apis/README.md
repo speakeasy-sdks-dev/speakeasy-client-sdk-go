@@ -24,10 +24,10 @@ Delete a particular version of an Api. The will also delete all associated ApiEn
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 	"net/http"
 )
@@ -78,10 +78,10 @@ Returns the original document and the newly generated document allowing a diff t
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -130,10 +130,10 @@ Generates a postman collection containing all endpoints for a particular API. In
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -183,10 +183,10 @@ Supports filtering the versions based on metadata attributes.
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -243,10 +243,10 @@ Supports filtering the APIs based on metadata attributes.
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -302,10 +302,10 @@ If the Api exists, it will be updated.
 package main
 
 import(
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v2"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"context"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 

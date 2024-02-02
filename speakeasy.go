@@ -6,10 +6,10 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
 	"io"
 	"net/http"
 	"strings"
@@ -170,9 +170,9 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.3.0",
-			SDKVersion:        "2.3.5",
-			GenVersion:        "2.246.1",
-			UserAgent:         "speakeasy-sdk/go 2.3.5 2.246.1 0.3.0 github.com/speakeasy-api/speakeasy-client-sdk-go",
+			SDKVersion:        "3.0.0",
+			GenVersion:        "2.248.1",
+			UserAgent:         "speakeasy-sdk/go 3.0.0 2.248.1 0.3.0 github.com/speakeasy-api/speakeasy-client-sdk-go",
 		},
 	}
 	for _, opt := range opts {

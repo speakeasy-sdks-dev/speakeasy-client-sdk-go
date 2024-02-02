@@ -4,7 +4,7 @@ package operations
 
 import (
 	"errors"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v2/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
 )
 
 var ErrUnsupportedOption = errors.New("unsupported option")
