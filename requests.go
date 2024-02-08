@@ -101,7 +101,7 @@ func (s *Requests) GenerateRequestPostmanCollection(ctx context.Context, request
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -174,7 +174,7 @@ func (s *Requests) GetRequestFromEventLog(ctx context.Context, request operation
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -250,7 +250,7 @@ func (s *Requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

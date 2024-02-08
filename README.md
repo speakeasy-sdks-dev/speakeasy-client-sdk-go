@@ -135,6 +135,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | 5XX                | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ### Example
@@ -149,6 +150,7 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/types"
 	"log"
 )
 
@@ -159,11 +161,28 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
-		APIID:     "string",
-		VersionID: "string",
+	res, err := s.Events.PostWorkspaceEvents(ctx, operations.PostWorkspaceEventsRequest{
+		RequestBody: []shared.CliEvent{
+			shared.CliEvent{
+				CreatedAt:           types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
+				ExecutionID:         "string",
+				ID:                  "<ID>",
+				InteractionType:     shared.InteractionTypeCliExec,
+				LocalStartedAt:      types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
+				SpeakeasyAPIKeyName: "string",
+				SpeakeasyVersion:    "string",
+				Success:             false,
+				WorkspaceID:         "string",
+			},
+		},
 	})
 	if err != nil {
+
+		var e *sdkerrors.Error
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 
 		var e *sdkerrors.SDKError
 		if errors.As(err, &e) {
@@ -410,6 +429,130 @@ func main() {
 
 ```
 <!-- End Global Parameters [global-parameters] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call by using the `WithRetries` option:
+```go
+package main
+
+import (
+	"context"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/types"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
+	"log"
+	"net/http"
+	"pkg/models/operations"
+)
+
+func main() {
+	s := speakeasyclientsdkgo.New(
+		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+	)
+
+	ctx := context.Background()
+	res, err := s.Events.PostWorkspaceEvents(ctx, operations.PostWorkspaceEventsRequest{
+		RequestBody: []shared.CliEvent{
+			shared.CliEvent{
+				CreatedAt:           types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
+				ExecutionID:         "string",
+				ID:                  "<ID>",
+				InteractionType:     shared.InteractionTypeCliExec,
+				LocalStartedAt:      types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
+				SpeakeasyAPIKeyName: "string",
+				SpeakeasyVersion:    "string",
+				Success:             false,
+				WorkspaceID:         "string",
+			},
+		},
+	}, operations.WithRetries(
+		utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 1,
+				MaxInterval:     50,
+				Exponent:        1.1,
+				MaxElapsedTime:  100,
+			},
+			RetryConnectionErrors: false,
+		}))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.StatusCode == http.StatusOK {
+		// handle response
+	}
+}
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can use the `WithRetryConfig` option at SDK initialization:
+```go
+package main
+
+import (
+	"context"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/types"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
+	"log"
+	"net/http"
+)
+
+func main() {
+	s := speakeasyclientsdkgo.New(
+		speakeasyclientsdkgo.WithRetryConfig(
+			utils.RetryConfig{
+				Strategy: "backoff",
+				Backoff: &utils.BackoffStrategy{
+					InitialInterval: 1,
+					MaxInterval:     50,
+					Exponent:        1.1,
+					MaxElapsedTime:  100,
+				},
+				RetryConnectionErrors: false,
+			}),
+		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+	)
+
+	ctx := context.Background()
+	res, err := s.Events.PostWorkspaceEvents(ctx, operations.PostWorkspaceEventsRequest{
+		RequestBody: []shared.CliEvent{
+			shared.CliEvent{
+				CreatedAt:           types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
+				ExecutionID:         "string",
+				ID:                  "<ID>",
+				InteractionType:     shared.InteractionTypeCliExec,
+				LocalStartedAt:      types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
+				SpeakeasyAPIKeyName: "string",
+				SpeakeasyVersion:    "string",
+				Success:             false,
+				WorkspaceID:         "string",
+			},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.StatusCode == http.StatusOK {
+		// handle response
+	}
+}
+
+```
+<!-- End Retries [retries] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

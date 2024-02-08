@@ -73,7 +73,7 @@ func (s *Metadata) DeleteVersionMetadata(ctx context.Context, request operations
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -146,7 +146,7 @@ func (s *Metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -229,7 +229,7 @@ func (s *Metadata) InsertVersionMetadata(ctx context.Context, request operations
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

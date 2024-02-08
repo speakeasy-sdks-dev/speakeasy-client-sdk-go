@@ -82,7 +82,7 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out shared.Error
+			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

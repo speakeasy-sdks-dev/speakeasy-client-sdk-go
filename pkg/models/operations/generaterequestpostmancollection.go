@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
 	"io"
 	"net/http"
 )
@@ -24,7 +24,7 @@ type GenerateRequestPostmanCollectionResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
-	Error *shared.Error
+	Error *sdkerrors.Error
 	// OK
 	// The Close method must be called on this field, even if it is not used, to prevent resource leaks.
 	PostmanCollection io.ReadCloser
@@ -41,7 +41,7 @@ func (o *GenerateRequestPostmanCollectionResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *GenerateRequestPostmanCollectionResponse) GetError() *shared.Error {
+func (o *GenerateRequestPostmanCollectionResponse) GetError() *sdkerrors.Error {
 	if o == nil {
 		return nil
 	}

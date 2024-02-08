@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: dff663dce4f21ddf3fc2332b7d7be92b
+  docChecksum: 557634d4bb5964b949ae70f79f40d856
   docVersion: 0.4.0
   speakeasyVersion: internal
   generationVersion: 2.250.16
-  releaseVersion: 3.1.0
-  configChecksum: da47dcf5d57a067ec3b283f1474368d3
+  releaseVersion: 3.2.0
+  configChecksum: c78e18f82653bf1f3b3be1d7d54b2d2d
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -21,6 +21,7 @@ features:
     globalServerURLs: 2.82.1
     globals: 2.81.1
     inputOutputModels: 2.83.0
+    retries: 2.82.1
     serverIDs: 2.81.1
 generatedFiles:
   - apis.go
@@ -83,7 +84,7 @@ generatedFiles:
   - /pkg/models/operations/getvalidembedaccesstokens.go
   - /pkg/models/operations/revokeembedaccesstoken.go
   - /pkg/models/operations/postworkspaceevents.go
-  - /pkg/models/shared/error.go
+  - /pkg/models/sdkerrors/error.go
   - /pkg/models/shared/generateopenapispecdiff.go
   - /pkg/models/shared/api.go
   - /pkg/models/shared/apiinput.go
@@ -171,7 +172,7 @@ generatedFiles:
   - docs/pkg/models/operations/revokeembedaccesstokenresponse.md
   - docs/pkg/models/operations/postworkspaceeventsrequest.md
   - docs/pkg/models/operations/postworkspaceeventsresponse.md
-  - docs/pkg/models/shared/error.md
+  - docs/pkg/models/sdkerrors/error.md
   - docs/pkg/models/shared/generateopenapispecdiff.md
   - docs/pkg/models/shared/api.md
   - docs/pkg/models/shared/apiinput.md
@@ -202,6 +203,7 @@ generatedFiles:
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
   - docs/sdks/embeds/README.md
+  - docs/pkg/models/operations/option.md
   - docs/sdks/events/README.md
   - USAGE.md
   - pkg/models/operations/options.go

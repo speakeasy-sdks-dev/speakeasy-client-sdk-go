@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
 	"net/http"
 )
 
@@ -50,7 +50,7 @@ type DeleteVersionMetadataResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
-	Error *shared.Error
+	Error *sdkerrors.Error
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
@@ -64,7 +64,7 @@ func (o *DeleteVersionMetadataResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *DeleteVersionMetadataResponse) GetError() *shared.Error {
+func (o *DeleteVersionMetadataResponse) GetError() *sdkerrors.Error {
 	if o == nil {
 		return nil
 	}
