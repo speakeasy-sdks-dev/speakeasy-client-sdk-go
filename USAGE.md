@@ -17,16 +17,7 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{
-		Metadata: map[string][]string{
-			"key": []string{
-				"string",
-			},
-		},
-		Op: &operations.QueryParamOp{
-			And: false,
-		},
-	})
+	res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}

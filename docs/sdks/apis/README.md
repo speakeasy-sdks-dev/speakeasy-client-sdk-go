@@ -202,14 +202,6 @@ func main() {
     ctx := context.Background()
     res, err := s.Apis.GetAllAPIVersions(ctx, operations.GetAllAPIVersionsRequest{
         APIID: "string",
-        Metadata: map[string][]string{
-            "key": []string{
-                "string",
-            },
-        },
-        Op: &operations.Op{
-            And: false,
-        },
     })
     if err != nil {
         log.Fatal(err)
@@ -261,16 +253,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{
-        Metadata: map[string][]string{
-            "key": []string{
-                "string",
-            },
-        },
-        Op: &operations.QueryParamOp{
-            And: false,
-        },
-    })
+    res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -325,11 +308,6 @@ func main() {
         API: shared.APIInput{
             APIID: "string",
             Description: "Synchronised 5th generation knowledge user",
-            MetaData: map[string][]string{
-                "key": []string{
-                    "string",
-                },
-            },
             VersionID: "string",
         },
         APIID: "string",

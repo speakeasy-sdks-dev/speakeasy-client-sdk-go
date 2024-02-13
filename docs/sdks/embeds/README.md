@@ -36,20 +36,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Embeds.GetEmbedAccessToken(ctx, operations.GetEmbedAccessTokenRequest{
-        Filters: &shared.Filters{
-            Filters: []shared.Filter{
-                shared.Filter{
-                    Key: "<key>",
-                    Operator: "string",
-                    Value: "string",
-                },
-            },
-            Limit: 964408,
-            Offset: 95617,
-            Operator: "string",
-        },
-    })
+    res, err := s.Embeds.GetEmbedAccessToken(ctx, operations.GetEmbedAccessTokenRequest{})
     if err != nil {
         log.Fatal(err)
     }

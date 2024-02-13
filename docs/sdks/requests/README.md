@@ -141,20 +141,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Requests.QueryEventLog(ctx, operations.QueryEventLogRequest{
-        Filters: &shared.Filters{
-            Filters: []shared.Filter{
-                shared.Filter{
-                    Key: "<key>",
-                    Operator: "string",
-                    Value: "string",
-                },
-            },
-            Limit: 241978,
-            Offset: 451388,
-            Operator: "string",
-        },
-    })
+    res, err := s.Requests.QueryEventLog(ctx, operations.QueryEventLogRequest{})
     if err != nil {
         log.Fatal(err)
     }
