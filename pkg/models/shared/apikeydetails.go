@@ -3,7 +3,15 @@
 package shared
 
 type APIKeyDetails struct {
-	WorkspaceID string `json:"workspace_id"`
+	GenerationAccessUnlimited *bool  `json:"generation_access_unlimited,omitempty"`
+	WorkspaceID               string `json:"workspace_id"`
+}
+
+func (o *APIKeyDetails) GetGenerationAccessUnlimited() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.GenerationAccessUnlimited
 }
 
 func (o *APIKeyDetails) GetWorkspaceID() string {
