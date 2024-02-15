@@ -32,12 +32,12 @@ import(
 func main() {
     s := speakeasyclientsdkgo.New(
         speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
     ctx := context.Background()
     res, err := s.Requests.GenerateRequestPostmanCollection(ctx, operations.GenerateRequestPostmanCollectionRequest{
-        RequestID: "string",
+        RequestID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -84,12 +84,12 @@ import(
 func main() {
     s := speakeasyclientsdkgo.New(
         speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
     ctx := context.Background()
     res, err := s.Requests.GetRequestFromEventLog(ctx, operations.GetRequestFromEventLogRequest{
-        RequestID: "string",
+        RequestID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -137,7 +137,7 @@ import(
 func main() {
     s := speakeasyclientsdkgo.New(
         speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
     ctx := context.Background()

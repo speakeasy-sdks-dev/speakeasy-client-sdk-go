@@ -27,7 +27,7 @@ import (
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
 	ctx := context.Background()
@@ -148,7 +148,7 @@ import (
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
 	ctx := context.Background()
@@ -203,13 +203,13 @@ func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithServer("prod"),
 		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
 	ctx := context.Background()
 	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
-		APIID:     "string",
-		VersionID: "string",
+		APIID:     "<value>",
+		VersionID: "<value>",
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -242,13 +242,13 @@ func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithServerURL("https://api.prod.speakeasyapi.dev"),
 		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
 	ctx := context.Background()
 	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
-		APIID:     "string",
-		VersionID: "string",
+		APIID:     "<value>",
+		VersionID: "<value>",
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -321,13 +321,13 @@ import (
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
 	ctx := context.Background()
 	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
-		APIID:     "string",
-		VersionID: "string",
+		APIID:     "<value>",
+		VersionID: "<value>",
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -346,7 +346,7 @@ func main() {
 
 A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
 
-For example, you can set `workspaceID` to `"string"` at SDK initialization and then you do not have to pass the same value on calls to operations like `PostWorkspaceEvents`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+For example, you can set `workspaceID` to `"<value>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `PostWorkspaceEvents`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
 
 
 ### Available Globals
@@ -376,7 +376,7 @@ import (
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
 	ctx := context.Background()
@@ -384,14 +384,14 @@ func main() {
 		RequestBody: []shared.CliEvent{
 			shared.CliEvent{
 				CreatedAt:           types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
-				ExecutionID:         "string",
-				ID:                  "<ID>",
+				ExecutionID:         "<value>",
+				ID:                  "<id>",
 				InteractionType:     shared.InteractionTypeCliExec,
 				LocalStartedAt:      types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
-				SpeakeasyAPIKeyName: "string",
-				SpeakeasyVersion:    "string",
+				SpeakeasyAPIKeyName: "<value>",
+				SpeakeasyVersion:    "<value>",
 				Success:             false,
-				WorkspaceID:         "string",
+				WorkspaceID:         "<value>",
 			},
 		},
 	})
@@ -429,7 +429,7 @@ import (
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
 	ctx := context.Background()
@@ -482,7 +482,7 @@ func main() {
 				RetryConnectionErrors: false,
 			}),
 		speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
 	ctx := context.Background()

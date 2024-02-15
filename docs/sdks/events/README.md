@@ -31,7 +31,7 @@ import(
 func main() {
     s := speakeasyclientsdkgo.New(
         speakeasyclientsdkgo.WithSecurity("<YOUR_API_KEY_HERE>"),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("string")),
+        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
     ctx := context.Background()
@@ -39,14 +39,14 @@ func main() {
         RequestBody: []shared.CliEvent{
             shared.CliEvent{
                 CreatedAt: types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
-                ExecutionID: "string",
-                ID: "<ID>",
+                ExecutionID: "<value>",
+                ID: "<id>",
                 InteractionType: shared.InteractionTypeCliExec,
                 LocalStartedAt: types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
-                SpeakeasyAPIKeyName: "string",
-                SpeakeasyVersion: "string",
+                SpeakeasyAPIKeyName: "<value>",
+                SpeakeasyVersion: "<value>",
                 Success: false,
-                WorkspaceID: "string",
+                WorkspaceID: "<value>",
             },
         },
     })
