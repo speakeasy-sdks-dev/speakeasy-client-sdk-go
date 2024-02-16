@@ -38,14 +38,14 @@ func (e *AccountType) UnmarshalJSON(data []byte) error {
 }
 
 type APIKeyDetails struct {
-	AccountType               *AccountType `json:"account_type,omitempty"`
-	GenerationAccessUnlimited *bool        `json:"generation_access_unlimited,omitempty"`
-	WorkspaceID               string       `json:"workspace_id"`
+	AccountType               AccountType `json:"account_type"`
+	GenerationAccessUnlimited *bool       `json:"generation_access_unlimited,omitempty"`
+	WorkspaceID               string      `json:"workspace_id"`
 }
 
-func (o *APIKeyDetails) GetAccountType() *AccountType {
+func (o *APIKeyDetails) GetAccountType() AccountType {
 	if o == nil {
-		return nil
+		return AccountType("")
 	}
 	return o.AccountType
 }
