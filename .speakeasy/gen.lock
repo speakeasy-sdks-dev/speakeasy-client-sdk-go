@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: c81aa4e807522359d28c09ee16d252ba
+  docChecksum: 6053b933cabcbacca33129604c0326e8
   docVersion: 0.4.0
   speakeasyVersion: internal
-  generationVersion: 2.258.0
-  releaseVersion: 3.3.0
-  configChecksum: 6e5ebda1f75ec31e2d452d70053511c2
+  generationVersion: 2.262.1
+  releaseVersion: 3.3.1
+  configChecksum: 9ca18e82a799eaac057353ff668bda86
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -188,6 +188,7 @@ generatedFiles:
   - docs/pkg/models/shared/valuechange.md
   - docs/pkg/models/shared/schemadiff.md
   - docs/pkg/models/shared/accessdetails.md
+  - docs/pkg/models/shared/accounttype.md
   - docs/pkg/models/shared/apikeydetails.md
   - docs/pkg/models/shared/unboundedrequest.md
   - docs/pkg/models/shared/boundedrequest.md
