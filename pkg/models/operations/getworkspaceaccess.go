@@ -10,6 +10,10 @@ import (
 type GetWorkspaceAccessRequest struct {
 	// Unique identifier of the generation target.
 	GenLockID *string `queryParam:"style=form,explode=true,name=genLockId"`
+	// Skip side-effects like incrementing metrics.
+	Passive *bool `queryParam:"style=form,explode=true,name=passive"`
+	// The type of the generated target.
+	TargetType *string `queryParam:"style=form,explode=true,name=targetType"`
 }
 
 func (o *GetWorkspaceAccessRequest) GetGenLockID() *string {
@@ -17,6 +21,20 @@ func (o *GetWorkspaceAccessRequest) GetGenLockID() *string {
 		return nil
 	}
 	return o.GenLockID
+}
+
+func (o *GetWorkspaceAccessRequest) GetPassive() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Passive
+}
+
+func (o *GetWorkspaceAccessRequest) GetTargetType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetType
 }
 
 type GetWorkspaceAccessResponse struct {
