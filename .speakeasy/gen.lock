@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 10893fff3e9a4e77b8628de48190cd77
+  docChecksum: 1e1fbb7b85b19b149be8f6b8a6916f76
   docVersion: 0.4.0
   speakeasyVersion: internal
   generationVersion: 2.272.4
-  releaseVersion: 3.3.7
-  configChecksum: 7c8ac7487c1fd212fa0516f449d4966d
+  releaseVersion: 3.3.8
+  configChecksum: 8b09894409730593004dbc2326ef512e
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -83,6 +83,8 @@ generatedFiles:
   - /pkg/models/operations/getembedaccesstoken.go
   - /pkg/models/operations/getvalidembedaccesstokens.go
   - /pkg/models/operations/revokeembedaccesstoken.go
+  - /pkg/models/operations/getworkspaceevents.go
+  - /pkg/models/operations/getworkspacetargets.go
   - /pkg/models/operations/postworkspaceevents.go
   - /pkg/models/sdkerrors/error.go
   - /pkg/models/shared/generateopenapispecdiff.go
@@ -104,6 +106,7 @@ generatedFiles:
   - /pkg/models/shared/embedaccesstokenresponse.go
   - /pkg/models/shared/embedtoken.go
   - /pkg/models/shared/clievent.go
+  - /pkg/models/shared/targetsdk.go
   - /pkg/models/shared/security.go
   - docs/pkg/models/operations/deleteapirequest.md
   - docs/pkg/models/operations/deleteapiresponse.md
@@ -173,6 +176,10 @@ generatedFiles:
   - docs/pkg/models/operations/getvalidembedaccesstokensresponse.md
   - docs/pkg/models/operations/revokeembedaccesstokenrequest.md
   - docs/pkg/models/operations/revokeembedaccesstokenresponse.md
+  - docs/pkg/models/operations/getworkspaceeventsrequest.md
+  - docs/pkg/models/operations/getworkspaceeventsresponse.md
+  - docs/pkg/models/operations/getworkspacetargetsrequest.md
+  - docs/pkg/models/operations/getworkspacetargetsresponse.md
   - docs/pkg/models/operations/postworkspaceeventsrequest.md
   - docs/pkg/models/operations/postworkspaceeventsresponse.md
   - docs/pkg/models/sdkerrors/error.md
@@ -199,6 +206,7 @@ generatedFiles:
   - docs/pkg/models/shared/generatebumptype.md
   - docs/pkg/models/shared/interactiontype.md
   - docs/pkg/models/shared/clievent.md
+  - docs/pkg/models/shared/targetsdk.md
   - docs/pkg/models/shared/security.md
   - docs/sdks/speakeasy/README.md
   - docs/sdks/apis/README.md
