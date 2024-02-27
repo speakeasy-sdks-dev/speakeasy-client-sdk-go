@@ -4,12 +4,34 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
 	"net/http"
+	"time"
 )
 
 type GetWorkspaceTargetsRequest struct {
+	// Filter to only return targets with events created after this timestamp
+	AfterLastEventCreatedAt *time.Time `queryParam:"style=form,explode=true,name=after_last_event_created_at"`
 	// Unique identifier of the workspace.
 	WorkspaceID *string `pathParam:"style=simple,explode=false,name=workspaceID"`
+}
+
+func (g GetWorkspaceTargetsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetWorkspaceTargetsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetWorkspaceTargetsRequest) GetAfterLastEventCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.AfterLastEventCreatedAt
 }
 
 func (o *GetWorkspaceTargetsRequest) GetWorkspaceID() *string {

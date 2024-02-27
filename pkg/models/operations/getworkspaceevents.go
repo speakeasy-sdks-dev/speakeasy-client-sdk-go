@@ -4,14 +4,36 @@ package operations
 
 import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
 	"net/http"
+	"time"
 )
 
 type GetWorkspaceEventsRequest struct {
-	// Filter to only return events corresponding to a particular gen_lock_id
+	// Filter to only return events created after this timestamp
+	AfterCreatedAt *time.Time `queryParam:"style=form,explode=true,name=after_created_at"`
+	// Filter to only return events corresponding to a particular gen_lock_id (gen_lock_id uniquely identifies a target)
 	GenerateGenLockID *string `queryParam:"style=form,explode=true,name=generate_gen_lock_id"`
 	// Unique identifier of the workspace.
 	WorkspaceID *string `pathParam:"style=simple,explode=false,name=workspaceID"`
+}
+
+func (g GetWorkspaceEventsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetWorkspaceEventsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GetWorkspaceEventsRequest) GetAfterCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.AfterCreatedAt
 }
 
 func (o *GetWorkspaceEventsRequest) GetGenerateGenLockID() *string {

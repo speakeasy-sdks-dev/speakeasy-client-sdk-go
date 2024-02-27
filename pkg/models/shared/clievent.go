@@ -152,7 +152,7 @@ type CliEvent struct {
 	GitRemoteDefaultRepo *string `json:"git_remote_default_repo,omitempty"`
 	// User email from git configuration.
 	GitUserEmail *string `json:"git_user_email,omitempty"`
-	// User name from git configuration.
+	// User's name from git configuration. (not GitHub username)
 	GitUserName *string `json:"git_user_name,omitempty"`
 	// Remote hostname.
 	Hostname *string `json:"hostname,omitempty"`

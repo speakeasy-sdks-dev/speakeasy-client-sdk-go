@@ -10,26 +10,44 @@ import (
 type TargetSDK struct {
 	// Remote commit ID.
 	CommitHead *string `json:"commit_head,omitempty"`
-	// Timestamp when the event was created in the database.
-	CreatedAt time.Time `json:"created_at"`
 	// Version of the generated target (post generation)
 	GenerateConfigPostVersion *string `json:"generate_config_post_version,omitempty"`
-	// gen.lock ID (expected to be a uuid).
-	GenerateGenLockID *string `json:"generate_gen_lock_id,omitempty"`
+	// gen.lock ID (expected to be a uuid). The same as `id`. A unique identifier for the target.
+	GenerateGenLockID string `json:"generate_gen_lock_id"`
 	// Indicates whether the target was considered published.
 	GeneratePublished *bool `json:"generate_published,omitempty"`
 	// The target of the event.
 	GenerateTarget string `json:"generate_target"`
-	// The version of the target.
+	// The version of the Speakeasy generator for this target eg v2 of the typescript generator.
 	GenerateTargetVersion *string `json:"generate_target_version,omitempty"`
+	// GitHub organization of the action.
+	GhActionOrganization *string `json:"gh_action_organization,omitempty"`
+	// GitHub repository of the action.
+	GhActionRepository *string `json:"gh_action_repository,omitempty"`
+	// Link to the GitHub action run.
+	GhActionRunLink *string `json:"gh_action_run_link,omitempty"`
+	// Version of the GitHub action.
+	GhActionVersion *string `json:"gh_action_version,omitempty"`
 	// Current working directory relative to the git root.
 	GitRelativeCwd *string `json:"git_relative_cwd,omitempty"`
 	// Default owner for git remote.
 	GitRemoteDefaultOwner *string `json:"git_remote_default_owner,omitempty"`
 	// Default repository name for git remote.
 	GitRemoteDefaultRepo *string `json:"git_remote_default_repo,omitempty"`
-	// Unique identifier for each event.
+	// User email from git configuration.
+	GitUserEmail *string `json:"git_user_email,omitempty"`
+	// User's name from git configuration. (not GitHub username)
+	GitUserName *string `json:"git_user_name,omitempty"`
+	// Remote hostname.
+	Hostname *string `json:"hostname,omitempty"`
+	// Unique identifier of the target the same as `generate_gen_lock_id`
 	ID string `json:"id"`
+	// Timestamp when the event was created in the database.
+	LastEventCreatedAt time.Time `json:"last_event_created_at"`
+	// Unique identifier of the last event for the target
+	LastEventID string `json:"last_event_id"`
+	// Label of the git repository.
+	RepoLabel *string `json:"repo_label,omitempty"`
 	// Indicates whether the event was successful.
 	Success *bool `json:"success,omitempty"`
 }
@@ -52,13 +70,6 @@ func (o *TargetSDK) GetCommitHead() *string {
 	return o.CommitHead
 }
 
-func (o *TargetSDK) GetCreatedAt() time.Time {
-	if o == nil {
-		return time.Time{}
-	}
-	return o.CreatedAt
-}
-
 func (o *TargetSDK) GetGenerateConfigPostVersion() *string {
 	if o == nil {
 		return nil
@@ -66,9 +77,9 @@ func (o *TargetSDK) GetGenerateConfigPostVersion() *string {
 	return o.GenerateConfigPostVersion
 }
 
-func (o *TargetSDK) GetGenerateGenLockID() *string {
+func (o *TargetSDK) GetGenerateGenLockID() string {
 	if o == nil {
-		return nil
+		return ""
 	}
 	return o.GenerateGenLockID
 }
@@ -94,6 +105,34 @@ func (o *TargetSDK) GetGenerateTargetVersion() *string {
 	return o.GenerateTargetVersion
 }
 
+func (o *TargetSDK) GetGhActionOrganization() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GhActionOrganization
+}
+
+func (o *TargetSDK) GetGhActionRepository() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GhActionRepository
+}
+
+func (o *TargetSDK) GetGhActionRunLink() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GhActionRunLink
+}
+
+func (o *TargetSDK) GetGhActionVersion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GhActionVersion
+}
+
 func (o *TargetSDK) GetGitRelativeCwd() *string {
 	if o == nil {
 		return nil
@@ -115,11 +154,53 @@ func (o *TargetSDK) GetGitRemoteDefaultRepo() *string {
 	return o.GitRemoteDefaultRepo
 }
 
+func (o *TargetSDK) GetGitUserEmail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GitUserEmail
+}
+
+func (o *TargetSDK) GetGitUserName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GitUserName
+}
+
+func (o *TargetSDK) GetHostname() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Hostname
+}
+
 func (o *TargetSDK) GetID() string {
 	if o == nil {
 		return ""
 	}
 	return o.ID
+}
+
+func (o *TargetSDK) GetLastEventCreatedAt() time.Time {
+	if o == nil {
+		return time.Time{}
+	}
+	return o.LastEventCreatedAt
+}
+
+func (o *TargetSDK) GetLastEventID() string {
+	if o == nil {
+		return ""
+	}
+	return o.LastEventID
+}
+
+func (o *TargetSDK) GetRepoLabel() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RepoLabel
 }
 
 func (o *TargetSDK) GetSuccess() *bool {

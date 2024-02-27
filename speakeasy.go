@@ -180,9 +180,9 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.4.0",
-			SDKVersion:        "3.3.8",
-			GenVersion:        "2.272.4",
-			UserAgent:         "speakeasy-sdk/go 3.3.8 2.272.4 0.4.0 github.com/speakeasy-api/speakeasy-client-sdk-go",
+			SDKVersion:        "3.3.9",
+			GenVersion:        "2.272.7",
+			UserAgent:         "speakeasy-sdk/go 3.3.9 2.272.7 0.4.0 github.com/speakeasy-api/speakeasy-client-sdk-go",
 			Globals: map[string]map[string]map[string]interface{}{
 				"parameters": {},
 			},
