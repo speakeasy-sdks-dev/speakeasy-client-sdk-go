@@ -3,7 +3,8 @@
 package shared
 
 type AccessDetails struct {
-	GenerationAllowed bool `json:"generation_allowed"`
+	GenerationAllowed bool   `json:"generation_allowed"`
+	Message           string `json:"message"`
 }
 
 func (o *AccessDetails) GetGenerationAllowed() bool {
@@ -11,4 +12,11 @@ func (o *AccessDetails) GetGenerationAllowed() bool {
 		return false
 	}
 	return o.GenerationAllowed
+}
+
+func (o *AccessDetails) GetMessage() string {
+	if o == nil {
+		return ""
+	}
+	return o.Message
 }

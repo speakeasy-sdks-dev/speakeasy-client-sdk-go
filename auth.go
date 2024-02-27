@@ -34,6 +34,7 @@ func (s *Auth) GetWorkspaceAccess(ctx context.Context, request operations.GetWor
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getWorkspaceAccess",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -169,6 +170,7 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "validateApiKey",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 

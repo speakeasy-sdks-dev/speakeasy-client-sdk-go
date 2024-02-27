@@ -33,6 +33,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "deleteApi",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -122,6 +123,7 @@ func (s *Apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "generateOpenApiSpec",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -221,6 +223,7 @@ func (s *Apis) GeneratePostmanCollection(ctx context.Context, request operations
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "generatePostmanCollection",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -335,6 +338,7 @@ func (s *Apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getAllApiVersions",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -439,6 +443,7 @@ func (s *Apis) GetApis(ctx context.Context, request operations.GetApisRequest) (
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getApis",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -543,6 +548,7 @@ func (s *Apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "upsertApi",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 

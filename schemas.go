@@ -31,6 +31,7 @@ func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "deleteSchema",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -118,6 +119,7 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "downloadSchema",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -235,6 +237,7 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "downloadSchemaRevision",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -354,6 +357,7 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getSchema",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -452,6 +456,7 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getSchemaDiff",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -552,6 +557,7 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getSchemaRevision",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -652,6 +658,7 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getSchemas",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -752,6 +759,7 @@ func (s *Schemas) RegisterSchema(ctx context.Context, request operations.Registe
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "registerSchema",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 

@@ -32,6 +32,7 @@ func (s *APIEndpoints) DeleteAPIEndpoint(ctx context.Context, request operations
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "deleteApiEndpoint",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -121,6 +122,7 @@ func (s *APIEndpoints) FindAPIEndpoint(ctx context.Context, request operations.F
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "findApiEndpoint",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -221,6 +223,7 @@ func (s *APIEndpoints) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, re
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "generateOpenApiSpecForApiEndpoint",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -320,6 +323,7 @@ func (s *APIEndpoints) GeneratePostmanCollectionForAPIEndpoint(ctx context.Conte
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "generatePostmanCollectionForApiEndpoint",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -432,6 +436,7 @@ func (s *APIEndpoints) GetAllAPIEndpoints(ctx context.Context, request operation
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getAllApiEndpoints",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -530,6 +535,7 @@ func (s *APIEndpoints) GetAllForVersionAPIEndpoints(ctx context.Context, request
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getAllForVersionApiEndpoints",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -628,6 +634,7 @@ func (s *APIEndpoints) GetAPIEndpoint(ctx context.Context, request operations.Ge
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getApiEndpoint",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -727,6 +734,7 @@ func (s *APIEndpoints) UpsertAPIEndpoint(ctx context.Context, request operations
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "upsertApiEndpoint",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 

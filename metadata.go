@@ -31,6 +31,7 @@ func (s *Metadata) DeleteVersionMetadata(ctx context.Context, request operations
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "deleteVersionMetadata",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -118,6 +119,7 @@ func (s *Metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getVersionMetadata",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -216,6 +218,7 @@ func (s *Metadata) InsertVersionMetadata(ctx context.Context, request operations
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "insertVersionMetadata",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 

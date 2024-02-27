@@ -32,6 +32,7 @@ func (s *Events) GetWorkspaceEvents(ctx context.Context, request operations.GetW
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getWorkspaceEvents",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -131,6 +132,7 @@ func (s *Events) GetWorkspaceTargets(ctx context.Context, request operations.Get
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getWorkspaceTargets",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -231,6 +233,7 @@ func (s *Events) PostWorkspaceEvents(ctx context.Context, request operations.Pos
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "postWorkspaceEvents",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 

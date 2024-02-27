@@ -34,6 +34,7 @@ func (s *Requests) GenerateRequestPostmanCollection(ctx context.Context, request
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "generateRequestPostmanCollection",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -146,6 +147,7 @@ func (s *Requests) GetRequestFromEventLog(ctx context.Context, request operation
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getRequestFromEventLog",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -246,6 +248,7 @@ func (s *Requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "queryEventLog",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 

@@ -16,8 +16,10 @@ type TargetSDK struct {
 	GenerateGenLockID string `json:"generate_gen_lock_id"`
 	// Indicates whether the target was considered published.
 	GeneratePublished *bool `json:"generate_published,omitempty"`
-	// The target of the event.
+	// eg `typescript`, `terraform`, `python`
 	GenerateTarget string `json:"generate_target"`
+	// The name of the target as defined by the user.
+	GenerateTargetName *string `json:"generate_target_name,omitempty"`
 	// The version of the Speakeasy generator for this target eg v2 of the typescript generator.
 	GenerateTargetVersion *string `json:"generate_target_version,omitempty"`
 	// GitHub organization of the action.
@@ -96,6 +98,13 @@ func (o *TargetSDK) GetGenerateTarget() string {
 		return ""
 	}
 	return o.GenerateTarget
+}
+
+func (o *TargetSDK) GetGenerateTargetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateTargetName
 }
 
 func (o *TargetSDK) GetGenerateTargetVersion() *string {

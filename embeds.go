@@ -34,6 +34,7 @@ func (s *Embeds) GetEmbedAccessToken(ctx context.Context, request operations.Get
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getEmbedAccessToken",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -136,6 +137,7 @@ func (s *Embeds) GetValidEmbedAccessTokens(ctx context.Context) (*operations.Get
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "getValidEmbedAccessTokens",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
@@ -234,6 +236,7 @@ func (s *Embeds) RevokeEmbedAccessToken(ctx context.Context, request operations.
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "revokeEmbedAccessToken",
+		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
