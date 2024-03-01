@@ -7,8 +7,59 @@ REST APIs for managing Authentication
 
 ### Available Operations
 
+* [GetAccessToken](#getaccesstoken) - Get or refresh an access token for the current workspace.
 * [GetWorkspaceAccess](#getworkspaceaccess) - Get access allowances for a particular workspace
 * [ValidateAPIKey](#validateapikey) - Validate the current api key.
+
+## GetAccessToken
+
+Get or refresh an access token for the current workspace.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
+	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    s := speakeasyclientsdkgo.New(
+        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
+    )
+
+    ctx := context.Background()
+    res, err := s.Auth.GetAccessToken(ctx, operations.GetAccessTokenRequest{
+        WorkspaceID: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.AccessToken != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `request`                                                                                | [operations.GetAccessTokenRequest](../../pkg/models/operations/getaccesstokenrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+
+
+### Response
+
+**[*operations.GetAccessTokenResponse](../../pkg/models/operations/getaccesstokenresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetWorkspaceAccess
 
