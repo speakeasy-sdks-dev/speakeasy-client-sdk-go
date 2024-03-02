@@ -52,6 +52,8 @@ type TargetSDK struct {
 	RepoLabel *string `json:"repo_label,omitempty"`
 	// Indicates whether the event was successful.
 	Success *bool `json:"success,omitempty"`
+	// Total number of events for the target
+	TotalEvents int64 `json:"total_events"`
 }
 
 func (t TargetSDK) MarshalJSON() ([]byte, error) {
@@ -217,4 +219,11 @@ func (o *TargetSDK) GetSuccess() *bool {
 		return nil
 	}
 	return o.Success
+}
+
+func (o *TargetSDK) GetTotalEvents() int64 {
+	if o == nil {
+		return 0
+	}
+	return o.TotalEvents
 }
