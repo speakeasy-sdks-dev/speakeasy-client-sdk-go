@@ -11,6 +11,7 @@ import (
 type InteractionType string
 
 const (
+	InteractionTypeCiExec         InteractionType = "CI_EXEC"
 	InteractionTypeCliExec        InteractionType = "CLI_EXEC"
 	InteractionTypeTargetGenerate InteractionType = "TARGET_GENERATE"
 	InteractionTypeTombstone      InteractionType = "TOMBSTONE"
@@ -31,6 +32,8 @@ func (e *InteractionType) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "CI_EXEC":
+		fallthrough
 	case "CLI_EXEC":
 		fallthrough
 	case "TARGET_GENERATE":

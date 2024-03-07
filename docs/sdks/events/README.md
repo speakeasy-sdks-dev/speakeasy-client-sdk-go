@@ -148,7 +148,7 @@ func main() {
                 CreatedAt: types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
                 ExecutionID: "<value>",
                 ID: "<id>",
-                InteractionType: shared.InteractionTypeTargetGenerate,
+                InteractionType: shared.InteractionTypeCliExec,
                 LocalStartedAt: types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
                 SpeakeasyAPIKeyName: "<value>",
                 SpeakeasyVersion: "<value>",

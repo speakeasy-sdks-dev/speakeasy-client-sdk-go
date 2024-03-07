@@ -7,6 +7,7 @@ Type of interaction.
 
 | Name                            | Value                           |
 | ------------------------------- | ------------------------------- |
+| `InteractionTypeCiExec`         | CI_EXEC                         |
 | `InteractionTypeCliExec`        | CLI_EXEC                        |
 | `InteractionTypeTargetGenerate` | TARGET_GENERATE                 |
 | `InteractionTypeTombstone`      | TOMBSTONE                       |
