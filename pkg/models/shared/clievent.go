@@ -92,6 +92,8 @@ func (e *InteractionType) UnmarshalJSON(data []byte) error {
 type CliEvent struct {
 	// Remote commit ID.
 	CommitHead *string `json:"commit_head,omitempty"`
+	// Name of the CI environment.
+	ContinuousIntegrationEnvironment *string `json:"continuous_integration_environment,omitempty"`
 	// Timestamp when the event was created in the database.
 	CreatedAt time.Time `json:"created_at"`
 	// Duration of the event in milliseconds.
@@ -206,6 +208,13 @@ func (o *CliEvent) GetCommitHead() *string {
 		return nil
 	}
 	return o.CommitHead
+}
+
+func (o *CliEvent) GetContinuousIntegrationEnvironment() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContinuousIntegrationEnvironment
 }
 
 func (o *CliEvent) GetCreatedAt() time.Time {

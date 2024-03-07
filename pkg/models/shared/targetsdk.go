@@ -10,10 +10,16 @@ import (
 type TargetSDK struct {
 	// Remote commit ID.
 	CommitHead *string `json:"commit_head,omitempty"`
+	// Name of the CI environment.
+	ContinuousIntegrationEnvironment *string `json:"continuous_integration_environment,omitempty"`
 	// Version of the generated target (post generation)
 	GenerateConfigPostVersion *string `json:"generate_config_post_version,omitempty"`
 	// gen.lock ID (expected to be a uuid). The same as `id`. A unique identifier for the target.
 	GenerateGenLockID string `json:"generate_gen_lock_id"`
+	// Features prior to generation
+	GenerateGenLockPreFeatures *string `json:"generate_gen_lock_pre_features,omitempty"`
+	// Artifact version for the Previous Generation
+	GenerateGenLockPreVersion *string `json:"generate_gen_lock_pre_version,omitempty"`
 	// Indicates whether the target was considered published.
 	GeneratePublished *bool `json:"generate_published,omitempty"`
 	// eg `typescript`, `terraform`, `python`
@@ -52,8 +58,6 @@ type TargetSDK struct {
 	RepoLabel *string `json:"repo_label,omitempty"`
 	// Indicates whether the event was successful.
 	Success *bool `json:"success,omitempty"`
-	// Total number of events for the target
-	TotalEvents int64 `json:"total_events"`
 }
 
 func (t TargetSDK) MarshalJSON() ([]byte, error) {
@@ -74,6 +78,13 @@ func (o *TargetSDK) GetCommitHead() *string {
 	return o.CommitHead
 }
 
+func (o *TargetSDK) GetContinuousIntegrationEnvironment() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ContinuousIntegrationEnvironment
+}
+
 func (o *TargetSDK) GetGenerateConfigPostVersion() *string {
 	if o == nil {
 		return nil
@@ -86,6 +97,20 @@ func (o *TargetSDK) GetGenerateGenLockID() string {
 		return ""
 	}
 	return o.GenerateGenLockID
+}
+
+func (o *TargetSDK) GetGenerateGenLockPreFeatures() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateGenLockPreFeatures
+}
+
+func (o *TargetSDK) GetGenerateGenLockPreVersion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateGenLockPreVersion
 }
 
 func (o *TargetSDK) GetGeneratePublished() *bool {
@@ -219,11 +244,4 @@ func (o *TargetSDK) GetSuccess() *bool {
 		return nil
 	}
 	return o.Success
-}
-
-func (o *TargetSDK) GetTotalEvents() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.TotalEvents
 }
