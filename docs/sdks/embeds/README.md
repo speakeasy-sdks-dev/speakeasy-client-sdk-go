@@ -42,7 +42,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.EmbedAccessTokenResponse != nil {
         // handle response
     }
@@ -93,7 +92,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.EmbedTokens != nil {
         // handle response
     }
@@ -129,7 +127,6 @@ import(
 	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -147,8 +144,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }

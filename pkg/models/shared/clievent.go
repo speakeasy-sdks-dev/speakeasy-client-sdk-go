@@ -46,49 +46,6 @@ func (e *GenerateBumpType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// InteractionType - Type of interaction.
-type InteractionType string
-
-const (
-	InteractionTypeCliExec        InteractionType = "CLI_EXEC"
-	InteractionTypeTargetGenerate InteractionType = "TARGET_GENERATE"
-	InteractionTypeAuthenticate   InteractionType = "AUTHENTICATE"
-	InteractionTypeQuickstart     InteractionType = "QUICKSTART"
-	InteractionTypeRun            InteractionType = "RUN"
-	InteractionTypeConfigure      InteractionType = "CONFIGURE"
-	InteractionTypePublish        InteractionType = "PUBLISH"
-)
-
-func (e InteractionType) ToPointer() *InteractionType {
-	return &e
-}
-
-func (e *InteractionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CLI_EXEC":
-		fallthrough
-	case "TARGET_GENERATE":
-		fallthrough
-	case "AUTHENTICATE":
-		fallthrough
-	case "QUICKSTART":
-		fallthrough
-	case "RUN":
-		fallthrough
-	case "CONFIGURE":
-		fallthrough
-	case "PUBLISH":
-		*e = InteractionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for InteractionType: %v", v)
-	}
-}
-
 type CliEvent struct {
 	// Remote commit ID.
 	CommitHead *string `json:"commit_head,omitempty"`

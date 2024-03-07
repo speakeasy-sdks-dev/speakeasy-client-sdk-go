@@ -48,14 +48,16 @@ func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -76,11 +78,10 @@ func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteSchemaResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -99,7 +100,7 @@ func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -107,7 +108,7 @@ func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -151,14 +152,16 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -179,20 +182,19 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DownloadSchemaResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
-	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `application/json`) {
+	if (httpRes.StatusCode == 200) && utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`) {
 		res.TwoHundredApplicationJSONSchema = httpRes.Body
 
 		return res, nil
 	}
-	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `application/x-yaml`) {
+	if (httpRes.StatusCode == 200) && utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/x-yaml`) {
 		res.TwoHundredApplicationXYamlSchema = httpRes.Body
 
 		return res, nil
@@ -209,7 +211,7 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 	case httpRes.StatusCode == 200:
 		switch {
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
@@ -217,7 +219,7 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -225,7 +227,7 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -269,14 +271,16 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -297,20 +301,19 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DownloadSchemaRevisionResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
-	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `application/json`) {
+	if (httpRes.StatusCode == 200) && utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`) {
 		res.TwoHundredApplicationJSONSchema = httpRes.Body
 
 		return res, nil
 	}
-	if (httpRes.StatusCode == 200) && utils.MatchContentType(contentType, `application/x-yaml`) {
+	if (httpRes.StatusCode == 200) && utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/x-yaml`) {
 		res.TwoHundredApplicationXYamlSchema = httpRes.Body
 
 		return res, nil
@@ -327,7 +330,7 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
@@ -335,7 +338,7 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -343,7 +346,7 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -374,14 +377,16 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -402,11 +407,10 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -420,7 +424,7 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -428,7 +432,7 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 
 			res.Schema = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
@@ -436,7 +440,7 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -444,7 +448,7 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -473,14 +477,16 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -501,11 +507,10 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaDiffResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -519,7 +524,7 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out shared.SchemaDiff
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -527,7 +532,7 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 
 			res.SchemaDiff = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
@@ -535,7 +540,7 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -543,7 +548,7 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -574,14 +579,16 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -602,11 +609,10 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemaRevisionResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -620,7 +626,7 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -628,7 +634,7 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 
 			res.Schema = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
@@ -636,7 +642,7 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -644,7 +650,7 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -675,14 +681,16 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -703,11 +711,10 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetSchemasResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -721,7 +728,7 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out []shared.Schema
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -729,7 +736,7 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 
 			res.Classes = out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
@@ -737,7 +744,7 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -745,7 +752,7 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -782,14 +789,16 @@ func (s *Schemas) RegisterSchema(ctx context.Context, request operations.Registe
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -810,11 +819,10 @@ func (s *Schemas) RegisterSchema(ctx context.Context, request operations.Registe
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.RegisterSchemaResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -833,7 +841,7 @@ func (s *Schemas) RegisterSchema(ctx context.Context, request operations.Registe
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -841,7 +849,7 @@ func (s *Schemas) RegisterSchema(ctx context.Context, request operations.Registe
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

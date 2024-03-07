@@ -37,7 +37,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.Apis != nil {
 		// handle response
 	}
@@ -203,7 +202,6 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -223,8 +221,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	if res.StatusCode == http.StatusOK {
+	if res != nil {
 		// handle response
 	}
 }
@@ -244,7 +241,6 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -264,8 +260,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	if res.StatusCode == http.StatusOK {
+	if res != nil {
 		// handle response
 	}
 }
@@ -328,7 +323,6 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -347,8 +341,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	if res.StatusCode == http.StatusOK {
+	if res != nil {
 		// handle response
 	}
 }
@@ -399,7 +392,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.CliEventBatch != nil {
 		// handle response
 	}
@@ -450,7 +442,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.AccessDetails != nil {
 		// handle response
 	}
@@ -495,7 +486,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	if res.AccessDetails != nil {
 		// handle response
 	}

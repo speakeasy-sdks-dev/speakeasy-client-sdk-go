@@ -54,14 +54,12 @@ func (s *Auth) GetAccessToken(ctx context.Context, request operations.GetAccessT
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.DefaultClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -82,11 +80,10 @@ func (s *Auth) GetAccessToken(ctx context.Context, request operations.GetAccessT
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetAccessTokenResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -100,7 +97,7 @@ func (s *Auth) GetAccessToken(ctx context.Context, request operations.GetAccessT
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out shared.AccessToken
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -108,7 +105,7 @@ func (s *Auth) GetAccessToken(ctx context.Context, request operations.GetAccessT
 
 			res.AccessToken = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
@@ -116,7 +113,7 @@ func (s *Auth) GetAccessToken(ctx context.Context, request operations.GetAccessT
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -124,7 +121,7 @@ func (s *Auth) GetAccessToken(ctx context.Context, request operations.GetAccessT
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -168,7 +165,9 @@ func (s *Auth) GetWorkspaceAccess(ctx context.Context, request operations.GetWor
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries
@@ -211,7 +210,7 @@ func (s *Auth) GetWorkspaceAccess(ctx context.Context, request operations.GetWor
 			return nil, backoff.Permanent(err)
 		}
 
-		httpRes, err := client.Do(req)
+		httpRes, err := s.sdkConfiguration.Client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
 				err = fmt.Errorf("error sending request: %w", err)
@@ -231,11 +230,10 @@ func (s *Auth) GetWorkspaceAccess(ctx context.Context, request operations.GetWor
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetWorkspaceAccessResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -249,7 +247,7 @@ func (s *Auth) GetWorkspaceAccess(ctx context.Context, request operations.GetWor
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out shared.AccessDetails
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -257,12 +255,14 @@ func (s *Auth) GetWorkspaceAccess(ctx context.Context, request operations.GetWor
 
 			res.AccessDetails = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	default:
+		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -290,14 +290,16 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
 
-	httpRes, err := client.Do(req)
+	httpRes, err := s.sdkConfiguration.Client.Do(req)
 	if err != nil || httpRes == nil {
 		if err != nil {
 			err = fmt.Errorf("error sending request: %w", err)
@@ -318,11 +320,10 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 			return nil, err
 		}
 	}
-	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.ValidateAPIKeyResponse{
 		StatusCode:  httpRes.StatusCode,
-		ContentType: contentType,
+		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
 	}
 
@@ -336,7 +337,7 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out shared.APIKeyDetails
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -344,7 +345,7 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 
 			res.APIKeyDetails = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
@@ -352,7 +353,7 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
-		case utils.MatchContentType(contentType, `application/json`):
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			var out sdkerrors.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
@@ -360,7 +361,7 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

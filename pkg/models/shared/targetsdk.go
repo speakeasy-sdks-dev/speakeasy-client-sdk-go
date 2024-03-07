@@ -54,6 +54,8 @@ type TargetSDK struct {
 	LastEventCreatedAt time.Time `json:"last_event_created_at"`
 	// Unique identifier of the last event for the target
 	LastEventID string `json:"last_event_id"`
+	// Type of interaction.
+	LastEventInteractionType InteractionType `json:"last_event_interaction_type"`
 	// Label of the git repository.
 	RepoLabel *string `json:"repo_label,omitempty"`
 	// Indicates whether the event was successful.
@@ -230,6 +232,13 @@ func (o *TargetSDK) GetLastEventID() string {
 		return ""
 	}
 	return o.LastEventID
+}
+
+func (o *TargetSDK) GetLastEventInteractionType() InteractionType {
+	if o == nil {
+		return InteractionType("")
+	}
+	return o.LastEventInteractionType
 }
 
 func (o *TargetSDK) GetRepoLabel() *string {

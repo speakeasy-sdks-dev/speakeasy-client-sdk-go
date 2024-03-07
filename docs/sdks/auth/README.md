@@ -39,7 +39,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AccessToken != nil {
         // handle response
     }
@@ -91,7 +90,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.AccessDetails != nil {
         // handle response
     }
@@ -143,7 +141,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.APIKeyDetails != nil {
         // handle response
     }

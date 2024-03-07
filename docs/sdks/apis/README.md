@@ -29,7 +29,6 @@ import(
 	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -48,8 +47,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -104,7 +102,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.GenerateOpenAPISpecDiff != nil {
         // handle response
     }
@@ -159,7 +156,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PostmanCollection != nil {
         // handle response
     }
@@ -214,7 +210,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Apis != nil {
         // handle response
     }
@@ -267,7 +262,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Apis != nil {
         // handle response
     }
@@ -327,7 +321,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.API != nil {
         // handle response
     }

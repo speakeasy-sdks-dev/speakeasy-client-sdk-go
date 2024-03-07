@@ -41,7 +41,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CliEventBatch != nil {
         // handle response
     }
@@ -94,7 +93,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TargetSDKList != nil {
         // handle response
     }
@@ -133,7 +131,6 @@ import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/types"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -151,7 +148,7 @@ func main() {
                 CreatedAt: types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
                 ExecutionID: "<value>",
                 ID: "<id>",
-                InteractionType: shared.InteractionTypeCliExec,
+                InteractionType: shared.InteractionTypeTargetGenerate,
                 LocalStartedAt: types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
                 SpeakeasyAPIKeyName: "<value>",
                 SpeakeasyVersion: "<value>",
@@ -163,8 +160,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }

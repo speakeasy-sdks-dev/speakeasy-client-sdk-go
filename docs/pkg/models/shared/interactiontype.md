@@ -9,6 +9,7 @@ Type of interaction.
 | ------------------------------- | ------------------------------- |
 | `InteractionTypeCliExec`        | CLI_EXEC                        |
 | `InteractionTypeTargetGenerate` | TARGET_GENERATE                 |
+| `InteractionTypeTombstone`      | TOMBSTONE                       |
 | `InteractionTypeAuthenticate`   | AUTHENTICATE                    |
 | `InteractionTypeQuickstart`     | QUICKSTART                      |
 | `InteractionTypeRun`            | RUN                             |

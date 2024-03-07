@@ -44,7 +44,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PostmanCollection != nil {
         // handle response
     }
@@ -98,7 +97,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.UnboundedRequest != nil {
         // handle response
     }
@@ -151,7 +149,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.BoundedRequests != nil {
         // handle response
     }
