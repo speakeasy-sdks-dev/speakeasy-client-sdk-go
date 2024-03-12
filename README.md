@@ -97,6 +97,10 @@ func main() {
 * [GetRequestFromEventLog](docs/sdks/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
 * [QueryEventLog](docs/sdks/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
 
+### [Organizations](docs/sdks/organizations/README.md)
+
+* [GetOrganizations](docs/sdks/organizations/README.md#getorganizations) - Get organizations for a user
+
 ### [Embeds](docs/sdks/embeds/README.md)
 
 * [GetEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.

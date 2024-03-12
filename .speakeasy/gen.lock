@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 64b423d1904e6c12d31973957d033247
+  docChecksum: 3d1ffb0cc7307a0362c5389c0fa1fdb5
   docVersion: 0.4.0
-  speakeasyVersion: 1.204.1
+  speakeasyVersion: 1.205.2
   generationVersion: 2.279.1
-  releaseVersion: 3.4.1
-  configChecksum: 40a29cc7e0ff788c129a3b371947d3dc
+  releaseVersion: 3.4.2
+  configChecksum: 0964d4521258d7b9358c4313f7bba6b5
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -31,6 +31,7 @@ generatedFiles:
   - schemas.go
   - auth.go
   - requests.go
+  - organizations.go
   - embeds.go
   - events.go
   - speakeasy.go
@@ -82,6 +83,7 @@ generatedFiles:
   - /pkg/models/operations/generaterequestpostmancollection.go
   - /pkg/models/operations/getrequestfromeventlog.go
   - /pkg/models/operations/queryeventlog.go
+  - /pkg/models/operations/getorganizations.go
   - /pkg/models/operations/getembedaccesstoken.go
   - /pkg/models/operations/getvalidembedaccesstokens.go
   - /pkg/models/operations/revokeembedaccesstoken.go
@@ -106,6 +108,7 @@ generatedFiles:
   - /pkg/models/shared/requestmetadata.go
   - /pkg/models/shared/filters.go
   - /pkg/models/shared/filter.go
+  - /pkg/models/shared/organization.go
   - /pkg/models/shared/embedaccesstokenresponse.go
   - /pkg/models/shared/embedtoken.go
   - /pkg/models/shared/clievent.go
@@ -177,6 +180,7 @@ generatedFiles:
   - docs/pkg/models/operations/getrequestfromeventlogresponse.md
   - docs/pkg/models/operations/queryeventlogrequest.md
   - docs/pkg/models/operations/queryeventlogresponse.md
+  - docs/pkg/models/operations/getorganizationsresponse.md
   - docs/pkg/models/operations/getembedaccesstokenrequest.md
   - docs/pkg/models/operations/getembedaccesstokenresponse.md
   - docs/pkg/models/operations/getvalidembedaccesstokensresponse.md
@@ -203,6 +207,7 @@ generatedFiles:
   - docs/pkg/models/shared/user.md
   - docs/pkg/models/shared/workspaces.md
   - docs/pkg/models/shared/accesstoken.md
+  - docs/pkg/models/shared/level.md
   - docs/pkg/models/shared/accessdetails.md
   - docs/pkg/models/shared/accounttype.md
   - docs/pkg/models/shared/apikeydetails.md
@@ -211,6 +216,8 @@ generatedFiles:
   - docs/pkg/models/shared/requestmetadata.md
   - docs/pkg/models/shared/filters.md
   - docs/pkg/models/shared/filter.md
+  - docs/pkg/models/shared/organizationaccounttype.md
+  - docs/pkg/models/shared/organization.md
   - docs/pkg/models/shared/embedaccesstokenresponse.md
   - docs/pkg/models/shared/embedtoken.md
   - docs/pkg/models/shared/generatebumptype.md
@@ -226,6 +233,7 @@ generatedFiles:
   - docs/pkg/models/operations/option.md
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
+  - docs/sdks/organizations/README.md
   - docs/sdks/embeds/README.md
   - docs/sdks/events/README.md
   - USAGE.md

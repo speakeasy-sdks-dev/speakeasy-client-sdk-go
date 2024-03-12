@@ -2,8 +2,44 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Level string
+
+const (
+	LevelAllowed Level = "allowed"
+	LevelWarning Level = "warning"
+	LevelBlocked Level = "blocked"
+)
+
+func (e Level) ToPointer() *Level {
+	return &e
+}
+
+func (e *Level) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "allowed":
+		fallthrough
+	case "warning":
+		fallthrough
+	case "blocked":
+		*e = Level(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Level: %v", v)
+	}
+}
+
 type AccessDetails struct {
 	GenerationAllowed bool   `json:"generation_allowed"`
+	Level             *Level `json:"level,omitempty"`
 	Message           string `json:"message"`
 }
 
@@ -12,6 +48,13 @@ func (o *AccessDetails) GetGenerationAllowed() bool {
 		return false
 	}
 	return o.GenerationAllowed
+}
+
+func (o *AccessDetails) GetLevel() *Level {
+	if o == nil {
+		return nil
+	}
+	return o.Level
 }
 
 func (o *AccessDetails) GetMessage() string {
