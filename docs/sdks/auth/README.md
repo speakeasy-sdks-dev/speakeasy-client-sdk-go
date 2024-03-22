@@ -8,6 +8,7 @@ REST APIs for managing Authentication
 ### Available Operations
 
 * [GetAccessToken](#getaccesstoken) - Get or refresh an access token for the current workspace.
+* [GetUser](#getuser) - Get information about the current user.
 * [GetWorkspaceAccess](#getworkspaceaccess) - Get access allowances for a particular workspace
 * [ValidateAPIKey](#validateapikey) - Validate the current api key.
 
@@ -56,6 +57,55 @@ func main() {
 ### Response
 
 **[*operations.GetAccessTokenResponse](../../pkg/models/operations/getaccesstokenresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
+
+## GetUser
+
+Get information about the current user.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
+	"context"
+	"log"
+)
+
+func main() {
+    s := speakeasyclientsdkgo.New(
+        speakeasyclientsdkgo.WithSecurity(shared.Security{
+            APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
+        }),
+        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
+    )
+
+    ctx := context.Background()
+    res, err := s.Auth.GetUser(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.User != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+
+
+### Response
+
+**[*operations.GetUserResponse](../../pkg/models/operations/getuserresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

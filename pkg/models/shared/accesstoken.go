@@ -10,7 +10,7 @@ import (
 type Claims struct {
 }
 
-type User struct {
+type AccessTokenUser struct {
 	Admin         *bool      `json:"admin,omitempty"`
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	DisplayName   *string    `json:"display_name,omitempty"`
@@ -19,53 +19,53 @@ type User struct {
 	ID            *string    `json:"id,omitempty"`
 }
 
-func (u User) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(u, "", false)
+func (a AccessTokenUser) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
 }
 
-func (u *User) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+func (a *AccessTokenUser) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *User) GetAdmin() *bool {
+func (o *AccessTokenUser) GetAdmin() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.Admin
 }
 
-func (o *User) GetCreatedAt() *time.Time {
+func (o *AccessTokenUser) GetCreatedAt() *time.Time {
 	if o == nil {
 		return nil
 	}
 	return o.CreatedAt
 }
 
-func (o *User) GetDisplayName() *string {
+func (o *AccessTokenUser) GetDisplayName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DisplayName
 }
 
-func (o *User) GetEmail() *string {
+func (o *AccessTokenUser) GetEmail() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Email
 }
 
-func (o *User) GetEmailVerified() *bool {
+func (o *AccessTokenUser) GetEmailVerified() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.EmailVerified
 }
 
-func (o *User) GetID() *string {
+func (o *AccessTokenUser) GetID() *string {
 	if o == nil {
 		return nil
 	}
@@ -77,10 +77,10 @@ type Workspaces struct {
 
 // An AccessToken is a token that can be used to authenticate with the Speakeasy API.
 type AccessToken struct {
-	AccessToken string       `json:"access_token"`
-	Claims      Claims       `json:"claims"`
-	User        User         `json:"user"`
-	Workspaces  []Workspaces `json:"workspaces,omitempty"`
+	AccessToken string          `json:"access_token"`
+	Claims      Claims          `json:"claims"`
+	User        AccessTokenUser `json:"user"`
+	Workspaces  []Workspaces    `json:"workspaces,omitempty"`
 }
 
 func (o *AccessToken) GetAccessToken() string {
@@ -97,9 +97,9 @@ func (o *AccessToken) GetClaims() Claims {
 	return o.Claims
 }
 
-func (o *AccessToken) GetUser() User {
+func (o *AccessToken) GetUser() AccessTokenUser {
 	if o == nil {
-		return User{}
+		return AccessTokenUser{}
 	}
 	return o.User
 }

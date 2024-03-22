@@ -88,6 +88,7 @@ func main() {
 ### [Auth](docs/sdks/auth/README.md)
 
 * [GetAccessToken](docs/sdks/auth/README.md#getaccesstoken) - Get or refresh an access token for the current workspace.
+* [GetUser](docs/sdks/auth/README.md#getuser) - Get information about the current user.
 * [GetWorkspaceAccess](docs/sdks/auth/README.md#getworkspaceaccess) - Get access allowances for a particular workspace
 * [ValidateAPIKey](docs/sdks/auth/README.md#validateapikey) - Validate the current api key.
 
