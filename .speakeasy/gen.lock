@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 17e2e733dfd588a7103c3c70e91b24b5
+  docChecksum: 5cec61dd888a82ca19ee8faa021b6fcf
   docVersion: 0.4.0
-  speakeasyVersion: 1.245.0
-  generationVersion: 2.301.3
-  releaseVersion: 3.5.2
-  configChecksum: 2f7f4c2c956a664f0a2a22bd15bedd7e
+  speakeasyVersion: 1.250.0
+  generationVersion: 2.304.1
+  releaseVersion: 3.5.3
+  configChecksum: e18558dbad02bde7f332469cae36c82a
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -29,6 +29,7 @@ generatedFiles:
   - apiendpoints.go
   - metadata.go
   - schemas.go
+  - artifacts.go
   - auth.go
   - requests.go
   - organizations.go
@@ -78,6 +79,9 @@ generatedFiles:
   - /pkg/models/operations/getschemarevision.go
   - /pkg/models/operations/getschemas.go
   - /pkg/models/operations/registerschema.go
+  - /pkg/models/operations/getnamespaces.go
+  - /pkg/models/operations/getrevisions.go
+  - /pkg/models/operations/preflight.go
   - /pkg/models/operations/getaccesstoken.go
   - /pkg/models/operations/getuser.go
   - /pkg/models/operations/getworkspaceaccess.go
@@ -102,6 +106,11 @@ generatedFiles:
   - /pkg/models/shared/versionmetadatainput.go
   - /pkg/models/shared/schema.go
   - /pkg/models/shared/schemadiff.go
+  - /pkg/models/shared/getnamespacesresponse.go
+  - /pkg/models/shared/namespace.go
+  - /pkg/models/shared/getrevisionsresponse.go
+  - /pkg/models/shared/revision.go
+  - /pkg/models/shared/preflighttoken.go
   - /pkg/models/shared/accesstoken.go
   - /pkg/models/shared/user.go
   - /pkg/models/shared/accessdetails.go
@@ -172,6 +181,10 @@ generatedFiles:
   - docs/pkg/models/operations/registerschemarequestbody.md
   - docs/pkg/models/operations/registerschemarequest.md
   - docs/pkg/models/operations/registerschemaresponse.md
+  - docs/pkg/models/operations/getnamespacesresponse.md
+  - docs/pkg/models/operations/getrevisionsrequest.md
+  - docs/pkg/models/operations/getrevisionsresponse.md
+  - docs/pkg/models/operations/preflightresponse.md
   - docs/pkg/models/operations/getaccesstokenrequest.md
   - docs/pkg/models/operations/getaccesstokenresponse.md
   - docs/pkg/models/operations/getuserresponse.md
@@ -210,6 +223,11 @@ generatedFiles:
   - docs/pkg/models/shared/schema.md
   - docs/pkg/models/shared/valuechange.md
   - docs/pkg/models/shared/schemadiff.md
+  - docs/pkg/models/shared/getnamespacesresponse.md
+  - docs/pkg/models/shared/namespace.md
+  - docs/pkg/models/shared/getrevisionsresponse.md
+  - docs/pkg/models/shared/revision.md
+  - docs/pkg/models/shared/preflighttoken.md
   - docs/pkg/models/shared/claims.md
   - docs/pkg/models/shared/accesstokenuser.md
   - docs/pkg/models/shared/workspaces.md
@@ -238,6 +256,7 @@ generatedFiles:
   - docs/sdks/apiendpoints/README.md
   - docs/sdks/metadata/README.md
   - docs/sdks/schemas/README.md
+  - docs/sdks/artifacts/README.md
   - docs/pkg/models/operations/option.md
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
