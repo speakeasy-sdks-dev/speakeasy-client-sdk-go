@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 5cec61dd888a82ca19ee8faa021b6fcf
+  docChecksum: 1867bd7891d65aa46bdee0032e33c25a
   docVersion: 0.4.0
-  speakeasyVersion: 1.250.0
-  generationVersion: 2.304.1
-  releaseVersion: 3.5.3
-  configChecksum: e18558dbad02bde7f332469cae36c82a
+  speakeasyVersion: 1.252.0
+  generationVersion: 2.306.0
+  releaseVersion: 3.5.4
+  configChecksum: 3a4bb55e22acdb389654910878efdb1c
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -79,8 +79,11 @@ generatedFiles:
   - /pkg/models/operations/getschemarevision.go
   - /pkg/models/operations/getschemas.go
   - /pkg/models/operations/registerschema.go
+  - /pkg/models/operations/getblob.go
+  - /pkg/models/operations/getmanifest.go
   - /pkg/models/operations/getnamespaces.go
   - /pkg/models/operations/getrevisions.go
+  - /pkg/models/operations/gettags.go
   - /pkg/models/operations/preflight.go
   - /pkg/models/operations/getaccesstoken.go
   - /pkg/models/operations/getuser.go
@@ -106,11 +109,17 @@ generatedFiles:
   - /pkg/models/shared/versionmetadatainput.go
   - /pkg/models/shared/schema.go
   - /pkg/models/shared/schemadiff.go
+  - /pkg/models/shared/manifest.go
+  - /pkg/models/shared/v2descriptor.go
+  - /pkg/models/shared/annotations.go
   - /pkg/models/shared/getnamespacesresponse.go
   - /pkg/models/shared/namespace.go
   - /pkg/models/shared/getrevisionsresponse.go
   - /pkg/models/shared/revision.go
+  - /pkg/models/shared/gettagsresponse.go
+  - /pkg/models/shared/tag.go
   - /pkg/models/shared/preflighttoken.go
+  - /pkg/models/shared/preflightrequest.go
   - /pkg/models/shared/accesstoken.go
   - /pkg/models/shared/user.go
   - /pkg/models/shared/accessdetails.go
@@ -181,9 +190,15 @@ generatedFiles:
   - docs/pkg/models/operations/registerschemarequestbody.md
   - docs/pkg/models/operations/registerschemarequest.md
   - docs/pkg/models/operations/registerschemaresponse.md
+  - docs/pkg/models/operations/getblobrequest.md
+  - docs/pkg/models/operations/getblobresponse.md
+  - docs/pkg/models/operations/getmanifestrequest.md
+  - docs/pkg/models/operations/getmanifestresponse.md
   - docs/pkg/models/operations/getnamespacesresponse.md
   - docs/pkg/models/operations/getrevisionsrequest.md
   - docs/pkg/models/operations/getrevisionsresponse.md
+  - docs/pkg/models/operations/gettagsrequest.md
+  - docs/pkg/models/operations/gettagsresponse.md
   - docs/pkg/models/operations/preflightresponse.md
   - docs/pkg/models/operations/getaccesstokenrequest.md
   - docs/pkg/models/operations/getaccesstokenresponse.md
@@ -223,11 +238,17 @@ generatedFiles:
   - docs/pkg/models/shared/schema.md
   - docs/pkg/models/shared/valuechange.md
   - docs/pkg/models/shared/schemadiff.md
+  - docs/pkg/models/shared/manifest.md
+  - docs/pkg/models/shared/v2descriptor.md
+  - docs/pkg/models/shared/annotations.md
   - docs/pkg/models/shared/getnamespacesresponse.md
   - docs/pkg/models/shared/namespace.md
   - docs/pkg/models/shared/getrevisionsresponse.md
   - docs/pkg/models/shared/revision.md
+  - docs/pkg/models/shared/gettagsresponse.md
+  - docs/pkg/models/shared/tag.md
   - docs/pkg/models/shared/preflighttoken.md
+  - docs/pkg/models/shared/preflightrequest.md
   - docs/pkg/models/shared/claims.md
   - docs/pkg/models/shared/accesstokenuser.md
   - docs/pkg/models/shared/workspaces.md

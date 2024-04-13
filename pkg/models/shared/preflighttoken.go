@@ -4,12 +4,12 @@ package shared
 
 // A PreflightToken is a token that allows access to the OCI distribution endpoints.
 type PreflightToken struct {
-	AccessToken string `json:"access_token"`
+	AuthToken *string `json:"auth_token,omitempty"`
 }
 
-func (o *PreflightToken) GetAccessToken() string {
+func (o *PreflightToken) GetAuthToken() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
-	return o.AccessToken
+	return o.AuthToken
 }

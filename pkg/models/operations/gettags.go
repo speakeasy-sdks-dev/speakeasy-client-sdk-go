@@ -8,68 +8,59 @@ import (
 	"net/http"
 )
 
-type GetRevisionsRequest struct {
+type GetTagsRequest struct {
 	NamespaceName string `pathParam:"style=simple,explode=false,name=namespace_name"`
-	// Token to retrieve the next page of results
-	NextPageToken *string `queryParam:"style=form,explode=true,name=next_page_token"`
 }
 
-func (o *GetRevisionsRequest) GetNamespaceName() string {
+func (o *GetTagsRequest) GetNamespaceName() string {
 	if o == nil {
 		return ""
 	}
 	return o.NamespaceName
 }
 
-func (o *GetRevisionsRequest) GetNextPageToken() *string {
-	if o == nil {
-		return nil
-	}
-	return o.NextPageToken
-}
-
-type GetRevisionsResponse struct {
+type GetTagsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
 	Error *sdkerrors.Error
 	// OK
-	GetRevisionsResponse *shared.GetRevisionsResponse
+	GetTagsResponse *shared.GetTagsResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 
-func (o *GetRevisionsResponse) GetContentType() string {
+func (o *GetTagsResponse) GetContentType() string {
 	if o == nil {
 		return ""
 	}
 	return o.ContentType
 }
 
-func (o *GetRevisionsResponse) GetError() *sdkerrors.Error {
+func (o *GetTagsResponse) GetError() *sdkerrors.Error {
 	if o == nil {
 		return nil
 	}
 	return o.Error
 }
 
-func (o *GetRevisionsResponse) GetGetRevisionsResponse() *shared.GetRevisionsResponse {
+func (o *GetTagsResponse) GetGetTagsResponse() *shared.GetTagsResponse {
 	if o == nil {
 		return nil
 	}
-	return o.GetRevisionsResponse
+	return o.GetTagsResponse
 }
 
-func (o *GetRevisionsResponse) GetStatusCode() int {
+func (o *GetTagsResponse) GetStatusCode() int {
 	if o == nil {
 		return 0
 	}
 	return o.StatusCode
 }
 
-func (o *GetRevisionsResponse) GetRawResponse() *http.Response {
+func (o *GetTagsResponse) GetRawResponse() *http.Response {
 	if o == nil {
 		return nil
 	}

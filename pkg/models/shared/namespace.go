@@ -10,8 +10,10 @@ import (
 // Namespace - A namespace contains many revisions.
 type Namespace struct {
 	CreatedAt time.Time `json:"created_at"`
-	// A human readable name for the namespace.
-	ID        string    `json:"id"`
+	// {organization_slug}/{workspace_slug}/{namespace_name}
+	ID string `json:"id"`
+	// A human-readable name for the namespace.
+	Name      string    `json:"name"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -38,6 +40,13 @@ func (o *Namespace) GetID() string {
 		return ""
 	}
 	return o.ID
+}
+
+func (o *Namespace) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
 }
 
 func (o *Namespace) GetUpdatedAt() time.Time {

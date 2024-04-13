@@ -7,55 +7,55 @@ import (
 	"time"
 )
 
-type Revision struct {
+type Tag struct {
 	CreatedAt time.Time `json:"created_at"`
-	// aka digest
+	// Human readable tag name
 	ID            string    `json:"id"`
 	NamespaceName string    `json:"namespace_name"`
-	Tags          []string  `json:"tags"`
+	RevisionID    string    `json:"revision_id"`
 	UpdatedAt     time.Time `json:"updated_at"`
 }
 
-func (r Revision) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
+func (t Tag) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (r *Revision) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+func (t *Tag) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Revision) GetCreatedAt() time.Time {
+func (o *Tag) GetCreatedAt() time.Time {
 	if o == nil {
 		return time.Time{}
 	}
 	return o.CreatedAt
 }
 
-func (o *Revision) GetID() string {
+func (o *Tag) GetID() string {
 	if o == nil {
 		return ""
 	}
 	return o.ID
 }
 
-func (o *Revision) GetNamespaceName() string {
+func (o *Tag) GetNamespaceName() string {
 	if o == nil {
 		return ""
 	}
 	return o.NamespaceName
 }
 
-func (o *Revision) GetTags() []string {
+func (o *Tag) GetRevisionID() string {
 	if o == nil {
-		return []string{}
+		return ""
 	}
-	return o.Tags
+	return o.RevisionID
 }
 
-func (o *Revision) GetUpdatedAt() time.Time {
+func (o *Tag) GetUpdatedAt() time.Time {
 	if o == nil {
 		return time.Time{}
 	}
