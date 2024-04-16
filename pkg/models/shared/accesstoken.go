@@ -3,6 +3,8 @@
 package shared
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
 	"time"
 )
@@ -72,7 +74,80 @@ func (o *AccessTokenUser) GetID() *string {
 	return o.ID
 }
 
+type AccessTokenAccountType string
+
+const (
+	AccessTokenAccountTypeFree       AccessTokenAccountType = "free"
+	AccessTokenAccountTypeScaleUp    AccessTokenAccountType = "scale-up"
+	AccessTokenAccountTypeEnterprise AccessTokenAccountType = "enterprise"
+)
+
+func (e AccessTokenAccountType) ToPointer() *AccessTokenAccountType {
+	return &e
+}
+
+func (e *AccessTokenAccountType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "free":
+		fallthrough
+	case "scale-up":
+		fallthrough
+	case "enterprise":
+		*e = AccessTokenAccountType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AccessTokenAccountType: %v", v)
+	}
+}
+
 type Workspaces struct {
+	AccountType *AccessTokenAccountType `json:"account_type,omitempty"`
+	ID          *string                 `json:"id,omitempty"`
+	Name        *string                 `json:"name,omitempty"`
+	UpdatedAt   *time.Time              `json:"updated_at,omitempty"`
+}
+
+func (w Workspaces) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *Workspaces) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Workspaces) GetAccountType() *AccessTokenAccountType {
+	if o == nil {
+		return nil
+	}
+	return o.AccountType
+}
+
+func (o *Workspaces) GetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ID
+}
+
+func (o *Workspaces) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *Workspaces) GetUpdatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
 }
 
 // An AccessToken is a token that can be used to authenticate with the Speakeasy API.

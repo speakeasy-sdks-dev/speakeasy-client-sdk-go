@@ -7,19 +7,19 @@ import (
 	"net/http"
 )
 
-type File struct {
+type RegisterSchemaFile struct {
 	Content  []byte `multipartForm:"content"`
 	FileName string `multipartForm:"name=file"`
 }
 
-func (o *File) GetContent() []byte {
+func (o *RegisterSchemaFile) GetContent() []byte {
 	if o == nil {
 		return []byte{}
 	}
 	return o.Content
 }
 
-func (o *File) GetFileName() string {
+func (o *RegisterSchemaFile) GetFileName() string {
 	if o == nil {
 		return ""
 	}
@@ -28,12 +28,12 @@ func (o *File) GetFileName() string {
 
 // RegisterSchemaRequestBody - The schema file to upload provided as a multipart/form-data file segment.
 type RegisterSchemaRequestBody struct {
-	File File `multipartForm:"file"`
+	File RegisterSchemaFile `multipartForm:"file"`
 }
 
-func (o *RegisterSchemaRequestBody) GetFile() File {
+func (o *RegisterSchemaRequestBody) GetFile() RegisterSchemaFile {
 	if o == nil {
-		return File{}
+		return RegisterSchemaFile{}
 	}
 	return o.File
 }

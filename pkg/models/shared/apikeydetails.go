@@ -37,10 +37,35 @@ func (e *AccountType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+type FeatureFlags string
+
+const (
+	FeatureFlagsSchemaRegistry FeatureFlags = "schema_registry"
+)
+
+func (e FeatureFlags) ToPointer() *FeatureFlags {
+	return &e
+}
+
+func (e *FeatureFlags) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "schema_registry":
+		*e = FeatureFlags(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for FeatureFlags: %v", v)
+	}
+}
+
 type APIKeyDetails struct {
-	AccountType               AccountType `json:"account_type"`
-	GenerationAccessUnlimited *bool       `json:"generation_access_unlimited,omitempty"`
-	WorkspaceID               string      `json:"workspace_id"`
+	AccountType               AccountType    `json:"account_type"`
+	FeatureFlags              []FeatureFlags `json:"feature_flags"`
+	GenerationAccessUnlimited *bool          `json:"generation_access_unlimited,omitempty"`
+	WorkspaceID               string         `json:"workspace_id"`
 }
 
 func (o *APIKeyDetails) GetAccountType() AccountType {
@@ -48,6 +73,13 @@ func (o *APIKeyDetails) GetAccountType() AccountType {
 		return AccountType("")
 	}
 	return o.AccountType
+}
+
+func (o *APIKeyDetails) GetFeatureFlags() []FeatureFlags {
+	if o == nil {
+		return []FeatureFlags{}
+	}
+	return o.FeatureFlags
 }
 
 func (o *APIKeyDetails) GetGenerationAccessUnlimited() *bool {

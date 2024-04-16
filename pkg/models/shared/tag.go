@@ -2,36 +2,13 @@
 
 package shared
 
-import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
-	"time"
-)
-
 type Tag struct {
-	CreatedAt time.Time `json:"created_at"`
+	// Format {namespace_id}/{tag}
+	ID string `json:"id"`
 	// Human readable tag name
-	ID            string    `json:"id"`
-	NamespaceName string    `json:"namespace_name"`
-	RevisionID    string    `json:"revision_id"`
-	UpdatedAt     time.Time `json:"updated_at"`
-}
-
-func (t Tag) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *Tag) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *Tag) GetCreatedAt() time.Time {
-	if o == nil {
-		return time.Time{}
-	}
-	return o.CreatedAt
+	Name           string `json:"name"`
+	NamespaceName  string `json:"namespace_name"`
+	RevisionDigest string `json:"revision_digest"`
 }
 
 func (o *Tag) GetID() string {
@@ -41,6 +18,13 @@ func (o *Tag) GetID() string {
 	return o.ID
 }
 
+func (o *Tag) GetName() string {
+	if o == nil {
+		return ""
+	}
+	return o.Name
+}
+
 func (o *Tag) GetNamespaceName() string {
 	if o == nil {
 		return ""
@@ -48,16 +32,9 @@ func (o *Tag) GetNamespaceName() string {
 	return o.NamespaceName
 }
 
-func (o *Tag) GetRevisionID() string {
+func (o *Tag) GetRevisionDigest() string {
 	if o == nil {
 		return ""
 	}
-	return o.RevisionID
-}
-
-func (o *Tag) GetUpdatedAt() time.Time {
-	if o == nil {
-		return time.Time{}
-	}
-	return o.UpdatedAt
+	return o.RevisionDigest
 }

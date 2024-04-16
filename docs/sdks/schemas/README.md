@@ -431,7 +431,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Schemas.RegisterSchema(ctx, operations.RegisterSchemaRequest{
         RequestBody: operations.RegisterSchemaRequestBody{
-            File: operations.File{
+            File: operations.RegisterSchemaFile{
                 Content: []byte("0xCAFCA03e0e"),
                 FileName: "bronze_table_blues.m2a",
             },

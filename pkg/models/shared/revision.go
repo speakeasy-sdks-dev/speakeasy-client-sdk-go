@@ -9,7 +9,8 @@ import (
 
 type Revision struct {
 	CreatedAt time.Time `json:"created_at"`
-	// aka digest
+	Digest    string    `json:"digest"`
+	// Format {namespace_id}/{revision_digest}
 	ID            string    `json:"id"`
 	NamespaceName string    `json:"namespace_name"`
 	Tags          []string  `json:"tags"`
@@ -32,6 +33,13 @@ func (o *Revision) GetCreatedAt() time.Time {
 		return time.Time{}
 	}
 	return o.CreatedAt
+}
+
+func (o *Revision) GetDigest() string {
+	if o == nil {
+		return ""
+	}
+	return o.Digest
 }
 
 func (o *Revision) GetID() string {

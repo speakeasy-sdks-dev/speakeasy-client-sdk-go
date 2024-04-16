@@ -9,8 +9,9 @@ import (
 )
 
 type GetManifestRequest struct {
-	NamespaceName     string `pathParam:"style=simple,explode=false,name=namespace_name"`
-	OrganizationSlug  string `pathParam:"style=simple,explode=false,name=organization_slug"`
+	NamespaceName    string `pathParam:"style=simple,explode=false,name=namespace_name"`
+	OrganizationSlug string `pathParam:"style=simple,explode=false,name=organization_slug"`
+	// Tag or digest
 	RevisionReference string `pathParam:"style=simple,explode=false,name=revision_reference"`
 	WorkspaceSlug     string `pathParam:"style=simple,explode=false,name=workspace_slug"`
 }

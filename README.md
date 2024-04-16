@@ -111,6 +111,11 @@ func main() {
 
 * [GetOrganizations](docs/sdks/organizations/README.md#getorganizations) - Get organizations for a user
 
+### [Reports](docs/sdks/reports/README.md)
+
+* [GetLintingReportSignedURL](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
+* [UploadReport](docs/sdks/reports/README.md#uploadreport) - Upload a report.
+
 ### [Embeds](docs/sdks/embeds/README.md)
 
 * [GetEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
