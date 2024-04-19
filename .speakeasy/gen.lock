@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 2b280a7f12ab57c144a654766cc34af2
+  docChecksum: 95815a9501527c69c4aab613380685a5
   docVersion: 0.4.0
-  speakeasyVersion: 1.257.1
-  generationVersion: 2.308.2
-  releaseVersion: 3.5.6
-  configChecksum: b33c8d7ad8b7f5c3a74c57788482757b
+  speakeasyVersion: 1.260.6
+  generationVersion: 2.311.1
+  releaseVersion: 3.5.7
+  configChecksum: d53e3839fcc4b7ca860e42e32ae4869a
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -287,6 +287,7 @@ generatedFiles:
   - docs/pkg/models/shared/embedaccesstokenresponse.md
   - docs/pkg/models/shared/embedtoken.md
   - docs/pkg/models/shared/generatebumptype.md
+  - docs/pkg/models/shared/openapidiffbumptype.md
   - docs/pkg/models/shared/clievent.md
   - docs/pkg/models/shared/interactiontype.md
   - docs/pkg/models/shared/targetsdk.md

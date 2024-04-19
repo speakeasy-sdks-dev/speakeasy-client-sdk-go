@@ -46,6 +46,40 @@ func (e *GenerateBumpType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// OpenapiDiffBumpType - Bump type of the lock file (calculated semver delta, or a custom change (manual release))
+type OpenapiDiffBumpType string
+
+const (
+	OpenapiDiffBumpTypeMajor OpenapiDiffBumpType = "major"
+	OpenapiDiffBumpTypeMinor OpenapiDiffBumpType = "minor"
+	OpenapiDiffBumpTypePatch OpenapiDiffBumpType = "patch"
+	OpenapiDiffBumpTypeNone  OpenapiDiffBumpType = "none"
+)
+
+func (e OpenapiDiffBumpType) ToPointer() *OpenapiDiffBumpType {
+	return &e
+}
+
+func (e *OpenapiDiffBumpType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "major":
+		fallthrough
+	case "minor":
+		fallthrough
+	case "patch":
+		fallthrough
+	case "none":
+		*e = OpenapiDiffBumpType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for OpenapiDiffBumpType: %v", v)
+	}
+}
+
 type CliEvent struct {
 	// Remote commit ID.
 	CommitHead *string `json:"commit_head,omitempty"`
@@ -75,12 +109,18 @@ type CliEvent struct {
 	GenerateGenLockID *string `json:"generate_gen_lock_id,omitempty"`
 	// Features post generation
 	GenerateGenLockPostFeatures *string `json:"generate_gen_lock_post_features,omitempty"`
+	// Blob digest of the Previous Generation
+	GenerateGenLockPreBlobDigest *string `json:"generate_gen_lock_pre_blob_digest,omitempty"`
 	// Checksum of the Previous Rendered OpenAPI document (prior to generation, via gen lock)
 	GenerateGenLockPreDocChecksum *string `json:"generate_gen_lock_pre_doc_checksum,omitempty"`
 	// info.Version of the Previous Rendered OpenAPI document (prior to generation, via gen lock)
 	GenerateGenLockPreDocVersion *string `json:"generate_gen_lock_pre_doc_version,omitempty"`
 	// Features prior to generation
 	GenerateGenLockPreFeatures *string `json:"generate_gen_lock_pre_features,omitempty"`
+	// Namespace name of the Previous Generation
+	GenerateGenLockPreNamespaceName *string `json:"generate_gen_lock_pre_namespace_name,omitempty"`
+	// Revision digest of the Previous Generation
+	GenerateGenLockPreRevisionDigest *string `json:"generate_gen_lock_pre_revision_digest,omitempty"`
 	// Artifact version for the Previous Generation
 	GenerateGenLockPreVersion *string `json:"generate_gen_lock_pre_version,omitempty"`
 	// Indicates whether tests were output.
@@ -119,6 +159,14 @@ type CliEvent struct {
 	ID string `json:"id"`
 	// Type of interaction.
 	InteractionType InteractionType `json:"interaction_type"`
+	// The checksum of the lint report.
+	LintReportDigest *string `json:"lint_report_digest,omitempty"`
+	// The number of errors in the lint report.
+	LintReportErrorCount *int64 `json:"lint_report_error_count,omitempty"`
+	// The number of info messages in the lint report.
+	LintReportInfoCount *int64 `json:"lint_report_info_count,omitempty"`
+	// The number of warnings in the lint report.
+	LintReportWarningCount *int64 `json:"lint_report_warning_count,omitempty"`
 	// Timestamp when the event completed, in local time.
 	LocalCompletedAt *time.Time `json:"local_completed_at,omitempty"`
 	// Timestamp when the event started, in local time.
@@ -127,6 +175,18 @@ type CliEvent struct {
 	ManagementDocChecksum *string `json:"management_doc_checksum,omitempty"`
 	// Version taken from info.version field of the Rendered OpenAPI document.
 	ManagementDocVersion *string `json:"management_doc_version,omitempty"`
+	// The blob digest of the base source.
+	OpenapiDiffBaseSourceBlobDigest *string `json:"openapi_diff_base_source_blob_digest,omitempty"`
+	// The namespace name of the base source.
+	OpenapiDiffBaseSourceNamespaceName *string `json:"openapi_diff_base_source_namespace_name,omitempty"`
+	// The revision digest of the base source.
+	OpenapiDiffBaseSourceRevisionDigest *string `json:"openapi_diff_base_source_revision_digest,omitempty"`
+	// The number of breaking changes in the openapi diff report.
+	OpenapiDiffBreakingChangesCount *int64 `json:"openapi_diff_breaking_changes_count,omitempty"`
+	// Bump type of the lock file (calculated semver delta, or a custom change (manual release))
+	OpenapiDiffBumpType *OpenapiDiffBumpType `json:"openapi_diff_bump_type,omitempty"`
+	// The checksum of the openapi diff report.
+	OpenapiDiffReportDigest *string `json:"openapi_diff_report_digest,omitempty"`
 	// Name of the published package.
 	PublishPackageName *string `json:"publish_package_name,omitempty"`
 	// Name of the registry where the package was published.
@@ -139,6 +199,12 @@ type CliEvent struct {
 	RawCommand *string `json:"raw_command,omitempty"`
 	// Label of the git repository.
 	RepoLabel *string `json:"repo_label,omitempty"`
+	// The blob digest of the source.
+	SourceBlobDigest *string `json:"source_blob_digest,omitempty"`
+	// The namespace name of the source.
+	SourceNamespaceName *string `json:"source_namespace_name,omitempty"`
+	// The revision digest of the source.
+	SourceRevisionDigest *string `json:"source_revision_digest,omitempty"`
 	// Identifier of the Speakeasy API key.
 	SpeakeasyAPIKeyName string `json:"speakeasy_api_key_name"`
 	// Version of the Speakeasy CLI.
@@ -258,6 +324,13 @@ func (o *CliEvent) GetGenerateGenLockPostFeatures() *string {
 	return o.GenerateGenLockPostFeatures
 }
 
+func (o *CliEvent) GetGenerateGenLockPreBlobDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateGenLockPreBlobDigest
+}
+
 func (o *CliEvent) GetGenerateGenLockPreDocChecksum() *string {
 	if o == nil {
 		return nil
@@ -277,6 +350,20 @@ func (o *CliEvent) GetGenerateGenLockPreFeatures() *string {
 		return nil
 	}
 	return o.GenerateGenLockPreFeatures
+}
+
+func (o *CliEvent) GetGenerateGenLockPreNamespaceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateGenLockPreNamespaceName
+}
+
+func (o *CliEvent) GetGenerateGenLockPreRevisionDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateGenLockPreRevisionDigest
 }
 
 func (o *CliEvent) GetGenerateGenLockPreVersion() *string {
@@ -412,6 +499,34 @@ func (o *CliEvent) GetInteractionType() InteractionType {
 	return o.InteractionType
 }
 
+func (o *CliEvent) GetLintReportDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LintReportDigest
+}
+
+func (o *CliEvent) GetLintReportErrorCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.LintReportErrorCount
+}
+
+func (o *CliEvent) GetLintReportInfoCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.LintReportInfoCount
+}
+
+func (o *CliEvent) GetLintReportWarningCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.LintReportWarningCount
+}
+
 func (o *CliEvent) GetLocalCompletedAt() *time.Time {
 	if o == nil {
 		return nil
@@ -438,6 +553,48 @@ func (o *CliEvent) GetManagementDocVersion() *string {
 		return nil
 	}
 	return o.ManagementDocVersion
+}
+
+func (o *CliEvent) GetOpenapiDiffBaseSourceBlobDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OpenapiDiffBaseSourceBlobDigest
+}
+
+func (o *CliEvent) GetOpenapiDiffBaseSourceNamespaceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OpenapiDiffBaseSourceNamespaceName
+}
+
+func (o *CliEvent) GetOpenapiDiffBaseSourceRevisionDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OpenapiDiffBaseSourceRevisionDigest
+}
+
+func (o *CliEvent) GetOpenapiDiffBreakingChangesCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.OpenapiDiffBreakingChangesCount
+}
+
+func (o *CliEvent) GetOpenapiDiffBumpType() *OpenapiDiffBumpType {
+	if o == nil {
+		return nil
+	}
+	return o.OpenapiDiffBumpType
+}
+
+func (o *CliEvent) GetOpenapiDiffReportDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OpenapiDiffReportDigest
 }
 
 func (o *CliEvent) GetPublishPackageName() *string {
@@ -480,6 +637,27 @@ func (o *CliEvent) GetRepoLabel() *string {
 		return nil
 	}
 	return o.RepoLabel
+}
+
+func (o *CliEvent) GetSourceBlobDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceBlobDigest
+}
+
+func (o *CliEvent) GetSourceNamespaceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceNamespaceName
+}
+
+func (o *CliEvent) GetSourceRevisionDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceRevisionDigest
 }
 
 func (o *CliEvent) GetSpeakeasyAPIKeyName() string {
