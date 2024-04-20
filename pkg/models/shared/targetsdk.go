@@ -58,6 +58,12 @@ type TargetSDK struct {
 	LastEventInteractionType InteractionType `json:"last_event_interaction_type"`
 	// Label of the git repository.
 	RepoLabel *string `json:"repo_label,omitempty"`
+	// The blob digest of the source.
+	SourceBlobDigest *string `json:"source_blob_digest,omitempty"`
+	// The namespace name of the source.
+	SourceNamespaceName *string `json:"source_namespace_name,omitempty"`
+	// The revision digest of the source.
+	SourceRevisionDigest *string `json:"source_revision_digest,omitempty"`
 	// Indicates whether the event was successful.
 	Success *bool `json:"success,omitempty"`
 }
@@ -246,6 +252,27 @@ func (o *TargetSDK) GetRepoLabel() *string {
 		return nil
 	}
 	return o.RepoLabel
+}
+
+func (o *TargetSDK) GetSourceBlobDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceBlobDigest
+}
+
+func (o *TargetSDK) GetSourceNamespaceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceNamespaceName
+}
+
+func (o *TargetSDK) GetSourceRevisionDigest() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceRevisionDigest
 }
 
 func (o *TargetSDK) GetSuccess() *bool {
