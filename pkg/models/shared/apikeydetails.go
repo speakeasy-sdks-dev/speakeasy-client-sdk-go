@@ -65,7 +65,9 @@ type APIKeyDetails struct {
 	AccountType               AccountType    `json:"account_type"`
 	FeatureFlags              []FeatureFlags `json:"feature_flags"`
 	GenerationAccessUnlimited *bool          `json:"generation_access_unlimited,omitempty"`
+	OrgSlug                   string         `json:"org_slug"`
 	WorkspaceID               string         `json:"workspace_id"`
+	WorkspaceSlug             string         `json:"workspace_slug"`
 }
 
 func (o *APIKeyDetails) GetAccountType() AccountType {
@@ -89,9 +91,23 @@ func (o *APIKeyDetails) GetGenerationAccessUnlimited() *bool {
 	return o.GenerationAccessUnlimited
 }
 
+func (o *APIKeyDetails) GetOrgSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.OrgSlug
+}
+
 func (o *APIKeyDetails) GetWorkspaceID() string {
 	if o == nil {
 		return ""
 	}
 	return o.WorkspaceID
+}
+
+func (o *APIKeyDetails) GetWorkspaceSlug() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceSlug
 }

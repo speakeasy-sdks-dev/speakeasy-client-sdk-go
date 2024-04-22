@@ -8,6 +8,7 @@ REST APIs for capturing event data
 ### Available Operations
 
 * [GetWorkspaceEvents](#getworkspaceevents) - Load recent events for a particular workspace
+* [GetWorkspaceEventsBySourceRevisionDigest](#getworkspaceeventsbysourcerevisiondigest) - Load events for a particular workspace and source revision digest
 * [GetWorkspaceTargets](#getworkspacetargets) - Load targets for a particular workspace
 * [PostWorkspaceEvents](#postworkspaceevents) - Post events for a specific workspace
 
@@ -58,6 +59,60 @@ func main() {
 ### Response
 
 **[*operations.GetWorkspaceEventsResponse](../../pkg/models/operations/getworkspaceeventsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Error    | 5XX                | application/json   |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
+
+## GetWorkspaceEventsBySourceRevisionDigest
+
+Load events for a particular workspace and source revision digest
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
+	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"log"
+)
+
+func main() {
+    s := speakeasyclientsdkgo.New(
+        speakeasyclientsdkgo.WithSecurity(shared.Security{
+            APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
+        }),
+        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
+    )
+
+    ctx := context.Background()
+    res, err := s.Events.GetWorkspaceEventsBySourceRevisionDigest(ctx, operations.GetWorkspaceEventsBySourceRevisionDigestRequest{
+        SourceRevisionDigest: "<value>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CliEventBatch != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                    | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                                                        | :heavy_check_mark:                                                                                                                           | The context to use for the request.                                                                                                          |
+| `request`                                                                                                                                    | [operations.GetWorkspaceEventsBySourceRevisionDigestRequest](../../pkg/models/operations/getworkspaceeventsbysourcerevisiondigestrequest.md) | :heavy_check_mark:                                                                                                                           | The request object to use for the request.                                                                                                   |
+
+
+### Response
+
+**[*operations.GetWorkspaceEventsBySourceRevisionDigestResponse](../../pkg/models/operations/getworkspaceeventsbysourcerevisiondigestresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |

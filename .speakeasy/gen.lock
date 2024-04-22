@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 141a9989778e09b7c6bb43e496b49905
-  docVersion: 0.4.0
-  speakeasyVersion: 1.267.0
-  generationVersion: 2.312.0
-  releaseVersion: 3.5.8
-  configChecksum: f7c41db530f440db38e4a3c9e6701318
+  docChecksum: 0df832386c1fcd5f74fb87fea6d0e2b7
+  docVersion: 0.4.0 .
+  speakeasyVersion: 1.267.2
+  generationVersion: 2.312.1
+  releaseVersion: 3.5.9
+  configChecksum: b360198ddfa01b0e230f1361d9fa8b48
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -101,6 +101,7 @@ generatedFiles:
   - /pkg/models/operations/getvalidembedaccesstokens.go
   - /pkg/models/operations/revokeembedaccesstoken.go
   - /pkg/models/operations/getworkspaceevents.go
+  - /pkg/models/operations/getworkspaceeventsbysourcerevisiondigest.go
   - /pkg/models/operations/getworkspacetargets.go
   - /pkg/models/operations/postworkspaceevents.go
   - /pkg/models/sdkerrors/error.go
@@ -236,6 +237,9 @@ generatedFiles:
   - docs/pkg/models/operations/getworkspaceeventsglobals.md
   - docs/pkg/models/operations/getworkspaceeventsrequest.md
   - docs/pkg/models/operations/getworkspaceeventsresponse.md
+  - docs/pkg/models/operations/getworkspaceeventsbysourcerevisiondigestglobals.md
+  - docs/pkg/models/operations/getworkspaceeventsbysourcerevisiondigestrequest.md
+  - docs/pkg/models/operations/getworkspaceeventsbysourcerevisiondigestresponse.md
   - docs/pkg/models/operations/getworkspacetargetsglobals.md
   - docs/pkg/models/operations/getworkspacetargetsrequest.md
   - docs/pkg/models/operations/getworkspacetargetsresponse.md
