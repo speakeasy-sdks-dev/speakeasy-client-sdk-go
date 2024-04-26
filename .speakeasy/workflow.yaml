@@ -1,0 +1,9 @@
+workflowVersion: 1.0.0
+sources:
+    my-source:
+        inputs:
+            - location: https://docs.speakeasyapi.dev/openapi.yaml
+targets:
+    speakeasy-client-sdk-go:
+        target: go
+        source: my-source
