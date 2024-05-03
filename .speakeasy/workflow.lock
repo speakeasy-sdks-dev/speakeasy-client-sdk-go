@@ -1,0 +1,28 @@
+speakeasyVersion: 1.279.0
+sources:
+    my-source:
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:f7498975b134b0299e529c32a3cf3efe9e0ff4d6dc89188cec0dc6b69d8bf904
+        sourceBlobDigest: sha256:a62be94181ac1ea8573b40bc91c3f5eee40e1e0f07da297041de639c5d62bdb5
+        tags:
+            - latest
+targets:
+    speakeasy-client-sdk-go:
+        source: my-source
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:f7498975b134b0299e529c32a3cf3efe9e0ff4d6dc89188cec0dc6b69d8bf904
+        sourceBlobDigest: sha256:a62be94181ac1ea8573b40bc91c3f5eee40e1e0f07da297041de639c5d62bdb5
+        outLocation: /github/workspace/repo
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        my-source:
+            inputs:
+                - location: https://docs.speakeasyapi.dev/openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/my-source
+    targets:
+        speakeasy-client-sdk-go:
+            target: go
+            source: my-source
