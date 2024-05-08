@@ -5,8 +5,8 @@ management:
   docVersion: 0.4.0 .
   speakeasyVersion: 1.285.1
   generationVersion: 2.326.3
-  releaseVersion: 3.7.0
-  configChecksum: d1d12d523a0a564b0be12a5fa38a9d14
+  releaseVersion: 3.7.1
+  configChecksum: 893e5f4d5d4e836f7ef4611a3f3d92a9
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
