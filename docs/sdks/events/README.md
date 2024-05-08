@@ -24,8 +24,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -34,13 +34,14 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
-    ctx := context.Background()
-    res, err := s.Events.GetWorkspaceEventsByTarget(ctx, operations.GetWorkspaceEventsByTargetRequest{
+    request := operations.GetWorkspaceEventsByTargetRequest{
         TargetID: "<value>",
-    })
+    }
+    
+    ctx := context.Background()
+    res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -78,8 +79,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -88,11 +89,12 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
+    request := operations.GetWorkspaceTargetsRequest{}
+    
     ctx := context.Background()
-    res, err := s.Events.GetWorkspaceTargets(ctx, operations.GetWorkspaceTargetsRequest{})
+    res, err := s.Events.GetWorkspaceTargets(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -130,9 +132,9 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/types"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -141,11 +143,9 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
-    ctx := context.Background()
-    res, err := s.Events.PostWorkspaceEvents(ctx, operations.PostWorkspaceEventsRequest{
+    request := operations.PostWorkspaceEventsRequest{
         RequestBody: []shared.CliEvent{
             shared.CliEvent{
                 CreatedAt: types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
@@ -159,7 +159,10 @@ func main() {
                 WorkspaceID: "<value>",
             },
         },
-    })
+    }
+    
+    ctx := context.Background()
+    res, err := s.Events.PostWorkspaceEvents(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -198,8 +201,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -208,11 +211,12 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
+    request := operations.SearchWorkspaceEventsRequest{}
+    
     ctx := context.Background()
-    res, err := s.Events.SearchWorkspaceEvents(ctx, operations.SearchWorkspaceEventsRequest{})
+    res, err := s.Events.SearchWorkspaceEvents(ctx, request)
     if err != nil {
         log.Fatal(err)
     }

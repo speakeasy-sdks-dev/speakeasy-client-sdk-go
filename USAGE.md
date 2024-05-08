@@ -15,11 +15,12 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
+	request := operations.GetApisRequest{}
+
 	ctx := context.Background()
-	res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{})
+	res, err := s.Apis.GetApis(ctx, request)
 	if err != nil {
 		log.Fatal(err)
 	}

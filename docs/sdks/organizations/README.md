@@ -26,9 +26,10 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
+
+    
     ctx := context.Background()
     res, err := s.Organizations.GetOrganizations(ctx)
     if err != nil {
