@@ -29,11 +29,12 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
+	request := operations.GetApisRequest{}
+
 	ctx := context.Background()
-	res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{})
+	res, err := s.Apis.GetApis(ctx, request)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -176,13 +177,14 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
-	ctx := context.Background()
-	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, operations.GetWorkspaceEventsByTargetRequest{
+	request := operations.GetWorkspaceEventsByTargetRequest{
 		TargetID: "<value>",
-	})
+	}
+
+	ctx := context.Background()
+	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
 	if err != nil {
 
 		var e *sdkerrors.Error
@@ -234,14 +236,15 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
+	request := operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	})
+	}
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, request)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -273,14 +276,15 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
+	request := operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	})
+	}
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, request)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -354,14 +358,15 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
+	request := operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	})
+	}
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, request)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -408,13 +413,14 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
-	ctx := context.Background()
-	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, operations.GetWorkspaceEventsByTargetRequest{
+	request := operations.GetWorkspaceEventsByTargetRequest{
 		TargetID: "<value>",
-	})
+	}
+
+	ctx := context.Background()
+	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -450,11 +456,12 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
+	request := operations.GetWorkspaceAccessRequest{}
+
 	ctx := context.Background()
-	res, err := s.Auth.GetWorkspaceAccess(ctx, operations.GetWorkspaceAccessRequest{}, operations.WithRetries(
+	res, err := s.Auth.GetWorkspaceAccess(ctx, request, operations.WithRetries(
 		utils.RetryConfig{
 			Strategy: "backoff",
 			Backoff: &utils.BackoffStrategy{
@@ -504,11 +511,12 @@ func main() {
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
-		speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
 	)
 
+	request := operations.GetWorkspaceAccessRequest{}
+
 	ctx := context.Background()
-	res, err := s.Auth.GetWorkspaceAccess(ctx, operations.GetWorkspaceAccessRequest{})
+	res, err := s.Auth.GetWorkspaceAccess(ctx, request)
 	if err != nil {
 		log.Fatal(err)
 	}

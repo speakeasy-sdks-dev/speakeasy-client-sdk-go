@@ -107,6 +107,8 @@ type CliEvent struct {
 	GenerateConfigPreRaw *string `json:"generate_config_pre_raw,omitempty"`
 	// The version of the customer's SDK before we generated
 	GenerateConfigPreVersion *string `json:"generate_config_pre_version,omitempty"`
+	// Eligible feature set during generation
+	GenerateEligibleFeatures *string `json:"generate_eligible_features,omitempty"`
 	// gen.lock ID (expected to be a uuid).
 	GenerateGenLockID *string `json:"generate_gen_lock_id,omitempty"`
 	// Features post generation
@@ -125,6 +127,10 @@ type CliEvent struct {
 	GenerateGenLockPreRevisionDigest *string `json:"generate_gen_lock_pre_revision_digest,omitempty"`
 	// Artifact version for the Previous Generation
 	GenerateGenLockPreVersion *string `json:"generate_gen_lock_pre_version,omitempty"`
+	// The number of operations ignored in generation.
+	GenerateNumberOfOperationsIgnored *int64 `json:"generate_number_of_operations_ignored,omitempty"`
+	// The number of operations used in generation.
+	GenerateNumberOfOperationsUsed *int64 `json:"generate_number_of_operations_used,omitempty"`
 	// Indicates whether tests were output.
 	GenerateOutputTests *bool `json:"generate_output_tests,omitempty"`
 	// Indicates whether the target was considered published.
@@ -139,6 +145,8 @@ type CliEvent struct {
 	GenerateVersion *string `json:"generate_version,omitempty"`
 	// GitHub organization of the action.
 	GhActionOrganization *string `json:"gh_action_organization,omitempty"`
+	// GitHub Action ref value.
+	GhActionRef *string `json:"gh_action_ref,omitempty"`
 	// GitHub repository of the action.
 	GhActionRepository *string `json:"gh_action_repository,omitempty"`
 	// Link to the GitHub action run.
@@ -331,6 +339,13 @@ func (o *CliEvent) GetGenerateConfigPreVersion() *string {
 	return o.GenerateConfigPreVersion
 }
 
+func (o *CliEvent) GetGenerateEligibleFeatures() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateEligibleFeatures
+}
+
 func (o *CliEvent) GetGenerateGenLockID() *string {
 	if o == nil {
 		return nil
@@ -394,6 +409,20 @@ func (o *CliEvent) GetGenerateGenLockPreVersion() *string {
 	return o.GenerateGenLockPreVersion
 }
 
+func (o *CliEvent) GetGenerateNumberOfOperationsIgnored() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateNumberOfOperationsIgnored
+}
+
+func (o *CliEvent) GetGenerateNumberOfOperationsUsed() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateNumberOfOperationsUsed
+}
+
 func (o *CliEvent) GetGenerateOutputTests() *bool {
 	if o == nil {
 		return nil
@@ -441,6 +470,13 @@ func (o *CliEvent) GetGhActionOrganization() *string {
 		return nil
 	}
 	return o.GhActionOrganization
+}
+
+func (o *CliEvent) GetGhActionRef() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GhActionRef
 }
 
 func (o *CliEvent) GetGhActionRepository() *string {

@@ -23,8 +23,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -33,16 +33,17 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
-    ctx := context.Background()
-    res, err := s.Metadata.DeleteVersionMetadata(ctx, operations.DeleteVersionMetadataRequest{
+    request := operations.DeleteVersionMetadataRequest{
         APIID: "<value>",
         MetaKey: "<value>",
         MetaValue: "<value>",
         VersionID: "<value>",
-    })
+    }
+    
+    ctx := context.Background()
+    res, err := s.Metadata.DeleteVersionMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -79,8 +80,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -89,14 +90,15 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
-    ctx := context.Background()
-    res, err := s.Metadata.GetVersionMetadata(ctx, operations.GetVersionMetadataRequest{
+    request := operations.GetVersionMetadataRequest{
         APIID: "<value>",
         VersionID: "<value>",
-    })
+    }
+    
+    ctx := context.Background()
+    res, err := s.Metadata.GetVersionMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -133,8 +135,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -143,18 +145,19 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
-    ctx := context.Background()
-    res, err := s.Metadata.InsertVersionMetadata(ctx, operations.InsertVersionMetadataRequest{
+    request := operations.InsertVersionMetadataRequest{
         VersionMetadata: shared.VersionMetadataInput{
             MetaKey: "<value>",
             MetaValue: "<value>",
         },
         APIID: "<value>",
         VersionID: "<value>",
-    })
+    }
+    
+    ctx := context.Background()
+    res, err := s.Metadata.InsertVersionMetadata(ctx, request)
     if err != nil {
         log.Fatal(err)
     }

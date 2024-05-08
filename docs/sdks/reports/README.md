@@ -23,8 +23,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -33,13 +33,14 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
-    ctx := context.Background()
-    res, err := s.Reports.GetChangesReportSignedURL(ctx, operations.GetChangesReportSignedURLRequest{
+    request := operations.GetChangesReportSignedURLRequest{
         DocumentChecksum: "<value>",
-    })
+    }
+    
+    ctx := context.Background()
+    res, err := s.Reports.GetChangesReportSignedURL(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -76,8 +77,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -86,13 +87,14 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
-    ctx := context.Background()
-    res, err := s.Reports.GetLintingReportSignedURL(ctx, operations.GetLintingReportSignedURLRequest{
+    request := operations.GetLintingReportSignedURLRequest{
         DocumentChecksum: "<value>",
-    })
+    }
+    
+    ctx := context.Background()
+    res, err := s.Reports.GetLintingReportSignedURL(ctx, request)
     if err != nil {
         log.Fatal(err)
     }
@@ -129,8 +131,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
 	"log"
 )
 
@@ -139,17 +141,18 @@ func main() {
         speakeasyclientsdkgo.WithSecurity(shared.Security{
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
-        speakeasyclientsdkgo.WithWorkspaceID(speakeasyclientsdkgo.String("<value>")),
     )
 
-    ctx := context.Background()
-    res, err := s.Reports.UploadReport(ctx, operations.UploadReportRequestBody{
+    request := operations.UploadReportRequestBody{
         Data: shared.Report{},
         File: operations.File{
             Content: []byte("0xA329C0ad85"),
             FileName: "sausages.m3a",
         },
-    })
+    }
+    
+    ctx := context.Background()
+    res, err := s.Reports.UploadReport(ctx, request)
     if err != nil {
         log.Fatal(err)
     }

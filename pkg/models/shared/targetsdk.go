@@ -16,12 +16,18 @@ type TargetSDK struct {
 	Error *string `json:"error,omitempty"`
 	// Version of the generated target (post generation)
 	GenerateConfigPostVersion *string `json:"generate_config_post_version,omitempty"`
+	// Eligible feature set during generation
+	GenerateEligibleFeatures *string `json:"generate_eligible_features,omitempty"`
 	// gen.lock ID (expected to be a uuid). The same as `id`. A unique identifier for the target.
 	GenerateGenLockID string `json:"generate_gen_lock_id"`
 	// Features prior to generation
 	GenerateGenLockPreFeatures *string `json:"generate_gen_lock_pre_features,omitempty"`
 	// Artifact version for the Previous Generation
 	GenerateGenLockPreVersion *string `json:"generate_gen_lock_pre_version,omitempty"`
+	// The number of operations ignored in generation.
+	GenerateNumberOfOperationsIgnored *int64 `json:"generate_number_of_operations_ignored,omitempty"`
+	// The number of operations used in generation.
+	GenerateNumberOfOperationsUsed *int64 `json:"generate_number_of_operations_used,omitempty"`
 	// Indicates whether the target was considered published.
 	GeneratePublished *bool `json:"generate_published,omitempty"`
 	// eg `typescript`, `terraform`, `python`
@@ -32,6 +38,8 @@ type TargetSDK struct {
 	GenerateTargetVersion *string `json:"generate_target_version,omitempty"`
 	// GitHub organization of the action.
 	GhActionOrganization *string `json:"gh_action_organization,omitempty"`
+	// GitHub Action ref value.
+	GhActionRef *string `json:"gh_action_ref,omitempty"`
 	// GitHub repository of the action.
 	GhActionRepository *string `json:"gh_action_repository,omitempty"`
 	// Link to the GitHub action run.
@@ -109,6 +117,13 @@ func (o *TargetSDK) GetGenerateConfigPostVersion() *string {
 	return o.GenerateConfigPostVersion
 }
 
+func (o *TargetSDK) GetGenerateEligibleFeatures() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateEligibleFeatures
+}
+
 func (o *TargetSDK) GetGenerateGenLockID() string {
 	if o == nil {
 		return ""
@@ -128,6 +143,20 @@ func (o *TargetSDK) GetGenerateGenLockPreVersion() *string {
 		return nil
 	}
 	return o.GenerateGenLockPreVersion
+}
+
+func (o *TargetSDK) GetGenerateNumberOfOperationsIgnored() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateNumberOfOperationsIgnored
+}
+
+func (o *TargetSDK) GetGenerateNumberOfOperationsUsed() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateNumberOfOperationsUsed
 }
 
 func (o *TargetSDK) GetGeneratePublished() *bool {
@@ -163,6 +192,13 @@ func (o *TargetSDK) GetGhActionOrganization() *string {
 		return nil
 	}
 	return o.GhActionOrganization
+}
+
+func (o *TargetSDK) GetGhActionRef() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GhActionRef
 }
 
 func (o *TargetSDK) GetGhActionRepository() *string {
