@@ -40,7 +40,9 @@ func (e *AccountType) UnmarshalJSON(data []byte) error {
 type FeatureFlags string
 
 const (
-	FeatureFlagsSchemaRegistry FeatureFlags = "schema_registry"
+	FeatureFlagsChangesReport      FeatureFlags = "changes_report"
+	FeatureFlagsSchemaRegistry     FeatureFlags = "schema_registry"
+	FeatureFlagsSkipSchemaRegistry FeatureFlags = "skip_schema_registry"
 )
 
 func (e FeatureFlags) ToPointer() *FeatureFlags {
@@ -53,7 +55,11 @@ func (e *FeatureFlags) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "changes_report":
+		fallthrough
 	case "schema_registry":
+		fallthrough
+	case "skip_schema_registry":
 		*e = FeatureFlags(v)
 		return nil
 	default:
