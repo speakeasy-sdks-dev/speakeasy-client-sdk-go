@@ -37,43 +37,13 @@ func (e *AccountType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type FeatureFlags string
-
-const (
-	FeatureFlagsChangesReport      FeatureFlags = "changes_report"
-	FeatureFlagsSchemaRegistry     FeatureFlags = "schema_registry"
-	FeatureFlagsSkipSchemaRegistry FeatureFlags = "skip_schema_registry"
-)
-
-func (e FeatureFlags) ToPointer() *FeatureFlags {
-	return &e
-}
-
-func (e *FeatureFlags) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "changes_report":
-		fallthrough
-	case "schema_registry":
-		fallthrough
-	case "skip_schema_registry":
-		*e = FeatureFlags(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FeatureFlags: %v", v)
-	}
-}
-
 type APIKeyDetails struct {
-	AccountType               AccountType    `json:"account_type"`
-	FeatureFlags              []FeatureFlags `json:"feature_flags"`
-	GenerationAccessUnlimited *bool          `json:"generation_access_unlimited,omitempty"`
-	OrgSlug                   string         `json:"org_slug"`
-	WorkspaceID               string         `json:"workspace_id"`
-	WorkspaceSlug             string         `json:"workspace_slug"`
+	AccountType               AccountType `json:"account_type"`
+	EnabledFeatures           []string    `json:"enabled_features"`
+	GenerationAccessUnlimited *bool       `json:"generation_access_unlimited,omitempty"`
+	OrgSlug                   string      `json:"org_slug"`
+	WorkspaceID               string      `json:"workspace_id"`
+	WorkspaceSlug             string      `json:"workspace_slug"`
 }
 
 func (o *APIKeyDetails) GetAccountType() AccountType {
@@ -83,11 +53,11 @@ func (o *APIKeyDetails) GetAccountType() AccountType {
 	return o.AccountType
 }
 
-func (o *APIKeyDetails) GetFeatureFlags() []FeatureFlags {
+func (o *APIKeyDetails) GetEnabledFeatures() []string {
 	if o == nil {
-		return []FeatureFlags{}
+		return []string{}
 	}
-	return o.FeatureFlags
+	return o.EnabledFeatures
 }
 
 func (o *APIKeyDetails) GetGenerationAccessUnlimited() *bool {

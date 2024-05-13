@@ -42,7 +42,7 @@ func (e *OrganizationAccountType) UnmarshalJSON(data []byte) error {
 // Organization - A speakeasy organization
 type Organization struct {
 	AccountType OrganizationAccountType `json:"account_type"`
-	CreatedAt   *time.Time              `json:"created)at,omitempty"`
+	CreatedAt   *time.Time              `json:"created_at,omitempty"`
 	ID          string                  `json:"id"`
 	Name        string                  `json:"name"`
 	Slug        *string                 `json:"slug,omitempty"`
