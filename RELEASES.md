@@ -997,3 +997,13 @@ Based on:
 - [go v3.7.1] .
 ### Releases
 - [Go v3.7.1] https://github.com/speakeasy-api/speakeasy-client-sdk-go/releases/tag/v3.7.1 - .
+
+## 2024-05-13 21:40:41
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.286.3 (2.329.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v3.7.3] .
+### Releases
+- [Go v3.7.3] https://github.com/speakeasy-api/speakeasy-client-sdk-go/releases/tag/v3.7.3 - .
