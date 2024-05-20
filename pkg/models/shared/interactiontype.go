@@ -27,7 +27,6 @@ const (
 func (e InteractionType) ToPointer() *InteractionType {
 	return &e
 }
-
 func (e *InteractionType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

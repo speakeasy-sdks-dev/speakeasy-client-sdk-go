@@ -89,6 +89,7 @@ type Speakeasy struct {
 	Auth *Auth
 	// REST APIs for retrieving request information
 	Requests      *Requests
+	Github        *Github
 	Organizations *Organizations
 	// REST APIs for managing reports
 	Reports *Reports
@@ -180,9 +181,9 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.4.0 .",
-			SDKVersion:        "3.7.3",
-			GenVersion:        "2.329.0",
-			UserAgent:         "speakeasy-sdk/go 3.7.3 2.329.0 0.4.0 . github.com/speakeasy-api/speakeasy-client-sdk-go",
+			SDKVersion:        "3.8.0",
+			GenVersion:        "2.333.3",
+			UserAgent:         "speakeasy-sdk/go 3.8.0 2.333.3 0.4.0 . github.com/speakeasy-api/speakeasy-client-sdk-go",
 			Globals:           globals.Globals{},
 			Hooks:             hooks.New(),
 		},
@@ -216,6 +217,8 @@ func New(opts ...SDKOption) *Speakeasy {
 	sdk.Auth = newAuth(sdk.sdkConfiguration)
 
 	sdk.Requests = newRequests(sdk.sdkConfiguration)
+
+	sdk.Github = newGithub(sdk.sdkConfiguration)
 
 	sdk.Organizations = newOrganizations(sdk.sdkConfiguration)
 

@@ -23,7 +23,6 @@ const (
 func (e GenerateBumpType) ToPointer() *GenerateBumpType {
 	return &e
 }
-
 func (e *GenerateBumpType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -59,7 +58,6 @@ const (
 func (e OpenapiDiffBumpType) ToPointer() *OpenapiDiffBumpType {
 	return &e
 }
-
 func (e *OpenapiDiffBumpType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
