@@ -18,7 +18,6 @@ const (
 func (e AccountType) ToPointer() *AccountType {
 	return &e
 }
-
 func (e *AccountType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -38,12 +37,14 @@ func (e *AccountType) UnmarshalJSON(data []byte) error {
 }
 
 type APIKeyDetails struct {
-	AccountType               AccountType `json:"account_type"`
-	EnabledFeatures           []string    `json:"enabled_features"`
-	GenerationAccessUnlimited *bool       `json:"generation_access_unlimited,omitempty"`
-	OrgSlug                   string      `json:"org_slug"`
-	WorkspaceID               string      `json:"workspace_id"`
-	WorkspaceSlug             string      `json:"workspace_slug"`
+	AccountType     AccountType   `json:"account_type"`
+	EnabledFeatures []FeatureFlag `json:"enabled_features"`
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	FeatureFlags              []string `json:"feature_flags,omitempty"`
+	GenerationAccessUnlimited *bool    `json:"generation_access_unlimited,omitempty"`
+	OrgSlug                   string   `json:"org_slug"`
+	WorkspaceID               string   `json:"workspace_id"`
+	WorkspaceSlug             string   `json:"workspace_slug"`
 }
 
 func (o *APIKeyDetails) GetAccountType() AccountType {
@@ -53,11 +54,18 @@ func (o *APIKeyDetails) GetAccountType() AccountType {
 	return o.AccountType
 }
 
-func (o *APIKeyDetails) GetEnabledFeatures() []string {
+func (o *APIKeyDetails) GetEnabledFeatures() []FeatureFlag {
 	if o == nil {
-		return []string{}
+		return []FeatureFlag{}
 	}
 	return o.EnabledFeatures
+}
+
+func (o *APIKeyDetails) GetFeatureFlags() []string {
+	if o == nil {
+		return nil
+	}
+	return o.FeatureFlags
 }
 
 func (o *APIKeyDetails) GetGenerationAccessUnlimited() *bool {

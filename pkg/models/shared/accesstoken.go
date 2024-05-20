@@ -85,7 +85,6 @@ const (
 func (e AccessTokenAccountType) ToPointer() *AccessTokenAccountType {
 	return &e
 }
-
 func (e *AccessTokenAccountType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -152,10 +151,11 @@ func (o *Workspaces) GetUpdatedAt() *time.Time {
 
 // An AccessToken is a token that can be used to authenticate with the Speakeasy API.
 type AccessToken struct {
-	AccessToken string          `json:"access_token"`
-	Claims      Claims          `json:"claims"`
-	User        AccessTokenUser `json:"user"`
-	Workspaces  []Workspaces    `json:"workspaces,omitempty"`
+	AccessToken  string          `json:"access_token"`
+	Claims       Claims          `json:"claims"`
+	FeatureFlags []FeatureFlag   `json:"feature_flags,omitempty"`
+	User         AccessTokenUser `json:"user"`
+	Workspaces   []Workspaces    `json:"workspaces,omitempty"`
 }
 
 func (o *AccessToken) GetAccessToken() string {
@@ -170,6 +170,13 @@ func (o *AccessToken) GetClaims() Claims {
 		return Claims{}
 	}
 	return o.Claims
+}
+
+func (o *AccessToken) GetFeatureFlags() []FeatureFlag {
+	if o == nil {
+		return nil
+	}
+	return o.FeatureFlags
 }
 
 func (o *AccessToken) GetUser() AccessTokenUser {
