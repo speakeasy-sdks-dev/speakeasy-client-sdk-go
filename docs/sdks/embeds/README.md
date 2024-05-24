@@ -35,9 +35,7 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetEmbedAccessTokenRequest{}
-    
     ctx := context.Background()
     res, err := s.Embeds.GetEmbedAccessToken(ctx, request)
     if err != nil {
@@ -87,8 +85,6 @@ func main() {
         }),
     )
 
-
-    
     ctx := context.Background()
     res, err := s.Embeds.GetValidEmbedAccessTokens(ctx)
     if err != nil {
@@ -137,11 +133,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.RevokeEmbedAccessTokenRequest{
         TokenID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Embeds.RevokeEmbedAccessToken(ctx, request)
     if err != nil {

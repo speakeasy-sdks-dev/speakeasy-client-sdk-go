@@ -37,12 +37,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.DeleteAPIRequest{
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Apis.DeleteAPI(ctx, request)
     if err != nil {
@@ -93,12 +91,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GenerateOpenAPISpecRequest{
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Apis.GenerateOpenAPISpec(ctx, request)
     if err != nil {
@@ -148,12 +144,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GeneratePostmanCollectionRequest{
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Apis.GeneratePostmanCollection(ctx, request)
     if err != nil {
@@ -204,11 +198,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetAllAPIVersionsRequest{
         APIID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Apis.GetAllAPIVersions(ctx, request)
     if err != nil {
@@ -259,9 +251,7 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetApisRequest{}
-    
     ctx := context.Background()
     res, err := s.Apis.GetApis(ctx, request)
     if err != nil {
@@ -312,7 +302,6 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.UpsertAPIRequest{
         API: shared.APIInput{
             APIID: "<value>",
@@ -321,7 +310,6 @@ func main() {
         },
         APIID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Apis.UpsertAPI(ctx, request)
     if err != nil {

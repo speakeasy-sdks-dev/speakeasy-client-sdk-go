@@ -117,6 +117,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 	}
 
 	return res, nil
+
 }
 
 // GenerateOpenAPISpec - Generate an OpenAPI specification for a particular Api.
@@ -221,6 +222,7 @@ func (s *Apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 	}
 
 	return res, nil
+
 }
 
 // GeneratePostmanCollection - Generate a Postman collection for a particular Api.
@@ -338,6 +340,7 @@ func (s *Apis) GeneratePostmanCollection(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }
 
 // GetAllAPIVersions - Get all Api versions for a particular ApiEndpoint.
@@ -446,6 +449,7 @@ func (s *Apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 	}
 
 	return res, nil
+
 }
 
 // GetApis - Get a list of Apis for a given workspace
@@ -554,6 +558,7 @@ func (s *Apis) GetApis(ctx context.Context, request operations.GetApisRequest) (
 	}
 
 	return res, nil
+
 }
 
 // UpsertAPI - Upsert an Api
@@ -664,4 +669,5 @@ func (s *Apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 	}
 
 	return res, nil
+
 }

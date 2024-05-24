@@ -115,6 +115,7 @@ func (s *Metadata) DeleteVersionMetadata(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }
 
 // GetVersionMetadata - Get all metadata for a particular apiID and versionID.
@@ -217,6 +218,7 @@ func (s *Metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 	}
 
 	return res, nil
+
 }
 
 // InsertVersionMetadata - Insert metadata for a particular apiID and versionID.
@@ -325,4 +327,5 @@ func (s *Metadata) InsertVersionMetadata(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }

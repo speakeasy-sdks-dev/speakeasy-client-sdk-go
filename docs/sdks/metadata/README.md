@@ -34,14 +34,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.DeleteVersionMetadataRequest{
         APIID: "<value>",
         MetaKey: "<value>",
         MetaValue: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Metadata.DeleteVersionMetadata(ctx, request)
     if err != nil {
@@ -91,12 +89,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetVersionMetadataRequest{
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Metadata.GetVersionMetadata(ctx, request)
     if err != nil {
@@ -146,7 +142,6 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.InsertVersionMetadataRequest{
         VersionMetadata: shared.VersionMetadataInput{
             MetaKey: "<value>",
@@ -155,7 +150,6 @@ func main() {
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Metadata.InsertVersionMetadata(ctx, request)
     if err != nil {

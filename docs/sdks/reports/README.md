@@ -34,11 +34,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetChangesReportSignedURLRequest{
         DocumentChecksum: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Reports.GetChangesReportSignedURL(ctx, request)
     if err != nil {
@@ -88,11 +86,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetLintingReportSignedURLRequest{
         DocumentChecksum: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Reports.GetLintingReportSignedURL(ctx, request)
     if err != nil {
@@ -142,7 +138,6 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.UploadReportRequestBody{
         Data: shared.Report{},
         File: operations.File{
@@ -150,7 +145,6 @@ func main() {
             FileName: "sausages.m3a",
         },
     }
-    
     ctx := context.Background()
     res, err := s.Reports.UploadReport(ctx, request)
     if err != nil {

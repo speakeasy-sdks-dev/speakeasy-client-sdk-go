@@ -35,11 +35,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GenerateRequestPostmanCollectionRequest{
         RequestID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Requests.GenerateRequestPostmanCollection(ctx, request)
     if err != nil {
@@ -89,11 +87,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetRequestFromEventLogRequest{
         RequestID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Requests.GetRequestFromEventLog(ctx, request)
     if err != nil {
@@ -144,9 +140,7 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.QueryEventLogRequest{}
-    
     ctx := context.Background()
     res, err := s.Requests.QueryEventLog(ctx, request)
     if err != nil {

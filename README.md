@@ -30,9 +30,7 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-
 	request := operations.GetApisRequest{}
-
 	ctx := context.Background()
 	res, err := s.Apis.GetApis(ctx, request)
 	if err != nil {
@@ -117,6 +115,7 @@ func main() {
 
 ### [Organizations](docs/sdks/organizations/README.md)
 
+* [CreateFreeTrial](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
 * [GetOrganizationUsage](docs/sdks/organizations/README.md#getorganizationusage) - Get billing usage summary for a particular organization
 * [GetOrganizations](docs/sdks/organizations/README.md#getorganizations) - Get organizations for a user
 
@@ -125,6 +124,10 @@ func main() {
 * [GetChangesReportSignedURL](docs/sdks/reports/README.md#getchangesreportsignedurl) - Get the signed access url for the change reports for a particular document.
 * [GetLintingReportSignedURL](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
 * [UploadReport](docs/sdks/reports/README.md#uploadreport) - Upload a report.
+
+### [Suggest](docs/sdks/suggest/README.md)
+
+* [SuggestOperationIDs](docs/sdks/suggest/README.md#suggestoperationids) - Generate operation ID suggestions.
 
 ### [Embeds](docs/sdks/embeds/README.md)
 
@@ -185,11 +188,9 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-
 	request := operations.GetWorkspaceEventsByTargetRequest{
 		TargetID: "<value>",
 	}
-
 	ctx := context.Background()
 	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
 	if err != nil {
@@ -244,12 +245,10 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-
 	request := operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
 	}
-
 	ctx := context.Background()
 	res, err := s.Apis.DeleteAPI(ctx, request)
 	if err != nil {
@@ -284,12 +283,10 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-
 	request := operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
 	}
-
 	ctx := context.Background()
 	res, err := s.Apis.DeleteAPI(ctx, request)
 	if err != nil {
@@ -366,12 +363,10 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-
 	request := operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
 	}
-
 	ctx := context.Background()
 	res, err := s.Apis.DeleteAPI(ctx, request)
 	if err != nil {
@@ -421,11 +416,9 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-
 	request := operations.GetWorkspaceEventsByTargetRequest{
 		TargetID: "<value>",
 	}
-
 	ctx := context.Background()
 	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
 	if err != nil {
@@ -464,9 +457,7 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-
 	request := operations.GetWorkspaceAccessRequest{}
-
 	ctx := context.Background()
 	res, err := s.Auth.GetWorkspaceAccess(ctx, request, operations.WithRetries(
 		utils.RetryConfig{
@@ -519,9 +510,7 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-
 	request := operations.GetWorkspaceAccessRequest{}
-
 	ctx := context.Background()
 	res, err := s.Auth.GetWorkspaceAccess(ctx, request)
 	if err != nil {

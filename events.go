@@ -137,6 +137,7 @@ func (s *Events) GetWorkspaceEventsByTarget(ctx context.Context, request operati
 	}
 
 	return res, nil
+
 }
 
 // GetWorkspaceTargets - Load targets for a particular workspace
@@ -249,6 +250,7 @@ func (s *Events) GetWorkspaceTargets(ctx context.Context, request operations.Get
 	}
 
 	return res, nil
+
 }
 
 // PostWorkspaceEvents - Post events for a specific workspace
@@ -400,6 +402,7 @@ func (s *Events) PostWorkspaceEvents(ctx context.Context, request operations.Pos
 	}
 
 	return res, nil
+
 }
 
 // SearchWorkspaceEvents - Search events for a particular workspace by any field
@@ -512,4 +515,5 @@ func (s *Events) SearchWorkspaceEvents(ctx context.Context, request operations.S
 	}
 
 	return res, nil
+
 }

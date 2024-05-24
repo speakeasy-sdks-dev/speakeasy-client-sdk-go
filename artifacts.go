@@ -140,6 +140,7 @@ func (s *Artifacts) GetBlob(ctx context.Context, request operations.GetBlobReque
 	}
 
 	return res, nil
+
 }
 
 // GetManifest - Get manifest for a particular reference
@@ -257,6 +258,7 @@ func (s *Artifacts) GetManifest(ctx context.Context, request operations.GetManif
 	}
 
 	return res, nil
+
 }
 
 // GetNamespaces - Each namespace contains many revisions.
@@ -359,6 +361,7 @@ func (s *Artifacts) GetNamespaces(ctx context.Context) (*operations.GetNamespace
 	}
 
 	return res, nil
+
 }
 
 func (s *Artifacts) GetRevisions(ctx context.Context, request operations.GetRevisionsRequest) (*operations.GetRevisionsResponse, error) {
@@ -464,6 +467,7 @@ func (s *Artifacts) GetRevisions(ctx context.Context, request operations.GetRevi
 	}
 
 	return res, nil
+
 }
 
 func (s *Artifacts) GetTags(ctx context.Context, request operations.GetTagsRequest) (*operations.GetTagsResponse, error) {
@@ -565,6 +569,7 @@ func (s *Artifacts) GetTags(ctx context.Context, request operations.GetTagsReque
 	}
 
 	return res, nil
+
 }
 
 // PostTags - Add tags to an existing revision
@@ -662,6 +667,7 @@ func (s *Artifacts) PostTags(ctx context.Context, request operations.PostTagsReq
 	}
 
 	return res, nil
+
 }
 
 // Preflight - Get access token for communicating with OCI distribution endpoints
@@ -770,4 +776,5 @@ func (s *Artifacts) Preflight(ctx context.Context, request *shared.PreflightRequ
 	}
 
 	return res, nil
+
 }

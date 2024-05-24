@@ -39,13 +39,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.DeleteSchemaRequest{
         APIID: "<value>",
         RevisionID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Schemas.DeleteSchema(ctx, request)
     if err != nil {
@@ -95,12 +93,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.DownloadSchemaRequest{
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Schemas.DownloadSchema(ctx, request)
     if err != nil {
@@ -150,13 +146,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.DownloadSchemaRevisionRequest{
         APIID: "<value>",
         RevisionID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Schemas.DownloadSchemaRevision(ctx, request)
     if err != nil {
@@ -207,12 +201,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetSchemaRequest{
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Schemas.GetSchema(ctx, request)
     if err != nil {
@@ -262,14 +254,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetSchemaDiffRequest{
         APIID: "<value>",
         BaseRevisionID: "<value>",
         TargetRevisionID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Schemas.GetSchemaDiff(ctx, request)
     if err != nil {
@@ -320,13 +310,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetSchemaRevisionRequest{
         APIID: "<value>",
         RevisionID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Schemas.GetSchemaRevision(ctx, request)
     if err != nil {
@@ -377,12 +365,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetSchemasRequest{
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Schemas.GetSchemas(ctx, request)
     if err != nil {
@@ -433,7 +419,6 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.RegisterSchemaRequest{
         RequestBody: operations.RegisterSchemaRequestBody{
             File: operations.RegisterSchemaFile{
@@ -444,7 +429,6 @@ func main() {
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Schemas.RegisterSchema(ctx, request)
     if err != nil {

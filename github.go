@@ -118,6 +118,7 @@ func (s *Github) GithubCheckAccess(ctx context.Context, request operations.Githu
 	}
 
 	return res, nil
+
 }
 
 func (s *Github) GithubConfigureTarget(ctx context.Context, request shared.GithubConfigureTargetRequest) (*operations.GithubConfigureTargetResponse, error) {
@@ -214,6 +215,7 @@ func (s *Github) GithubConfigureTarget(ctx context.Context, request shared.Githu
 	}
 
 	return res, nil
+
 }
 
 func (s *Github) GithubTriggerAction(ctx context.Context, request shared.GithubTriggerActionRequest) (*operations.GithubTriggerActionResponse, error) {
@@ -310,4 +312,5 @@ func (s *Github) GithubTriggerAction(ctx context.Context, request shared.GithubT
 	}
 
 	return res, nil
+
 }
