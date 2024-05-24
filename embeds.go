@@ -133,6 +133,7 @@ func (s *Embeds) GetEmbedAccessToken(ctx context.Context, request operations.Get
 	}
 
 	return res, nil
+
 }
 
 // GetValidEmbedAccessTokens - Get all valid embed access tokens for the current workspace.
@@ -235,6 +236,7 @@ func (s *Embeds) GetValidEmbedAccessTokens(ctx context.Context) (*operations.Get
 	}
 
 	return res, nil
+
 }
 
 // RevokeEmbedAccessToken - Revoke an embed access EmbedToken.
@@ -326,4 +328,5 @@ func (s *Embeds) RevokeEmbedAccessToken(ctx context.Context, request operations.
 	}
 
 	return res, nil
+
 }

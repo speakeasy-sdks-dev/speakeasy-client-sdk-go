@@ -116,6 +116,7 @@ func (s *Reports) GetChangesReportSignedURL(ctx context.Context, request operati
 	}
 
 	return res, nil
+
 }
 
 // GetLintingReportSignedURL - Get the signed access url for the linting reports for a particular document.
@@ -208,6 +209,7 @@ func (s *Reports) GetLintingReportSignedURL(ctx context.Context, request operati
 	}
 
 	return res, nil
+
 }
 
 // UploadReport - Upload a report.
@@ -306,4 +308,5 @@ func (s *Reports) UploadReport(ctx context.Context, request operations.UploadRep
 	}
 
 	return res, nil
+
 }

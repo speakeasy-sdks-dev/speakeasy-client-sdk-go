@@ -143,6 +143,7 @@ func (s *Requests) GenerateRequestPostmanCollection(ctx context.Context, request
 	}
 
 	return res, nil
+
 }
 
 // GetRequestFromEventLog - Get information about a particular request.
@@ -245,6 +246,7 @@ func (s *Requests) GetRequestFromEventLog(ctx context.Context, request operation
 	}
 
 	return res, nil
+
 }
 
 // QueryEventLog - Query the event log to retrieve a list of requests.
@@ -353,4 +355,5 @@ func (s *Requests) QueryEventLog(ctx context.Context, request operations.QueryEv
 	}
 
 	return res, nil
+
 }

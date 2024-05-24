@@ -39,13 +39,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.DeleteAPIEndpointRequest{
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, request)
     if err != nil {
@@ -96,13 +94,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.FindAPIEndpointRequest{
         APIID: "<value>",
         DisplayName: "Don.Strosin",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.APIEndpoints.FindAPIEndpoint(ctx, request)
     if err != nil {
@@ -153,13 +149,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GenerateOpenAPISpecForAPIEndpointRequest{
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, request)
     if err != nil {
@@ -209,13 +203,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GeneratePostmanCollectionForAPIEndpointRequest{
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, request)
     if err != nil {
@@ -265,11 +257,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetAllAPIEndpointsRequest{
         APIID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, request)
     if err != nil {
@@ -319,12 +309,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetAllForVersionAPIEndpointsRequest{
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, request)
     if err != nil {
@@ -374,13 +362,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetAPIEndpointRequest{
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.APIEndpoints.GetAPIEndpoint(ctx, request)
     if err != nil {
@@ -430,7 +416,6 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.UpsertAPIEndpointRequest{
         APIEndpoint: shared.APIEndpointInput{
             APIEndpointID: "<value>",
@@ -444,7 +429,6 @@ func main() {
         APIID: "<value>",
         VersionID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, request)
     if err != nil {

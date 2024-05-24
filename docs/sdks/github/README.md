@@ -28,12 +28,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GithubCheckAccessRequest{
         Org: "<value>",
         Repo: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Github.GithubCheckAccess(ctx, request)
     if err != nil {
@@ -80,12 +78,10 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := shared.GithubConfigureTargetRequest{
         Org: "<value>",
         RepoName: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Github.GithubConfigureTarget(ctx, request)
     if err != nil {
@@ -132,13 +128,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := shared.GithubTriggerActionRequest{
         GenLockID: "<value>",
         Org: "<value>",
         RepoName: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Github.GithubTriggerAction(ctx, request)
     if err != nil {

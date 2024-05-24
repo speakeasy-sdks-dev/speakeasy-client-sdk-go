@@ -30,11 +30,9 @@ import(
 
 func main() {
     s := speakeasyclientsdkgo.New()
-
     request := operations.GetAccessTokenRequest{
         WorkspaceID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Auth.GetAccessToken(ctx, request)
     if err != nil {
@@ -84,8 +82,6 @@ func main() {
         }),
     )
 
-
-    
     ctx := context.Background()
     res, err := s.Auth.GetUser(ctx)
     if err != nil {
@@ -134,9 +130,7 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetWorkspaceAccessRequest{}
-    
     ctx := context.Background()
     res, err := s.Auth.GetWorkspaceAccess(ctx, request)
     if err != nil {
@@ -187,8 +181,6 @@ func main() {
         }),
     )
 
-
-    
     ctx := context.Background()
     res, err := s.Auth.ValidateAPIKey(ctx)
     if err != nil {

@@ -35,11 +35,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetWorkspaceEventsByTargetRequest{
         TargetID: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
     if err != nil {
@@ -90,9 +88,7 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetWorkspaceTargetsRequest{}
-    
     ctx := context.Background()
     res, err := s.Events.GetWorkspaceTargets(ctx, request)
     if err != nil {
@@ -144,7 +140,6 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.PostWorkspaceEventsRequest{
         RequestBody: []shared.CliEvent{
             shared.CliEvent{
@@ -160,7 +155,6 @@ func main() {
             },
         },
     }
-    
     ctx := context.Background()
     res, err := s.Events.PostWorkspaceEvents(ctx, request)
     if err != nil {
@@ -212,9 +206,7 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.SearchWorkspaceEventsRequest{}
-    
     ctx := context.Background()
     res, err := s.Events.SearchWorkspaceEvents(ctx, request)
     if err != nil {

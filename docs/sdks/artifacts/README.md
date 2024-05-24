@@ -34,14 +34,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetBlobRequest{
         Digest: "<value>",
         NamespaceName: "<value>",
         OrganizationSlug: "<value>",
         WorkspaceSlug: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Artifacts.GetBlob(ctx, request)
     if err != nil {
@@ -91,14 +89,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetManifestRequest{
         NamespaceName: "<value>",
         OrganizationSlug: "<value>",
         RevisionReference: "<value>",
         WorkspaceSlug: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Artifacts.GetManifest(ctx, request)
     if err != nil {
@@ -148,8 +144,6 @@ func main() {
         }),
     )
 
-
-    
     ctx := context.Background()
     res, err := s.Artifacts.GetNamespaces(ctx)
     if err != nil {
@@ -196,11 +190,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetRevisionsRequest{
         NamespaceName: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Artifacts.GetRevisions(ctx, request)
     if err != nil {
@@ -248,11 +240,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.GetTagsRequest{
         NamespaceName: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Artifacts.GetTags(ctx, request)
     if err != nil {
@@ -302,11 +292,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     request := operations.PostTagsRequest{
         NamespaceName: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Artifacts.PostTags(ctx, request)
     if err != nil {
@@ -355,11 +343,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-
     var request *shared.PreflightRequest = &shared.PreflightRequest{
         NamespaceName: "<value>",
     }
-    
     ctx := context.Background()
     res, err := s.Artifacts.Preflight(ctx, request)
     if err != nil {

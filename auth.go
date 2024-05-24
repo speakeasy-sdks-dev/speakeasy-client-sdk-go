@@ -128,6 +128,7 @@ func (s *Auth) GetAccessToken(ctx context.Context, request operations.GetAccessT
 	}
 
 	return res, nil
+
 }
 
 // GetUser - Get information about the current user.
@@ -230,6 +231,7 @@ func (s *Auth) GetUser(ctx context.Context) (*operations.GetUserResponse, error)
 	}
 
 	return res, nil
+
 }
 
 // GetWorkspaceAccess - Get access allowances for a particular workspace
@@ -370,6 +372,7 @@ func (s *Auth) GetWorkspaceAccess(ctx context.Context, request operations.GetWor
 	}
 
 	return res, nil
+
 }
 
 // ValidateAPIKey - Validate the current api key.
@@ -472,4 +475,5 @@ func (s *Auth) ValidateAPIKey(ctx context.Context) (*operations.ValidateAPIKeyRe
 	}
 
 	return res, nil
+
 }

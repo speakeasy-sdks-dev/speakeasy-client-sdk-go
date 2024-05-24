@@ -93,6 +93,8 @@ type Speakeasy struct {
 	Organizations *Organizations
 	// REST APIs for managing reports
 	Reports *Reports
+	// REST APIs for managing LLM OAS suggestions
+	Suggest *Suggest
 	// REST APIs for managing embeds
 	Embeds *Embeds
 	// REST APIs for capturing event data
@@ -140,16 +142,10 @@ func WithClient(client HTTPClient) SDKOption {
 	}
 }
 
-func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
-	return func(context.Context) (interface{}, error) {
-		return security, nil
-	}
-}
-
 // WithSecurity configures the SDK to use the provided security details
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *Speakeasy) {
-		sdk.sdkConfiguration.Security = withSecurity(security)
+		sdk.sdkConfiguration.Security = utils.AsSecuritySource(security)
 	}
 }
 
@@ -181,9 +177,9 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.4.0 .",
-			SDKVersion:        "3.8.1",
-			GenVersion:        "2.333.3",
-			UserAgent:         "speakeasy-sdk/go 3.8.1 2.333.3 0.4.0 . github.com/speakeasy-api/speakeasy-client-sdk-go",
+			SDKVersion:        "3.8.2",
+			GenVersion:        "2.337.1",
+			UserAgent:         "speakeasy-sdk/go 3.8.2 2.337.1 0.4.0 . github.com/speakeasy-api/speakeasy-client-sdk-go",
 			Globals:           globals.Globals{},
 			Hooks:             hooks.New(),
 		},
@@ -223,6 +219,8 @@ func New(opts ...SDKOption) *Speakeasy {
 	sdk.Organizations = newOrganizations(sdk.sdkConfiguration)
 
 	sdk.Reports = newReports(sdk.sdkConfiguration)
+
+	sdk.Suggest = newSuggest(sdk.sdkConfiguration)
 
 	sdk.Embeds = newEmbeds(sdk.sdkConfiguration)
 

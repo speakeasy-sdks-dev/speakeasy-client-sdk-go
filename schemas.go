@@ -115,6 +115,7 @@ func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 	}
 
 	return res, nil
+
 }
 
 // DownloadSchema - Download the latest schema for a particular apiID.
@@ -236,6 +237,7 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 	}
 
 	return res, nil
+
 }
 
 // DownloadSchemaRevision - Download a particular schema revision for an Api.
@@ -357,6 +359,7 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }
 
 // GetSchema - Get information about the latest schema.
@@ -461,6 +464,7 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 	}
 
 	return res, nil
+
 }
 
 // GetSchemaDiff - Get a diff of two schema revisions for an Api.
@@ -563,6 +567,7 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 	}
 
 	return res, nil
+
 }
 
 // GetSchemaRevision - Get information about a particular schema revision for an Api.
@@ -667,6 +672,7 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 	}
 
 	return res, nil
+
 }
 
 // GetSchemas - Get information about all schemas associated with a particular apiID.
@@ -771,6 +777,7 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 	}
 
 	return res, nil
+
 }
 
 // RegisterSchema - Register a schema.
@@ -870,4 +877,5 @@ func (s *Schemas) RegisterSchema(ctx context.Context, request operations.Registe
 	}
 
 	return res, nil
+
 }

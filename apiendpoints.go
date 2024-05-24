@@ -116,6 +116,7 @@ func (s *APIEndpoints) DeleteAPIEndpoint(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }
 
 // FindAPIEndpoint - Find an ApiEndpoint via its displayName.
@@ -220,6 +221,7 @@ func (s *APIEndpoints) FindAPIEndpoint(ctx context.Context, request operations.F
 	}
 
 	return res, nil
+
 }
 
 // GenerateOpenAPISpecForAPIEndpoint - Generate an OpenAPI specification for a particular ApiEndpoint.
@@ -324,6 +326,7 @@ func (s *APIEndpoints) GenerateOpenAPISpecForAPIEndpoint(ctx context.Context, re
 	}
 
 	return res, nil
+
 }
 
 // GeneratePostmanCollectionForAPIEndpoint - Generate a Postman collection for a particular ApiEndpoint.
@@ -441,6 +444,7 @@ func (s *APIEndpoints) GeneratePostmanCollectionForAPIEndpoint(ctx context.Conte
 	}
 
 	return res, nil
+
 }
 
 // GetAllAPIEndpoints - Get all Api endpoints for a particular apiID.
@@ -543,6 +547,7 @@ func (s *APIEndpoints) GetAllAPIEndpoints(ctx context.Context, request operation
 	}
 
 	return res, nil
+
 }
 
 // GetAllForVersionAPIEndpoints - Get all ApiEndpoints for a particular apiID and versionID.
@@ -645,6 +650,7 @@ func (s *APIEndpoints) GetAllForVersionAPIEndpoints(ctx context.Context, request
 	}
 
 	return res, nil
+
 }
 
 // GetAPIEndpoint - Get an ApiEndpoint.
@@ -747,6 +753,7 @@ func (s *APIEndpoints) GetAPIEndpoint(ctx context.Context, request operations.Ge
 	}
 
 	return res, nil
+
 }
 
 // UpsertAPIEndpoint - Upsert an ApiEndpoint.
@@ -856,4 +863,5 @@ func (s *APIEndpoints) UpsertAPIEndpoint(ctx context.Context, request operations
 	}
 
 	return res, nil
+
 }
