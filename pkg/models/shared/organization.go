@@ -40,12 +40,13 @@ func (e *OrganizationAccountType) UnmarshalJSON(data []byte) error {
 
 // Organization - A speakeasy organization
 type Organization struct {
-	AccountType OrganizationAccountType `json:"account_type"`
-	CreatedAt   *time.Time              `json:"created_at,omitempty"`
-	ID          string                  `json:"id"`
-	Name        string                  `json:"name"`
-	Slug        *string                 `json:"slug,omitempty"`
-	UpdatedAt   *time.Time              `json:"updated_at,omitempty"`
+	AccountType       OrganizationAccountType `json:"account_type"`
+	CreatedAt         *time.Time              `json:"created_at,omitempty"`
+	ID                string                  `json:"id"`
+	Name              string                  `json:"name"`
+	Slug              *string                 `json:"slug,omitempty"`
+	TelemetryDisabled bool                    `json:"telemetry_disabled"`
+	UpdatedAt         *time.Time              `json:"updated_at,omitempty"`
 }
 
 func (o Organization) MarshalJSON() ([]byte, error) {
@@ -92,6 +93,13 @@ func (o *Organization) GetSlug() *string {
 		return nil
 	}
 	return o.Slug
+}
+
+func (o *Organization) GetTelemetryDisabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.TelemetryDisabled
 }
 
 func (o *Organization) GetUpdatedAt() *time.Time {
