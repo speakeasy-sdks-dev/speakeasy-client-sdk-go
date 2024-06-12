@@ -43,6 +43,7 @@ type APIKeyDetails struct {
 	FeatureFlags              []string `json:"feature_flags,omitempty"`
 	GenerationAccessUnlimited *bool    `json:"generation_access_unlimited,omitempty"`
 	OrgSlug                   string   `json:"org_slug"`
+	TelemetryDisabled         bool     `json:"telemetry_disabled"`
 	WorkspaceID               string   `json:"workspace_id"`
 	WorkspaceSlug             string   `json:"workspace_slug"`
 }
@@ -80,6 +81,13 @@ func (o *APIKeyDetails) GetOrgSlug() string {
 		return ""
 	}
 	return o.OrgSlug
+}
+
+func (o *APIKeyDetails) GetTelemetryDisabled() bool {
+	if o == nil {
+		return false
+	}
+	return o.TelemetryDisabled
 }
 
 func (o *APIKeyDetails) GetWorkspaceID() string {
