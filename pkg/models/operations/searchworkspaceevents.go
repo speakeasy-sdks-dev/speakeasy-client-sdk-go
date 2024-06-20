@@ -19,6 +19,10 @@ func (o *SearchWorkspaceEventsGlobals) GetWorkspaceID() *string {
 }
 
 type SearchWorkspaceEventsRequest struct {
+	// A specific gen lock ID for the events.
+	GenerateGenLockID *string `queryParam:"style=form,explode=true,name=generate_gen_lock_id"`
+	// Specified interaction type for events.
+	InteractionType *shared.InteractionType `queryParam:"style=form,explode=true,name=interaction_type"`
 	// Unique identifier of the lint report digest.
 	LintReportDigest *string `queryParam:"style=form,explode=true,name=lint_report_digest"`
 	// Unique identifier of the openapi diff report digest.
@@ -27,6 +31,20 @@ type SearchWorkspaceEventsRequest struct {
 	SourceRevisionDigest *string `queryParam:"style=form,explode=true,name=source_revision_digest"`
 	// Unique identifier of the workspace.
 	WorkspaceID *string `pathParam:"style=simple,explode=false,name=workspaceID"`
+}
+
+func (o *SearchWorkspaceEventsRequest) GetGenerateGenLockID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateGenLockID
+}
+
+func (o *SearchWorkspaceEventsRequest) GetInteractionType() *shared.InteractionType {
+	if o == nil {
+		return nil
+	}
+	return o.InteractionType
 }
 
 func (o *SearchWorkspaceEventsRequest) GetLintReportDigest() *string {

@@ -109,8 +109,11 @@ func main() {
 
 ### [Github](docs/sdks/github/README.md)
 
+* [FetchPublishingPRs](docs/sdks/github/README.md#fetchpublishingprs)
 * [GithubCheckAccess](docs/sdks/github/README.md#githubcheckaccess)
+* [GithubCheckPublishingSecrets](docs/sdks/github/README.md#githubcheckpublishingsecrets)
 * [GithubConfigureTarget](docs/sdks/github/README.md#githubconfiguretarget)
+* [GithubStorePublishingSecrets](docs/sdks/github/README.md#githubstorepublishingsecrets)
 * [GithubTriggerAction](docs/sdks/github/README.md#githubtriggeraction)
 
 ### [Organizations](docs/sdks/organizations/README.md)
