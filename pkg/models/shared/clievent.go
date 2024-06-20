@@ -137,6 +137,8 @@ type CliEvent struct {
 	GenerateRepoURL *string `json:"generate_repo_url,omitempty"`
 	// The target of the event.
 	GenerateTarget *string `json:"generate_target,omitempty"`
+	// The workflow name of the target.
+	GenerateTargetName *string `json:"generate_target_name,omitempty"`
 	// The version of the target.
 	GenerateTargetVersion *string `json:"generate_target_version,omitempty"`
 	// Version of the generation logic used.
@@ -447,6 +449,13 @@ func (o *CliEvent) GetGenerateTarget() *string {
 		return nil
 	}
 	return o.GenerateTarget
+}
+
+func (o *CliEvent) GetGenerateTargetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GenerateTargetName
 }
 
 func (o *CliEvent) GetGenerateTargetVersion() *string {
