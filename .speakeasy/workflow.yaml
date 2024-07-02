@@ -10,7 +10,3 @@ targets:
     speakeasy-client-sdk-go:
         target: go
         source: my-source
-        codeSamples:
-            output: code-samples.yaml
-            registry:
-                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/code-samples-go-speakeasy-client-sdk-go
