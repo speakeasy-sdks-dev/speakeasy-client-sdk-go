@@ -115,6 +115,7 @@ func main() {
 * [ConfigureMintlifyRepo](docs/sdks/github/README.md#configuremintlifyrepo)
 * [ConfigureTarget](docs/sdks/github/README.md#configuretarget)
 * [FetchPublishingPRs](docs/sdks/github/README.md#fetchpublishingprs)
+* [GetAction](docs/sdks/github/README.md#getaction)
 * [GithubCheckPublishingSecrets](docs/sdks/github/README.md#githubcheckpublishingsecrets)
 * [GithubStorePublishingSecrets](docs/sdks/github/README.md#githubstorepublishingsecrets)
 * [TriggerAction](docs/sdks/github/README.md#triggeraction)
@@ -130,6 +131,10 @@ func main() {
 * [GetChangesReportSignedURL](docs/sdks/reports/README.md#getchangesreportsignedurl) - Get the signed access url for the change reports for a particular document.
 * [GetLintingReportSignedURL](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
 * [UploadReport](docs/sdks/reports/README.md#uploadreport) - Upload a report.
+
+### [ShortURLs](docs/sdks/shorturls/README.md)
+
+* [Create](docs/sdks/shorturls/README.md#create) - Shorten a URL.
 
 ### [Suggest](docs/sdks/suggest/README.md)
 
@@ -445,7 +450,7 @@ func main() {
 
 Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
 
-To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call by using the `WithRetries` option:
+To change the default retry strategy for a single API call, simply provide a `retry.Config` object to the call by using the `WithRetries` option:
 ```go
 package main
 
@@ -454,7 +459,7 @@ import (
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/retry"
 	"log"
 	"pkg/models/operations"
 )
@@ -465,12 +470,15 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetWorkspaceAccessRequest{}
+	request := operations.DeleteAPIRequest{
+		APIID:     "<value>",
+		VersionID: "<value>",
+	}
 	ctx := context.Background()
-	res, err := s.Auth.GetWorkspaceAccess(ctx, request, operations.WithRetries(
-		utils.RetryConfig{
+	res, err := s.Apis.DeleteAPI(ctx, request, operations.WithRetries(
+		retry.Config{
 			Strategy: "backoff",
-			Backoff: &utils.BackoffStrategy{
+			Backoff: &retry.BackoffStrategy{
 				InitialInterval: 1,
 				MaxInterval:     50,
 				Exponent:        1.1,
@@ -481,7 +489,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccessDetails != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -497,16 +505,16 @@ import (
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/retry"
 	"log"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithRetryConfig(
-			utils.RetryConfig{
+			retry.Config{
 				Strategy: "backoff",
-				Backoff: &utils.BackoffStrategy{
+				Backoff: &retry.BackoffStrategy{
 					InitialInterval: 1,
 					MaxInterval:     50,
 					Exponent:        1.1,
@@ -518,13 +526,16 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetWorkspaceAccessRequest{}
+	request := operations.DeleteAPIRequest{
+		APIID:     "<value>",
+		VersionID: "<value>",
+	}
 	ctx := context.Background()
-	res, err := s.Auth.GetWorkspaceAccess(ctx, request)
+	res, err := s.Apis.DeleteAPI(ctx, request)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccessDetails != nil {
+	if res != nil {
 		// handle response
 	}
 }

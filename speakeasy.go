@@ -8,6 +8,7 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/internal/globals"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/internal/hooks"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/retry"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
 	"net/http"
 	"time"
@@ -56,8 +57,9 @@ type sdkConfiguration struct {
 	GenVersion        string
 	UserAgent         string
 	Globals           globals.Globals
-	RetryConfig       *utils.RetryConfig
+	RetryConfig       *retry.Config
 	Hooks             *hooks.Hooks
+	Timeout           *time.Duration
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -94,6 +96,8 @@ type Speakeasy struct {
 	Organizations *Organizations
 	// REST APIs for managing reports
 	Reports *Reports
+	// REST APIs for managing short URLs
+	ShortURLs *ShortURLs
 	// REST APIs for managing LLM OAS suggestions
 	Suggest *Suggest
 	// REST APIs for managing embeds
@@ -166,9 +170,16 @@ func WithWorkspaceID(workspaceID string) SDKOption {
 	}
 }
 
-func WithRetryConfig(retryConfig utils.RetryConfig) SDKOption {
+func WithRetryConfig(retryConfig retry.Config) SDKOption {
 	return func(sdk *Speakeasy) {
 		sdk.sdkConfiguration.RetryConfig = &retryConfig
+	}
+}
+
+// WithTimeout Optional request timeout applied to each operation
+func WithTimeout(timeout time.Duration) SDKOption {
+	return func(sdk *Speakeasy) {
+		sdk.sdkConfiguration.Timeout = &timeout
 	}
 }
 
@@ -178,9 +189,9 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.4.0 .",
-			SDKVersion:        "3.8.9",
-			GenVersion:        "2.352.0",
-			UserAgent:         "speakeasy-sdk/go 3.8.9 2.352.0 0.4.0 . github.com/speakeasy-api/speakeasy-client-sdk-go",
+			SDKVersion:        "3.9.0",
+			GenVersion:        "2.366.1",
+			UserAgent:         "speakeasy-sdk/go 3.9.0 2.366.1 0.4.0 . github.com/speakeasy-api/speakeasy-client-sdk-go",
 			Globals:           globals.Globals{},
 			Hooks:             hooks.New(),
 		},
@@ -220,6 +231,8 @@ func New(opts ...SDKOption) *Speakeasy {
 	sdk.Organizations = newOrganizations(sdk.sdkConfiguration)
 
 	sdk.Reports = newReports(sdk.sdkConfiguration)
+
+	sdk.ShortURLs = newShortURLs(sdk.sdkConfiguration)
 
 	sdk.Suggest = newSuggest(sdk.sdkConfiguration)
 
