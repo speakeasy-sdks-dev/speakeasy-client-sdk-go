@@ -8,6 +8,7 @@
 * [ConfigureMintlifyRepo](#configuremintlifyrepo)
 * [ConfigureTarget](#configuretarget)
 * [FetchPublishingPRs](#fetchpublishingprs)
+* [GetAction](#getaction)
 * [GithubCheckPublishingSecrets](#githubcheckpublishingsecrets)
 * [GithubStorePublishingSecrets](#githubstorepublishingsecrets)
 * [TriggerAction](#triggeraction)
@@ -54,6 +55,7 @@ func main() {
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
 | `request`                                                                          | [operations.CheckAccessRequest](../../pkg/models/operations/checkaccessrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
 
 ### Response
@@ -105,6 +107,7 @@ func main() {
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
 | `request`                                                                                                | [shared.GithubConfigureCodeSamplesRequest](../../pkg/models/shared/githubconfigurecodesamplesrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
 
 ### Response
@@ -159,6 +162,7 @@ func main() {
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
 | `request`                                                                                                  | [shared.GithubConfigureMintlifyRepoRequest](../../pkg/models/shared/githubconfiguremintlifyreporequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
 
 ### Response
@@ -209,6 +213,7 @@ func main() {
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `request`                                                                                      | [shared.GithubConfigureTargetRequest](../../pkg/models/shared/githubconfiguretargetrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 
 ### Response
@@ -261,11 +266,64 @@ func main() {
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
 | `request`                                                                                        | [operations.FetchPublishingPRsRequest](../../pkg/models/operations/fetchpublishingprsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
 
 ### Response
 
 **[*operations.FetchPublishingPRsResponse](../../pkg/models/operations/fetchpublishingprsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
+
+## GetAction
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
+	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
+	"context"
+	"log"
+)
+
+func main() {
+    s := speakeasyclientsdkgo.New(
+        speakeasyclientsdkgo.WithSecurity(shared.Security{
+            APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
+        }),
+    )
+    request := operations.GetActionRequest{
+        Org: "<value>",
+        Repo: "<value>",
+    }
+    ctx := context.Background()
+    res, err := s.Github.GetAction(ctx, request)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GithubGetActionResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [operations.GetActionRequest](../../pkg/models/operations/getactionrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
+
+
+### Response
+
+**[*operations.GetActionResponse](../../pkg/models/operations/getactionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
@@ -311,6 +369,7 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
 | `request`                                                                                                            | [operations.GithubCheckPublishingSecretsRequest](../../pkg/models/operations/githubcheckpublishingsecretsrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `opts`                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
 
 
 ### Response
@@ -360,6 +419,7 @@ func main() {
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
 | `request`                                                                                                    | [shared.GithubStorePublishingSecretsRequest](../../pkg/models/shared/githubstorepublishingsecretsrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
+| `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
 
 ### Response
@@ -411,6 +471,7 @@ func main() {
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |
 | `request`                                                                                  | [shared.GithubTriggerActionRequest](../../pkg/models/shared/githubtriggeractionrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
 
 ### Response

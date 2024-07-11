@@ -12,6 +12,8 @@ type GithubConfigureMintlifyRepoRequest struct {
 	Overlays []string `json:"overlays"`
 	// The GitHub repository name
 	Repo string `json:"repo"`
+	// The subdirectory (location of mint.json)
+	Subdirectory *string `json:"subdirectory,omitempty"`
 }
 
 func (o *GithubConfigureMintlifyRepoRequest) GetInput() string {
@@ -40,4 +42,11 @@ func (o *GithubConfigureMintlifyRepoRequest) GetRepo() string {
 		return ""
 	}
 	return o.Repo
+}
+
+func (o *GithubConfigureMintlifyRepoRequest) GetSubdirectory() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Subdirectory
 }

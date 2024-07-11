@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 030dd7b481bf8470a7bc69926ccae8f2
+  docChecksum: 638dbecd668cc1d7818c3b5aefd2d3e1
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.315.2
-  generationVersion: 2.352.0
-  releaseVersion: 3.8.9
-  configChecksum: 665c2c0f6148e7cb6feb44e098d2bd4f
+  speakeasyVersion: 1.332.0
+  generationVersion: 2.366.1
+  releaseVersion: 3.9.0
+  configChecksum: d17328f8c91e344e2d7d382464225fa9
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -15,7 +15,8 @@ features:
   go:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    core: 3.4.14
+    core: 3.4.15
+    defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
     devContainers: 2.90.0
     downloadStreams: 0.1.1
@@ -28,7 +29,7 @@ features:
     intellisenseMarkdownSupport: 0.1.0
     nullables: 0.1.0
     responseFormat: 0.1.2
-    retries: 2.82.3
+    retries: 2.83.0
     sdkHooks: 0.1.0
     serverIDs: 2.81.1
 generatedFiles:
@@ -42,12 +43,14 @@ generatedFiles:
   - github.go
   - organizations.go
   - reports.go
+  - shorturls.go
   - suggest.go
   - embeds.go
   - events.go
   - speakeasy.go
   - go.mod
   - pkg/models/sdkerrors/sdkerror.go
+  - pkg/retry/config.go
   - pkg/types/bigint.go
   - pkg/types/date.go
   - pkg/types/datetime.go
@@ -109,6 +112,7 @@ generatedFiles:
   - /pkg/models/operations/configuremintlifyrepo.go
   - /pkg/models/operations/configuretarget.go
   - /pkg/models/operations/fetchpublishingprs.go
+  - /pkg/models/operations/getaction.go
   - /pkg/models/operations/githubcheckpublishingsecrets.go
   - /pkg/models/operations/githubstorepublishingsecrets.go
   - /pkg/models/operations/triggeraction.go
@@ -118,6 +122,7 @@ generatedFiles:
   - /pkg/models/operations/getchangesreportsignedurl.go
   - /pkg/models/operations/getlintingreportsignedurl.go
   - /pkg/models/operations/uploadreport.go
+  - /pkg/models/operations/create.go
   - /pkg/models/operations/applyoperationids.go
   - /pkg/models/operations/suggestoperationids.go
   - /pkg/models/operations/suggestoperationidsregistry.go
@@ -169,6 +174,7 @@ generatedFiles:
   - /pkg/models/shared/githubconfiguremintlifyreporequest.go
   - /pkg/models/shared/githubconfiguretargetrequest.go
   - /pkg/models/shared/githubpublishingprresponse.go
+  - /pkg/models/shared/githubgetactionresponse.go
   - /pkg/models/shared/githubmissingpublishingsecretsresponse.go
   - /pkg/models/shared/githubstorepublishingsecretsrequest.go
   - /pkg/models/shared/githubtriggeractionrequest.go
@@ -176,6 +182,7 @@ generatedFiles:
   - /pkg/models/shared/organizationusage.go
   - /pkg/models/shared/organization.go
   - /pkg/models/shared/report.go
+  - /pkg/models/shared/shorturl.go
   - /pkg/models/shared/suggestedoperationids.go
   - /pkg/models/shared/suggestoperationidsopts.go
   - /pkg/models/shared/embedaccesstokenresponse.go
@@ -271,6 +278,8 @@ generatedFiles:
   - docs/pkg/models/operations/configuretargetresponse.md
   - docs/pkg/models/operations/fetchpublishingprsrequest.md
   - docs/pkg/models/operations/fetchpublishingprsresponse.md
+  - docs/pkg/models/operations/getactionrequest.md
+  - docs/pkg/models/operations/getactionresponse.md
   - docs/pkg/models/operations/githubcheckpublishingsecretsrequest.md
   - docs/pkg/models/operations/githubcheckpublishingsecretsresponse.md
   - docs/pkg/models/operations/githubstorepublishingsecretsresponse.md
@@ -288,6 +297,8 @@ generatedFiles:
   - docs/pkg/models/operations/uploadreportrequestbody.md
   - docs/pkg/models/operations/uploadreportuploadedreport.md
   - docs/pkg/models/operations/uploadreportresponse.md
+  - docs/pkg/models/operations/createrequestbody.md
+  - docs/pkg/models/operations/createresponse.md
   - docs/pkg/models/operations/applyoperationidsrequestbody.md
   - docs/pkg/models/operations/applyoperationidsrequest.md
   - docs/pkg/models/operations/applyoperationidsresponse.md
@@ -364,6 +375,7 @@ generatedFiles:
   - docs/pkg/models/shared/githubconfiguremintlifyreporequest.md
   - docs/pkg/models/shared/githubconfiguretargetrequest.md
   - docs/pkg/models/shared/githubpublishingprresponse.md
+  - docs/pkg/models/shared/githubgetactionresponse.md
   - docs/pkg/models/shared/githubmissingpublishingsecretsresponse.md
   - docs/pkg/models/shared/githubstorepublishingsecretsrequest.md
   - docs/pkg/models/shared/githubtriggeractionrequest.md
@@ -373,6 +385,7 @@ generatedFiles:
   - docs/pkg/models/shared/organization.md
   - docs/pkg/models/shared/type.md
   - docs/pkg/models/shared/report.md
+  - docs/pkg/models/shared/shorturl.md
   - docs/pkg/models/shared/suggestedoperationids.md
   - docs/pkg/models/shared/depthstyle.md
   - docs/pkg/models/shared/style.md
@@ -386,17 +399,18 @@ generatedFiles:
   - docs/pkg/models/shared/targetsdk.md
   - docs/pkg/models/shared/security.md
   - docs/sdks/speakeasy/README.md
+  - docs/pkg/models/operations/option.md
   - docs/sdks/apis/README.md
   - docs/sdks/apiendpoints/README.md
   - docs/sdks/metadata/README.md
   - docs/sdks/schemas/README.md
   - docs/sdks/artifacts/README.md
-  - docs/pkg/models/operations/option.md
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
   - docs/sdks/github/README.md
   - docs/sdks/organizations/README.md
   - docs/sdks/reports/README.md
+  - docs/sdks/shorturls/README.md
   - docs/sdks/suggest/README.md
   - docs/sdks/embeds/README.md
   - docs/sdks/events/README.md
