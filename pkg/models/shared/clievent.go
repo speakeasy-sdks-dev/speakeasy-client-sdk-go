@@ -9,15 +9,17 @@ import (
 	"time"
 )
 
-// GenerateBumpType - Bump type of the lock file (calculated semver delta, or a custom change (manual release))
+// GenerateBumpType - Bump type of the lock file (calculated semver delta, custom change (manual release), or prerelease/graduate)
 type GenerateBumpType string
 
 const (
-	GenerateBumpTypeMajor  GenerateBumpType = "major"
-	GenerateBumpTypeMinor  GenerateBumpType = "minor"
-	GenerateBumpTypePatch  GenerateBumpType = "patch"
-	GenerateBumpTypeCustom GenerateBumpType = "custom"
-	GenerateBumpTypeNone   GenerateBumpType = "none"
+	GenerateBumpTypeMajor      GenerateBumpType = "major"
+	GenerateBumpTypeMinor      GenerateBumpType = "minor"
+	GenerateBumpTypePatch      GenerateBumpType = "patch"
+	GenerateBumpTypeCustom     GenerateBumpType = "custom"
+	GenerateBumpTypeGraduate   GenerateBumpType = "graduate"
+	GenerateBumpTypePrerelease GenerateBumpType = "prerelease"
+	GenerateBumpTypeNone       GenerateBumpType = "none"
 )
 
 func (e GenerateBumpType) ToPointer() *GenerateBumpType {
@@ -36,6 +38,10 @@ func (e *GenerateBumpType) UnmarshalJSON(data []byte) error {
 	case "patch":
 		fallthrough
 	case "custom":
+		fallthrough
+	case "graduate":
+		fallthrough
+	case "prerelease":
 		fallthrough
 	case "none":
 		*e = GenerateBumpType(v)
@@ -91,7 +97,7 @@ type CliEvent struct {
 	Error *string `json:"error,omitempty"`
 	// Unique identifier for each execution of the CLI.
 	ExecutionID string `json:"execution_id"`
-	// Bump type of the lock file (calculated semver delta, or a custom change (manual release))
+	// Bump type of the lock file (calculated semver delta, custom change (manual release), or prerelease/graduate)
 	GenerateBumpType *GenerateBumpType `json:"generate_bump_type,omitempty"`
 	// Checksum of the configuration file (post generation)
 	GenerateConfigPostChecksum *string `json:"generate_config_post_checksum,omitempty"`
