@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 5b362866a3e7a85c830c6cb1f1cf4896
+  docChecksum: 788929ad275a9aa095373e9046a05d41
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.344.1
-  generationVersion: 2.376.2
-  releaseVersion: 3.10.0
-  configChecksum: e9c49c281a0fa2857e5be8e110f7e5f4
+  speakeasyVersion: 1.346.1
+  generationVersion: 2.379.5
+  releaseVersion: 3.10.1
+  configChecksum: 835180144a14ccd50ffd1aaf9c6ffa47
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -15,7 +15,7 @@ features:
   go:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    core: 3.5.0
+    core: 3.5.2
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
     devContainers: 2.90.0
@@ -48,6 +48,7 @@ generatedFiles:
   - shorturls.go
   - suggest.go
   - embeds.go
+  - workspaces.go
   - events.go
   - speakeasy.go
   - go.mod
@@ -131,6 +132,7 @@ generatedFiles:
   - /pkg/models/operations/getembedaccesstoken.go
   - /pkg/models/operations/getvalidembedaccesstokens.go
   - /pkg/models/operations/revokeembedaccesstoken.go
+  - /pkg/models/operations/getworkspace.go
   - /pkg/models/operations/getworkspaceeventsbytarget.go
   - /pkg/models/operations/getworkspacetargets.go
   - /pkg/models/operations/postworkspaceevents.go
@@ -189,6 +191,7 @@ generatedFiles:
   - /pkg/models/shared/suggestoperationidsopts.go
   - /pkg/models/shared/embedaccesstokenresponse.go
   - /pkg/models/shared/embedtoken.go
+  - /pkg/models/shared/workspace.go
   - /pkg/models/shared/clievent.go
   - /pkg/models/shared/interactiontype.go
   - /pkg/models/shared/targetsdk.go
@@ -315,6 +318,9 @@ generatedFiles:
   - docs/pkg/models/operations/getvalidembedaccesstokensresponse.md
   - docs/pkg/models/operations/revokeembedaccesstokenrequest.md
   - docs/pkg/models/operations/revokeembedaccesstokenresponse.md
+  - docs/pkg/models/operations/getworkspaceglobals.md
+  - docs/pkg/models/operations/getworkspacerequest.md
+  - docs/pkg/models/operations/getworkspaceresponse.md
   - docs/pkg/models/operations/getworkspaceeventsbytargetglobals.md
   - docs/pkg/models/operations/getworkspaceeventsbytargetrequest.md
   - docs/pkg/models/operations/getworkspaceeventsbytargetresponse.md
@@ -394,6 +400,7 @@ generatedFiles:
   - docs/pkg/models/shared/suggestoperationidsopts.md
   - docs/pkg/models/shared/embedaccesstokenresponse.md
   - docs/pkg/models/shared/embedtoken.md
+  - docs/pkg/models/shared/workspace.md
   - docs/pkg/models/shared/generatebumptype.md
   - docs/pkg/models/shared/openapidiffbumptype.md
   - docs/pkg/models/shared/clievent.md
@@ -415,6 +422,7 @@ generatedFiles:
   - docs/sdks/shorturls/README.md
   - docs/sdks/suggest/README.md
   - docs/sdks/embeds/README.md
+  - docs/sdks/workspaces/README.md
   - docs/sdks/events/README.md
   - USAGE.md
   - pkg/models/operations/options.go
