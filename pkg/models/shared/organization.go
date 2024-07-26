@@ -42,6 +42,7 @@ func (e *OrganizationAccountType) UnmarshalJSON(data []byte) error {
 type Organization struct {
 	AccountType       OrganizationAccountType `json:"account_type"`
 	CreatedAt         *time.Time              `json:"created_at,omitempty"`
+	FreeTrialExpiry   *time.Time              `json:"free_trial_expiry,omitempty"`
 	ID                string                  `json:"id"`
 	Name              string                  `json:"name"`
 	Slug              *string                 `json:"slug,omitempty"`
@@ -72,6 +73,13 @@ func (o *Organization) GetCreatedAt() *time.Time {
 		return nil
 	}
 	return o.CreatedAt
+}
+
+func (o *Organization) GetFreeTrialExpiry() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.FreeTrialExpiry
 }
 
 func (o *Organization) GetID() string {

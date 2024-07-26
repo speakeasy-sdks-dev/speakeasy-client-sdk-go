@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 788929ad275a9aa095373e9046a05d41
+  docChecksum: 312822a7ccdbf7c77dbbfeef49fb2053
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.346.1
+  speakeasyVersion: 1.346.2
   generationVersion: 2.379.5
-  releaseVersion: 3.10.1
-  configChecksum: 835180144a14ccd50ffd1aaf9c6ffa47
+  releaseVersion: 3.10.2
+  configChecksum: 2f6f7b5b10b10e4a046eb287ae0f1248
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -120,6 +120,7 @@ generatedFiles:
   - /pkg/models/operations/githubstorepublishingsecrets.go
   - /pkg/models/operations/triggeraction.go
   - /pkg/models/operations/createfreetrial.go
+  - /pkg/models/operations/getorganization.go
   - /pkg/models/operations/getorganizationusage.go
   - /pkg/models/operations/getorganizations.go
   - /pkg/models/operations/getchangesreportsignedurl.go
@@ -182,9 +183,9 @@ generatedFiles:
   - /pkg/models/shared/githubmissingpublishingsecretsresponse.go
   - /pkg/models/shared/githubstorepublishingsecretsrequest.go
   - /pkg/models/shared/githubtriggeractionrequest.go
+  - /pkg/models/shared/organization.go
   - /pkg/models/shared/organizationusageresponse.go
   - /pkg/models/shared/organizationusage.go
-  - /pkg/models/shared/organization.go
   - /pkg/models/shared/report.go
   - /pkg/models/shared/shorturl.go
   - /pkg/models/shared/suggestedoperationids.go
@@ -290,6 +291,8 @@ generatedFiles:
   - docs/pkg/models/operations/githubstorepublishingsecretsresponse.md
   - docs/pkg/models/operations/triggeractionresponse.md
   - docs/pkg/models/operations/createfreetrialresponse.md
+  - docs/pkg/models/operations/getorganizationrequest.md
+  - docs/pkg/models/operations/getorganizationresponse.md
   - docs/pkg/models/operations/getorganizationusageresponse.md
   - docs/pkg/models/operations/getorganizationsresponse.md
   - docs/pkg/models/operations/getchangesreportsignedurlrequest.md
@@ -387,10 +390,10 @@ generatedFiles:
   - docs/pkg/models/shared/githubmissingpublishingsecretsresponse.md
   - docs/pkg/models/shared/githubstorepublishingsecretsrequest.md
   - docs/pkg/models/shared/githubtriggeractionrequest.md
-  - docs/pkg/models/shared/organizationusageresponse.md
-  - docs/pkg/models/shared/organizationusage.md
   - docs/pkg/models/shared/organizationaccounttype.md
   - docs/pkg/models/shared/organization.md
+  - docs/pkg/models/shared/organizationusageresponse.md
+  - docs/pkg/models/shared/organizationusage.md
   - docs/pkg/models/shared/type.md
   - docs/pkg/models/shared/report.md
   - docs/pkg/models/shared/shorturl.md
