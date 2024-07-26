@@ -124,6 +124,7 @@ func main() {
 ### [Organizations](docs/sdks/organizations/README.md)
 
 * [CreateFreeTrial](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
+* [GetOrganization](docs/sdks/organizations/README.md#getorganization) - Get organization
 * [GetOrganizationUsage](docs/sdks/organizations/README.md#getorganizationusage) - Get billing usage summary for a particular organization
 * [GetOrganizations](docs/sdks/organizations/README.md#getorganizations) - Get organizations for a user
 
