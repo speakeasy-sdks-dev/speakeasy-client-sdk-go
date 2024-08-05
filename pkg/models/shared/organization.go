@@ -3,51 +3,20 @@
 package shared
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
 	"time"
 )
 
-type OrganizationAccountType string
-
-const (
-	OrganizationAccountTypeFree       OrganizationAccountType = "free"
-	OrganizationAccountTypeScaleUp    OrganizationAccountType = "scale-up"
-	OrganizationAccountTypeEnterprise OrganizationAccountType = "enterprise"
-)
-
-func (e OrganizationAccountType) ToPointer() *OrganizationAccountType {
-	return &e
-}
-func (e *OrganizationAccountType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "free":
-		fallthrough
-	case "scale-up":
-		fallthrough
-	case "enterprise":
-		*e = OrganizationAccountType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrganizationAccountType: %v", v)
-	}
-}
-
 // Organization - A speakeasy organization
 type Organization struct {
-	AccountType       OrganizationAccountType `json:"account_type"`
-	CreatedAt         *time.Time              `json:"created_at,omitempty"`
-	FreeTrialExpiry   *time.Time              `json:"free_trial_expiry,omitempty"`
-	ID                string                  `json:"id"`
-	Name              string                  `json:"name"`
-	Slug              *string                 `json:"slug,omitempty"`
-	TelemetryDisabled bool                    `json:"telemetry_disabled"`
-	UpdatedAt         *time.Time              `json:"updated_at,omitempty"`
+	AccountType       AccountType `json:"account_type"`
+	CreatedAt         *time.Time  `json:"created_at,omitempty"`
+	FreeTrialExpiry   *time.Time  `json:"free_trial_expiry,omitempty"`
+	ID                string      `json:"id"`
+	Name              string      `json:"name"`
+	Slug              *string     `json:"slug,omitempty"`
+	TelemetryDisabled bool        `json:"telemetry_disabled"`
+	UpdatedAt         *time.Time  `json:"updated_at,omitempty"`
 }
 
 func (o Organization) MarshalJSON() ([]byte, error) {
@@ -61,9 +30,9 @@ func (o *Organization) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Organization) GetAccountType() OrganizationAccountType {
+func (o *Organization) GetAccountType() AccountType {
 	if o == nil {
-		return OrganizationAccountType("")
+		return AccountType("")
 	}
 	return o.AccountType
 }

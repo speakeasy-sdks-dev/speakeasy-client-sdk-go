@@ -22,13 +22,12 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.GetApisRequest{}
@@ -199,13 +198,12 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.GetWorkspaceEventsByTargetRequest{
@@ -256,14 +254,13 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithServer("prod"),
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.DeleteAPIRequest{
@@ -295,14 +292,13 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithServerURL("https://api.prod.speakeasyapi.dev"),
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.DeleteAPIRequest{
@@ -377,13 +373,12 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.DeleteAPIRequest{
@@ -431,13 +426,12 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.GetWorkspaceRequest{}
@@ -470,14 +464,13 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/retry"
 	"log"
-	"os"
 	"pkg/models/operations"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.DeleteAPIRequest{
@@ -517,7 +510,6 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/retry"
 	"log"
-	"os"
 )
 
 func main() {
@@ -534,7 +526,7 @@ func main() {
 				RetryConnectionErrors: false,
 			}),
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.DeleteAPIRequest{

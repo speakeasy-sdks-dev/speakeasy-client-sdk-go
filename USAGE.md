@@ -8,13 +8,12 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"log"
-	"os"
 )
 
 func main() {
 	s := speakeasyclientsdkgo.New(
 		speakeasyclientsdkgo.WithSecurity(shared.Security{
-			APIKey: speakeasyclientsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
 	request := operations.GetApisRequest{}

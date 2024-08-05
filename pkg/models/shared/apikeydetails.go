@@ -2,42 +2,8 @@
 
 package shared
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
-type AccountType string
-
-const (
-	AccountTypeFree       AccountType = "free"
-	AccountTypeScaleUp    AccountType = "scale-up"
-	AccountTypeEnterprise AccountType = "enterprise"
-)
-
-func (e AccountType) ToPointer() *AccountType {
-	return &e
-}
-func (e *AccountType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "free":
-		fallthrough
-	case "scale-up":
-		fallthrough
-	case "enterprise":
-		*e = AccountType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountType: %v", v)
-	}
-}
-
 type APIKeyDetails struct {
-	AccountType     AccountType `json:"account_type"`
+	AccountTypeV2   AccountType `json:"account_type_v2"`
 	EnabledFeatures []string    `json:"enabled_features"`
 	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	FeatureFlags              []string `json:"feature_flags,omitempty"`
@@ -48,11 +14,11 @@ type APIKeyDetails struct {
 	WorkspaceSlug             string   `json:"workspace_slug"`
 }
 
-func (o *APIKeyDetails) GetAccountType() AccountType {
+func (o *APIKeyDetails) GetAccountTypeV2() AccountType {
 	if o == nil {
 		return AccountType("")
 	}
-	return o.AccountType
+	return o.AccountTypeV2
 }
 
 func (o *APIKeyDetails) GetEnabledFeatures() []string {
