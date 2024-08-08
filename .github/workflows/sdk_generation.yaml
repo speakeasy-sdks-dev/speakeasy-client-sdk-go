@@ -11,8 +11,8 @@ name: Generate
                 type: boolean
                 default: false
     schedule:
-        # This sets the workflow to run every day at 3:00 PM PST (11:00 PM UTC)
-        - cron: '0 23 * * *'
+        # This sets the workflow to run every day at 3:00 PM PST (10:00 PM UTC)
+        - cron: '0 22 * * *'
 jobs:
     generate:
         uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
