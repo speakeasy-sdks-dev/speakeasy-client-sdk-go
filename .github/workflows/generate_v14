@@ -1,4 +1,4 @@
-name: Generate V14
+name: v14
 
 on:
   workflow_dispatch: # Allows manual triggering of the workflow to generate SDK
