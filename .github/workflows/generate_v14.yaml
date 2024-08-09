@@ -1,5 +1,4 @@
 name: v14
-
 on:
   workflow_dispatch: # Allows manual triggering of the workflow to generate SDK
     inputs:
@@ -9,7 +8,6 @@ on:
         default: false
   schedule:
     - cron: 0 0 * * * # Runs every day at midnight
-
 jobs:
   generate:
     uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-generation.yaml@v14
