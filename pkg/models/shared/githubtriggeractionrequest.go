@@ -4,6 +4,8 @@ package shared
 
 // GithubTriggerActionRequest - A request to trigger an action on a GitHub target
 type GithubTriggerActionRequest struct {
+	// Force an SDK generation
+	Force *bool `json:"force,omitempty"`
 	// The generation lock ID
 	GenLockID string `json:"gen_lock_id"`
 	// The GitHub organization name
@@ -14,6 +16,13 @@ type GithubTriggerActionRequest struct {
 	SetVersion *string `json:"set_version,omitempty"`
 	// The target name for the action
 	TargetName *string `json:"target_name,omitempty"`
+}
+
+func (o *GithubTriggerActionRequest) GetForce() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Force
 }
 
 func (o *GithubTriggerActionRequest) GetGenLockID() string {
