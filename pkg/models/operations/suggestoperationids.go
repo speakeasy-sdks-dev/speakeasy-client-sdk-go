@@ -8,13 +8,14 @@ import (
 )
 
 type Schema struct {
-	Content  []byte `multipartForm:"content"`
+	// This field accepts []byte data or io.Reader implementations, such as *os.File.
+	Content  any    `multipartForm:"content"`
 	FileName string `multipartForm:"name=schema"`
 }
 
-func (o *Schema) GetContent() []byte {
+func (o *Schema) GetContent() any {
 	if o == nil {
-		return []byte{}
+		return nil
 	}
 	return o.Content
 }

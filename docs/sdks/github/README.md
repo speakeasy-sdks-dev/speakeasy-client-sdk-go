@@ -1,6 +1,8 @@
 # Github
 (*Github*)
 
+## Overview
+
 ### Available Operations
 
 * [CheckAccess](#checkaccess)
@@ -49,8 +51,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -59,13 +59,16 @@ func main() {
 | `request`                                                                          | [operations.CheckAccessRequest](../../pkg/models/operations/checkaccessrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.CheckAccessResponse](../../pkg/models/operations/checkaccessresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ConfigureCodeSamples
 
@@ -103,8 +106,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -113,13 +114,16 @@ func main() {
 | `request`                                                                                                | [shared.GithubConfigureCodeSamplesRequest](../../pkg/models/shared/githubconfigurecodesamplesrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 | `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.ConfigureCodeSamplesResponse](../../pkg/models/operations/configurecodesamplesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ConfigureMintlifyRepo
 
@@ -160,8 +164,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
@@ -170,13 +172,16 @@ func main() {
 | `request`                                                                                                  | [shared.GithubConfigureMintlifyRepoRequest](../../pkg/models/shared/githubconfiguremintlifyreporequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
 | `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
-
 ### Response
 
 **[*operations.ConfigureMintlifyRepoResponse](../../pkg/models/operations/configuremintlifyreporesponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ConfigureTarget
 
@@ -213,8 +218,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -223,13 +226,16 @@ func main() {
 | `request`                                                                                      | [shared.GithubConfigureTargetRequest](../../pkg/models/shared/githubconfiguretargetrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.ConfigureTargetResponse](../../pkg/models/operations/configuretargetresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## FetchPublishingPRs
 
@@ -268,8 +274,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
@@ -278,13 +282,16 @@ func main() {
 | `request`                                                                                        | [operations.FetchPublishingPRsRequest](../../pkg/models/operations/fetchpublishingprsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.FetchPublishingPRsResponse](../../pkg/models/operations/fetchpublishingprsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAction
 
@@ -322,8 +329,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -332,13 +337,16 @@ func main() {
 | `request`                                                                      | [operations.GetActionRequest](../../pkg/models/operations/getactionrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.GetActionResponse](../../pkg/models/operations/getactionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GithubCheckPublishingSecrets
 
@@ -375,8 +383,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
@@ -385,13 +391,16 @@ func main() {
 | `request`                                                                                                            | [operations.GithubCheckPublishingSecretsRequest](../../pkg/models/operations/githubcheckpublishingsecretsrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
 | `opts`                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
 
-
 ### Response
 
 **[*operations.GithubCheckPublishingSecretsResponse](../../pkg/models/operations/githubcheckpublishingsecretsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GithubStorePublishingSecrets
 
@@ -427,8 +436,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
@@ -437,13 +444,16 @@ func main() {
 | `request`                                                                                                    | [shared.GithubStorePublishingSecretsRequest](../../pkg/models/shared/githubstorepublishingsecretsrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
 | `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
-
 ### Response
 
 **[*operations.GithubStorePublishingSecretsResponse](../../pkg/models/operations/githubstorepublishingsecretsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## TriggerAction
 
@@ -481,8 +491,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -491,10 +499,12 @@ func main() {
 | `request`                                                                                  | [shared.GithubTriggerActionRequest](../../pkg/models/shared/githubtriggeractionrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.TriggerActionResponse](../../pkg/models/operations/triggeractionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

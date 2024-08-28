@@ -49,8 +49,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
@@ -59,14 +57,17 @@ func main() {
 | `request`                                                                                                        | [operations.GetWorkspaceEventsByTargetRequest](../../pkg/models/operations/getworkspaceeventsbytargetrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
 | `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
 
-
 ### Response
 
 **[*operations.GetWorkspaceEventsByTargetResponse](../../pkg/models/operations/getworkspaceeventsbytargetresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetWorkspaceTargets
 
@@ -103,8 +104,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -113,14 +112,17 @@ func main() {
 | `request`                                                                                          | [operations.GetWorkspaceTargetsRequest](../../pkg/models/operations/getworkspacetargetsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.GetWorkspaceTargetsResponse](../../pkg/models/operations/getworkspacetargetsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## PostWorkspaceEvents
 
@@ -172,8 +174,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -182,14 +182,17 @@ func main() {
 | `request`                                                                                          | [operations.PostWorkspaceEventsRequest](../../pkg/models/operations/postworkspaceeventsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.PostWorkspaceEventsResponse](../../pkg/models/operations/postworkspaceeventsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## SearchWorkspaceEvents
 
@@ -226,8 +229,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
@@ -236,10 +237,12 @@ func main() {
 | `request`                                                                                              | [operations.SearchWorkspaceEventsRequest](../../pkg/models/operations/searchworkspaceeventsrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
 | `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
 
-
 ### Response
 
 **[*operations.SearchWorkspaceEventsResponse](../../pkg/models/operations/searchworkspaceeventsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |

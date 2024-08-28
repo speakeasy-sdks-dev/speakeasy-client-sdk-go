@@ -55,8 +55,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -65,13 +63,16 @@ func main() {
 | `request`                                                                            | [operations.DeleteSchemaRequest](../../pkg/models/operations/deleteschemarequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.DeleteSchemaResponse](../../pkg/models/operations/deleteschemaresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## DownloadSchema
 
@@ -111,8 +112,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -121,13 +120,16 @@ func main() {
 | `request`                                                                                | [operations.DownloadSchemaRequest](../../pkg/models/operations/downloadschemarequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.DownloadSchemaResponse](../../pkg/models/operations/downloadschemaresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## DownloadSchemaRevision
 
@@ -168,8 +170,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -178,13 +178,16 @@ func main() {
 | `request`                                                                                                | [operations.DownloadSchemaRevisionRequest](../../pkg/models/operations/downloadschemarevisionrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 | `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.DownloadSchemaRevisionResponse](../../pkg/models/operations/downloadschemarevisionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetSchema
 
@@ -225,8 +228,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -235,13 +236,16 @@ func main() {
 | `request`                                                                      | [operations.GetSchemaRequest](../../pkg/models/operations/getschemarequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.GetSchemaResponse](../../pkg/models/operations/getschemaresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetSchemaDiff
 
@@ -283,8 +287,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -293,13 +295,16 @@ func main() {
 | `request`                                                                              | [operations.GetSchemaDiffRequest](../../pkg/models/operations/getschemadiffrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.GetSchemaDiffResponse](../../pkg/models/operations/getschemadiffresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetSchemaRevision
 
@@ -341,8 +346,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -351,13 +354,16 @@ func main() {
 | `request`                                                                                      | [operations.GetSchemaRevisionRequest](../../pkg/models/operations/getschemarevisionrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.GetSchemaRevisionResponse](../../pkg/models/operations/getschemarevisionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetSchemas
 
@@ -398,8 +404,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
@@ -408,13 +412,16 @@ func main() {
 | `request`                                                                        | [operations.GetSchemasRequest](../../pkg/models/operations/getschemasrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.GetSchemasResponse](../../pkg/models/operations/getschemasresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## RegisterSchema
 
@@ -443,7 +450,7 @@ func main() {
     request := operations.RegisterSchemaRequest{
         RequestBody: operations.RegisterSchemaRequestBody{
             File: operations.RegisterSchemaFile{
-                Content: []byte("0xCAFCA03e0e"),
+                Content: os.Open("<file_path>"),
                 FileName: "your_file_here",
             },
         },
@@ -461,8 +468,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -471,10 +476,12 @@ func main() {
 | `request`                                                                                | [operations.RegisterSchemaRequest](../../pkg/models/operations/registerschemarequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.RegisterSchemaResponse](../../pkg/models/operations/registerschemaresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

@@ -44,8 +44,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -54,13 +52,16 @@ func main() {
 | `request`                                                                                | [operations.GetAccessTokenRequest](../../pkg/models/operations/getaccesstokenrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.GetAccessTokenResponse](../../pkg/models/operations/getaccesstokenresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetUser
 
@@ -96,8 +97,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
@@ -105,13 +104,16 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.GetUserResponse](../../pkg/models/operations/getuserresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetWorkspaceAccess
 
@@ -148,8 +150,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
@@ -158,13 +158,16 @@ func main() {
 | `request`                                                                                        | [operations.GetWorkspaceAccessRequest](../../pkg/models/operations/getworkspaceaccessrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.GetWorkspaceAccessResponse](../../pkg/models/operations/getworkspaceaccessresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ValidateAPIKey
 
@@ -200,8 +203,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
@@ -209,10 +210,12 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.ValidateAPIKeyResponse](../../pkg/models/operations/validateapikeyresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

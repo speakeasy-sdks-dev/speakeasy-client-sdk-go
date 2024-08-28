@@ -1,6 +1,8 @@
 # Workspaces
 (*Workspaces*)
 
+## Overview
+
 ### Available Operations
 
 * [GetWorkspace](#getworkspace) - Get workspace
@@ -40,8 +42,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -50,10 +50,12 @@ func main() {
 | `request`                                                                            | [operations.GetWorkspaceRequest](../../pkg/models/operations/getworkspacerequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.GetWorkspaceResponse](../../pkg/models/operations/getworkspaceresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

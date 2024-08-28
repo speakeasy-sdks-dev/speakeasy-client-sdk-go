@@ -52,8 +52,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -62,13 +60,16 @@ func main() {
 | `request`                                                                      | [operations.DeleteAPIRequest](../../pkg/models/operations/deleteapirequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.DeleteAPIResponse](../../pkg/models/operations/deleteapiresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GenerateOpenAPISpec
 
@@ -109,8 +110,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -119,13 +118,16 @@ func main() {
 | `request`                                                                                          | [operations.GenerateOpenAPISpecRequest](../../pkg/models/operations/generateopenapispecrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.GenerateOpenAPISpecResponse](../../pkg/models/operations/generateopenapispecresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GeneratePostmanCollection
 
@@ -165,8 +167,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
@@ -175,13 +175,16 @@ func main() {
 | `request`                                                                                                      | [operations.GeneratePostmanCollectionRequest](../../pkg/models/operations/generatepostmancollectionrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
 | `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
 
-
 ### Response
 
 **[*operations.GeneratePostmanCollectionResponse](../../pkg/models/operations/generatepostmancollectionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAllAPIVersions
 
@@ -221,8 +224,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -231,13 +232,16 @@ func main() {
 | `request`                                                                                      | [operations.GetAllAPIVersionsRequest](../../pkg/models/operations/getallapiversionsrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.GetAllAPIVersionsResponse](../../pkg/models/operations/getallapiversionsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetApis
 
@@ -275,8 +279,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
@@ -285,13 +287,16 @@ func main() {
 | `request`                                                                  | [operations.GetApisRequest](../../pkg/models/operations/getapisrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 | `opts`                                                                     | [][operations.Option](../../pkg/models/operations/option.md)               | :heavy_minus_sign:                                                         | The options for this request.                                              |
 
-
 ### Response
 
 **[*operations.GetApisResponse](../../pkg/models/operations/getapisresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## UpsertAPI
 
@@ -336,8 +341,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -346,10 +349,12 @@ func main() {
 | `request`                                                                      | [operations.UpsertAPIRequest](../../pkg/models/operations/upsertapirequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.UpsertAPIResponse](../../pkg/models/operations/upsertapiresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

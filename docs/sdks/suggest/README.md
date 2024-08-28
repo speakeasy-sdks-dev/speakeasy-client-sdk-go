@@ -48,8 +48,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -58,13 +56,16 @@ func main() {
 | `request`                                                                                      | [operations.ApplyOperationIDsRequest](../../pkg/models/operations/applyoperationidsrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.ApplyOperationIDsResponse](../../pkg/models/operations/applyoperationidsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## SuggestOperationIDs
 
@@ -92,7 +93,7 @@ func main() {
     request := operations.SuggestOperationIDsRequest{
         RequestBody: operations.SuggestOperationIDsRequestBody{
             Schema: operations.Schema{
-                Content: []byte("0xb2de88c98a"),
+                Content: os.Open("<file_path>"),
                 FileName: "your_file_here",
             },
         },
@@ -109,8 +110,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -119,13 +118,16 @@ func main() {
 | `request`                                                                                          | [operations.SuggestOperationIDsRequest](../../pkg/models/operations/suggestoperationidsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.SuggestOperationIDsResponse](../../pkg/models/operations/suggestoperationidsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## SuggestOperationIDsRegistry
 
@@ -166,8 +168,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
@@ -176,10 +176,12 @@ func main() {
 | `request`                                                                                                          | [operations.SuggestOperationIDsRegistryRequest](../../pkg/models/operations/suggestoperationidsregistryrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
 | `opts`                                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |
 
-
 ### Response
 
 **[*operations.SuggestOperationIDsRegistryResponse](../../pkg/models/operations/suggestoperationidsregistryresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

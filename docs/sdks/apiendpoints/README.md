@@ -55,8 +55,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -65,13 +63,16 @@ func main() {
 | `request`                                                                                      | [operations.DeleteAPIEndpointRequest](../../pkg/models/operations/deleteapiendpointrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.DeleteAPIEndpointResponse](../../pkg/models/operations/deleteapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## FindAPIEndpoint
 
@@ -113,8 +114,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -123,13 +122,16 @@ func main() {
 | `request`                                                                                  | [operations.FindAPIEndpointRequest](../../pkg/models/operations/findapiendpointrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.FindAPIEndpointResponse](../../pkg/models/operations/findapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GenerateOpenAPISpecForAPIEndpoint
 
@@ -171,8 +173,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
@@ -181,13 +181,16 @@ func main() {
 | `request`                                                                                                                      | [operations.GenerateOpenAPISpecForAPIEndpointRequest](../../pkg/models/operations/generateopenapispecforapiendpointrequest.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
 | `opts`                                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                             | The options for this request.                                                                                                  |
 
-
 ### Response
 
 **[*operations.GenerateOpenAPISpecForAPIEndpointResponse](../../pkg/models/operations/generateopenapispecforapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GeneratePostmanCollectionForAPIEndpoint
 
@@ -228,8 +231,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                                                  | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
@@ -238,13 +239,16 @@ func main() {
 | `request`                                                                                                                                  | [operations.GeneratePostmanCollectionForAPIEndpointRequest](../../pkg/models/operations/generatepostmancollectionforapiendpointrequest.md) | :heavy_check_mark:                                                                                                                         | The request object to use for the request.                                                                                                 |
 | `opts`                                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                                               | :heavy_minus_sign:                                                                                                                         | The options for this request.                                                                                                              |
 
-
 ### Response
 
 **[*operations.GeneratePostmanCollectionForAPIEndpointResponse](../../pkg/models/operations/generatepostmancollectionforapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAllAPIEndpoints
 
@@ -283,8 +287,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
@@ -293,13 +295,16 @@ func main() {
 | `request`                                                                                        | [operations.GetAllAPIEndpointsRequest](../../pkg/models/operations/getallapiendpointsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.GetAllAPIEndpointsResponse](../../pkg/models/operations/getallapiendpointsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAllForVersionAPIEndpoints
 
@@ -339,8 +344,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
@@ -349,13 +352,16 @@ func main() {
 | `request`                                                                                                            | [operations.GetAllForVersionAPIEndpointsRequest](../../pkg/models/operations/getallforversionapiendpointsrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
 | `opts`                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
 
-
 ### Response
 
 **[*operations.GetAllForVersionAPIEndpointsResponse](../../pkg/models/operations/getallforversionapiendpointsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAPIEndpoint
 
@@ -396,8 +402,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -406,13 +410,16 @@ func main() {
 | `request`                                                                                | [operations.GetAPIEndpointRequest](../../pkg/models/operations/getapiendpointrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.GetAPIEndpointResponse](../../pkg/models/operations/getapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## UpsertAPIEndpoint
 
@@ -461,8 +468,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -471,10 +476,12 @@ func main() {
 | `request`                                                                                      | [operations.UpsertAPIEndpointRequest](../../pkg/models/operations/upsertapiendpointrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.UpsertAPIEndpointResponse](../../pkg/models/operations/upsertapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
