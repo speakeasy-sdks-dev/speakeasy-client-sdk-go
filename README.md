@@ -1,8 +1,32 @@
 # github.com/speakeasy-api/speakeasy-client-sdk-go
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
+
+For more information about the API: [The Speakeasy Platform Documentation](/docs)
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+
+* [SDK Installation](#sdk-installation)
+* [SDK Example Usage](#sdk-example-usage)
+* [Available Resources and Operations](#available-resources-and-operations)
+* [Global Parameters](#global-parameters)
+* [Retries](#retries)
+* [Error Handling](#error-handling)
+* [Server Selection](#server-selection)
+* [Custom HTTP Client](#custom-http-client)
+* [Authentication](#authentication)
+* [Special Types](#special-types)
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+To add the SDK as a dependency to your project:
 ```bash
 go get github.com/speakeasy-api/speakeasy-client-sdk-go
 ```
@@ -30,9 +54,9 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetApisRequest{}
+
 	ctx := context.Background()
-	res, err := s.Apis.GetApis(ctx, request)
+	res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -140,8 +164,8 @@ func main() {
 ### [Suggest](docs/sdks/suggest/README.md)
 
 * [ApplyOperationIDs](docs/sdks/suggest/README.md#applyoperationids) - Apply operation ID suggestions and download result.
-* [SuggestOperationIDs](docs/sdks/suggest/README.md#suggestoperationids) - Generate operation ID suggestions.
-* [SuggestOperationIDsRegistry](docs/sdks/suggest/README.md#suggestoperationidsregistry) - Generate operation ID suggestions.
+* [SuggestOpenAPI](docs/sdks/suggest/README.md#suggestopenapi) - Generate suggestions for improving an OpenAPI document.
+* [SuggestOpenAPIRegistry](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
 
 ### [Embeds](docs/sdks/embeds/README.md)
 
@@ -206,11 +230,11 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetWorkspaceEventsByTargetRequest{
-		TargetID: "<value>",
-	}
+
 	ctx := context.Background()
-	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
+	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, operations.GetWorkspaceEventsByTargetRequest{
+		TargetID: "<value>",
+	})
 	if err != nil {
 
 		var e *sdkerrors.Error
@@ -263,12 +287,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -301,12 +325,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -381,12 +405,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -434,9 +458,9 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetWorkspaceRequest{}
+
 	ctx := context.Background()
-	res, err := s.Workspaces.GetWorkspace(ctx, request)
+	res, err := s.Workspaces.GetWorkspace(ctx, operations.GetWorkspaceRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -473,12 +497,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request, operations.WithRetries(
+	}, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -529,12 +553,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}

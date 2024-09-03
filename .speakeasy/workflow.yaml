@@ -4,6 +4,8 @@ sources:
     my-source:
         inputs:
             - location: https://www.speakeasy.com/openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/my-source
 targets:
     speakeasy-client-sdk-go:
         target: go

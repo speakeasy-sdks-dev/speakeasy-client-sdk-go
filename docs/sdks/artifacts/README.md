@@ -28,8 +28,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -39,14 +39,14 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetBlobRequest{
+
+    ctx := context.Background()
+    res, err := s.Artifacts.GetBlob(ctx, operations.GetBlobRequest{
         Digest: "<value>",
         NamespaceName: "<value>",
         OrganizationSlug: "<value>",
         WorkspaceSlug: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Artifacts.GetBlob(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -56,8 +56,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
@@ -66,13 +64,16 @@ func main() {
 | `request`                                                                  | [operations.GetBlobRequest](../../pkg/models/operations/getblobrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 | `opts`                                                                     | [][operations.Option](../../pkg/models/operations/option.md)               | :heavy_minus_sign:                                                         | The options for this request.                                              |
 
-
 ### Response
 
 **[*operations.GetBlobResponse](../../pkg/models/operations/getblobresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetManifest
 
@@ -86,8 +87,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -97,14 +98,14 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetManifestRequest{
+
+    ctx := context.Background()
+    res, err := s.Artifacts.GetManifest(ctx, operations.GetManifestRequest{
         NamespaceName: "<value>",
         OrganizationSlug: "<value>",
         RevisionReference: "<value>",
         WorkspaceSlug: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Artifacts.GetManifest(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -114,8 +115,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -124,13 +123,16 @@ func main() {
 | `request`                                                                          | [operations.GetManifestRequest](../../pkg/models/operations/getmanifestrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.GetManifestResponse](../../pkg/models/operations/getmanifestresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetNamespaces
 
@@ -166,8 +168,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
@@ -175,13 +175,16 @@ func main() {
 | `ctx`                                                        | [context.Context](https://pkg.go.dev/context#Context)        | :heavy_check_mark:                                           | The context to use for the request.                          |
 | `opts`                                                       | [][operations.Option](../../pkg/models/operations/option.md) | :heavy_minus_sign:                                           | The options for this request.                                |
 
-
 ### Response
 
 **[*operations.GetNamespacesResponse](../../pkg/models/operations/getnamespacesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetOASSummary
 
@@ -193,8 +196,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -204,12 +207,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetOASSummaryRequest{
+
+    ctx := context.Background()
+    res, err := s.Artifacts.GetOASSummary(ctx, operations.GetOASSummaryRequest{
         NamespaceName: "<value>",
         RevisionReference: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Artifacts.GetOASSummary(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -219,8 +222,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -229,13 +230,16 @@ func main() {
 | `request`                                                                              | [operations.GetOASSummaryRequest](../../pkg/models/operations/getoassummaryrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.GetOASSummaryResponse](../../pkg/models/operations/getoassummaryresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetRevisions
 
@@ -247,8 +251,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -258,11 +262,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetRevisionsRequest{
-        NamespaceName: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Artifacts.GetRevisions(ctx, request)
+    res, err := s.Artifacts.GetRevisions(ctx, operations.GetRevisionsRequest{
+        NamespaceName: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -272,8 +276,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -282,13 +284,16 @@ func main() {
 | `request`                                                                            | [operations.GetRevisionsRequest](../../pkg/models/operations/getrevisionsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.GetRevisionsResponse](../../pkg/models/operations/getrevisionsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetTags
 
@@ -300,8 +305,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -311,11 +316,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetTagsRequest{
-        NamespaceName: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Artifacts.GetTags(ctx, request)
+    res, err := s.Artifacts.GetTags(ctx, operations.GetTagsRequest{
+        NamespaceName: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -325,8 +330,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
@@ -335,13 +338,16 @@ func main() {
 | `request`                                                                  | [operations.GetTagsRequest](../../pkg/models/operations/gettagsrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 | `opts`                                                                     | [][operations.Option](../../pkg/models/operations/option.md)               | :heavy_minus_sign:                                                         | The options for this request.                                              |
 
-
 ### Response
 
 **[*operations.GetTagsResponse](../../pkg/models/operations/gettagsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## PostTags
 
@@ -355,8 +361,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -366,11 +372,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.PostTagsRequest{
-        NamespaceName: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Artifacts.PostTags(ctx, request)
+    res, err := s.Artifacts.PostTags(ctx, operations.PostTagsRequest{
+        NamespaceName: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -380,8 +386,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
@@ -390,13 +394,16 @@ func main() {
 | `request`                                                                    | [operations.PostTagsRequest](../../pkg/models/operations/posttagsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
 | `opts`                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                 | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
-
 ### Response
 
 **[*operations.PostTagsResponse](../../pkg/models/operations/posttagsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## Preflight
 
@@ -432,8 +439,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
@@ -442,10 +447,12 @@ func main() {
 | `request`                                                              | [shared.PreflightRequest](../../pkg/models/shared/preflightrequest.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
 | `opts`                                                                 | [][operations.Option](../../pkg/models/operations/option.md)           | :heavy_minus_sign:                                                     | The options for this request.                                          |
 
-
 ### Response
 
 **[*operations.PreflightResponse](../../pkg/models/operations/preflightresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

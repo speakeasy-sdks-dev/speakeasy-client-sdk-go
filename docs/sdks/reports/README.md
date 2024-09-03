@@ -23,8 +23,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -34,11 +34,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetChangesReportSignedURLRequest{
-        DocumentChecksum: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Reports.GetChangesReportSignedURL(ctx, request)
+    res, err := s.Reports.GetChangesReportSignedURL(ctx, operations.GetChangesReportSignedURLRequest{
+        DocumentChecksum: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -48,8 +48,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
@@ -58,13 +56,16 @@ func main() {
 | `request`                                                                                                      | [operations.GetChangesReportSignedURLRequest](../../pkg/models/operations/getchangesreportsignedurlrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
 | `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
 
-
 ### Response
 
 **[*operations.GetChangesReportSignedURLResponse](../../pkg/models/operations/getchangesreportsignedurlresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetLintingReportSignedURL
 
@@ -78,8 +79,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -89,11 +90,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetLintingReportSignedURLRequest{
-        DocumentChecksum: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Reports.GetLintingReportSignedURL(ctx, request)
+    res, err := s.Reports.GetLintingReportSignedURL(ctx, operations.GetLintingReportSignedURLRequest{
+        DocumentChecksum: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -103,8 +104,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
@@ -113,13 +112,16 @@ func main() {
 | `request`                                                                                                      | [operations.GetLintingReportSignedURLRequest](../../pkg/models/operations/getlintingreportsignedurlrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
 | `opts`                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
 
-
 ### Response
 
 **[*operations.GetLintingReportSignedURLResponse](../../pkg/models/operations/getlintingreportsignedurlresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## UploadReport
 
@@ -133,8 +135,9 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"os"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -144,15 +147,15 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.UploadReportRequestBody{
+
+    ctx := context.Background()
+    res, err := s.Reports.UploadReport(ctx, operations.UploadReportRequestBody{
         Data: shared.Report{},
         File: operations.File{
-            Content: []byte("0xA329C0ad85"),
+            Content: os.Open("example.file"),
             FileName: "your_file_here",
         },
-    }
-    ctx := context.Background()
-    res, err := s.Reports.UploadReport(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -162,8 +165,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
@@ -172,10 +173,12 @@ func main() {
 | `request`                                                                                    | [operations.UploadReportRequestBody](../../pkg/models/operations/uploadreportrequestbody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 | `opts`                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                 | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
-
 ### Response
 
 **[*operations.UploadReportResponse](../../pkg/models/operations/uploadreportresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

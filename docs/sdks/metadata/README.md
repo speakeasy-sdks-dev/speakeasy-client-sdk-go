@@ -23,8 +23,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -34,14 +34,14 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.DeleteVersionMetadataRequest{
+
+    ctx := context.Background()
+    res, err := s.Metadata.DeleteVersionMetadata(ctx, operations.DeleteVersionMetadataRequest{
         APIID: "<value>",
         MetaKey: "<value>",
         MetaValue: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Metadata.DeleteVersionMetadata(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -51,8 +51,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
@@ -61,13 +59,16 @@ func main() {
 | `request`                                                                                              | [operations.DeleteVersionMetadataRequest](../../pkg/models/operations/deleteversionmetadatarequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
 | `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
 
-
 ### Response
 
 **[*operations.DeleteVersionMetadataResponse](../../pkg/models/operations/deleteversionmetadataresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetVersionMetadata
 
@@ -81,8 +82,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -92,12 +93,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetVersionMetadataRequest{
+
+    ctx := context.Background()
+    res, err := s.Metadata.GetVersionMetadata(ctx, operations.GetVersionMetadataRequest{
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Metadata.GetVersionMetadata(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -107,8 +108,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
@@ -117,13 +116,16 @@ func main() {
 | `request`                                                                                        | [operations.GetVersionMetadataRequest](../../pkg/models/operations/getversionmetadatarequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.GetVersionMetadataResponse](../../pkg/models/operations/getversionmetadataresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## InsertVersionMetadata
 
@@ -137,8 +139,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -148,16 +150,16 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.InsertVersionMetadataRequest{
+
+    ctx := context.Background()
+    res, err := s.Metadata.InsertVersionMetadata(ctx, operations.InsertVersionMetadataRequest{
         VersionMetadata: shared.VersionMetadataInput{
             MetaKey: "<value>",
             MetaValue: "<value>",
         },
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Metadata.InsertVersionMetadata(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -167,8 +169,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
@@ -177,10 +177,12 @@ func main() {
 | `request`                                                                                              | [operations.InsertVersionMetadataRequest](../../pkg/models/operations/insertversionmetadatarequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
 | `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
 
-
 ### Response
 
 **[*operations.InsertVersionMetadataResponse](../../pkg/models/operations/insertversionmetadataresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

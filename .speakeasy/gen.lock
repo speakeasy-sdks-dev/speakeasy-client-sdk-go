@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: f406fdb120a976f69c3be12c8676cbac
+  docChecksum: 11eaddc370e7d2043750bcff56df17e1
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.364.0
-  generationVersion: 2.396.0
-  releaseVersion: 3.12.5
-  configChecksum: 06754b207a20130a897c23f6a2d79b0e
+  speakeasyVersion: 1.389.0
+  generationVersion: 2.409.0
+  releaseVersion: 3.13.0
+  configChecksum: 0e57f08adff3fdc7db9bcc690cdfe792
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -15,12 +15,12 @@ features:
   go:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    core: 3.5.3
+    core: 3.5.5
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
     devContainers: 2.90.0
     downloadStreams: 0.1.1
-    envVarSecurityUsage: 0.3.0
+    envVarSecurityUsage: 0.3.1
     examples: 2.81.3
     globalSecurity: 2.82.10
     globalSecurityCallbacks: 0.1.0
@@ -35,6 +35,7 @@ features:
     sdkHooks: 0.1.0
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.1
+    uploadStreams: 0.1.0
 generatedFiles:
   - apis.go
   - apiendpoints.go
@@ -129,8 +130,8 @@ generatedFiles:
   - /pkg/models/operations/uploadreport.go
   - /pkg/models/operations/create.go
   - /pkg/models/operations/applyoperationids.go
-  - /pkg/models/operations/suggestoperationids.go
-  - /pkg/models/operations/suggestoperationidsregistry.go
+  - /pkg/models/operations/suggestopenapi.go
+  - /pkg/models/operations/suggestopenapiregistry.go
   - /pkg/models/operations/getembedaccesstoken.go
   - /pkg/models/operations/getvalidembedaccesstokens.go
   - /pkg/models/operations/revokeembedaccesstoken.go
@@ -190,8 +191,8 @@ generatedFiles:
   - /pkg/models/shared/organizationusage.go
   - /pkg/models/shared/report.go
   - /pkg/models/shared/shorturl.go
-  - /pkg/models/shared/suggestedoperationids.go
-  - /pkg/models/shared/suggestoperationidsopts.go
+  - /pkg/models/shared/suggestopts.go
+  - /pkg/models/shared/diagnostic.go
   - /pkg/models/shared/embedaccesstokenresponse.go
   - /pkg/models/shared/embedtoken.go
   - /pkg/models/shared/workspace.go
@@ -313,11 +314,11 @@ generatedFiles:
   - docs/pkg/models/operations/applyoperationidsrequest.md
   - docs/pkg/models/operations/applyoperationidsresponse.md
   - docs/pkg/models/operations/schema.md
-  - docs/pkg/models/operations/suggestoperationidsrequestbody.md
-  - docs/pkg/models/operations/suggestoperationidsrequest.md
-  - docs/pkg/models/operations/suggestoperationidsresponse.md
-  - docs/pkg/models/operations/suggestoperationidsregistryrequest.md
-  - docs/pkg/models/operations/suggestoperationidsregistryresponse.md
+  - docs/pkg/models/operations/suggestopenapirequestbody.md
+  - docs/pkg/models/operations/suggestopenapirequest.md
+  - docs/pkg/models/operations/suggestopenapiresponse.md
+  - docs/pkg/models/operations/suggestopenapiregistryrequest.md
+  - docs/pkg/models/operations/suggestopenapiregistryresponse.md
   - docs/pkg/models/operations/getembedaccesstokenrequest.md
   - docs/pkg/models/operations/getembedaccesstokenresponse.md
   - docs/pkg/models/operations/getvalidembedaccesstokensresponse.md
@@ -341,11 +342,8 @@ generatedFiles:
   - docs/pkg/models/sdkerrors/error.md
   - docs/pkg/models/shared/generateopenapispecdiff.md
   - docs/pkg/models/shared/api.md
-  - docs/pkg/models/shared/apiinput.md
   - docs/pkg/models/shared/apiendpoint.md
-  - docs/pkg/models/shared/apiendpointinput.md
   - docs/pkg/models/shared/versionmetadata.md
-  - docs/pkg/models/shared/versionmetadatainput.md
   - docs/pkg/models/shared/schema.md
   - docs/pkg/models/shared/valuechange.md
   - docs/pkg/models/shared/schemadiff.md
@@ -397,10 +395,9 @@ generatedFiles:
   - docs/pkg/models/shared/type.md
   - docs/pkg/models/shared/report.md
   - docs/pkg/models/shared/shorturl.md
-  - docs/pkg/models/shared/suggestedoperationids.md
-  - docs/pkg/models/shared/depthstyle.md
-  - docs/pkg/models/shared/style.md
-  - docs/pkg/models/shared/suggestoperationidsopts.md
+  - docs/pkg/models/shared/suggestiontype.md
+  - docs/pkg/models/shared/suggestopts.md
+  - docs/pkg/models/shared/diagnostic.md
   - docs/pkg/models/shared/embedaccesstokenresponse.md
   - docs/pkg/models/shared/embedtoken.md
   - docs/pkg/models/shared/workspace.md
