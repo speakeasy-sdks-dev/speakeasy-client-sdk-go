@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     my-source:
         inputs:
-            - location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/speakeasy-api:main
+            - location: https://www.speakeasy.com/openapi.yaml
 targets:
     speakeasy-client-sdk-go:
         target: go
