@@ -10,7 +10,6 @@ import (
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/internal/hooks"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/utils"
 	"io"
 	"net/http"
@@ -228,12 +227,12 @@ func (s *Suggest) ApplyOperationIDs(ctx context.Context, request operations.Appl
 
 }
 
-// SuggestOperationIDs - Generate operation ID suggestions.
-// Get suggestions from an LLM model for improving the operationIDs in the provided schema.
-func (s *Suggest) SuggestOperationIDs(ctx context.Context, request operations.SuggestOperationIDsRequest, opts ...operations.Option) (*operations.SuggestOperationIDsResponse, error) {
+// SuggestOpenAPI - Generate suggestions for improving an OpenAPI document.
+// Get suggestions from an LLM model for improving an OpenAPI document.
+func (s *Suggest) SuggestOpenAPI(ctx context.Context, request operations.SuggestOpenAPIRequest, opts ...operations.Option) (*operations.SuggestOpenAPIResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "suggestOperationIDs",
+		OperationID:    "suggestOpenAPI",
 		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
@@ -251,7 +250,7 @@ func (s *Suggest) SuggestOperationIDs(ctx context.Context, request operations.Su
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	opURL, err := url.JoinPath(baseURL, "/v1/suggest/operation_ids")
+	opURL, err := url.JoinPath(baseURL, "/v1/suggest/openapi")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -282,10 +281,6 @@ func (s *Suggest) SuggestOperationIDs(ctx context.Context, request operations.Su
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -375,10 +370,16 @@ func (s *Suggest) SuggestOperationIDs(ctx context.Context, request operations.Su
 		}
 	}
 
-	res := &operations.SuggestOperationIDsResponse{
+	res := &operations.SuggestOpenAPIResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
+	}
+
+	if (httpRes.StatusCode == 200) && utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`) {
+		res.Schema = httpRes.Body
+
+		return res, nil
 	}
 
 	rawBody, err := io.ReadAll(httpRes.Body)
@@ -391,13 +392,6 @@ func (s *Suggest) SuggestOperationIDs(ctx context.Context, request operations.Su
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out shared.SuggestedOperationIDs
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.SuggestedOperationIDs = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -413,12 +407,12 @@ func (s *Suggest) SuggestOperationIDs(ctx context.Context, request operations.Su
 
 }
 
-// SuggestOperationIDsRegistry - Generate operation ID suggestions.
-// Get suggestions from an LLM model for improving the operationIDs in the provided schema.
-func (s *Suggest) SuggestOperationIDsRegistry(ctx context.Context, request operations.SuggestOperationIDsRegistryRequest, opts ...operations.Option) (*operations.SuggestOperationIDsRegistryResponse, error) {
+// SuggestOpenAPIRegistry - Generate suggestions for improving an OpenAPI document stored in the registry.
+// Get suggestions from an LLM model for improving an OpenAPI document stored in the registry.
+func (s *Suggest) SuggestOpenAPIRegistry(ctx context.Context, request operations.SuggestOpenAPIRegistryRequest, opts ...operations.Option) (*operations.SuggestOpenAPIRegistryResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "suggestOperationIDsRegistry",
+		OperationID:    "suggestOpenAPIRegistry",
 		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
@@ -436,12 +430,12 @@ func (s *Suggest) SuggestOperationIDsRegistry(ctx context.Context, request opera
 	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/suggest/operation_ids/{namespace_name}/{revision_reference}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/suggest/openapi/{namespace_name}/{revision_reference}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "SuggestOperationIDsOpts", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "SuggestOpts", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -467,10 +461,6 @@ func (s *Suggest) SuggestOperationIDsRegistry(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -560,10 +550,16 @@ func (s *Suggest) SuggestOperationIDsRegistry(ctx context.Context, request opera
 		}
 	}
 
-	res := &operations.SuggestOperationIDsRegistryResponse{
+	res := &operations.SuggestOpenAPIRegistryResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: httpRes.Header.Get("Content-Type"),
 		RawResponse: httpRes,
+	}
+
+	if (httpRes.StatusCode == 200) && utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`) {
+		res.Schema = httpRes.Body
+
+		return res, nil
 	}
 
 	rawBody, err := io.ReadAll(httpRes.Body)
@@ -576,13 +572,6 @@ func (s *Suggest) SuggestOperationIDsRegistry(ctx context.Context, request opera
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			var out shared.SuggestedOperationIDs
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.SuggestedOperationIDs = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}

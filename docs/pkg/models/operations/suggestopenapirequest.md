@@ -1,0 +1,9 @@
+# SuggestOpenAPIRequest
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `RequestBody`                                                                                       | [operations.SuggestOpenAPIRequestBody](../../../pkg/models/operations/suggestopenapirequestbody.md) | :heavy_check_mark:                                                                                  | The schema file to upload provided as a multipart/form-data file segment.                           |
+| `XSessionID`                                                                                        | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
