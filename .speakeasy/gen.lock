@@ -4,7 +4,7 @@ management:
   docChecksum: ef34c7c9a8d7b40707eaed604ee75276
   docVersion: 0.4.0 .
   speakeasyVersion: internal
-  generationVersion: 2.410.1
+  generationVersion: 2.410.0
   releaseVersion: 3.12.5
   configChecksum: 06754b207a20130a897c23f6a2d79b0e
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
@@ -753,6 +753,7 @@ examples:
   suggestOperationIDs:
     speakeasy-default-suggest-operation-I-ds:
       parameters:
+        query: {}
         header:
           x-session-id: "<value>"
       requestBody:
