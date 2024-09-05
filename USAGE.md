@@ -16,9 +16,9 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetApisRequest{}
+
 	ctx := context.Background()
-	res, err := s.Apis.GetApis(ctx, request)
+	res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
