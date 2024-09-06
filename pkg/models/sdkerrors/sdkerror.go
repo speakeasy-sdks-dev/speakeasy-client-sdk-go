@@ -16,9 +16,16 @@ type SDKError struct {
 
 var _ error = &SDKError{}
 
-func NewSDKError(message string, statusCode int, body string, httpRes *http.Response) *SDKError {
+func NewSDKError(message *string, statusCode int, body string, httpRes *http.Response) *SDKError {
+	var msg string
+	if message != nil {
+		msg = *message
+	} else {
+		msg = "API error occurred"
+	}
+
 	return &SDKError{
-		Message:     message,
+		Message:     msg,
 		StatusCode:  statusCode,
 		Body:        body,
 		RawResponse: httpRes,

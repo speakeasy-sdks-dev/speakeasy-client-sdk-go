@@ -191,12 +191,13 @@ func (s *Artifacts) GetBlob(ctx context.Context, request operations.GetBlobReque
 	case httpRes.StatusCode == 200:
 		switch {
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -207,7 +208,8 @@ func (s *Artifacts) GetBlob(ctx context.Context, request operations.GetBlobReque
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -379,12 +381,13 @@ func (s *Artifacts) GetManifest(ctx context.Context, request operations.GetManif
 
 			res.Manifest = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -395,7 +398,8 @@ func (s *Artifacts) GetManifest(ctx context.Context, request operations.GetManif
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -561,12 +565,13 @@ func (s *Artifacts) GetNamespaces(ctx context.Context, opts ...operations.Option
 
 			res.GetNamespacesResponse = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -577,7 +582,8 @@ func (s *Artifacts) GetNamespaces(ctx context.Context, opts ...operations.Option
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -742,12 +748,13 @@ func (s *Artifacts) GetOASSummary(ctx context.Context, request operations.GetOAS
 
 			res.OASSummary = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -758,7 +765,8 @@ func (s *Artifacts) GetOASSummary(ctx context.Context, request operations.GetOAS
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -927,12 +935,13 @@ func (s *Artifacts) GetRevisions(ctx context.Context, request operations.GetRevi
 
 			res.GetRevisionsResponse = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -943,7 +952,8 @@ func (s *Artifacts) GetRevisions(ctx context.Context, request operations.GetRevi
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1108,12 +1118,13 @@ func (s *Artifacts) GetTags(ctx context.Context, request operations.GetTagsReque
 
 			res.GetTagsResponse = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1124,7 +1135,8 @@ func (s *Artifacts) GetTags(ctx context.Context, request operations.GetTagsReque
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1290,7 +1302,7 @@ func (s *Artifacts) PostTags(ctx context.Context, request operations.PostTagsReq
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1301,7 +1313,8 @@ func (s *Artifacts) PostTags(ctx context.Context, request operations.PostTagsReq
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1473,12 +1486,13 @@ func (s *Artifacts) Preflight(ctx context.Context, request *shared.PreflightRequ
 
 			res.PreflightToken = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1489,7 +1503,8 @@ func (s *Artifacts) Preflight(ctx context.Context, request *shared.PreflightRequ
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

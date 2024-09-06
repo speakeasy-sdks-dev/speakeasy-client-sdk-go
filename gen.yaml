@@ -17,6 +17,8 @@ go:
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: false
   clientServerStatusCodesAsErrors: true
+  defaultErrorName: SDKError
+  explicitErrors: false
   flattenGlobalSecurity: true
   imports:
     option: openapi

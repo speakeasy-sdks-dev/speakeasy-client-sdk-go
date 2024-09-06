@@ -180,7 +180,7 @@ func (s *Organizations) CreateFreeTrial(ctx context.Context, opts ...operations.
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -191,7 +191,8 @@ func (s *Organizations) CreateFreeTrial(ctx context.Context, opts ...operations.
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -358,12 +359,13 @@ func (s *Organizations) GetOrganization(ctx context.Context, request operations.
 
 			res.Organization = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -374,7 +376,8 @@ func (s *Organizations) GetOrganization(ctx context.Context, request operations.
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -541,12 +544,13 @@ func (s *Organizations) GetOrganizationUsage(ctx context.Context, opts ...operat
 
 			res.OrganizationUsageResponse = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -557,7 +561,8 @@ func (s *Organizations) GetOrganizationUsage(ctx context.Context, opts ...operat
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -724,12 +729,13 @@ func (s *Organizations) GetOrganizations(ctx context.Context, opts ...operations
 
 			res.Organizations = out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -740,7 +746,8 @@ func (s *Organizations) GetOrganizations(ctx context.Context, opts ...operations
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

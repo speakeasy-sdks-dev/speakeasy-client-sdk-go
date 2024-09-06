@@ -204,12 +204,13 @@ func (s *Suggest) ApplyOperationIDs(ctx context.Context, request operations.Appl
 	case httpRes.StatusCode == 200:
 		switch {
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -220,7 +221,8 @@ func (s *Suggest) ApplyOperationIDs(ctx context.Context, request operations.Appl
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -399,14 +401,16 @@ func (s *Suggest) SuggestOperationIDs(ctx context.Context, request operations.Su
 
 			res.SuggestedOperationIDs = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
+		errorMsg := fmt.Sprintf("unknown status code returned: %v", httpRes.StatusCode)
+		return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil
@@ -584,14 +588,16 @@ func (s *Suggest) SuggestOperationIDsRegistry(ctx context.Context, request opera
 
 			res.SuggestedOperationIDs = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
-		return nil, sdkerrors.NewSDKError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
+		errorMsg := fmt.Sprintf("unknown status code returned: %v", httpRes.StatusCode)
+		return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
 	return res, nil

@@ -63,11 +63,10 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | 5XX                | application/json   |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.sdkerrors.Error | 5XX                       | application/json          |
+| sdkerrors.SDKError        | 4XX                       | \*/\*                     |
 
 ## GetWorkspaceTargets
 
@@ -118,11 +117,10 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | 5XX                | application/json   |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.sdkerrors.Error | 5XX                       | application/json          |
+| sdkerrors.SDKError        | 4XX                       | \*/\*                     |
 
 ## PostWorkspaceEvents
 
@@ -188,11 +186,10 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | 5XX                | application/json   |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.sdkerrors.Error | 5XX                       | application/json          |
+| sdkerrors.SDKError        | 4XX                       | \*/\*                     |
 
 ## SearchWorkspaceEvents
 
@@ -243,7 +240,7 @@ func main() {
 
 ### Errors
 
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | 5XX                | application/json   |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.sdkerrors.Error | 5XX                       | application/json          |
+| sdkerrors.SDKError        | 4XX                       | \*/\*                     |

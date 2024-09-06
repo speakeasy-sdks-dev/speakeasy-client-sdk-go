@@ -179,7 +179,7 @@ func (s *Metadata) DeleteVersionMetadata(ctx context.Context, request operations
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -190,7 +190,8 @@ func (s *Metadata) DeleteVersionMetadata(ctx context.Context, request operations
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -356,12 +357,13 @@ func (s *Metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 
 			res.VersionMetadata = out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -372,7 +374,8 @@ func (s *Metadata) GetVersionMetadata(ctx context.Context, request operations.Ge
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -544,12 +547,13 @@ func (s *Metadata) InsertVersionMetadata(ctx context.Context, request operations
 
 			res.VersionMetadata = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -560,7 +564,8 @@ func (s *Metadata) InsertVersionMetadata(ctx context.Context, request operations
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

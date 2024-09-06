@@ -181,7 +181,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -192,7 +192,8 @@ func (s *Apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -360,12 +361,13 @@ func (s *Apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 
 			res.GenerateOpenAPISpecDiff = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -376,7 +378,8 @@ func (s *Apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -548,12 +551,13 @@ func (s *Apis) GeneratePostmanCollection(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -564,7 +568,8 @@ func (s *Apis) GeneratePostmanCollection(ctx context.Context, request operations
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -736,12 +741,13 @@ func (s *Apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 
 			res.Apis = out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -752,7 +758,8 @@ func (s *Apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -924,12 +931,13 @@ func (s *Apis) GetApis(ctx context.Context, request operations.GetApisRequest, o
 
 			res.Apis = out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -940,7 +948,8 @@ func (s *Apis) GetApis(ctx context.Context, request operations.GetApisRequest, o
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 
@@ -1114,12 +1123,13 @@ func (s *Apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 
 			res.API = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		fallthrough
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return nil, sdkerrors.NewSDKError(nil, httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -1130,7 +1140,8 @@ func (s *Apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 
 			res.Error = &out
 		default:
-			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			errorMsg := fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type"))
+			return nil, sdkerrors.NewSDKError(&errorMsg, httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	}
 

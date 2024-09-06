@@ -202,12 +202,14 @@ func main() {
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations. All operations return a response object or an error, they will never return both.
 
-| Error Object       | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Error    | 5XX                | application/json   |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+When custom error responses are specified for an operation, the SDK will return the appropriate error type. For example, the `GetWorkspaceEventsByTarget` method may return the following errors:
+
+| Error Object              | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| sdkerrors.sdkerrors.Error | 5XX                       | application/json          |
+| sdkerrors.SDKError        | 4XX                       | \*/\*                     |
 
 ### Example
 
