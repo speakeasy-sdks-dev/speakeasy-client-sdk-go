@@ -60,8 +60,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetUser
 
@@ -112,8 +111,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetWorkspaceAccess
 
@@ -166,8 +164,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## ValidateAPIKey
 
@@ -218,4 +215,4 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |

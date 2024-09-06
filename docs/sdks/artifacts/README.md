@@ -72,8 +72,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetManifest
 
@@ -131,8 +130,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetNamespaces
 
@@ -183,8 +181,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetOASSummary
 
@@ -238,8 +235,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetRevisions
 
@@ -292,8 +288,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetTags
 
@@ -346,8 +341,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## PostTags
 
@@ -402,8 +396,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## Preflight
 
@@ -455,4 +448,4 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |

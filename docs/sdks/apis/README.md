@@ -68,8 +68,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GenerateOpenAPISpec
 
@@ -126,8 +125,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GeneratePostmanCollection
 
@@ -183,8 +181,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetAllAPIVersions
 
@@ -240,8 +237,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetApis
 
@@ -295,8 +291,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## UpsertAPI
 
@@ -357,4 +352,4 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |

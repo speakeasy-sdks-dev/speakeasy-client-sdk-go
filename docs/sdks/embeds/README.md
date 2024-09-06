@@ -63,8 +63,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## GetValidEmbedAccessTokens
 
@@ -115,8 +114,7 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
-
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ## RevokeEmbedAccessToken
 
@@ -171,4 +169,4 @@ func main() {
 
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |

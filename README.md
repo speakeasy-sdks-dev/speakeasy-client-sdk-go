@@ -207,7 +207,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |
-| sdkerrors.SDKError | 4xx-5xx            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | \*/\*              |
 
 ### Example
 
