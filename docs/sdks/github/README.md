@@ -1,6 +1,8 @@
 # Github
 (*Github*)
 
+## Overview
+
 ### Available Operations
 
 * [CheckAccess](#checkaccess)
@@ -23,8 +25,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -34,12 +36,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.CheckAccessRequest{
+
+    ctx := context.Background()
+    res, err := s.Github.CheckAccess(ctx, operations.CheckAccessRequest{
         Org: "<value>",
         Repo: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Github.CheckAccess(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -49,8 +51,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
@@ -59,13 +59,16 @@ func main() {
 | `request`                                                                          | [operations.CheckAccessRequest](../../pkg/models/operations/checkaccessrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
 | `opts`                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                       | :heavy_minus_sign:                                                                 | The options for this request.                                                      |
 
-
 ### Response
 
 **[*operations.CheckAccessResponse](../../pkg/models/operations/checkaccessresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ConfigureCodeSamples
 
@@ -87,13 +90,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := shared.GithubConfigureCodeSamplesRequest{
+
+    ctx := context.Background()
+    res, err := s.Github.ConfigureCodeSamples(ctx, shared.GithubConfigureCodeSamplesRequest{
         Org: "<value>",
         Repo: "<value>",
         TargetName: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Github.ConfigureCodeSamples(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -103,8 +106,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -113,13 +114,16 @@ func main() {
 | `request`                                                                                                | [shared.GithubConfigureCodeSamplesRequest](../../pkg/models/shared/githubconfigurecodesamplesrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 | `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.ConfigureCodeSamplesResponse](../../pkg/models/operations/configurecodesamplesresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ConfigureMintlifyRepo
 
@@ -141,16 +145,16 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := shared.GithubConfigureMintlifyRepoRequest{
+
+    ctx := context.Background()
+    res, err := s.Github.ConfigureMintlifyRepo(ctx, shared.GithubConfigureMintlifyRepoRequest{
         Input: "<value>",
         Org: "<value>",
         Overlays: []string{
             "<value>",
         },
         Repo: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Github.ConfigureMintlifyRepo(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -160,8 +164,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
@@ -170,13 +172,16 @@ func main() {
 | `request`                                                                                                  | [shared.GithubConfigureMintlifyRepoRequest](../../pkg/models/shared/githubconfiguremintlifyreporequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
 | `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
-
 ### Response
 
 **[*operations.ConfigureMintlifyRepoResponse](../../pkg/models/operations/configuremintlifyreporesponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## ConfigureTarget
 
@@ -198,12 +203,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := shared.GithubConfigureTargetRequest{
+
+    ctx := context.Background()
+    res, err := s.Github.ConfigureTarget(ctx, shared.GithubConfigureTargetRequest{
         Org: "<value>",
         RepoName: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Github.ConfigureTarget(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -213,8 +218,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -223,13 +226,16 @@ func main() {
 | `request`                                                                                      | [shared.GithubConfigureTargetRequest](../../pkg/models/shared/githubconfiguretargetrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.ConfigureTargetResponse](../../pkg/models/operations/configuretargetresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## FetchPublishingPRs
 
@@ -241,8 +247,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -252,13 +258,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.FetchPublishingPRsRequest{
+
+    ctx := context.Background()
+    res, err := s.Github.FetchPublishingPRs(ctx, operations.FetchPublishingPRsRequest{
         GenerateGenLockID: "<value>",
         Org: "<value>",
         Repo: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Github.FetchPublishingPRs(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -268,8 +274,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
@@ -278,13 +282,16 @@ func main() {
 | `request`                                                                                        | [operations.FetchPublishingPRsRequest](../../pkg/models/operations/fetchpublishingprsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.FetchPublishingPRsResponse](../../pkg/models/operations/fetchpublishingprsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAction
 
@@ -296,8 +303,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -307,12 +314,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetActionRequest{
+
+    ctx := context.Background()
+    res, err := s.Github.GetAction(ctx, operations.GetActionRequest{
         Org: "<value>",
         Repo: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Github.GetAction(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -322,8 +329,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -332,13 +337,16 @@ func main() {
 | `request`                                                                      | [operations.GetActionRequest](../../pkg/models/operations/getactionrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.GetActionResponse](../../pkg/models/operations/getactionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GithubCheckPublishingSecrets
 
@@ -350,8 +358,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -361,11 +369,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GithubCheckPublishingSecretsRequest{
-        GenerateGenLockID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Github.GithubCheckPublishingSecrets(ctx, request)
+    res, err := s.Github.GithubCheckPublishingSecrets(ctx, operations.GithubCheckPublishingSecretsRequest{
+        GenerateGenLockID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -375,8 +383,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
@@ -385,13 +391,16 @@ func main() {
 | `request`                                                                                                            | [operations.GithubCheckPublishingSecretsRequest](../../pkg/models/operations/githubcheckpublishingsecretsrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
 | `opts`                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
 
-
 ### Response
 
 **[*operations.GithubCheckPublishingSecretsResponse](../../pkg/models/operations/githubcheckpublishingsecretsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GithubStorePublishingSecrets
 
@@ -413,11 +422,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := shared.GithubStorePublishingSecretsRequest{
-        GenerateGenLockID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Github.GithubStorePublishingSecrets(ctx, request)
+    res, err := s.Github.GithubStorePublishingSecrets(ctx, shared.GithubStorePublishingSecretsRequest{
+        GenerateGenLockID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -427,8 +436,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
@@ -437,13 +444,16 @@ func main() {
 | `request`                                                                                                    | [shared.GithubStorePublishingSecretsRequest](../../pkg/models/shared/githubstorepublishingsecretsrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
 | `opts`                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                 | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
-
 ### Response
 
 **[*operations.GithubStorePublishingSecretsResponse](../../pkg/models/operations/githubstorepublishingsecretsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## TriggerAction
 
@@ -465,13 +475,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := shared.GithubTriggerActionRequest{
+
+    ctx := context.Background()
+    res, err := s.Github.TriggerAction(ctx, shared.GithubTriggerActionRequest{
         GenLockID: "<value>",
         Org: "<value>",
         RepoName: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Github.TriggerAction(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -481,8 +491,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -491,10 +499,12 @@ func main() {
 | `request`                                                                                  | [shared.GithubTriggerActionRequest](../../pkg/models/shared/githubtriggeractionrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.TriggerActionResponse](../../pkg/models/operations/triggeractionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

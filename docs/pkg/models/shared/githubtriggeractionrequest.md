@@ -7,7 +7,6 @@ A request to trigger an action on a GitHub target
 
 | Field                                                  | Type                                                   | Required                                               | Description                                            |
 | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `Force`                                                | **bool*                                                | :heavy_minus_sign:                                     | Force an SDK generation                                |
 | `GenLockID`                                            | *string*                                               | :heavy_check_mark:                                     | The generation lock ID                                 |
 | `Org`                                                  | *string*                                               | :heavy_check_mark:                                     | The GitHub organization name                           |
 | `RepoName`                                             | *string*                                               | :heavy_check_mark:                                     | The GitHub repository name                             |
