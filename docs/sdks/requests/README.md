@@ -24,8 +24,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -35,11 +35,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GenerateRequestPostmanCollectionRequest{
-        RequestID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Requests.GenerateRequestPostmanCollection(ctx, request)
+    res, err := s.Requests.GenerateRequestPostmanCollection(ctx, operations.GenerateRequestPostmanCollectionRequest{
+        RequestID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -49,8 +49,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                                    | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
@@ -59,13 +57,16 @@ func main() {
 | `request`                                                                                                                    | [operations.GenerateRequestPostmanCollectionRequest](../../pkg/models/operations/generaterequestpostmancollectionrequest.md) | :heavy_check_mark:                                                                                                           | The request object to use for the request.                                                                                   |
 | `opts`                                                                                                                       | [][operations.Option](../../pkg/models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                           | The options for this request.                                                                                                |
 
-
 ### Response
 
 **[*operations.GenerateRequestPostmanCollectionResponse](../../pkg/models/operations/generaterequestpostmancollectionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetRequestFromEventLog
 
@@ -79,8 +80,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -90,11 +91,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetRequestFromEventLogRequest{
-        RequestID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Requests.GetRequestFromEventLog(ctx, request)
+    res, err := s.Requests.GetRequestFromEventLog(ctx, operations.GetRequestFromEventLogRequest{
+        RequestID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -104,8 +105,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -114,13 +113,16 @@ func main() {
 | `request`                                                                                                | [operations.GetRequestFromEventLogRequest](../../pkg/models/operations/getrequestfromeventlogrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 | `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.GetRequestFromEventLogResponse](../../pkg/models/operations/getrequestfromeventlogresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## QueryEventLog
 
@@ -135,8 +137,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -146,9 +148,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.QueryEventLogRequest{}
+
     ctx := context.Background()
-    res, err := s.Requests.QueryEventLog(ctx, request)
+    res, err := s.Requests.QueryEventLog(ctx, operations.QueryEventLogRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -158,8 +160,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -168,10 +168,12 @@ func main() {
 | `request`                                                                              | [operations.QueryEventLogRequest](../../pkg/models/operations/queryeventlogrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.QueryEventLogResponse](../../pkg/models/operations/queryeventlogresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
