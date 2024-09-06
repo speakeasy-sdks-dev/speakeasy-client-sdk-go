@@ -4,7 +4,7 @@ management:
   docChecksum: ef34c7c9a8d7b40707eaed604ee75276
   docVersion: 0.4.0 .
   speakeasyVersion: internal
-  generationVersion: 2.411.1
+  generationVersion: 2.411.0
   releaseVersion: 3.12.5
   configChecksum: 06754b207a20130a897c23f6a2d79b0e
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
@@ -19,7 +19,7 @@ features:
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
     devContainers: 2.90.0
-    downloadStreams: 0.1.1
+    downloadStreams: 0.1.2
     envVarSecurityUsage: 0.3.1
     examples: 2.81.3
     globalSecurity: 2.82.10
@@ -753,6 +753,7 @@ examples:
   suggestOperationIDs:
     speakeasy-default-suggest-operation-I-ds:
       parameters:
+        query: {}
         header:
           x-session-id: "<value>"
       requestBody:
