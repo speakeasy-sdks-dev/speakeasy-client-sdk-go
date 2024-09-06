@@ -8,13 +8,14 @@ import (
 )
 
 type File struct {
-	Content  []byte `multipartForm:"content"`
+	// This field accepts []byte data or io.Reader implementations, such as *os.File.
+	Content  any    `multipartForm:"content"`
 	FileName string `multipartForm:"name=file"`
 }
 
-func (o *File) GetContent() []byte {
+func (o *File) GetContent() any {
 	if o == nil {
-		return []byte{}
+		return nil
 	}
 	return o.Content
 }

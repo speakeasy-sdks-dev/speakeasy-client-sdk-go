@@ -28,8 +28,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -39,13 +39,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.DeleteAPIEndpointRequest{
+
+    ctx := context.Background()
+    res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, operations.DeleteAPIEndpointRequest{
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -55,8 +55,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -65,13 +63,16 @@ func main() {
 | `request`                                                                                      | [operations.DeleteAPIEndpointRequest](../../pkg/models/operations/deleteapiendpointrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.DeleteAPIEndpointResponse](../../pkg/models/operations/deleteapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## FindAPIEndpoint
 
@@ -86,8 +87,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -97,13 +98,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.FindAPIEndpointRequest{
+
+    ctx := context.Background()
+    res, err := s.APIEndpoints.FindAPIEndpoint(ctx, operations.FindAPIEndpointRequest{
         APIID: "<value>",
         DisplayName: "Don.Strosin",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.APIEndpoints.FindAPIEndpoint(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -113,8 +114,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
@@ -123,13 +122,16 @@ func main() {
 | `request`                                                                                  | [operations.FindAPIEndpointRequest](../../pkg/models/operations/findapiendpointrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
 | `opts`                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                               | :heavy_minus_sign:                                                                         | The options for this request.                                                              |
 
-
 ### Response
 
 **[*operations.FindAPIEndpointResponse](../../pkg/models/operations/findapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GenerateOpenAPISpecForAPIEndpoint
 
@@ -144,8 +146,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -155,13 +157,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GenerateOpenAPISpecForAPIEndpointRequest{
+
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, operations.GenerateOpenAPISpecForAPIEndpointRequest{
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -171,8 +173,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
@@ -181,13 +181,16 @@ func main() {
 | `request`                                                                                                                      | [operations.GenerateOpenAPISpecForAPIEndpointRequest](../../pkg/models/operations/generateopenapispecforapiendpointrequest.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
 | `opts`                                                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                             | The options for this request.                                                                                                  |
 
-
 ### Response
 
 **[*operations.GenerateOpenAPISpecForAPIEndpointResponse](../../pkg/models/operations/generateopenapispecforapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GeneratePostmanCollectionForAPIEndpoint
 
@@ -201,8 +204,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -212,13 +215,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GeneratePostmanCollectionForAPIEndpointRequest{
+
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, operations.GeneratePostmanCollectionForAPIEndpointRequest{
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -228,8 +231,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                                                  | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
@@ -238,13 +239,16 @@ func main() {
 | `request`                                                                                                                                  | [operations.GeneratePostmanCollectionForAPIEndpointRequest](../../pkg/models/operations/generatepostmancollectionforapiendpointrequest.md) | :heavy_check_mark:                                                                                                                         | The request object to use for the request.                                                                                                 |
 | `opts`                                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                                               | :heavy_minus_sign:                                                                                                                         | The options for this request.                                                                                                              |
 
-
 ### Response
 
 **[*operations.GeneratePostmanCollectionForAPIEndpointResponse](../../pkg/models/operations/generatepostmancollectionforapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAllAPIEndpoints
 
@@ -258,8 +262,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -269,11 +273,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetAllAPIEndpointsRequest{
-        APIID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, request)
+    res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, operations.GetAllAPIEndpointsRequest{
+        APIID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -283,8 +287,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
@@ -293,13 +295,16 @@ func main() {
 | `request`                                                                                        | [operations.GetAllAPIEndpointsRequest](../../pkg/models/operations/getallapiendpointsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 | `opts`                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                     | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
-
 ### Response
 
 **[*operations.GetAllAPIEndpointsResponse](../../pkg/models/operations/getallapiendpointsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAllForVersionAPIEndpoints
 
@@ -313,8 +318,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -324,12 +329,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetAllForVersionAPIEndpointsRequest{
+
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, operations.GetAllForVersionAPIEndpointsRequest{
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -339,8 +344,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
@@ -349,13 +352,16 @@ func main() {
 | `request`                                                                                                            | [operations.GetAllForVersionAPIEndpointsRequest](../../pkg/models/operations/getallforversionapiendpointsrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
 | `opts`                                                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
 
-
 ### Response
 
 **[*operations.GetAllForVersionAPIEndpointsResponse](../../pkg/models/operations/getallforversionapiendpointsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetAPIEndpoint
 
@@ -369,8 +375,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -380,13 +386,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetAPIEndpointRequest{
+
+    ctx := context.Background()
+    res, err := s.APIEndpoints.GetAPIEndpoint(ctx, operations.GetAPIEndpointRequest{
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.APIEndpoints.GetAPIEndpoint(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -396,8 +402,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -406,13 +410,16 @@ func main() {
 | `request`                                                                                | [operations.GetAPIEndpointRequest](../../pkg/models/operations/getapiendpointrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.GetAPIEndpointResponse](../../pkg/models/operations/getapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## UpsertAPIEndpoint
 
@@ -426,8 +433,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -437,7 +444,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.UpsertAPIEndpointRequest{
+
+    ctx := context.Background()
+    res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, operations.UpsertAPIEndpointRequest{
         APIEndpoint: shared.APIEndpointInput{
             APIEndpointID: "<value>",
             Description: "Public-key systematic attitude",
@@ -449,9 +458,7 @@ func main() {
         APIEndpointID: "<value>",
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -461,8 +468,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -471,10 +476,12 @@ func main() {
 | `request`                                                                                      | [operations.UpsertAPIEndpointRequest](../../pkg/models/operations/upsertapiendpointrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.UpsertAPIEndpointResponse](../../pkg/models/operations/upsertapiendpointresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
