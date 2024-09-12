@@ -28,8 +28,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -39,13 +39,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.DeleteSchemaRequest{
+
+    ctx := context.Background()
+    res, err := s.Schemas.DeleteSchema(ctx, operations.DeleteSchemaRequest{
         APIID: "<value>",
         RevisionID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Schemas.DeleteSchema(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -55,8 +55,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
@@ -65,13 +63,16 @@ func main() {
 | `request`                                                                            | [operations.DeleteSchemaRequest](../../pkg/models/operations/deleteschemarequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
-
 ### Response
 
 **[*operations.DeleteSchemaResponse](../../pkg/models/operations/deleteschemaresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## DownloadSchema
 
@@ -85,8 +86,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -96,12 +97,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.DownloadSchemaRequest{
+
+    ctx := context.Background()
+    res, err := s.Schemas.DownloadSchema(ctx, operations.DownloadSchemaRequest{
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Schemas.DownloadSchema(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -111,8 +112,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -121,13 +120,16 @@ func main() {
 | `request`                                                                                | [operations.DownloadSchemaRequest](../../pkg/models/operations/downloadschemarequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.DownloadSchemaResponse](../../pkg/models/operations/downloadschemaresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## DownloadSchemaRevision
 
@@ -141,8 +143,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -152,13 +154,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.DownloadSchemaRevisionRequest{
+
+    ctx := context.Background()
+    res, err := s.Schemas.DownloadSchemaRevision(ctx, operations.DownloadSchemaRevisionRequest{
         APIID: "<value>",
         RevisionID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Schemas.DownloadSchemaRevision(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -168,8 +170,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
@@ -178,13 +178,16 @@ func main() {
 | `request`                                                                                                | [operations.DownloadSchemaRevisionRequest](../../pkg/models/operations/downloadschemarevisionrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
 | `opts`                                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                                             | :heavy_minus_sign:                                                                                       | The options for this request.                                                                            |
 
-
 ### Response
 
 **[*operations.DownloadSchemaRevisionResponse](../../pkg/models/operations/downloadschemarevisionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetSchema
 
@@ -199,8 +202,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -210,12 +213,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetSchemaRequest{
+
+    ctx := context.Background()
+    res, err := s.Schemas.GetSchema(ctx, operations.GetSchemaRequest{
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Schemas.GetSchema(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -225,8 +228,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
@@ -235,13 +236,16 @@ func main() {
 | `request`                                                                      | [operations.GetSchemaRequest](../../pkg/models/operations/getschemarequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                   | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
-
 ### Response
 
 **[*operations.GetSchemaResponse](../../pkg/models/operations/getschemaresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetSchemaDiff
 
@@ -255,8 +259,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -266,14 +270,14 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetSchemaDiffRequest{
+
+    ctx := context.Background()
+    res, err := s.Schemas.GetSchemaDiff(ctx, operations.GetSchemaDiffRequest{
         APIID: "<value>",
         BaseRevisionID: "<value>",
         TargetRevisionID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Schemas.GetSchemaDiff(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -283,8 +287,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
@@ -293,13 +295,16 @@ func main() {
 | `request`                                                                              | [operations.GetSchemaDiffRequest](../../pkg/models/operations/getschemadiffrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                           | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
-
 ### Response
 
 **[*operations.GetSchemaDiffResponse](../../pkg/models/operations/getschemadiffresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetSchemaRevision
 
@@ -314,8 +319,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -325,13 +330,13 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetSchemaRevisionRequest{
+
+    ctx := context.Background()
+    res, err := s.Schemas.GetSchemaRevision(ctx, operations.GetSchemaRevisionRequest{
         APIID: "<value>",
         RevisionID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Schemas.GetSchemaRevision(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -341,8 +346,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
@@ -351,13 +354,16 @@ func main() {
 | `request`                                                                                      | [operations.GetSchemaRevisionRequest](../../pkg/models/operations/getschemarevisionrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
 | `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
-
 ### Response
 
 **[*operations.GetSchemaRevisionResponse](../../pkg/models/operations/getschemarevisionresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetSchemas
 
@@ -372,8 +378,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -383,12 +389,12 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetSchemasRequest{
+
+    ctx := context.Background()
+    res, err := s.Schemas.GetSchemas(ctx, operations.GetSchemasRequest{
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Schemas.GetSchemas(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -398,8 +404,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
@@ -408,13 +412,16 @@ func main() {
 | `request`                                                                        | [operations.GetSchemasRequest](../../pkg/models/operations/getschemasrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
 | `opts`                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                     | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
-
 ### Response
 
 **[*operations.GetSchemasResponse](../../pkg/models/operations/getschemasresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## RegisterSchema
 
@@ -429,8 +436,9 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"os"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -440,18 +448,18 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.RegisterSchemaRequest{
+
+    ctx := context.Background()
+    res, err := s.Schemas.RegisterSchema(ctx, operations.RegisterSchemaRequest{
         RequestBody: operations.RegisterSchemaRequestBody{
             File: operations.RegisterSchemaFile{
-                Content: []byte("0xCAFCA03e0e"),
+                Content: os.Open("example.file"),
                 FileName: "your_file_here",
             },
         },
         APIID: "<value>",
         VersionID: "<value>",
-    }
-    ctx := context.Background()
-    res, err := s.Schemas.RegisterSchema(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -461,8 +469,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
@@ -471,10 +477,12 @@ func main() {
 | `request`                                                                                | [operations.RegisterSchemaRequest](../../pkg/models/operations/registerschemarequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
 | `opts`                                                                                   | [][operations.Option](../../pkg/models/operations/option.md)                             | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
-
 ### Response
 
 **[*operations.RegisterSchemaResponse](../../pkg/models/operations/registerschemaresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |

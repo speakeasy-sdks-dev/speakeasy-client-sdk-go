@@ -1,8 +1,32 @@
 # github.com/speakeasy-api/speakeasy-client-sdk-go
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
+
+For more information about the API: [The Speakeasy Platform Documentation](/docs)
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+
+* [SDK Installation](#sdk-installation)
+* [SDK Example Usage](#sdk-example-usage)
+* [Available Resources and Operations](#available-resources-and-operations)
+* [Global Parameters](#global-parameters)
+* [Retries](#retries)
+* [Error Handling](#error-handling)
+* [Server Selection](#server-selection)
+* [Custom HTTP Client](#custom-http-client)
+* [Authentication](#authentication)
+* [Special Types](#special-types)
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+To add the SDK as a dependency to your project:
 ```bash
 go get github.com/speakeasy-api/speakeasy-client-sdk-go
 ```
@@ -30,9 +54,9 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetApisRequest{}
+
 	ctx := context.Background()
-	res, err := s.Apis.GetApis(ctx, request)
+	res, err := s.Apis.GetApis(ctx, operations.GetApisRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -47,14 +71,8 @@ func main() {
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
-### [Apis](docs/sdks/apis/README.md)
-
-* [DeleteAPI](docs/sdks/apis/README.md#deleteapi) - Delete an Api.
-* [GenerateOpenAPISpec](docs/sdks/apis/README.md#generateopenapispec) - Generate an OpenAPI specification for a particular Api.
-* [GeneratePostmanCollection](docs/sdks/apis/README.md#generatepostmancollection) - Generate a Postman collection for a particular Api.
-* [GetAllAPIVersions](docs/sdks/apis/README.md#getallapiversions) - Get all Api versions for a particular ApiEndpoint.
-* [GetApis](docs/sdks/apis/README.md#getapis) - Get a list of Apis for a given workspace
-* [UpsertAPI](docs/sdks/apis/README.md#upsertapi) - Upsert an Api
+<details open>
+<summary>Available methods</summary>
 
 ### [APIEndpoints](docs/sdks/apiendpoints/README.md)
 
@@ -67,22 +85,14 @@ func main() {
 * [GetAPIEndpoint](docs/sdks/apiendpoints/README.md#getapiendpoint) - Get an ApiEndpoint.
 * [UpsertAPIEndpoint](docs/sdks/apiendpoints/README.md#upsertapiendpoint) - Upsert an ApiEndpoint.
 
-### [Metadata](docs/sdks/metadata/README.md)
+### [Apis](docs/sdks/apis/README.md)
 
-* [DeleteVersionMetadata](docs/sdks/metadata/README.md#deleteversionmetadata) - Delete metadata for a particular apiID and versionID.
-* [GetVersionMetadata](docs/sdks/metadata/README.md#getversionmetadata) - Get all metadata for a particular apiID and versionID.
-* [InsertVersionMetadata](docs/sdks/metadata/README.md#insertversionmetadata) - Insert metadata for a particular apiID and versionID.
-
-### [Schemas](docs/sdks/schemas/README.md)
-
-* [DeleteSchema](docs/sdks/schemas/README.md#deleteschema) - Delete a particular schema revision for an Api.
-* [DownloadSchema](docs/sdks/schemas/README.md#downloadschema) - Download the latest schema for a particular apiID.
-* [DownloadSchemaRevision](docs/sdks/schemas/README.md#downloadschemarevision) - Download a particular schema revision for an Api.
-* [GetSchema](docs/sdks/schemas/README.md#getschema) - Get information about the latest schema.
-* [GetSchemaDiff](docs/sdks/schemas/README.md#getschemadiff) - Get a diff of two schema revisions for an Api.
-* [GetSchemaRevision](docs/sdks/schemas/README.md#getschemarevision) - Get information about a particular schema revision for an Api.
-* [GetSchemas](docs/sdks/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
-* [RegisterSchema](docs/sdks/schemas/README.md#registerschema) - Register a schema.
+* [DeleteAPI](docs/sdks/apis/README.md#deleteapi) - Delete an Api.
+* [GenerateOpenAPISpec](docs/sdks/apis/README.md#generateopenapispec) - Generate an OpenAPI specification for a particular Api.
+* [GeneratePostmanCollection](docs/sdks/apis/README.md#generatepostmancollection) - Generate a Postman collection for a particular Api.
+* [GetAllAPIVersions](docs/sdks/apis/README.md#getallapiversions) - Get all Api versions for a particular ApiEndpoint.
+* [GetApis](docs/sdks/apis/README.md#getapis) - Get a list of Apis for a given workspace
+* [UpsertAPI](docs/sdks/apis/README.md#upsertapi) - Upsert an Api
 
 ### [Artifacts](docs/sdks/artifacts/README.md)
 
@@ -102,11 +112,18 @@ func main() {
 * [GetWorkspaceAccess](docs/sdks/auth/README.md#getworkspaceaccess) - Get access allowances for a particular workspace
 * [ValidateAPIKey](docs/sdks/auth/README.md#validateapikey) - Validate the current api key.
 
-### [Requests](docs/sdks/requests/README.md)
+### [Embeds](docs/sdks/embeds/README.md)
 
-* [GenerateRequestPostmanCollection](docs/sdks/requests/README.md#generaterequestpostmancollection) - Generate a Postman collection for a particular request.
-* [GetRequestFromEventLog](docs/sdks/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
-* [QueryEventLog](docs/sdks/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
+* [GetEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
+* [GetValidEmbedAccessTokens](docs/sdks/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
+* [RevokeEmbedAccessToken](docs/sdks/embeds/README.md#revokeembedaccesstoken) - Revoke an embed access EmbedToken.
+
+### [Events](docs/sdks/events/README.md)
+
+* [GetWorkspaceEventsByTarget](docs/sdks/events/README.md#getworkspaceeventsbytarget) - Load recent events for a particular workspace
+* [GetWorkspaceTargets](docs/sdks/events/README.md#getworkspacetargets) - Load targets for a particular workspace
+* [PostWorkspaceEvents](docs/sdks/events/README.md#postworkspaceevents) - Post events for a specific workspace
+* [SearchWorkspaceEvents](docs/sdks/events/README.md#searchworkspaceevents) - Search events for a particular workspace by any field
 
 ### [Github](docs/sdks/github/README.md)
 
@@ -119,6 +136,12 @@ func main() {
 * [GithubCheckPublishingSecrets](docs/sdks/github/README.md#githubcheckpublishingsecrets)
 * [GithubStorePublishingSecrets](docs/sdks/github/README.md#githubstorepublishingsecrets)
 * [TriggerAction](docs/sdks/github/README.md#triggeraction)
+
+### [Metadata](docs/sdks/metadata/README.md)
+
+* [DeleteVersionMetadata](docs/sdks/metadata/README.md#deleteversionmetadata) - Delete metadata for a particular apiID and versionID.
+* [GetVersionMetadata](docs/sdks/metadata/README.md#getversionmetadata) - Get all metadata for a particular apiID and versionID.
+* [InsertVersionMetadata](docs/sdks/metadata/README.md#insertversionmetadata) - Insert metadata for a particular apiID and versionID.
 
 ### [Organizations](docs/sdks/organizations/README.md)
 
@@ -133,9 +156,27 @@ func main() {
 * [GetLintingReportSignedURL](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
 * [UploadReport](docs/sdks/reports/README.md#uploadreport) - Upload a report.
 
+### [Requests](docs/sdks/requests/README.md)
+
+* [GenerateRequestPostmanCollection](docs/sdks/requests/README.md#generaterequestpostmancollection) - Generate a Postman collection for a particular request.
+* [GetRequestFromEventLog](docs/sdks/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
+* [QueryEventLog](docs/sdks/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
+
+### [Schemas](docs/sdks/schemas/README.md)
+
+* [DeleteSchema](docs/sdks/schemas/README.md#deleteschema) - Delete a particular schema revision for an Api.
+* [DownloadSchema](docs/sdks/schemas/README.md#downloadschema) - Download the latest schema for a particular apiID.
+* [DownloadSchemaRevision](docs/sdks/schemas/README.md#downloadschemarevision) - Download a particular schema revision for an Api.
+* [GetSchema](docs/sdks/schemas/README.md#getschema) - Get information about the latest schema.
+* [GetSchemaDiff](docs/sdks/schemas/README.md#getschemadiff) - Get a diff of two schema revisions for an Api.
+* [GetSchemaRevision](docs/sdks/schemas/README.md#getschemarevision) - Get information about a particular schema revision for an Api.
+* [GetSchemas](docs/sdks/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
+* [RegisterSchema](docs/sdks/schemas/README.md#registerschema) - Register a schema.
+
 ### [ShortURLs](docs/sdks/shorturls/README.md)
 
 * [Create](docs/sdks/shorturls/README.md#create) - Shorten a URL.
+
 
 ### [Suggest](docs/sdks/suggest/README.md)
 
@@ -143,22 +184,11 @@ func main() {
 * [SuggestOperationIDs](docs/sdks/suggest/README.md#suggestoperationids) - Generate operation ID suggestions.
 * [SuggestOperationIDsRegistry](docs/sdks/suggest/README.md#suggestoperationidsregistry) - Generate operation ID suggestions.
 
-### [Embeds](docs/sdks/embeds/README.md)
-
-* [GetEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
-* [GetValidEmbedAccessTokens](docs/sdks/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
-* [RevokeEmbedAccessToken](docs/sdks/embeds/README.md#revokeembedaccesstoken) - Revoke an embed access EmbedToken.
-
 ### [Workspaces](docs/sdks/workspaces/README.md)
 
 * [GetWorkspace](docs/sdks/workspaces/README.md#getworkspace) - Get workspace
 
-### [Events](docs/sdks/events/README.md)
-
-* [GetWorkspaceEventsByTarget](docs/sdks/events/README.md#getworkspaceeventsbytarget) - Load recent events for a particular workspace
-* [GetWorkspaceTargets](docs/sdks/events/README.md#getworkspacetargets) - Load targets for a particular workspace
-* [PostWorkspaceEvents](docs/sdks/events/README.md#postworkspaceevents) - Post events for a specific workspace
-* [SearchWorkspaceEvents](docs/sdks/events/README.md#searchworkspaceevents) - Search events for a particular workspace by any field
+</details>
 <!-- End Available Resources and Operations [operations] -->
 
 
@@ -206,11 +236,11 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetWorkspaceEventsByTargetRequest{
-		TargetID: "<value>",
-	}
+
 	ctx := context.Background()
-	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
+	res, err := s.Events.GetWorkspaceEventsByTarget(ctx, operations.GetWorkspaceEventsByTargetRequest{
+		TargetID: "<value>",
+	})
 	if err != nil {
 
 		var e *sdkerrors.Error
@@ -263,12 +293,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -301,12 +331,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -381,12 +411,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -434,9 +464,9 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.GetWorkspaceRequest{}
+
 	ctx := context.Background()
-	res, err := s.Workspaces.GetWorkspace(ctx, request)
+	res, err := s.Workspaces.GetWorkspace(ctx, operations.GetWorkspaceRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -473,12 +503,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request, operations.WithRetries(
+	}, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -529,12 +559,12 @@ func main() {
 			APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
 		}),
 	)
-	request := operations.DeleteAPIRequest{
+
+	ctx := context.Background()
+	res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
 		APIID:     "<value>",
 		VersionID: "<value>",
-	}
-	ctx := context.Background()
-	res, err := s.Apis.DeleteAPI(ctx, request)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}

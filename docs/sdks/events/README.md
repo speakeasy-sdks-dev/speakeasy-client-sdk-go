@@ -24,8 +24,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -35,11 +35,11 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetWorkspaceEventsByTargetRequest{
-        TargetID: "<value>",
-    }
+
     ctx := context.Background()
-    res, err := s.Events.GetWorkspaceEventsByTarget(ctx, request)
+    res, err := s.Events.GetWorkspaceEventsByTarget(ctx, operations.GetWorkspaceEventsByTargetRequest{
+        TargetID: "<value>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -49,8 +49,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
@@ -59,14 +57,17 @@ func main() {
 | `request`                                                                                                        | [operations.GetWorkspaceEventsByTargetRequest](../../pkg/models/operations/getworkspaceeventsbytargetrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
 | `opts`                                                                                                           | [][operations.Option](../../pkg/models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |
 
-
 ### Response
 
 **[*operations.GetWorkspaceEventsByTargetResponse](../../pkg/models/operations/getworkspaceeventsbytargetresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## GetWorkspaceTargets
 
@@ -80,8 +81,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -91,9 +92,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.GetWorkspaceTargetsRequest{}
+
     ctx := context.Background()
-    res, err := s.Events.GetWorkspaceTargets(ctx, request)
+    res, err := s.Events.GetWorkspaceTargets(ctx, operations.GetWorkspaceTargetsRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -103,8 +104,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -113,14 +112,17 @@ func main() {
 | `request`                                                                                          | [operations.GetWorkspaceTargetsRequest](../../pkg/models/operations/getworkspacetargetsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.GetWorkspaceTargetsResponse](../../pkg/models/operations/getworkspacetargetsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## PostWorkspaceEvents
 
@@ -134,9 +136,9 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/types"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/types"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -146,7 +148,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.PostWorkspaceEventsRequest{
+
+    ctx := context.Background()
+    res, err := s.Events.PostWorkspaceEvents(ctx, operations.PostWorkspaceEventsRequest{
         RequestBody: []shared.CliEvent{
             shared.CliEvent{
                 CreatedAt: types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
@@ -160,9 +164,7 @@ func main() {
                 WorkspaceID: "<value>",
             },
         },
-    }
-    ctx := context.Background()
-    res, err := s.Events.PostWorkspaceEvents(ctx, request)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -172,8 +174,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
@@ -182,14 +182,17 @@ func main() {
 | `request`                                                                                          | [operations.PostWorkspaceEventsRequest](../../pkg/models/operations/postworkspaceeventsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
 | `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
-
 ### Response
 
 **[*operations.PostWorkspaceEventsResponse](../../pkg/models/operations/postworkspaceeventsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |
 | sdkerrors.SDKError | 4xx-5xx            | */*                |
+
 
 ## SearchWorkspaceEvents
 
@@ -203,8 +206,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"context"
+	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
 
@@ -214,9 +217,9 @@ func main() {
             APIKey: speakeasyclientsdkgo.String("<YOUR_API_KEY_HERE>"),
         }),
     )
-    request := operations.SearchWorkspaceEventsRequest{}
+
     ctx := context.Background()
-    res, err := s.Events.SearchWorkspaceEvents(ctx, request)
+    res, err := s.Events.SearchWorkspaceEvents(ctx, operations.SearchWorkspaceEventsRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -226,8 +229,6 @@ func main() {
 }
 ```
 
-
-
 ### Parameters
 
 | Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
@@ -236,10 +237,12 @@ func main() {
 | `request`                                                                                              | [operations.SearchWorkspaceEventsRequest](../../pkg/models/operations/searchworkspaceeventsrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
 | `opts`                                                                                                 | [][operations.Option](../../pkg/models/operations/option.md)                                           | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
 
-
 ### Response
 
 **[*operations.SearchWorkspaceEventsResponse](../../pkg/models/operations/searchworkspaceeventsresponse.md), error**
+
+### Errors
+
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Error    | 5XX                | application/json   |
