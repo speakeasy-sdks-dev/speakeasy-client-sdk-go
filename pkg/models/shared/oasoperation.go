@@ -3,11 +3,13 @@
 package shared
 
 type OASOperation struct {
-	Description string   `json:"description"`
-	Method      string   `json:"method"`
-	OperationID string   `json:"operation_id"`
-	Path        string   `json:"path"`
-	Tags        []string `json:"tags"`
+	Description        string   `json:"description"`
+	GroupOverride      *string  `json:"group_override,omitempty"`
+	Method             string   `json:"method"`
+	MethodNameOverride *string  `json:"method_name_override,omitempty"`
+	OperationID        string   `json:"operation_id"`
+	Path               string   `json:"path"`
+	Tags               []string `json:"tags"`
 }
 
 func (o *OASOperation) GetDescription() string {
@@ -17,11 +19,25 @@ func (o *OASOperation) GetDescription() string {
 	return o.Description
 }
 
+func (o *OASOperation) GetGroupOverride() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GroupOverride
+}
+
 func (o *OASOperation) GetMethod() string {
 	if o == nil {
 		return ""
 	}
 	return o.Method
+}
+
+func (o *OASOperation) GetMethodNameOverride() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MethodNameOverride
 }
 
 func (o *OASOperation) GetOperationID() string {

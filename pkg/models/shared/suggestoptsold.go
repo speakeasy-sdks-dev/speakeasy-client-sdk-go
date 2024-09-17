@@ -33,19 +33,19 @@ func (e *SuggestionType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type SuggestOpts struct {
+type SuggestOptsOld struct {
 	Diagnostics    []Diagnostic   `json:"diagnostics,omitempty"`
 	SuggestionType SuggestionType `json:"suggestion_type"`
 }
 
-func (o *SuggestOpts) GetDiagnostics() []Diagnostic {
+func (o *SuggestOptsOld) GetDiagnostics() []Diagnostic {
 	if o == nil {
 		return nil
 	}
 	return o.Diagnostics
 }
 
-func (o *SuggestOpts) GetSuggestionType() SuggestionType {
+func (o *SuggestOptsOld) GetSuggestionType() SuggestionType {
 	if o == nil {
 		return SuggestionType("")
 	}

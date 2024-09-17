@@ -10,18 +10,18 @@ import (
 
 type SuggestOpenAPIRegistryRequest struct {
 	// Suggest options
-	SuggestOpts   *shared.SuggestOpts `request:"mediaType=application/json"`
-	NamespaceName string              `pathParam:"style=simple,explode=false,name=namespace_name"`
+	SuggestRequestBody *shared.SuggestRequestBody `request:"mediaType=application/json"`
+	NamespaceName      string                     `pathParam:"style=simple,explode=false,name=namespace_name"`
 	// Tag or digest
 	RevisionReference string `pathParam:"style=simple,explode=false,name=revision_reference"`
 	XSessionID        string `header:"style=simple,explode=false,name=x-session-id"`
 }
 
-func (o *SuggestOpenAPIRegistryRequest) GetSuggestOpts() *shared.SuggestOpts {
+func (o *SuggestOpenAPIRegistryRequest) GetSuggestRequestBody() *shared.SuggestRequestBody {
 	if o == nil {
 		return nil
 	}
-	return o.SuggestOpts
+	return o.SuggestRequestBody
 }
 
 func (o *SuggestOpenAPIRegistryRequest) GetNamespaceName() string {

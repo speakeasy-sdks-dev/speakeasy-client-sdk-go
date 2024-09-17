@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 11eaddc370e7d2043750bcff56df17e1
+  docChecksum: 40626f73138958b2117c67a0ddff344f
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.389.0
-  generationVersion: 2.409.0
-  releaseVersion: 3.13.0
-  configChecksum: 0e57f08adff3fdc7db9bcc690cdfe792
+  speakeasyVersion: 1.398.1
+  generationVersion: 2.415.8
+  releaseVersion: 3.13.1
+  configChecksum: 5be574dcf411db184ba10fb491d2b4a7
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go
@@ -15,11 +15,11 @@ features:
   go:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    core: 3.5.5
+    core: 3.5.8
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
     devContainers: 2.90.0
-    downloadStreams: 0.1.1
+    downloadStreams: 0.1.2
     envVarSecurityUsage: 0.3.1
     examples: 2.81.3
     globalSecurity: 2.82.10
@@ -37,23 +37,385 @@ features:
     serverIDs: 2.81.1
     uploadStreams: 0.1.0
 generatedFiles:
-  - apis.go
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - /pkg/models/operations/checkaccess.go
+  - /pkg/models/operations/configurecodesamples.go
+  - /pkg/models/operations/configuremintlifyrepo.go
+  - /pkg/models/operations/configuretarget.go
+  - /pkg/models/operations/create.go
+  - /pkg/models/operations/createfreetrial.go
+  - /pkg/models/operations/deleteapi.go
+  - /pkg/models/operations/deleteapiendpoint.go
+  - /pkg/models/operations/deleteschema.go
+  - /pkg/models/operations/deleteversionmetadata.go
+  - /pkg/models/operations/downloadschema.go
+  - /pkg/models/operations/downloadschemarevision.go
+  - /pkg/models/operations/fetchpublishingprs.go
+  - /pkg/models/operations/findapiendpoint.go
+  - /pkg/models/operations/generateopenapispec.go
+  - /pkg/models/operations/generateopenapispecforapiendpoint.go
+  - /pkg/models/operations/generatepostmancollection.go
+  - /pkg/models/operations/generatepostmancollectionforapiendpoint.go
+  - /pkg/models/operations/generaterequestpostmancollection.go
+  - /pkg/models/operations/getaccesstoken.go
+  - /pkg/models/operations/getaction.go
+  - /pkg/models/operations/getallapiendpoints.go
+  - /pkg/models/operations/getallapiversions.go
+  - /pkg/models/operations/getallforversionapiendpoints.go
+  - /pkg/models/operations/getapiendpoint.go
+  - /pkg/models/operations/getapis.go
+  - /pkg/models/operations/getblob.go
+  - /pkg/models/operations/getchangesreportsignedurl.go
+  - /pkg/models/operations/getembedaccesstoken.go
+  - /pkg/models/operations/getlintingreportsignedurl.go
+  - /pkg/models/operations/getmanifest.go
+  - /pkg/models/operations/getnamespaces.go
+  - /pkg/models/operations/getoassummary.go
+  - /pkg/models/operations/getorganization.go
+  - /pkg/models/operations/getorganizations.go
+  - /pkg/models/operations/getorganizationusage.go
+  - /pkg/models/operations/getrequestfromeventlog.go
+  - /pkg/models/operations/getrevisions.go
+  - /pkg/models/operations/getschema.go
+  - /pkg/models/operations/getschemadiff.go
+  - /pkg/models/operations/getschemarevision.go
+  - /pkg/models/operations/getschemas.go
+  - /pkg/models/operations/gettags.go
+  - /pkg/models/operations/getuser.go
+  - /pkg/models/operations/getvalidembedaccesstokens.go
+  - /pkg/models/operations/getversionmetadata.go
+  - /pkg/models/operations/getworkspace.go
+  - /pkg/models/operations/getworkspaceaccess.go
+  - /pkg/models/operations/getworkspaceeventsbytarget.go
+  - /pkg/models/operations/getworkspacefeatureflags.go
+  - /pkg/models/operations/getworkspacetargets.go
+  - /pkg/models/operations/githubcheckpublishingsecrets.go
+  - /pkg/models/operations/githubstorepublishingsecrets.go
+  - /pkg/models/operations/insertversionmetadata.go
+  - /pkg/models/operations/posttags.go
+  - /pkg/models/operations/postworkspaceevents.go
+  - /pkg/models/operations/preflight.go
+  - /pkg/models/operations/queryeventlog.go
+  - /pkg/models/operations/registerschema.go
+  - /pkg/models/operations/revokeembedaccesstoken.go
+  - /pkg/models/operations/searchworkspaceevents.go
+  - /pkg/models/operations/suggest.go
+  - /pkg/models/operations/suggestopenapi.go
+  - /pkg/models/operations/suggestopenapiregistry.go
+  - /pkg/models/operations/triggeraction.go
+  - /pkg/models/operations/uploadreport.go
+  - /pkg/models/operations/upsertapi.go
+  - /pkg/models/operations/upsertapiendpoint.go
+  - /pkg/models/operations/validateapikey.go
+  - /pkg/models/sdkerrors/error.go
+  - /pkg/models/shared/accessdetails.go
+  - /pkg/models/shared/accesstoken.go
+  - /pkg/models/shared/accounttype.go
+  - /pkg/models/shared/addtags.go
+  - /pkg/models/shared/annotations.go
+  - /pkg/models/shared/api.go
+  - /pkg/models/shared/apiendpoint.go
+  - /pkg/models/shared/apiendpointinput.go
+  - /pkg/models/shared/apiinput.go
+  - /pkg/models/shared/apikeydetails.go
+  - /pkg/models/shared/boundedrequest.go
+  - /pkg/models/shared/clievent.go
+  - /pkg/models/shared/diagnostic.go
+  - /pkg/models/shared/embedaccesstokenresponse.go
+  - /pkg/models/shared/embedtoken.go
+  - /pkg/models/shared/featureflag.go
+  - /pkg/models/shared/filter.go
+  - /pkg/models/shared/filters.go
+  - /pkg/models/shared/generateopenapispecdiff.go
+  - /pkg/models/shared/getnamespacesresponse.go
+  - /pkg/models/shared/getrevisionsresponse.go
+  - /pkg/models/shared/gettagsresponse.go
+  - /pkg/models/shared/githubconfigurecodesamplesrequest.go
+  - /pkg/models/shared/githubconfigurecodesamplesresponse.go
+  - /pkg/models/shared/githubconfiguremintlifyreporequest.go
+  - /pkg/models/shared/githubconfiguretargetrequest.go
+  - /pkg/models/shared/githubgetactionresponse.go
+  - /pkg/models/shared/githubmissingpublishingsecretsresponse.go
+  - /pkg/models/shared/githubpublishingprresponse.go
+  - /pkg/models/shared/githubstorepublishingsecretsrequest.go
+  - /pkg/models/shared/githubtriggeractionrequest.go
+  - /pkg/models/shared/interactiontype.go
+  - /pkg/models/shared/manifest.go
+  - /pkg/models/shared/namespace.go
+  - /pkg/models/shared/oasinfo.go
+  - /pkg/models/shared/oasoperation.go
+  - /pkg/models/shared/oassummary.go
+  - /pkg/models/shared/organization.go
+  - /pkg/models/shared/organizationusage.go
+  - /pkg/models/shared/organizationusageresponse.go
+  - /pkg/models/shared/preflightrequest.go
+  - /pkg/models/shared/preflighttoken.go
+  - /pkg/models/shared/report.go
+  - /pkg/models/shared/requestmetadata.go
+  - /pkg/models/shared/revision.go
+  - /pkg/models/shared/schema.go
+  - /pkg/models/shared/schemadiff.go
+  - /pkg/models/shared/security.go
+  - /pkg/models/shared/shorturl.go
+  - /pkg/models/shared/suggestoptsold.go
+  - /pkg/models/shared/suggestrequestbody.go
+  - /pkg/models/shared/tag.go
+  - /pkg/models/shared/targetsdk.go
+  - /pkg/models/shared/unboundedrequest.go
+  - /pkg/models/shared/user.go
+  - /pkg/models/shared/v2descriptor.go
+  - /pkg/models/shared/versionmetadata.go
+  - /pkg/models/shared/versionmetadatainput.go
+  - /pkg/models/shared/workflowdocument.go
+  - /pkg/models/shared/workspace.go
+  - /pkg/models/shared/workspacefeatureflagresponse.go
+  - CONTRIBUTING.md
+  - USAGE.md
   - apiendpoints.go
-  - metadata.go
-  - schemas.go
+  - apis.go
   - artifacts.go
   - auth.go
-  - requests.go
-  - github.go
-  - organizations.go
-  - reports.go
-  - shorturls.go
-  - suggest.go
+  - docs/pkg/models/operations/checkaccessrequest.md
+  - docs/pkg/models/operations/checkaccessresponse.md
+  - docs/pkg/models/operations/configurecodesamplesresponse.md
+  - docs/pkg/models/operations/configuremintlifyreporesponse.md
+  - docs/pkg/models/operations/configuretargetresponse.md
+  - docs/pkg/models/operations/createfreetrialresponse.md
+  - docs/pkg/models/operations/createrequestbody.md
+  - docs/pkg/models/operations/createresponse.md
+  - docs/pkg/models/operations/deleteapiendpointrequest.md
+  - docs/pkg/models/operations/deleteapiendpointresponse.md
+  - docs/pkg/models/operations/deleteapirequest.md
+  - docs/pkg/models/operations/deleteapiresponse.md
+  - docs/pkg/models/operations/deleteschemarequest.md
+  - docs/pkg/models/operations/deleteschemaresponse.md
+  - docs/pkg/models/operations/deleteversionmetadatarequest.md
+  - docs/pkg/models/operations/deleteversionmetadataresponse.md
+  - docs/pkg/models/operations/downloadschemarequest.md
+  - docs/pkg/models/operations/downloadschemaresponse.md
+  - docs/pkg/models/operations/downloadschemarevisionrequest.md
+  - docs/pkg/models/operations/downloadschemarevisionresponse.md
+  - docs/pkg/models/operations/fetchpublishingprsrequest.md
+  - docs/pkg/models/operations/fetchpublishingprsresponse.md
+  - docs/pkg/models/operations/file.md
+  - docs/pkg/models/operations/findapiendpointrequest.md
+  - docs/pkg/models/operations/findapiendpointresponse.md
+  - docs/pkg/models/operations/generateopenapispecforapiendpointrequest.md
+  - docs/pkg/models/operations/generateopenapispecforapiendpointresponse.md
+  - docs/pkg/models/operations/generateopenapispecrequest.md
+  - docs/pkg/models/operations/generateopenapispecresponse.md
+  - docs/pkg/models/operations/generatepostmancollectionforapiendpointrequest.md
+  - docs/pkg/models/operations/generatepostmancollectionforapiendpointresponse.md
+  - docs/pkg/models/operations/generatepostmancollectionrequest.md
+  - docs/pkg/models/operations/generatepostmancollectionresponse.md
+  - docs/pkg/models/operations/generaterequestpostmancollectionrequest.md
+  - docs/pkg/models/operations/generaterequestpostmancollectionresponse.md
+  - docs/pkg/models/operations/getaccesstokenrequest.md
+  - docs/pkg/models/operations/getaccesstokenresponse.md
+  - docs/pkg/models/operations/getactionrequest.md
+  - docs/pkg/models/operations/getactionresponse.md
+  - docs/pkg/models/operations/getallapiendpointsrequest.md
+  - docs/pkg/models/operations/getallapiendpointsresponse.md
+  - docs/pkg/models/operations/getallapiversionsrequest.md
+  - docs/pkg/models/operations/getallapiversionsresponse.md
+  - docs/pkg/models/operations/getallforversionapiendpointsrequest.md
+  - docs/pkg/models/operations/getallforversionapiendpointsresponse.md
+  - docs/pkg/models/operations/getapiendpointrequest.md
+  - docs/pkg/models/operations/getapiendpointresponse.md
+  - docs/pkg/models/operations/getapisrequest.md
+  - docs/pkg/models/operations/getapisresponse.md
+  - docs/pkg/models/operations/getblobrequest.md
+  - docs/pkg/models/operations/getblobresponse.md
+  - docs/pkg/models/operations/getchangesreportsignedurlrequest.md
+  - docs/pkg/models/operations/getchangesreportsignedurlresponse.md
+  - docs/pkg/models/operations/getchangesreportsignedurlsignedaccess.md
+  - docs/pkg/models/operations/getembedaccesstokenrequest.md
+  - docs/pkg/models/operations/getembedaccesstokenresponse.md
+  - docs/pkg/models/operations/getlintingreportsignedurlrequest.md
+  - docs/pkg/models/operations/getlintingreportsignedurlresponse.md
+  - docs/pkg/models/operations/getlintingreportsignedurlsignedaccess.md
+  - docs/pkg/models/operations/getmanifestrequest.md
+  - docs/pkg/models/operations/getmanifestresponse.md
+  - docs/pkg/models/operations/getnamespacesresponse.md
+  - docs/pkg/models/operations/getoassummaryrequest.md
+  - docs/pkg/models/operations/getoassummaryresponse.md
+  - docs/pkg/models/operations/getorganizationrequest.md
+  - docs/pkg/models/operations/getorganizationresponse.md
+  - docs/pkg/models/operations/getorganizationsresponse.md
+  - docs/pkg/models/operations/getorganizationusageresponse.md
+  - docs/pkg/models/operations/getrequestfromeventlogrequest.md
+  - docs/pkg/models/operations/getrequestfromeventlogresponse.md
+  - docs/pkg/models/operations/getrevisionsrequest.md
+  - docs/pkg/models/operations/getrevisionsresponse.md
+  - docs/pkg/models/operations/getschemadiffrequest.md
+  - docs/pkg/models/operations/getschemadiffresponse.md
+  - docs/pkg/models/operations/getschemarequest.md
+  - docs/pkg/models/operations/getschemaresponse.md
+  - docs/pkg/models/operations/getschemarevisionrequest.md
+  - docs/pkg/models/operations/getschemarevisionresponse.md
+  - docs/pkg/models/operations/getschemasrequest.md
+  - docs/pkg/models/operations/getschemasresponse.md
+  - docs/pkg/models/operations/gettagsrequest.md
+  - docs/pkg/models/operations/gettagsresponse.md
+  - docs/pkg/models/operations/getuserresponse.md
+  - docs/pkg/models/operations/getvalidembedaccesstokensresponse.md
+  - docs/pkg/models/operations/getversionmetadatarequest.md
+  - docs/pkg/models/operations/getversionmetadataresponse.md
+  - docs/pkg/models/operations/getworkspaceaccessrequest.md
+  - docs/pkg/models/operations/getworkspaceaccessresponse.md
+  - docs/pkg/models/operations/getworkspaceeventsbytargetglobals.md
+  - docs/pkg/models/operations/getworkspaceeventsbytargetrequest.md
+  - docs/pkg/models/operations/getworkspaceeventsbytargetresponse.md
+  - docs/pkg/models/operations/getworkspacefeatureflagsglobals.md
+  - docs/pkg/models/operations/getworkspacefeatureflagsrequest.md
+  - docs/pkg/models/operations/getworkspacefeatureflagsresponse.md
+  - docs/pkg/models/operations/getworkspaceglobals.md
+  - docs/pkg/models/operations/getworkspacerequest.md
+  - docs/pkg/models/operations/getworkspaceresponse.md
+  - docs/pkg/models/operations/getworkspacetargetsglobals.md
+  - docs/pkg/models/operations/getworkspacetargetsrequest.md
+  - docs/pkg/models/operations/getworkspacetargetsresponse.md
+  - docs/pkg/models/operations/githubcheckpublishingsecretsrequest.md
+  - docs/pkg/models/operations/githubcheckpublishingsecretsresponse.md
+  - docs/pkg/models/operations/githubstorepublishingsecretsresponse.md
+  - docs/pkg/models/operations/insertversionmetadatarequest.md
+  - docs/pkg/models/operations/insertversionmetadataresponse.md
+  - docs/pkg/models/operations/op.md
+  - docs/pkg/models/operations/option.md
+  - docs/pkg/models/operations/posttagsrequest.md
+  - docs/pkg/models/operations/posttagsresponse.md
+  - docs/pkg/models/operations/postworkspaceeventsglobals.md
+  - docs/pkg/models/operations/postworkspaceeventsrequest.md
+  - docs/pkg/models/operations/postworkspaceeventsresponse.md
+  - docs/pkg/models/operations/preflightresponse.md
+  - docs/pkg/models/operations/queryeventlogrequest.md
+  - docs/pkg/models/operations/queryeventlogresponse.md
+  - docs/pkg/models/operations/queryparamop.md
+  - docs/pkg/models/operations/registerschemafile.md
+  - docs/pkg/models/operations/registerschemarequest.md
+  - docs/pkg/models/operations/registerschemarequestbody.md
+  - docs/pkg/models/operations/registerschemaresponse.md
+  - docs/pkg/models/operations/revokeembedaccesstokenrequest.md
+  - docs/pkg/models/operations/revokeembedaccesstokenresponse.md
+  - docs/pkg/models/operations/schema.md
+  - docs/pkg/models/operations/searchworkspaceeventsglobals.md
+  - docs/pkg/models/operations/searchworkspaceeventsrequest.md
+  - docs/pkg/models/operations/searchworkspaceeventsresponse.md
+  - docs/pkg/models/operations/suggestopenapiregistryrequest.md
+  - docs/pkg/models/operations/suggestopenapiregistryresponse.md
+  - docs/pkg/models/operations/suggestopenapirequest.md
+  - docs/pkg/models/operations/suggestopenapirequestbody.md
+  - docs/pkg/models/operations/suggestopenapiresponse.md
+  - docs/pkg/models/operations/suggestrequest.md
+  - docs/pkg/models/operations/suggestresponse.md
+  - docs/pkg/models/operations/triggeractionresponse.md
+  - docs/pkg/models/operations/uploadreportrequestbody.md
+  - docs/pkg/models/operations/uploadreportresponse.md
+  - docs/pkg/models/operations/uploadreportuploadedreport.md
+  - docs/pkg/models/operations/upsertapiendpointrequest.md
+  - docs/pkg/models/operations/upsertapiendpointresponse.md
+  - docs/pkg/models/operations/upsertapirequest.md
+  - docs/pkg/models/operations/upsertapiresponse.md
+  - docs/pkg/models/operations/validateapikeyresponse.md
+  - docs/pkg/models/sdkerrors/error.md
+  - docs/pkg/models/shared/accessdetails.md
+  - docs/pkg/models/shared/accesstoken.md
+  - docs/pkg/models/shared/accesstokenuser.md
+  - docs/pkg/models/shared/accounttype.md
+  - docs/pkg/models/shared/addtags.md
+  - docs/pkg/models/shared/annotations.md
+  - docs/pkg/models/shared/api.md
+  - docs/pkg/models/shared/apiendpoint.md
+  - docs/pkg/models/shared/apikeydetails.md
+  - docs/pkg/models/shared/auth.md
+  - docs/pkg/models/shared/boundedrequest.md
+  - docs/pkg/models/shared/claims.md
+  - docs/pkg/models/shared/clievent.md
+  - docs/pkg/models/shared/diagnostic.md
+  - docs/pkg/models/shared/embedaccesstokenresponse.md
+  - docs/pkg/models/shared/embedtoken.md
+  - docs/pkg/models/shared/featureflag.md
+  - docs/pkg/models/shared/filter.md
+  - docs/pkg/models/shared/filters.md
+  - docs/pkg/models/shared/generatebumptype.md
+  - docs/pkg/models/shared/generateopenapispecdiff.md
+  - docs/pkg/models/shared/getnamespacesresponse.md
+  - docs/pkg/models/shared/getrevisionsresponse.md
+  - docs/pkg/models/shared/gettagsresponse.md
+  - docs/pkg/models/shared/githubconfigurecodesamplesrequest.md
+  - docs/pkg/models/shared/githubconfigurecodesamplesresponse.md
+  - docs/pkg/models/shared/githubconfiguremintlifyreporequest.md
+  - docs/pkg/models/shared/githubconfiguretargetrequest.md
+  - docs/pkg/models/shared/githubgetactionresponse.md
+  - docs/pkg/models/shared/githubmissingpublishingsecretsresponse.md
+  - docs/pkg/models/shared/githubpublishingprresponse.md
+  - docs/pkg/models/shared/githubstorepublishingsecretsrequest.md
+  - docs/pkg/models/shared/githubtriggeractionrequest.md
+  - docs/pkg/models/shared/interactiontype.md
+  - docs/pkg/models/shared/level.md
+  - docs/pkg/models/shared/license.md
+  - docs/pkg/models/shared/manifest.md
+  - docs/pkg/models/shared/namespace.md
+  - docs/pkg/models/shared/oasinfo.md
+  - docs/pkg/models/shared/oasoperation.md
+  - docs/pkg/models/shared/oassummary.md
+  - docs/pkg/models/shared/openapidiffbumptype.md
+  - docs/pkg/models/shared/organization.md
+  - docs/pkg/models/shared/organizationusage.md
+  - docs/pkg/models/shared/organizationusageresponse.md
+  - docs/pkg/models/shared/preflightrequest.md
+  - docs/pkg/models/shared/preflighttoken.md
+  - docs/pkg/models/shared/report.md
+  - docs/pkg/models/shared/requestmetadata.md
+  - docs/pkg/models/shared/revision.md
+  - docs/pkg/models/shared/schema.md
+  - docs/pkg/models/shared/schemadiff.md
+  - docs/pkg/models/shared/security.md
+  - docs/pkg/models/shared/shorturl.md
+  - docs/pkg/models/shared/suggestiontype.md
+  - docs/pkg/models/shared/suggestoptsold.md
+  - docs/pkg/models/shared/suggestrequestbody.md
+  - docs/pkg/models/shared/suggestrequestbodysuggestiontype.md
+  - docs/pkg/models/shared/tag.md
+  - docs/pkg/models/shared/targetsdk.md
+  - docs/pkg/models/shared/type.md
+  - docs/pkg/models/shared/unboundedrequest.md
+  - docs/pkg/models/shared/user.md
+  - docs/pkg/models/shared/v2descriptor.md
+  - docs/pkg/models/shared/valuechange.md
+  - docs/pkg/models/shared/versionmetadata.md
+  - docs/pkg/models/shared/workflowdocument.md
+  - docs/pkg/models/shared/workspace.md
+  - docs/pkg/models/shared/workspacefeatureflagresponse.md
+  - docs/pkg/models/shared/workspaces.md
+  - docs/sdks/apiendpoints/README.md
+  - docs/sdks/apis/README.md
+  - docs/sdks/artifacts/README.md
+  - docs/sdks/auth/README.md
+  - docs/sdks/embeds/README.md
+  - docs/sdks/events/README.md
+  - docs/sdks/github/README.md
+  - docs/sdks/metadata/README.md
+  - docs/sdks/organizations/README.md
+  - docs/sdks/reports/README.md
+  - docs/sdks/requests/README.md
+  - docs/sdks/schemas/README.md
+  - docs/sdks/shorturls/README.md
+  - docs/sdks/speakeasy/README.md
+  - docs/sdks/suggest/README.md
+  - docs/sdks/workspaces/README.md
   - embeds.go
-  - workspaces.go
   - events.go
-  - speakeasy.go
+  - github.go
   - go.mod
+  - internal/globals/globals.go
+  - internal/hooks/hooks.go
+  - metadata.go
+  - organizations.go
+  - pkg/models/operations/options.go
   - pkg/models/sdkerrors/sdkerror.go
   - pkg/retry/config.go
   - pkg/types/bigint.go
@@ -71,364 +433,633 @@ generatedFiles:
   - pkg/utils/retries.go
   - pkg/utils/security.go
   - pkg/utils/utils.go
-  - internal/globals/globals.go
-  - /pkg/models/operations/deleteapi.go
-  - /pkg/models/operations/generateopenapispec.go
-  - /pkg/models/operations/generatepostmancollection.go
-  - /pkg/models/operations/getallapiversions.go
-  - /pkg/models/operations/getapis.go
-  - /pkg/models/operations/upsertapi.go
-  - /pkg/models/operations/deleteapiendpoint.go
-  - /pkg/models/operations/findapiendpoint.go
-  - /pkg/models/operations/generateopenapispecforapiendpoint.go
-  - /pkg/models/operations/generatepostmancollectionforapiendpoint.go
-  - /pkg/models/operations/getallapiendpoints.go
-  - /pkg/models/operations/getallforversionapiendpoints.go
-  - /pkg/models/operations/getapiendpoint.go
-  - /pkg/models/operations/upsertapiendpoint.go
-  - /pkg/models/operations/deleteversionmetadata.go
-  - /pkg/models/operations/getversionmetadata.go
-  - /pkg/models/operations/insertversionmetadata.go
-  - /pkg/models/operations/deleteschema.go
-  - /pkg/models/operations/downloadschema.go
-  - /pkg/models/operations/downloadschemarevision.go
-  - /pkg/models/operations/getschema.go
-  - /pkg/models/operations/getschemadiff.go
-  - /pkg/models/operations/getschemarevision.go
-  - /pkg/models/operations/getschemas.go
-  - /pkg/models/operations/registerschema.go
-  - /pkg/models/operations/getblob.go
-  - /pkg/models/operations/getmanifest.go
-  - /pkg/models/operations/getnamespaces.go
-  - /pkg/models/operations/getoassummary.go
-  - /pkg/models/operations/getrevisions.go
-  - /pkg/models/operations/gettags.go
-  - /pkg/models/operations/posttags.go
-  - /pkg/models/operations/preflight.go
-  - /pkg/models/operations/getaccesstoken.go
-  - /pkg/models/operations/getuser.go
-  - /pkg/models/operations/getworkspaceaccess.go
-  - /pkg/models/operations/validateapikey.go
-  - /pkg/models/operations/generaterequestpostmancollection.go
-  - /pkg/models/operations/getrequestfromeventlog.go
-  - /pkg/models/operations/queryeventlog.go
-  - /pkg/models/operations/checkaccess.go
-  - /pkg/models/operations/configurecodesamples.go
-  - /pkg/models/operations/configuremintlifyrepo.go
-  - /pkg/models/operations/configuretarget.go
-  - /pkg/models/operations/fetchpublishingprs.go
-  - /pkg/models/operations/getaction.go
-  - /pkg/models/operations/githubcheckpublishingsecrets.go
-  - /pkg/models/operations/githubstorepublishingsecrets.go
-  - /pkg/models/operations/triggeraction.go
-  - /pkg/models/operations/createfreetrial.go
-  - /pkg/models/operations/getorganization.go
-  - /pkg/models/operations/getorganizationusage.go
-  - /pkg/models/operations/getorganizations.go
-  - /pkg/models/operations/getchangesreportsignedurl.go
-  - /pkg/models/operations/getlintingreportsignedurl.go
-  - /pkg/models/operations/uploadreport.go
-  - /pkg/models/operations/create.go
-  - /pkg/models/operations/applyoperationids.go
-  - /pkg/models/operations/suggestopenapi.go
-  - /pkg/models/operations/suggestopenapiregistry.go
-  - /pkg/models/operations/getembedaccesstoken.go
-  - /pkg/models/operations/getvalidembedaccesstokens.go
-  - /pkg/models/operations/revokeembedaccesstoken.go
-  - /pkg/models/operations/getworkspace.go
-  - /pkg/models/operations/getworkspaceeventsbytarget.go
-  - /pkg/models/operations/getworkspacetargets.go
-  - /pkg/models/operations/postworkspaceevents.go
-  - /pkg/models/operations/searchworkspaceevents.go
-  - /pkg/models/sdkerrors/error.go
-  - /pkg/models/shared/generateopenapispecdiff.go
-  - /pkg/models/shared/api.go
-  - /pkg/models/shared/apiinput.go
-  - /pkg/models/shared/apiendpoint.go
-  - /pkg/models/shared/apiendpointinput.go
-  - /pkg/models/shared/versionmetadata.go
-  - /pkg/models/shared/versionmetadatainput.go
-  - /pkg/models/shared/schema.go
-  - /pkg/models/shared/schemadiff.go
-  - /pkg/models/shared/manifest.go
-  - /pkg/models/shared/v2descriptor.go
-  - /pkg/models/shared/annotations.go
-  - /pkg/models/shared/getnamespacesresponse.go
-  - /pkg/models/shared/namespace.go
-  - /pkg/models/shared/oassummary.go
-  - /pkg/models/shared/oasoperation.go
-  - /pkg/models/shared/oasinfo.go
-  - /pkg/models/shared/getrevisionsresponse.go
-  - /pkg/models/shared/revision.go
-  - /pkg/models/shared/gettagsresponse.go
-  - /pkg/models/shared/tag.go
-  - /pkg/models/shared/addtags.go
-  - /pkg/models/shared/preflighttoken.go
-  - /pkg/models/shared/preflightrequest.go
-  - /pkg/models/shared/accesstoken.go
-  - /pkg/models/shared/accounttype.go
-  - /pkg/models/shared/featureflag.go
-  - /pkg/models/shared/user.go
-  - /pkg/models/shared/accessdetails.go
-  - /pkg/models/shared/apikeydetails.go
-  - /pkg/models/shared/unboundedrequest.go
-  - /pkg/models/shared/boundedrequest.go
-  - /pkg/models/shared/requestmetadata.go
-  - /pkg/models/shared/filters.go
-  - /pkg/models/shared/filter.go
-  - /pkg/models/shared/githubconfigurecodesamplesresponse.go
-  - /pkg/models/shared/workflowdocument.go
-  - /pkg/models/shared/githubconfigurecodesamplesrequest.go
-  - /pkg/models/shared/githubconfiguremintlifyreporequest.go
-  - /pkg/models/shared/githubconfiguretargetrequest.go
-  - /pkg/models/shared/githubpublishingprresponse.go
-  - /pkg/models/shared/githubgetactionresponse.go
-  - /pkg/models/shared/githubmissingpublishingsecretsresponse.go
-  - /pkg/models/shared/githubstorepublishingsecretsrequest.go
-  - /pkg/models/shared/githubtriggeractionrequest.go
-  - /pkg/models/shared/organization.go
-  - /pkg/models/shared/organizationusageresponse.go
-  - /pkg/models/shared/organizationusage.go
-  - /pkg/models/shared/report.go
-  - /pkg/models/shared/shorturl.go
-  - /pkg/models/shared/suggestopts.go
-  - /pkg/models/shared/diagnostic.go
-  - /pkg/models/shared/embedaccesstokenresponse.go
-  - /pkg/models/shared/embedtoken.go
-  - /pkg/models/shared/workspace.go
-  - /pkg/models/shared/clievent.go
-  - /pkg/models/shared/interactiontype.go
-  - /pkg/models/shared/targetsdk.go
-  - /pkg/models/shared/security.go
-  - docs/pkg/models/operations/deleteapirequest.md
-  - docs/pkg/models/operations/deleteapiresponse.md
-  - docs/pkg/models/operations/generateopenapispecrequest.md
-  - docs/pkg/models/operations/generateopenapispecresponse.md
-  - docs/pkg/models/operations/generatepostmancollectionrequest.md
-  - docs/pkg/models/operations/generatepostmancollectionresponse.md
-  - docs/pkg/models/operations/op.md
-  - docs/pkg/models/operations/getallapiversionsrequest.md
-  - docs/pkg/models/operations/getallapiversionsresponse.md
-  - docs/pkg/models/operations/queryparamop.md
-  - docs/pkg/models/operations/getapisrequest.md
-  - docs/pkg/models/operations/getapisresponse.md
-  - docs/pkg/models/operations/upsertapirequest.md
-  - docs/pkg/models/operations/upsertapiresponse.md
-  - docs/pkg/models/operations/deleteapiendpointrequest.md
-  - docs/pkg/models/operations/deleteapiendpointresponse.md
-  - docs/pkg/models/operations/findapiendpointrequest.md
-  - docs/pkg/models/operations/findapiendpointresponse.md
-  - docs/pkg/models/operations/generateopenapispecforapiendpointrequest.md
-  - docs/pkg/models/operations/generateopenapispecforapiendpointresponse.md
-  - docs/pkg/models/operations/generatepostmancollectionforapiendpointrequest.md
-  - docs/pkg/models/operations/generatepostmancollectionforapiendpointresponse.md
-  - docs/pkg/models/operations/getallapiendpointsrequest.md
-  - docs/pkg/models/operations/getallapiendpointsresponse.md
-  - docs/pkg/models/operations/getallforversionapiendpointsrequest.md
-  - docs/pkg/models/operations/getallforversionapiendpointsresponse.md
-  - docs/pkg/models/operations/getapiendpointrequest.md
-  - docs/pkg/models/operations/getapiendpointresponse.md
-  - docs/pkg/models/operations/upsertapiendpointrequest.md
-  - docs/pkg/models/operations/upsertapiendpointresponse.md
-  - docs/pkg/models/operations/deleteversionmetadatarequest.md
-  - docs/pkg/models/operations/deleteversionmetadataresponse.md
-  - docs/pkg/models/operations/getversionmetadatarequest.md
-  - docs/pkg/models/operations/getversionmetadataresponse.md
-  - docs/pkg/models/operations/insertversionmetadatarequest.md
-  - docs/pkg/models/operations/insertversionmetadataresponse.md
-  - docs/pkg/models/operations/deleteschemarequest.md
-  - docs/pkg/models/operations/deleteschemaresponse.md
-  - docs/pkg/models/operations/downloadschemarequest.md
-  - docs/pkg/models/operations/downloadschemaresponse.md
-  - docs/pkg/models/operations/downloadschemarevisionrequest.md
-  - docs/pkg/models/operations/downloadschemarevisionresponse.md
-  - docs/pkg/models/operations/getschemarequest.md
-  - docs/pkg/models/operations/getschemaresponse.md
-  - docs/pkg/models/operations/getschemadiffrequest.md
-  - docs/pkg/models/operations/getschemadiffresponse.md
-  - docs/pkg/models/operations/getschemarevisionrequest.md
-  - docs/pkg/models/operations/getschemarevisionresponse.md
-  - docs/pkg/models/operations/getschemasrequest.md
-  - docs/pkg/models/operations/getschemasresponse.md
-  - docs/pkg/models/operations/registerschemafile.md
-  - docs/pkg/models/operations/registerschemarequestbody.md
-  - docs/pkg/models/operations/registerschemarequest.md
-  - docs/pkg/models/operations/registerschemaresponse.md
-  - docs/pkg/models/operations/getblobrequest.md
-  - docs/pkg/models/operations/getblobresponse.md
-  - docs/pkg/models/operations/getmanifestrequest.md
-  - docs/pkg/models/operations/getmanifestresponse.md
-  - docs/pkg/models/operations/getnamespacesresponse.md
-  - docs/pkg/models/operations/getoassummaryrequest.md
-  - docs/pkg/models/operations/getoassummaryresponse.md
-  - docs/pkg/models/operations/getrevisionsrequest.md
-  - docs/pkg/models/operations/getrevisionsresponse.md
-  - docs/pkg/models/operations/gettagsrequest.md
-  - docs/pkg/models/operations/gettagsresponse.md
-  - docs/pkg/models/operations/posttagsrequest.md
-  - docs/pkg/models/operations/posttagsresponse.md
-  - docs/pkg/models/operations/preflightresponse.md
-  - docs/pkg/models/operations/getaccesstokenrequest.md
-  - docs/pkg/models/operations/getaccesstokenresponse.md
-  - docs/pkg/models/operations/getuserresponse.md
-  - docs/pkg/models/operations/getworkspaceaccessrequest.md
-  - docs/pkg/models/operations/getworkspaceaccessresponse.md
-  - docs/pkg/models/operations/validateapikeyresponse.md
-  - docs/pkg/models/operations/generaterequestpostmancollectionrequest.md
-  - docs/pkg/models/operations/generaterequestpostmancollectionresponse.md
-  - docs/pkg/models/operations/getrequestfromeventlogrequest.md
-  - docs/pkg/models/operations/getrequestfromeventlogresponse.md
-  - docs/pkg/models/operations/queryeventlogrequest.md
-  - docs/pkg/models/operations/queryeventlogresponse.md
-  - docs/pkg/models/operations/checkaccessrequest.md
-  - docs/pkg/models/operations/checkaccessresponse.md
-  - docs/pkg/models/operations/configurecodesamplesresponse.md
-  - docs/pkg/models/operations/configuremintlifyreporesponse.md
-  - docs/pkg/models/operations/configuretargetresponse.md
-  - docs/pkg/models/operations/fetchpublishingprsrequest.md
-  - docs/pkg/models/operations/fetchpublishingprsresponse.md
-  - docs/pkg/models/operations/getactionrequest.md
-  - docs/pkg/models/operations/getactionresponse.md
-  - docs/pkg/models/operations/githubcheckpublishingsecretsrequest.md
-  - docs/pkg/models/operations/githubcheckpublishingsecretsresponse.md
-  - docs/pkg/models/operations/githubstorepublishingsecretsresponse.md
-  - docs/pkg/models/operations/triggeractionresponse.md
-  - docs/pkg/models/operations/createfreetrialresponse.md
-  - docs/pkg/models/operations/getorganizationrequest.md
-  - docs/pkg/models/operations/getorganizationresponse.md
-  - docs/pkg/models/operations/getorganizationusageresponse.md
-  - docs/pkg/models/operations/getorganizationsresponse.md
-  - docs/pkg/models/operations/getchangesreportsignedurlrequest.md
-  - docs/pkg/models/operations/getchangesreportsignedurlsignedaccess.md
-  - docs/pkg/models/operations/getchangesreportsignedurlresponse.md
-  - docs/pkg/models/operations/getlintingreportsignedurlrequest.md
-  - docs/pkg/models/operations/getlintingreportsignedurlsignedaccess.md
-  - docs/pkg/models/operations/getlintingreportsignedurlresponse.md
-  - docs/pkg/models/operations/file.md
-  - docs/pkg/models/operations/uploadreportrequestbody.md
-  - docs/pkg/models/operations/uploadreportuploadedreport.md
-  - docs/pkg/models/operations/uploadreportresponse.md
-  - docs/pkg/models/operations/createrequestbody.md
-  - docs/pkg/models/operations/createresponse.md
-  - docs/pkg/models/operations/applyoperationidsrequestbody.md
-  - docs/pkg/models/operations/applyoperationidsrequest.md
-  - docs/pkg/models/operations/applyoperationidsresponse.md
-  - docs/pkg/models/operations/schema.md
-  - docs/pkg/models/operations/suggestopenapirequestbody.md
-  - docs/pkg/models/operations/suggestopenapirequest.md
-  - docs/pkg/models/operations/suggestopenapiresponse.md
-  - docs/pkg/models/operations/suggestopenapiregistryrequest.md
-  - docs/pkg/models/operations/suggestopenapiregistryresponse.md
-  - docs/pkg/models/operations/getembedaccesstokenrequest.md
-  - docs/pkg/models/operations/getembedaccesstokenresponse.md
-  - docs/pkg/models/operations/getvalidembedaccesstokensresponse.md
-  - docs/pkg/models/operations/revokeembedaccesstokenrequest.md
-  - docs/pkg/models/operations/revokeembedaccesstokenresponse.md
-  - docs/pkg/models/operations/getworkspaceglobals.md
-  - docs/pkg/models/operations/getworkspacerequest.md
-  - docs/pkg/models/operations/getworkspaceresponse.md
-  - docs/pkg/models/operations/getworkspaceeventsbytargetglobals.md
-  - docs/pkg/models/operations/getworkspaceeventsbytargetrequest.md
-  - docs/pkg/models/operations/getworkspaceeventsbytargetresponse.md
-  - docs/pkg/models/operations/getworkspacetargetsglobals.md
-  - docs/pkg/models/operations/getworkspacetargetsrequest.md
-  - docs/pkg/models/operations/getworkspacetargetsresponse.md
-  - docs/pkg/models/operations/postworkspaceeventsglobals.md
-  - docs/pkg/models/operations/postworkspaceeventsrequest.md
-  - docs/pkg/models/operations/postworkspaceeventsresponse.md
-  - docs/pkg/models/operations/searchworkspaceeventsglobals.md
-  - docs/pkg/models/operations/searchworkspaceeventsrequest.md
-  - docs/pkg/models/operations/searchworkspaceeventsresponse.md
-  - docs/pkg/models/sdkerrors/error.md
-  - docs/pkg/models/shared/generateopenapispecdiff.md
-  - docs/pkg/models/shared/api.md
-  - docs/pkg/models/shared/apiendpoint.md
-  - docs/pkg/models/shared/versionmetadata.md
-  - docs/pkg/models/shared/schema.md
-  - docs/pkg/models/shared/valuechange.md
-  - docs/pkg/models/shared/schemadiff.md
-  - docs/pkg/models/shared/manifest.md
-  - docs/pkg/models/shared/v2descriptor.md
-  - docs/pkg/models/shared/annotations.md
-  - docs/pkg/models/shared/getnamespacesresponse.md
-  - docs/pkg/models/shared/namespace.md
-  - docs/pkg/models/shared/oassummary.md
-  - docs/pkg/models/shared/oasoperation.md
-  - docs/pkg/models/shared/license.md
-  - docs/pkg/models/shared/oasinfo.md
-  - docs/pkg/models/shared/getrevisionsresponse.md
-  - docs/pkg/models/shared/revision.md
-  - docs/pkg/models/shared/gettagsresponse.md
-  - docs/pkg/models/shared/tag.md
-  - docs/pkg/models/shared/addtags.md
-  - docs/pkg/models/shared/preflighttoken.md
-  - docs/pkg/models/shared/preflightrequest.md
-  - docs/pkg/models/shared/claims.md
-  - docs/pkg/models/shared/accesstokenuser.md
-  - docs/pkg/models/shared/workspaces.md
-  - docs/pkg/models/shared/accesstoken.md
-  - docs/pkg/models/shared/accounttype.md
-  - docs/pkg/models/shared/featureflag.md
-  - docs/pkg/models/shared/user.md
-  - docs/pkg/models/shared/level.md
-  - docs/pkg/models/shared/accessdetails.md
-  - docs/pkg/models/shared/apikeydetails.md
-  - docs/pkg/models/shared/unboundedrequest.md
-  - docs/pkg/models/shared/boundedrequest.md
-  - docs/pkg/models/shared/requestmetadata.md
-  - docs/pkg/models/shared/filters.md
-  - docs/pkg/models/shared/filter.md
-  - docs/pkg/models/shared/githubconfigurecodesamplesresponse.md
-  - docs/pkg/models/shared/auth.md
-  - docs/pkg/models/shared/workflowdocument.md
-  - docs/pkg/models/shared/githubconfigurecodesamplesrequest.md
-  - docs/pkg/models/shared/githubconfiguremintlifyreporequest.md
-  - docs/pkg/models/shared/githubconfiguretargetrequest.md
-  - docs/pkg/models/shared/githubpublishingprresponse.md
-  - docs/pkg/models/shared/githubgetactionresponse.md
-  - docs/pkg/models/shared/githubmissingpublishingsecretsresponse.md
-  - docs/pkg/models/shared/githubstorepublishingsecretsrequest.md
-  - docs/pkg/models/shared/githubtriggeractionrequest.md
-  - docs/pkg/models/shared/organization.md
-  - docs/pkg/models/shared/organizationusageresponse.md
-  - docs/pkg/models/shared/organizationusage.md
-  - docs/pkg/models/shared/type.md
-  - docs/pkg/models/shared/report.md
-  - docs/pkg/models/shared/shorturl.md
-  - docs/pkg/models/shared/suggestiontype.md
-  - docs/pkg/models/shared/suggestopts.md
-  - docs/pkg/models/shared/diagnostic.md
-  - docs/pkg/models/shared/embedaccesstokenresponse.md
-  - docs/pkg/models/shared/embedtoken.md
-  - docs/pkg/models/shared/workspace.md
-  - docs/pkg/models/shared/generatebumptype.md
-  - docs/pkg/models/shared/openapidiffbumptype.md
-  - docs/pkg/models/shared/clievent.md
-  - docs/pkg/models/shared/interactiontype.md
-  - docs/pkg/models/shared/targetsdk.md
-  - docs/pkg/models/shared/security.md
-  - docs/sdks/speakeasy/README.md
-  - docs/pkg/models/operations/option.md
-  - docs/sdks/apis/README.md
-  - docs/sdks/apiendpoints/README.md
-  - docs/sdks/metadata/README.md
-  - docs/sdks/schemas/README.md
-  - docs/sdks/artifacts/README.md
-  - docs/sdks/auth/README.md
-  - docs/sdks/requests/README.md
-  - docs/sdks/github/README.md
-  - docs/sdks/organizations/README.md
-  - docs/sdks/reports/README.md
-  - docs/sdks/shorturls/README.md
-  - docs/sdks/suggest/README.md
-  - docs/sdks/embeds/README.md
-  - docs/sdks/workspaces/README.md
-  - docs/sdks/events/README.md
-  - USAGE.md
-  - pkg/models/operations/options.go
-  - .gitattributes
-  - .devcontainer/README.md
-  - .devcontainer/devcontainer.json
-  - .devcontainer/setup.sh
-  - internal/hooks/hooks.go
-  - CONTRIBUTING.md
+  - reports.go
+  - requests.go
+  - schemas.go
+  - shorturls.go
+  - speakeasy.go
+  - suggest.go
+  - workspaces.go
+examples:
+  deleteApi:
+    speakeasy-default-delete-api:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 875451}
+  generateOpenApiSpec:
+    speakeasy-default-generate-open-api-spec:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      responses:
+        "200":
+          application/json: {"current_schema": "<value>", "new_schema": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 871055}
+  generatePostmanCollection:
+    speakeasy-default-generate-postman-collection:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 623581}
+  getAllApiVersions:
+    speakeasy-default-get-all-api-versions:
+      parameters:
+        path:
+          apiID: "<value>"
+        query: {}
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 784529}
+  getApis:
+    speakeasy-default-get-apis:
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 11490}
+  upsertApi:
+    speakeasy-default-upsert-api:
+      parameters:
+        path:
+          apiID: "<value>"
+      requestBody:
+        application/json: {"api_id": "<value>", "description": "Synchronised 5th generation knowledge user", "version_id": "<value>"}
+      responses:
+        "200":
+          application/json: {"api_id": "<value>", "created_at": "2022-11-30T03:11:22.096Z", "description": "Visionary 4th generation focus group", "updated_at": "2022-03-06T16:10:22.154Z", "version_id": "<value>", "workspace_id": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 17590}
+  deleteApiEndpoint:
+    speakeasy-default-delete-api-endpoint:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          apiEndpointID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 788324}
+  findApiEndpoint:
+    speakeasy-default-find-api-endpoint:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          displayName: "Don.Strosin"
+      responses:
+        "200":
+          application/json: {"api_endpoint_id": "<value>", "api_id": "<value>", "created_at": "2023-05-01T15:36:31.538Z", "description": "Programmable uniform adapter", "display_name": "Gracie23", "method": "<value>", "path": "/srv", "updated_at": "2024-01-26T05:16:49.540Z", "version_id": "<value>", "workspace_id": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 398024}
+  generateOpenApiSpecForApiEndpoint:
+    speakeasy-default-generate-open-api-spec-for-api-endpoint:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          apiEndpointID: "<value>"
+      responses:
+        "200":
+          application/json: {"current_schema": "<value>", "new_schema": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 833540}
+  generatePostmanCollectionForApiEndpoint:
+    speakeasy-default-generate-postman-collection-for-api-endpoint:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          apiEndpointID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 786917}
+  getAllApiEndpoints:
+    speakeasy-default-get-all-api-endpoints:
+      parameters:
+        path:
+          apiID: "<value>"
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 909400}
+  getAllForVersionApiEndpoints:
+    speakeasy-default-get-all-for-version-api-endpoints:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 908203}
+  getApiEndpoint:
+    speakeasy-default-get-api-endpoint:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          apiEndpointID: "<value>"
+      responses:
+        "200":
+          application/json: {"api_endpoint_id": "<value>", "api_id": "<value>", "created_at": "2024-12-16T12:54:49.054Z", "description": "Grass-roots interactive orchestration", "display_name": "Mylene_Kozey58", "method": "<value>", "path": "/rescue", "updated_at": "2024-07-01T02:49:47.888Z", "version_id": "<value>", "workspace_id": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 572524}
+  upsertApiEndpoint:
+    speakeasy-default-upsert-api-endpoint:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          apiEndpointID: "<value>"
+      requestBody:
+        application/json: {"api_endpoint_id": "<value>", "description": "Public-key systematic attitude", "display_name": "Camille.Schaefer11", "method": "<value>", "path": "/Library", "version_id": "<value>"}
+      responses:
+        "200":
+          application/json: {"api_endpoint_id": "<value>", "api_id": "<value>", "created_at": "2023-05-11T02:25:34.515Z", "description": "Triple-buffered optimal methodology", "display_name": "Nolan_Corwin58", "method": "<value>", "path": "/home/user", "updated_at": "2022-04-29T18:24:21.535Z", "version_id": "<value>", "workspace_id": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 462700}
+  deleteVersionMetadata:
+    speakeasy-default-delete-version-metadata:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          metaKey: "<value>"
+          metaValue: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 730807}
+  getVersionMetadata:
+    speakeasy-default-get-version-metadata:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 269133}
+  insertVersionMetadata:
+    speakeasy-default-insert-version-metadata:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      requestBody:
+        application/json: {"meta_key": "<value>", "meta_value": "<value>"}
+      responses:
+        "200":
+          application/json: {"api_id": "<value>", "created_at": "2022-03-18T13:32:09.395Z", "meta_key": "<value>", "meta_value": "<value>", "version_id": "<value>", "workspace_id": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 516378}
+  deleteSchema:
+    speakeasy-default-delete-schema:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          revisionID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 9376}
+  downloadSchema:
+    speakeasy-default-download-schema:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 477436}
+  downloadSchemaRevision:
+    speakeasy-default-download-schema-revision:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          revisionID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 859820}
+  getSchema:
+    speakeasy-default-get-schema:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      responses:
+        "200":
+          application/json: {"api_id": "<value>", "created_at": "2022-09-09T00:58:17.303Z", "description": "Quality-focused scalable superstructure", "revision_id": "<value>", "version_id": "<value>", "workspace_id": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 983881}
+  getSchemaDiff:
+    speakeasy-default-get-schema-diff:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          baseRevisionID: "<value>"
+          targetRevisionID: "<value>"
+      responses:
+        "200":
+          application/json: {"additions": [], "deletions": [], "modifications": {}}
+        default:
+          application/json: {"message": "<value>", "status_code": 201370}
+  getSchemaRevision:
+    speakeasy-default-get-schema-revision:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+          revisionID: "<value>"
+      responses:
+        "200":
+          application/json: {"api_id": "<value>", "created_at": "2022-01-23T10:21:45.287Z", "description": "Managed intermediate flexibility", "revision_id": "<value>", "version_id": "<value>", "workspace_id": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 941905}
+  getSchemas:
+    speakeasy-default-get-schemas:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 170115}
+  registerSchema:
+    speakeasy-default-register-schema:
+      parameters:
+        path:
+          apiID: "<value>"
+          versionID: "<value>"
+      requestBody:
+        multipart/form-data: {"file": {"": "example.file"}}
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 822243}
+  getBlob:
+    speakeasy-default-get-blob:
+      parameters:
+        path:
+          organization_slug: "<value>"
+          workspace_slug: "<value>"
+          namespace_name: "<value>"
+          digest: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 115307}
+  getManifest:
+    speakeasy-default-get-manifest:
+      parameters:
+        path:
+          organization_slug: "<value>"
+          workspace_slug: "<value>"
+          namespace_name: "<value>"
+          revision_reference: "<value>"
+      responses:
+        "200":
+          application/vnd.oci.image.manifest.v1+json: {"layers": [{"digest": "sha256:5d20c808ce198565ff70b3ed23a991dd49afac45dece63474b27ce6ed036adc6", "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip", "size": 2107098}], "mediaType": "application/vnd.docker.distribution.manifest.v2+json", "schemaVersion": 2}
+        default:
+          application/json: {"message": "<value>", "status_code": 707258}
+  getNamespaces:
+    speakeasy-default-get-namespaces:
+      responses:
+        "200":
+          application/json: {"items": []}
+        default:
+          application/json: {"message": "<value>", "status_code": 917991}
+  getOASSummary:
+    speakeasy-default-get-OAS-summary:
+      parameters:
+        path:
+          namespace_name: "<value>"
+          revision_reference: "<value>"
+      responses:
+        "200":
+          application/json: {"info": {"description": "Fully-configurable neutral software", "summary": "<value>", "title": "<value>", "version": "<value>"}, "operations": []}
+        default:
+          application/json: {"message": "<value>", "status_code": 963960}
+  getRevisions:
+    speakeasy-default-get-revisions:
+      parameters:
+        path:
+          namespace_name: "<value>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"items": [], "next_page_token": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 284614}
+  getTags:
+    speakeasy-default-get-tags:
+      parameters:
+        path:
+          namespace_name: "<value>"
+      responses:
+        "200":
+          application/json: {"items": []}
+        default:
+          application/json: {"message": "<value>", "status_code": 136548}
+  postTags:
+    speakeasy-default-post-tags:
+      parameters:
+        path:
+          namespace_name: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 581484}
+  preflight:
+    speakeasy-default-preflight:
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 820828}
+  getAccessToken:
+    speakeasy-default-get-access-token:
+      parameters:
+        query:
+          workspace_id: "<value>"
+      responses:
+        "200":
+          application/json: {"access_token": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 299050}
+  getUser:
+    speakeasy-default-get-user:
+      responses:
+        "200":
+          application/json: {"admin": true, "confirmed": false, "created_at": "2022-06-27T09:27:02.992Z", "display_name": "Kendrick92", "email": "Kirstin.Kautzer61@yahoo.com", "email_verified": false, "id": "<id>", "last_login_at": "2023-04-23T00:14:06.093Z", "updated_at": "2023-07-11T14:17:50.684Z", "whitelisted": false}
+        default:
+          application/json: {"message": "<value>", "status_code": 502060}
+  getWorkspaceAccess:
+    speakeasy-default-get-workspace-access:
+      responses:
+        "200":
+          application/json: {"generation_allowed": false, "message": "<value>"}
+  validateApiKey:
+    speakeasy-default-validate-api-key:
+      responses:
+        "200":
+          application/json: {"account_type_v2": "enterprise", "enabled_features": [], "org_slug": "<value>", "telemetry_disabled": true, "workspace_id": "<value>", "workspace_slug": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 858745}
+  generateRequestPostmanCollection:
+    speakeasy-default-generate-request-postman-collection:
+      parameters:
+        path:
+          requestID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 681461}
+  getRequestFromEventLog:
+    speakeasy-default-get-request-from-event-log:
+      parameters:
+        path:
+          requestID: "<value>"
+      responses:
+        "200":
+          application/json: {"created_at": "2024-07-06T20:33:24.663Z", "har": "<value>", "har_size_bytes": 205280, "request_id": "<value>", "workspace_id": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 659422}
+  queryEventLog:
+    speakeasy-default-query-event-log:
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 241978}
+  checkAccess:
+    speakeasy-default-check-access:
+      parameters:
+        query:
+          org: "<value>"
+          repo: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 74604}
+  configureCodeSamples:
+    speakeasy-default-configure-code-samples:
+      requestBody:
+        application/json: {"org": "<value>", "repo": "<value>", "targetName": "<value>"}
+      responses:
+        "200":
+          application/json: {"codeSampleOverlayRegistryURL": "<value>", "source": {"location": "<value>"}}
+        default:
+          application/json: {"message": "<value>", "status_code": 968093}
+  configureMintlifyRepo:
+    speakeasy-default-configure-mintlify-repo:
+      requestBody:
+        application/json: {"input": "<value>", "org": "<value>", "overlays": [], "repo": "<value>"}
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 310607}
+  configureTarget:
+    speakeasy-default-configure-target:
+      requestBody:
+        application/json: {"org": "<value>", "repo_name": "<value>"}
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 210299}
+  fetchPublishingPRs:
+    speakeasy-default-fetch-publishing-P-rs:
+      parameters:
+        query:
+          generate_gen_lock_id: "<value>"
+          org: "<value>"
+          repo: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 192607}
+  getAction:
+    speakeasy-default-get-action:
+      parameters:
+        query:
+          org: "<value>"
+          repo: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 252330}
+  githubCheckPublishingSecrets:
+    speakeasy-default-github-check-publishing-secrets:
+      parameters:
+        query:
+          generate_gen_lock_id: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 445560}
+  githubStorePublishingSecrets:
+    speakeasy-default-github-store-publishing-secrets:
+      requestBody:
+        application/json: {"generate_gen_lock_id": "<value>"}
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 802162}
+  triggerAction:
+    speakeasy-default-trigger-action:
+      requestBody:
+        application/json: {"gen_lock_id": "<value>", "org": "<value>", "repo_name": "<value>"}
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 689611}
+  createFreeTrial:
+    speakeasy-default-create-free-trial:
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 728627}
+  getOrganization:
+    speakeasy-default-get-organization:
+      parameters:
+        path:
+          organizationID: "<value>"
+      responses:
+        "200":
+          application/json: {"account_type": "scale-up", "id": "<id>", "name": "<value>", "telemetry_disabled": true}
+        default:
+          application/json: {"message": "<value>", "status_code": 492205}
+  getOrganizationUsage:
+    speakeasy-default-get-organization-usage:
+      responses:
+        "200":
+          application/json: {"allowed_languages": [], "total_allowed_languages": 85188, "usage": []}
+        default:
+          application/json: {"message": "<value>", "status_code": 689787}
+  getOrganizations:
+    speakeasy-default-get-organizations:
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 952344}
+  getChangesReportSignedUrl:
+    speakeasy-default-get-changes-report-signed-url:
+      parameters:
+        path:
+          documentChecksum: "<value>"
+      responses:
+        "200":
+          application/json: {"url": "http://precious-pressure.biz"}
+  getLintingReportSignedUrl:
+    speakeasy-default-get-linting-report-signed-url:
+      parameters:
+        path:
+          documentChecksum: "<value>"
+      responses:
+        "200":
+          application/json: {"url": "https://overdue-maybe.net"}
+  uploadReport:
+    speakeasy-default-upload-report:
+      requestBody:
+        multipart/form-data: {"file": {"": "example.file"}}
+      responses:
+        "200":
+          application/json: {"url": "https://conventional-call.info"}
+  create:
+    speakeasy-default-create:
+      requestBody:
+        application/json: {"url": "http://limp-pastry.org"}
+      responses:
+        "200":
+          application/json: {"full_url": "<value>", "short_url": "<value>"}
+  suggest:
+    speakeasy-default-suggest:
+      parameters:
+        header:
+          x-session-id: "<value>"
+      requestBody:
+        application/json: {"diagnostics": [], "oas_summary": {"info": {"description": "Operative impactful monitoring", "summary": "<value>", "title": "<value>", "version": "<value>"}, "operations": []}, "suggestion_type": "diagnostics-only"}
+  suggestOpenAPI:
+    speakeasy-default-suggest-open-API:
+      parameters:
+        header:
+          x-session-id: "<value>"
+      requestBody:
+        multipart/form-data: {"schema": {"": "example.file"}}
+  suggestOpenAPIRegistry:
+    speakeasy-default-suggest-open-API-registry:
+      parameters:
+        path:
+          namespace_name: "<value>"
+          revision_reference: "<value>"
+        header:
+          x-session-id: "<value>"
+  getEmbedAccessToken:
+    speakeasy-default-get-embed-access-token:
+      responses:
+        "200":
+          application/json: {"access_token": "<value>"}
+        default:
+          application/json: {"message": "<value>", "status_code": 964408}
+  getValidEmbedAccessTokens:
+    speakeasy-default-get-valid-embed-access-tokens:
+      responses:
+        "200":
+          application/json: []
+        default:
+          application/json: {"message": "<value>", "status_code": 806352}
+  revokeEmbedAccessToken:
+    speakeasy-default-revoke-embed-access-token:
+      parameters:
+        path:
+          tokenID: "<value>"
+      responses:
+        default:
+          application/json: {"message": "<value>", "status_code": 217594}
+  getWorkspace:
+    speakeasy-default-get-workspace:
+      responses:
+        "200":
+          application/json: {"created_at": "2024-06-17T21:39:51.489Z", "id": "<id>", "name": "<value>", "organization_id": "<value>", "slug": "<value>", "telemetry_disabled": true, "updated_at": "2022-01-05T09:55:04.665Z", "verified": false}
+        default:
+          application/json: {"message": "<value>", "status_code": 488095}
+  getWorkspaceFeatureFlags:
+    speakeasy-default-get-workspace-feature-flags:
+      responses:
+        5XX:
+          application/json: {"message": "<value>", "status_code": 365854}
+  getWorkspaceEventsByTarget:
+    speakeasy-default-get-workspace-events-by-target:
+      parameters:
+        path:
+          targetID: "<value>"
+        query: {}
+      responses:
+        "200":
+          application/json: []
+        5XX:
+          application/json: {"message": "<value>", "status_code": 749240}
+  getWorkspaceTargets:
+    speakeasy-default-get-workspace-targets:
+      responses:
+        "200":
+          application/json: []
+        5XX:
+          application/json: {"message": "<value>", "status_code": 966013}
+  postWorkspaceEvents:
+    speakeasy-default-post-workspace-events:
+      requestBody:
+        application/json: []
+      responses:
+        5XX:
+          application/json: {"message": "<value>", "status_code": 962857}
+  searchWorkspaceEvents:
+    speakeasy-default-search-workspace-events:
+      responses:
+        "200":
+          application/json: []
+        5XX:
+          application/json: {"message": "<value>", "status_code": 750032}
