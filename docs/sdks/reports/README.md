@@ -135,8 +135,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"os"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -148,12 +148,17 @@ func main() {
         }),
     )
 
+    content, fileErr := os.Open("example.file")
+    if fileErr != nil {
+        panic(fileErr)
+    }
+
     ctx := context.Background()
     res, err := s.Reports.UploadReport(ctx, operations.UploadReportRequestBody{
         Data: shared.Report{},
         File: operations.File{
-            Content: os.Open("example.file"),
-            FileName: "your_file_here",
+            Content: content,
+            FileName: "example.file",
         },
     })
     if err != nil {

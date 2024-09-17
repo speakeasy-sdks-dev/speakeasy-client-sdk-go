@@ -7,13 +7,13 @@ REST APIs for managing LLM OAS suggestions
 
 ### Available Operations
 
-* [ApplyOperationIDs](#applyoperationids) - Apply operation ID suggestions and download result.
-* [SuggestOpenAPI](#suggestopenapi) - Generate suggestions for improving an OpenAPI document.
+* [Suggest](#suggest) - Generate suggestions for improving an OpenAPI document.
+* [SuggestOpenAPI](#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 * [SuggestOpenAPIRegistry](#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
 
-## ApplyOperationIDs
+## Suggest
 
-Apply operation ID suggestions and download result.
+Get suggestions from an LLM model for improving an OpenAPI document.
 
 ### Example Usage
 
@@ -36,13 +36,45 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Suggest.ApplyOperationIDs(ctx, operations.ApplyOperationIDsRequest{
+    res, err := s.Suggest.Suggest(ctx, operations.SuggestRequest{
+        SuggestRequestBody: shared.SuggestRequestBody{
+            Diagnostics: []shared.Diagnostic{
+                shared.Diagnostic{
+                    Message: "<value>",
+                    Path: []string{
+                        "/rescue",
+                    },
+                    Type: "<value>",
+                },
+            },
+            OasSummary: shared.OASSummary{
+                Info: shared.OASInfo{
+                    Description: "Operative impactful monitoring",
+                    License: shared.License{},
+                    Summary: "<value>",
+                    Title: "<value>",
+                    Version: "<value>",
+                },
+                Operations: []shared.OASOperation{
+                    shared.OASOperation{
+                        Description: "Object-based multi-state pricing structure",
+                        Method: "<value>",
+                        OperationID: "<value>",
+                        Path: "/opt/include",
+                        Tags: []string{
+                            "<value>",
+                        },
+                    },
+                },
+            },
+            SuggestionType: shared.SuggestRequestBodySuggestionTypeDiagnosticsOnly,
+        },
         XSessionID: "<value>",
     })
     if err != nil {
         log.Fatal(err)
     }
-    if res.TwoHundredApplicationJSONSchema != nil {
+    if res.Schema != nil {
         // handle response
     }
 }
@@ -50,15 +82,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.ApplyOperationIDsRequest](../../pkg/models/operations/applyoperationidsrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `opts`                                                                                         | [][operations.Option](../../pkg/models/operations/option.md)                                   | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
+| `request`                                                                  | [operations.SuggestRequest](../../pkg/models/operations/suggestrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| `opts`                                                                     | [][operations.Option](../../pkg/models/operations/option.md)               | :heavy_minus_sign:                                                         | The options for this request.                                              |
 
 ### Response
 
-**[*operations.ApplyOperationIDsResponse](../../pkg/models/operations/applyoperationidsresponse.md), error**
+**[*operations.SuggestResponse](../../pkg/models/operations/suggestresponse.md), error**
 
 ### Errors
 
@@ -79,8 +111,8 @@ package main
 import(
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	speakeasyclientsdkgo "github.com/speakeasy-api/speakeasy-client-sdk-go/v3"
-	"context"
 	"os"
+	"context"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/operations"
 	"log"
 )
@@ -92,12 +124,17 @@ func main() {
         }),
     )
 
+    content, fileErr := os.Open("example.file")
+    if fileErr != nil {
+        panic(fileErr)
+    }
+
     ctx := context.Background()
     res, err := s.Suggest.SuggestOpenAPI(ctx, operations.SuggestOpenAPIRequest{
         RequestBody: operations.SuggestOpenAPIRequestBody{
             Schema: operations.Schema{
-                Content: os.Open("example.file"),
-                FileName: "your_file_here",
+                Content: content,
+                FileName: "example.file",
             },
         },
         XSessionID: "<value>",

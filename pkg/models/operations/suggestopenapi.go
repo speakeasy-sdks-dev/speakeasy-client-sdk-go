@@ -30,11 +30,11 @@ func (o *Schema) GetFileName() string {
 
 // SuggestOpenAPIRequestBody - The schema file to upload provided as a multipart/form-data file segment.
 type SuggestOpenAPIRequestBody struct {
-	Opts   *shared.SuggestOpts `multipartForm:"name=opts,json"`
-	Schema Schema              `multipartForm:"file"`
+	Opts   *shared.SuggestOptsOld `multipartForm:"name=opts,json"`
+	Schema Schema                 `multipartForm:"file"`
 }
 
-func (o *SuggestOpenAPIRequestBody) GetOpts() *shared.SuggestOpts {
+func (o *SuggestOpenAPIRequestBody) GetOpts() *shared.SuggestOptsOld {
 	if o == nil {
 		return nil
 	}
