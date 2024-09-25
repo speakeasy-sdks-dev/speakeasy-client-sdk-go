@@ -153,11 +153,11 @@ func main() {
     res, err := s.Events.PostWorkspaceEvents(ctx, operations.PostWorkspaceEventsRequest{
         RequestBody: []shared.CliEvent{
             shared.CliEvent{
-                CreatedAt: types.MustTimeFromString("2024-11-21T06:58:42.120Z"),
+                CreatedAt: types.MustTimeFromString("2024-11-21T06:58:41.592Z"),
                 ExecutionID: "<value>",
                 ID: "<id>",
-                InteractionType: shared.InteractionTypeCliExec,
-                LocalStartedAt: types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
+                InteractionType: shared.InteractionTypeRun,
+                LocalStartedAt: types.MustTimeFromString("2023-02-23T15:36:59.809Z"),
                 SpeakeasyAPIKeyName: "<value>",
                 SpeakeasyVersion: "<value>",
                 Success: false,

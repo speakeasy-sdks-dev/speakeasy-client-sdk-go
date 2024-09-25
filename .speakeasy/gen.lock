@@ -1,10 +1,10 @@
 lockVersion: 2.0.0
 id: 2858c6d9-f946-4185-ae68-3b8e708830fb
 management:
-  docChecksum: 40626f73138958b2117c67a0ddff344f
+  docChecksum: 13e2c18d3a406a85e9744b895bb6ebc8
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.398.1
-  generationVersion: 2.415.8
+  speakeasyVersion: internal
+  generationVersion: 2.422.22
   releaseVersion: 3.13.1
   configChecksum: 5be574dcf411db184ba10fb491d2b4a7
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-go.git
@@ -15,7 +15,7 @@ features:
   go:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    core: 3.5.8
+    core: 3.5.10
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.1
     devContainers: 2.90.0
@@ -470,6 +470,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 623581}
+        "200": {}
   getAllApiVersions:
     speakeasy-default-get-all-api-versions:
       parameters:
@@ -544,6 +545,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 786917}
+        "200": {}
   getAllApiEndpoints:
     speakeasy-default-get-all-api-endpoints:
       parameters:
@@ -645,6 +647,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 477436}
+        "200": {}
   downloadSchemaRevision:
     speakeasy-default-download-schema-revision:
       parameters:
@@ -655,6 +658,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 859820}
+        "200": {}
   getSchema:
     speakeasy-default-get-schema:
       parameters:
@@ -724,6 +728,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 115307}
+        "200": {}
   getManifest:
     speakeasy-default-get-manifest:
       parameters:
@@ -789,6 +794,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 820828}
+        "200": {}
   getAccessToken:
     speakeasy-default-get-access-token:
       parameters:
@@ -826,6 +832,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 681461}
+        "200": {}
   getRequestFromEventLog:
     speakeasy-default-get-request-from-event-log:
       parameters:
@@ -885,6 +892,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 192607}
+        "200": {}
   getAction:
     speakeasy-default-get-action:
       parameters:
@@ -894,6 +902,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 252330}
+        "200": {}
   githubCheckPublishingSecrets:
     speakeasy-default-github-check-publishing-secrets:
       parameters:
@@ -902,6 +911,7 @@ examples:
       responses:
         default:
           application/json: {"message": "<value>", "status_code": 445560}
+        "200": {}
   githubStorePublishingSecrets:
     speakeasy-default-github-store-publishing-secrets:
       requestBody:
@@ -1031,6 +1041,7 @@ examples:
       responses:
         5XX:
           application/json: {"message": "<value>", "status_code": 365854}
+        "200": {}
   getWorkspaceEventsByTarget:
     speakeasy-default-get-workspace-events-by-target:
       parameters:

@@ -57,10 +57,10 @@ func main() {
                 },
                 Operations: []shared.OASOperation{
                     shared.OASOperation{
-                        Description: "Object-based multi-state pricing structure",
+                        Description: "Programmable fault-tolerant hierarchy",
                         Method: "<value>",
                         OperationID: "<value>",
-                        Path: "/opt/include",
+                        Path: "/etc/periodic",
                         Tags: []string{
                             "<value>",
                         },

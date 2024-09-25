@@ -97,7 +97,7 @@ actions:
                     APIID: "<value>",
                     API: shared.APIInput{
                         APIID: "<value>",
-                        Description: "Synchronised 5th generation knowledge user",
+                        Description: "Synchronised leading edge utilisation",
                         VersionID: "<value>",
                     },
                 })
@@ -239,7 +239,7 @@ actions:
                 res, err := s.APIEndpoints.FindAPIEndpoint(ctx, operations.FindAPIEndpointRequest{
                     APIID: "<value>",
                     VersionID: "<value>",
-                    DisplayName: "Don.Strosin",
+                    DisplayName: "Don_Kihn39",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -350,10 +350,10 @@ actions:
                     APIEndpointID: "<value>",
                     APIEndpoint: shared.APIEndpointInput{
                         APIEndpointID: "<value>",
-                        Description: "Public-key systematic attitude",
-                        DisplayName: "Camille.Schaefer11",
+                        Description: "Public-key background productivity",
+                        DisplayName: "Jailyn_Turner",
                         Method: "<value>",
-                        Path: "/Library",
+                        Path: "/home/user",
                         VersionID: "<value>",
                     },
                 })
@@ -1926,7 +1926,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.ShortURLs.Create(ctx, operations.CreateRequestBody{
-                    URL: "http://limp-pastry.org",
+                    URL: "https://probable-heating.com/",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -2048,28 +2048,28 @@ actions:
                             Info: shared.OASInfo{
                                 Title: "<value>",
                                 Summary: "<value>",
-                                Description: "Operative impactful monitoring",
+                                Description: "Operative multi-tasking framework",
                                 Version: "<value>",
                                 License: shared.License{},
                             },
                             Operations: []shared.OASOperation{
                                 shared.OASOperation{
                                     Method: "<value>",
-                                    Path: "/rescue",
+                                    Path: "/etc/periodic",
                                     OperationID: "<value>",
-                                    Description: "Object-based multi-state pricing structure",
+                                    Description: "Synchronised value-added knowledge base",
                                     Tags: []string{
                                         "<value>",
                                     },
                                 },
                             },
                         },
-                        SuggestionType: shared.SuggestRequestBodySuggestionTypeDiagnosticsOnly,
+                        SuggestionType: shared.SuggestRequestBodySuggestionTypeMethodNames,
                         Diagnostics: []shared.Diagnostic{
                             shared.Diagnostic{
                                 Message: "<value>",
                                 Path: []string{
-                                    "/opt/include",
+                                    "/rescue",
                                 },
                                 Type: "<value>",
                             },
@@ -2339,11 +2339,33 @@ actions:
                             ExecutionID: "<value>",
                             WorkspaceID: "<value>",
                             SpeakeasyAPIKeyName: "<value>",
-                            InteractionType: shared.InteractionTypePublish,
-                            LocalStartedAt: types.MustTimeFromString("2022-05-18T11:28:11.328Z"),
-                            CreatedAt: types.MustTimeFromString("2024-05-07T12:35:47.182Z"),
+                            InteractionType: shared.InteractionTypeRun,
+                            LocalStartedAt: types.MustTimeFromString("2023-02-23T15:36:59.809Z"),
+                            CreatedAt: types.MustTimeFromString("2024-11-03T15:10:38.542Z"),
                             SpeakeasyVersion: "<value>",
                             Success: false,
+                        },
+                        shared.CliEvent{
+                            ID: "<id>",
+                            ExecutionID: "<value>",
+                            WorkspaceID: "<value>",
+                            SpeakeasyAPIKeyName: "<value>",
+                            InteractionType: shared.InteractionTypeCliExec,
+                            LocalStartedAt: types.MustTimeFromString("2023-11-03T18:39:29.949Z"),
+                            CreatedAt: types.MustTimeFromString("2022-07-17T16:15:35.191Z"),
+                            SpeakeasyVersion: "<value>",
+                            Success: true,
+                        },
+                        shared.CliEvent{
+                            ID: "<id>",
+                            ExecutionID: "<value>",
+                            WorkspaceID: "<value>",
+                            SpeakeasyAPIKeyName: "<value>",
+                            InteractionType: shared.InteractionTypeConfigure,
+                            LocalStartedAt: types.MustTimeFromString("2024-07-20T12:49:37.190Z"),
+                            CreatedAt: types.MustTimeFromString("2022-06-08T00:19:02.158Z"),
+                            SpeakeasyVersion: "<value>",
+                            Success: true,
                         },
                     },
                 })
