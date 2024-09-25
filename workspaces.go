@@ -221,7 +221,7 @@ func (s *Workspaces) GetWorkspace(ctx context.Context, request operations.GetWor
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

@@ -154,14 +154,14 @@ func main() {
         RequestBody: []shared.CliEvent{
             shared.CliEvent{
                 CreatedAt: types.MustTimeFromString("2024-11-21T06:58:41.592Z"),
-                ExecutionID: "<value>",
+                ExecutionID: "<id>",
                 ID: "<id>",
                 InteractionType: shared.InteractionTypeRun,
                 LocalStartedAt: types.MustTimeFromString("2023-02-23T15:36:59.809Z"),
                 SpeakeasyAPIKeyName: "<value>",
                 SpeakeasyVersion: "<value>",
                 Success: false,
-                WorkspaceID: "<value>",
+                WorkspaceID: "<id>",
             },
         },
     })

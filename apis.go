@@ -198,7 +198,7 @@ func (s *Apis) DeleteAPI(ctx context.Context, request operations.DeleteAPIReques
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -410,7 +410,7 @@ func (s *Apis) GenerateOpenAPISpec(ctx context.Context, request operations.Gener
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -619,7 +619,7 @@ func (s *Apis) GeneratePostmanCollection(ctx context.Context, request operations
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -835,7 +835,7 @@ func (s *Apis) GetAllAPIVersions(ctx context.Context, request operations.GetAllA
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1051,7 +1051,7 @@ func (s *Apis) GetApis(ctx context.Context, request operations.GetApisRequest, o
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1269,7 +1269,7 @@ func (s *Apis) UpsertAPI(ctx context.Context, request operations.UpsertAPIReques
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

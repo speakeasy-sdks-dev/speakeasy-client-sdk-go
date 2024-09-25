@@ -219,7 +219,7 @@ func (s *Auth) GetAccessToken(ctx context.Context, request operations.GetAccessT
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -429,7 +429,7 @@ func (s *Auth) GetUser(ctx context.Context, opts ...operations.Option) (*operati
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -848,7 +848,7 @@ func (s *Auth) ValidateAPIKey(ctx context.Context, opts ...operations.Option) (*
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

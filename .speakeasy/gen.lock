@@ -126,6 +126,7 @@ generatedFiles:
   - /pkg/models/shared/diagnostic.go
   - /pkg/models/shared/embedaccesstokenresponse.go
   - /pkg/models/shared/embedtoken.go
+  - /pkg/models/shared/error.go
   - /pkg/models/shared/featureflag.go
   - /pkg/models/shared/filter.go
   - /pkg/models/shared/filters.go
@@ -329,6 +330,8 @@ generatedFiles:
   - docs/pkg/models/shared/annotations.md
   - docs/pkg/models/shared/api.md
   - docs/pkg/models/shared/apiendpoint.md
+  - docs/pkg/models/shared/apiendpointinput.md
+  - docs/pkg/models/shared/apiinput.md
   - docs/pkg/models/shared/apikeydetails.md
   - docs/pkg/models/shared/auth.md
   - docs/pkg/models/shared/boundedrequest.md
@@ -337,6 +340,7 @@ generatedFiles:
   - docs/pkg/models/shared/diagnostic.md
   - docs/pkg/models/shared/embedaccesstokenresponse.md
   - docs/pkg/models/shared/embedtoken.md
+  - docs/pkg/models/shared/error.md
   - docs/pkg/models/shared/featureflag.md
   - docs/pkg/models/shared/filter.md
   - docs/pkg/models/shared/filters.md
@@ -387,6 +391,7 @@ generatedFiles:
   - docs/pkg/models/shared/v2descriptor.md
   - docs/pkg/models/shared/valuechange.md
   - docs/pkg/models/shared/versionmetadata.md
+  - docs/pkg/models/shared/versionmetadatainput.md
   - docs/pkg/models/shared/workflowdocument.md
   - docs/pkg/models/shared/workspace.md
   - docs/pkg/models/shared/workspacefeatureflagresponse.md

@@ -216,7 +216,7 @@ func (s *Artifacts) GetBlob(ctx context.Context, request operations.GetBlobReque
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -432,7 +432,7 @@ func (s *Artifacts) GetManifest(ctx context.Context, request operations.GetManif
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -642,7 +642,7 @@ func (s *Artifacts) GetNamespaces(ctx context.Context, opts ...operations.Option
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -851,7 +851,7 @@ func (s *Artifacts) GetOASSummary(ctx context.Context, request operations.GetOAS
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1064,7 +1064,7 @@ func (s *Artifacts) GetRevisions(ctx context.Context, request operations.GetRevi
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1273,7 +1273,7 @@ func (s *Artifacts) GetTags(ctx context.Context, request operations.GetTagsReque
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1468,7 +1468,7 @@ func (s *Artifacts) PostTags(ctx context.Context, request operations.PostTagsReq
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1684,7 +1684,7 @@ func (s *Artifacts) Preflight(ctx context.Context, request *shared.PreflightRequ
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

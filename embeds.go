@@ -224,7 +224,7 @@ func (s *Embeds) GetEmbedAccessToken(ctx context.Context, request operations.Get
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -434,7 +434,7 @@ func (s *Embeds) GetValidEmbedAccessTokens(ctx context.Context, opts ...operatio
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -623,7 +623,7 @@ func (s *Embeds) RevokeEmbedAccessToken(ctx context.Context, request operations.
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

@@ -60,7 +60,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Apis.GetAllAPIVersions(ctx, operations.GetAllAPIVersionsRequest{
-                    APIID: "<value>",
+                    APIID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -94,11 +94,11 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Apis.UpsertAPI(ctx, operations.UpsertAPIRequest{
-                    APIID: "<value>",
+                    APIID: "<id>",
                     API: shared.APIInput{
-                        APIID: "<value>",
-                        Description: "Synchronised leading edge utilisation",
-                        VersionID: "<value>",
+                        APIID: "<id>",
+                        Description: "consequently brr happily yowza however gosh investigate joyfully direct",
+                        VersionID: "<id>",
                     },
                 })
                 if err != nil {
@@ -133,7 +133,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.APIEndpoints.GetAllAPIEndpoints(ctx, operations.GetAllAPIEndpointsRequest{
-                    APIID: "<value>",
+                    APIID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -167,8 +167,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Apis.DeleteAPI(ctx, operations.DeleteAPIRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -202,8 +202,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.APIEndpoints.GetAllForVersionAPIEndpoints(ctx, operations.GetAllForVersionAPIEndpointsRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -237,8 +237,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.APIEndpoints.FindAPIEndpoint(ctx, operations.FindAPIEndpointRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                     DisplayName: "Don_Kihn39",
                 })
                 if err != nil {
@@ -273,9 +273,9 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.APIEndpoints.DeleteAPIEndpoint(ctx, operations.DeleteAPIEndpointRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    APIEndpointID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    APIEndpointID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -309,9 +309,9 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.APIEndpoints.GetAPIEndpoint(ctx, operations.GetAPIEndpointRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    APIEndpointID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    APIEndpointID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -345,16 +345,16 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.APIEndpoints.UpsertAPIEndpoint(ctx, operations.UpsertAPIEndpointRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    APIEndpointID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    APIEndpointID: "<id>",
                     APIEndpoint: shared.APIEndpointInput{
-                        APIEndpointID: "<value>",
-                        Description: "Public-key background productivity",
-                        DisplayName: "Jailyn_Turner",
+                        APIEndpointID: "<id>",
+                        Description: "commandeer equate pish psst hoot ugh frankly supposing",
+                        DisplayName: "Eliseo.Little15",
                         Method: "<value>",
-                        Path: "/home/user",
-                        VersionID: "<value>",
+                        Path: "/etc/defaults",
+                        VersionID: "<id>",
                     },
                 })
                 if err != nil {
@@ -389,9 +389,9 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.APIEndpoints.GenerateOpenAPISpecForAPIEndpoint(ctx, operations.GenerateOpenAPISpecForAPIEndpointRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    APIEndpointID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    APIEndpointID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -425,9 +425,9 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.APIEndpoints.GeneratePostmanCollectionForAPIEndpoint(ctx, operations.GeneratePostmanCollectionForAPIEndpointRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    APIEndpointID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    APIEndpointID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -461,8 +461,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Apis.GenerateOpenAPISpec(ctx, operations.GenerateOpenAPISpecRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -496,8 +496,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Apis.GeneratePostmanCollection(ctx, operations.GeneratePostmanCollectionRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -531,8 +531,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Metadata.GetVersionMetadata(ctx, operations.GetVersionMetadataRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -566,8 +566,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Metadata.InsertVersionMetadata(ctx, operations.InsertVersionMetadataRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                     VersionMetadata: shared.VersionMetadataInput{
                         MetaKey: "<value>",
                         MetaValue: "<value>",
@@ -605,8 +605,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Metadata.DeleteVersionMetadata(ctx, operations.DeleteVersionMetadataRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                     MetaKey: "<value>",
                     MetaValue: "<value>",
                 })
@@ -642,8 +642,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Schemas.GetSchema(ctx, operations.GetSchemaRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -683,8 +683,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Schemas.RegisterSchema(ctx, operations.RegisterSchemaRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                     RequestBody: operations.RegisterSchemaRequestBody{
                         File: operations.File{
                             FileName: "example.file",
@@ -724,8 +724,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Schemas.DownloadSchema(ctx, operations.DownloadSchemaRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -759,10 +759,10 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Schemas.GetSchemaDiff(ctx, operations.GetSchemaDiffRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    BaseRevisionID: "<value>",
-                    TargetRevisionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    BaseRevisionID: "<id>",
+                    TargetRevisionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -796,9 +796,9 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Schemas.DeleteSchema(ctx, operations.DeleteSchemaRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    RevisionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    RevisionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -832,9 +832,9 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Schemas.GetSchemaRevision(ctx, operations.GetSchemaRevisionRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    RevisionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    RevisionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -868,9 +868,9 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Schemas.DownloadSchemaRevision(ctx, operations.DownloadSchemaRevisionRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
-                    RevisionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
+                    RevisionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -904,8 +904,8 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Schemas.GetSchemas(ctx, operations.GetSchemasRequest{
-                    APIID: "<value>",
-                    VersionID: "<value>",
+                    APIID: "<id>",
+                    VersionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -1133,7 +1133,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Auth.GetAccessToken(ctx, operations.GetAccessTokenRequest{
-                    WorkspaceID: "<value>",
+                    WorkspaceID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -1230,7 +1230,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Requests.GetRequestFromEventLog(ctx, operations.GetRequestFromEventLogRequest{
-                    RequestID: "<value>",
+                    RequestID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -1264,7 +1264,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Requests.GenerateRequestPostmanCollection(ctx, operations.GenerateRequestPostmanCollectionRequest{
-                    RequestID: "<value>",
+                    RequestID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -1475,7 +1475,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Github.FetchPublishingPRs(ctx, operations.FetchPublishingPRsRequest{
-                    GenerateGenLockID: "<value>",
+                    GenerateGenLockID: "<id>",
                     Org: "<value>",
                     Repo: "<value>",
                 })
@@ -1511,7 +1511,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Github.GithubCheckPublishingSecrets(ctx, operations.GithubCheckPublishingSecretsRequest{
-                    GenerateGenLockID: "<value>",
+                    GenerateGenLockID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -1544,7 +1544,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Github.GithubStorePublishingSecrets(ctx, shared.GithubStorePublishingSecretsRequest{
-                    GenerateGenLockID: "<value>",
+                    GenerateGenLockID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -1579,7 +1579,7 @@ actions:
                 res, err := s.Github.TriggerAction(ctx, shared.GithubTriggerActionRequest{
                     Org: "<value>",
                     RepoName: "<value>",
-                    GenLockID: "<value>",
+                    GenLockID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -1780,7 +1780,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Organizations.GetOrganization(ctx, operations.GetOrganizationRequest{
-                    OrganizationID: "<value>",
+                    OrganizationID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -1966,7 +1966,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Suggest.SuggestOpenAPI(ctx, operations.SuggestOpenAPIRequest{
-                    XSessionID: "<value>",
+                    XSessionID: "<id>",
                     RequestBody: operations.SuggestOpenAPIRequestBody{
                         Schema: operations.Schema{
                             FileName: "example.file",
@@ -2008,7 +2008,7 @@ actions:
                 res, err := s.Suggest.SuggestOpenAPIRegistry(ctx, operations.SuggestOpenAPIRegistryRequest{
                     NamespaceName: "<value>",
                     RevisionReference: "<value>",
-                    XSessionID: "<value>",
+                    XSessionID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -2042,34 +2042,34 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Suggest.Suggest(ctx, operations.SuggestRequest{
-                    XSessionID: "<value>",
+                    XSessionID: "<id>",
                     SuggestRequestBody: shared.SuggestRequestBody{
                         OasSummary: shared.OASSummary{
                             Info: shared.OASInfo{
                                 Title: "<value>",
                                 Summary: "<value>",
-                                Description: "Operative multi-tasking framework",
+                                Description: "ugh which garrote ashamed sarong fiddle really",
                                 Version: "<value>",
                                 License: shared.License{},
                             },
                             Operations: []shared.OASOperation{
                                 shared.OASOperation{
                                     Method: "<value>",
-                                    Path: "/etc/periodic",
-                                    OperationID: "<value>",
-                                    Description: "Synchronised value-added knowledge base",
+                                    Path: "/rescue",
+                                    OperationID: "<id>",
+                                    Description: "kielbasa psst stitcher cannon devoted blindly apropos low",
                                     Tags: []string{
                                         "<value>",
                                     },
                                 },
                             },
                         },
-                        SuggestionType: shared.SuggestRequestBodySuggestionTypeMethodNames,
+                        SuggestionType: shared.SuggestRequestBodySuggestionTypeDiagnosticsOnly,
                         Diagnostics: []shared.Diagnostic{
                             shared.Diagnostic{
                                 Message: "<value>",
                                 Path: []string{
-                                    "/rescue",
+                                    "/opt/share",
                                 },
                                 Type: "<value>",
                             },
@@ -2234,7 +2234,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Embeds.RevokeEmbedAccessToken(ctx, operations.RevokeEmbedAccessTokenRequest{
-                    TokenID: "<value>",
+                    TokenID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)
@@ -2336,8 +2336,8 @@ actions:
                     RequestBody: []shared.CliEvent{
                         shared.CliEvent{
                             ID: "<id>",
-                            ExecutionID: "<value>",
-                            WorkspaceID: "<value>",
+                            ExecutionID: "<id>",
+                            WorkspaceID: "<id>",
                             SpeakeasyAPIKeyName: "<value>",
                             InteractionType: shared.InteractionTypeRun,
                             LocalStartedAt: types.MustTimeFromString("2023-02-23T15:36:59.809Z"),
@@ -2347,8 +2347,8 @@ actions:
                         },
                         shared.CliEvent{
                             ID: "<id>",
-                            ExecutionID: "<value>",
-                            WorkspaceID: "<value>",
+                            ExecutionID: "<id>",
+                            WorkspaceID: "<id>",
                             SpeakeasyAPIKeyName: "<value>",
                             InteractionType: shared.InteractionTypeCliExec,
                             LocalStartedAt: types.MustTimeFromString("2023-11-03T18:39:29.949Z"),
@@ -2358,8 +2358,8 @@ actions:
                         },
                         shared.CliEvent{
                             ID: "<id>",
-                            ExecutionID: "<value>",
-                            WorkspaceID: "<value>",
+                            ExecutionID: "<id>",
+                            WorkspaceID: "<id>",
                             SpeakeasyAPIKeyName: "<value>",
                             InteractionType: shared.InteractionTypeConfigure,
                             LocalStartedAt: types.MustTimeFromString("2024-07-20T12:49:37.190Z"),
@@ -2433,7 +2433,7 @@ actions:
 
                 ctx := context.Background()
                 res, err := s.Events.GetWorkspaceEventsByTarget(ctx, operations.GetWorkspaceEventsByTargetRequest{
-                    TargetID: "<value>",
+                    TargetID: "<id>",
                 })
                 if err != nil {
                     log.Fatal(err)

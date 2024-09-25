@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"net/http"
 )
@@ -31,7 +30,7 @@ type GetOASSummaryResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
-	Error *sdkerrors.Error
+	Error *shared.Error
 	// OK
 	OASSummary *shared.OASSummary
 	// HTTP response status code for this operation
@@ -47,7 +46,7 @@ func (o *GetOASSummaryResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *GetOASSummaryResponse) GetError() *sdkerrors.Error {
+func (o *GetOASSummaryResponse) GetError() *shared.Error {
 	if o == nil {
 		return nil
 	}

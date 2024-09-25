@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"net/http"
 )
@@ -12,7 +11,7 @@ type PreflightResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
-	Error *sdkerrors.Error
+	Error *shared.Error
 	// OK
 	PreflightToken *shared.PreflightToken
 	// HTTP response status code for this operation
@@ -28,7 +27,7 @@ func (o *PreflightResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *PreflightResponse) GetError() *sdkerrors.Error {
+func (o *PreflightResponse) GetError() *shared.Error {
 	if o == nil {
 		return nil
 	}

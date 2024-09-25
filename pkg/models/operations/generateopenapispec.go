@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"net/http"
 )
@@ -33,7 +32,7 @@ type GenerateOpenAPISpecResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
-	Error *sdkerrors.Error
+	Error *shared.Error
 	// OK
 	GenerateOpenAPISpecDiff *shared.GenerateOpenAPISpecDiff
 	// HTTP response status code for this operation
@@ -49,7 +48,7 @@ func (o *GenerateOpenAPISpecResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *GenerateOpenAPISpecResponse) GetError() *sdkerrors.Error {
+func (o *GenerateOpenAPISpecResponse) GetError() *shared.Error {
 	if o == nil {
 		return nil
 	}

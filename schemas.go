@@ -196,7 +196,7 @@ func (s *Schemas) DeleteSchema(ctx context.Context, request operations.DeleteSch
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -408,7 +408,7 @@ func (s *Schemas) DownloadSchema(ctx context.Context, request operations.Downloa
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -620,7 +620,7 @@ func (s *Schemas) DownloadSchemaRevision(ctx context.Context, request operations
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -832,7 +832,7 @@ func (s *Schemas) GetSchema(ctx context.Context, request operations.GetSchemaReq
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1042,7 +1042,7 @@ func (s *Schemas) GetSchemaDiff(ctx context.Context, request operations.GetSchem
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1254,7 +1254,7 @@ func (s *Schemas) GetSchemaRevision(ctx context.Context, request operations.GetS
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1466,7 +1466,7 @@ func (s *Schemas) GetSchemas(ctx context.Context, request operations.GetSchemasR
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1663,7 +1663,7 @@ func (s *Schemas) RegisterSchema(ctx context.Context, request operations.Registe
 				return nil, err
 			}
 
-			var out sdkerrors.Error
+			var out shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

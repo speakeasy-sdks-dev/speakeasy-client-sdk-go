@@ -57,10 +57,10 @@ func main() {
                 },
                 Operations: []shared.OASOperation{
                     shared.OASOperation{
-                        Description: "Programmable fault-tolerant hierarchy",
+                        Description: "kielbasa psst stitcher cannon devoted blindly apropos low",
                         Method: "<value>",
-                        OperationID: "<value>",
-                        Path: "/etc/periodic",
+                        OperationID: "<id>",
+                        Path: "/opt/share",
                         Tags: []string{
                             "<value>",
                         },

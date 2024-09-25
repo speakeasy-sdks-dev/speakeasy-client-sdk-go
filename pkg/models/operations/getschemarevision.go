@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/sdkerrors"
 	"github.com/speakeasy-api/speakeasy-client-sdk-go/v3/pkg/models/shared"
 	"net/http"
 )
@@ -42,7 +41,7 @@ type GetSchemaRevisionResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	// Default error response
-	Error *sdkerrors.Error
+	Error *shared.Error
 	// OK
 	Schema *shared.Schema
 	// HTTP response status code for this operation
@@ -58,7 +57,7 @@ func (o *GetSchemaRevisionResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *GetSchemaRevisionResponse) GetError() *sdkerrors.Error {
+func (o *GetSchemaRevisionResponse) GetError() *shared.Error {
 	if o == nil {
 		return nil
 	}
